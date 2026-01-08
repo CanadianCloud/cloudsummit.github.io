@@ -1,0 +1,169 @@
+---
+// GSAP Scroll Animations Component
+// Add this component to any page to enable scroll animations
+---
+
+<script>
+	import gsap from 'gsap';
+	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+	gsap.registerPlugin(ScrollTrigger);
+
+	// Wait for DOM to be ready
+	document.addEventListener('DOMContentLoaded', () => {
+		// Fade up animation for sections
+		gsap.utils.toArray('section').forEach((section: Element) => {
+			gsap.fromTo(
+				section,
+				{
+					opacity: 0,
+					y: 50,
+				},
+				{
+					opacity: 1,
+					y: 0,
+					duration: 0.8,
+					ease: 'power2.out',
+					scrollTrigger: {
+						trigger: section,
+						start: 'top 85%',
+						toggleActions: 'play none none none',
+					},
+				}
+			);
+		});
+
+		// Stagger animation for grid items (cards, activities, etc.)
+		gsap.utils.toArray('.locations-grid, .activities-grid, .speakers-grid, .opportunities-grid, .sponsors-grid, .bento-grid').forEach((grid: Element) => {
+			const items = grid.querySelectorAll('.location-card, .activity-card, .speaker-card, .opportunity-card, .sponsor-logo, .bento-item');
+
+			gsap.fromTo(
+				items,
+				{
+					opacity: 0,
+					y: 30,
+					scale: 0.95,
+				},
+				{
+					opacity: 1,
+					y: 0,
+					scale: 1,
+					duration: 0.5,
+					stagger: 0.1,
+					ease: 'power2.out',
+					scrollTrigger: {
+						trigger: grid,
+						start: 'top 80%',
+						toggleActions: 'play none none none',
+					},
+				}
+			);
+		});
+
+		// Heading animations
+		gsap.utils.toArray('.section-heading, .about-description, h2').forEach((heading: Element) => {
+			gsap.fromTo(
+				heading,
+				{
+					opacity: 0,
+					y: 20,
+				},
+				{
+					opacity: 1,
+					y: 0,
+					duration: 0.6,
+					ease: 'power2.out',
+					scrollTrigger: {
+						trigger: heading,
+						start: 'top 90%',
+						toggleActions: 'play none none none',
+					},
+				}
+			);
+		});
+
+		// Footer columns stagger
+		const footerColumns = document.querySelectorAll('.footer-column');
+		if (footerColumns.length > 0) {
+			gsap.fromTo(
+				footerColumns,
+				{
+					opacity: 0,
+					y: 30,
+				},
+				{
+					opacity: 1,
+					y: 0,
+					duration: 0.5,
+					stagger: 0.15,
+					ease: 'power2.out',
+					scrollTrigger: {
+						trigger: '.footer',
+						start: 'top 85%',
+						toggleActions: 'play none none none',
+					},
+				}
+			);
+		}
+
+		// Video container scale animation
+		const videoContainer = document.querySelector('.video-container');
+		if (videoContainer) {
+			gsap.fromTo(
+				videoContainer,
+				{
+					opacity: 0,
+					scale: 0.9,
+				},
+				{
+					opacity: 1,
+					scale: 1,
+					duration: 0.8,
+					ease: 'power2.out',
+					scrollTrigger: {
+						trigger: videoContainer,
+						start: 'top 80%',
+						toggleActions: 'play none none none',
+					},
+				}
+			);
+		}
+
+		// CTA buttons subtle bounce
+		gsap.utils.toArray('.cta-button, .cpca-cta, .newsletter-cta').forEach((button: Element) => {
+			gsap.fromTo(
+				button,
+				{
+					opacity: 0,
+					scale: 0.9,
+				},
+				{
+					opacity: 1,
+					scale: 1,
+					duration: 0.5,
+					ease: 'back.out(1.7)',
+					scrollTrigger: {
+						trigger: button,
+						start: 'top 90%',
+						toggleActions: 'play none none none',
+					},
+				}
+			);
+		});
+
+		// Pulsing squares parallax effect
+		const pulsingSquares = document.querySelector('.pulsing-squares');
+		if (pulsingSquares) {
+			gsap.to('.square', {
+				y: -20,
+				ease: 'none',
+				scrollTrigger: {
+					trigger: pulsingSquares,
+					start: 'top bottom',
+					end: 'bottom top',
+					scrub: 1,
+				},
+			});
+		}
+	});
+</script>

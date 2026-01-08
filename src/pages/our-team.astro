@@ -1,0 +1,378 @@
+---
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import ScrollAnimations from '../components/ScrollAnimations.astro';
+import { navigationContent, footerContent } from '../lib/content';
+
+const teamMembers = [
+	{
+		name: 'John Doe',
+		role: 'Event Director',
+		image: '/images/team/placeholder.jpg',
+	},
+	{
+		name: 'Jane Smith',
+		role: 'Operations Manager',
+		image: '/images/team/placeholder.jpg',
+	},
+	{
+		name: 'Mike Johnson',
+		role: 'Sponsorship Lead',
+		image: '/images/team/placeholder.jpg',
+	},
+	{
+		name: 'Sarah Williams',
+		role: 'Marketing Director',
+		image: '/images/team/placeholder.jpg',
+	},
+	{
+		name: 'David Brown',
+		role: 'Technical Lead',
+		image: '/images/team/placeholder.jpg',
+	},
+	{
+		name: 'Emily Davis',
+		role: 'Community Manager',
+		image: '/images/team/placeholder.jpg',
+	},
+];
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Squada+One&family=Noto+Sans:wght@400;500;600;700&family=Doto:wght@100..900&display=swap" rel="stylesheet" />
+		<title>Our Event Team - Cloud Summit 2026</title>
+	</head>
+	<body>
+		<Navigation content={navigationContent} />
+
+		<main class="team-page">
+			<!-- Hero Section -->
+			<section class="team-hero">
+				<div class="pulsing-squares">
+					<div class="square" style="left: 10%; top: 15%; opacity: 0.35;"></div>
+					<div class="square" style="left: 25%; top: 35%; opacity: 0.25; animation-delay: 0.3s;"></div>
+					<div class="square" style="left: 45%; top: 20%; opacity: 0.4; animation-delay: 0.6s;"></div>
+					<div class="square" style="left: 60%; top: 45%; opacity: 0.3; animation-delay: 0.9s;"></div>
+					<div class="square" style="left: 75%; top: 25%; opacity: 0.38; animation-delay: 1.2s;"></div>
+					<div class="square" style="left: 85%; top: 60%; opacity: 0.28; animation-delay: 1.5s;"></div>
+					<div class="square" style="left: 15%; top: 70%; opacity: 0.32; animation-delay: 0.4s;"></div>
+					<div class="square" style="left: 35%; top: 80%; opacity: 0.3; animation-delay: 0.8s;"></div>
+					<div class="square" style="left: 55%; top: 65%; opacity: 0.35; animation-delay: 1.1s;"></div>
+					<div class="square" style="left: 70%; top: 75%; opacity: 0.4; animation-delay: 1.4s;"></div>
+					<div class="square" style="left: 20%; top: 50%; opacity: 0.32; animation-delay: 0.5s;"></div>
+					<div class="square" style="left: 40%; top: 55%; opacity: 0.38; animation-delay: 0.7s;"></div>
+					<div class="square" style="left: 50%; top: 40%; opacity: 0.3; animation-delay: 1s;"></div>
+					<div class="square" style="left: 80%; top: 35%; opacity: 0.35; animation-delay: 1.3s;"></div>
+					<div class="square" style="left: 30%; top: 10%; opacity: 0.28; animation-delay: 0.2s;"></div>
+				</div>
+				<div class="hero-container">
+					<h1 class="hero-title">Our Team</h1>
+					<p class="hero-subtitle">Meet the People Behind Cloud Summit 2026</p>
+					<p class="hero-description">
+						Our dedicated team of cloud enthusiasts and event professionals work tirelessly
+						to bring you Canada's premier multi-cloud conference experience.
+					</p>
+				</div>
+			</section>
+
+			<!-- Team Grid -->
+			<section class="team-section">
+				<div class="team-container">
+					<h2 class="section-heading">
+						<span class="heading-prefix">Meet The </span>
+						Team
+					</h2>
+					<div class="team-grid">
+						{teamMembers.map((member) => (
+							<div class="team-card">
+								<div class="team-image">
+									<img src={member.image} alt={member.name} />
+								</div>
+								<div class="team-info">
+									<h3 class="team-name">{member.name}</h3>
+									<p class="team-role">{member.role}</p>
+								</div>
+							</div>
+						))}
+					</div>
+				</div>
+			</section>
+
+			<!-- Join Team CTA -->
+			<section class="join-section">
+				<div class="join-container">
+					<h2 class="section-heading">
+						<span class="heading-prefix">Join </span>
+						Our Team
+					</h2>
+					<p class="join-description">
+						Interested in being part of Cloud Summit? We're always looking for passionate
+						volunteers and team members to help make our events successful.
+					</p>
+					<a href="https://tally.so/r/mBVZjA" class="join-button" target="_blank" rel="noopener noreferrer">
+						Get Involved
+					</a>
+				</div>
+			</section>
+		</main>
+
+		<Footer content={footerContent} />
+		<ScrollAnimations />
+	</body>
+</html>
+
+<style is:global>
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+
+	html {
+		font-family: 'Noto Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+		line-height: 1.6;
+		color: #1a1a1a;
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		font-family: 'Squada One', system-ui, sans-serif;
+		font-weight: 400;
+		letter-spacing: 0.02em;
+	}
+
+	body {
+		min-height: 100vh;
+		background: black;
+		color: white;
+	}
+</style>
+
+<style>
+	.team-page {
+		background: black;
+		color: white;
+	}
+
+	/* Hero Section */
+	.team-hero {
+		padding: 6rem 1.5rem 4rem;
+		background: black;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.pulsing-squares {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		pointer-events: none;
+		z-index: 0;
+	}
+
+	.square {
+		position: absolute;
+		width: 15px;
+		height: 15px;
+		background: rgb(230, 148, 255);
+		animation: pulse 2s ease-in-out infinite;
+	}
+
+	@keyframes pulse {
+		0%, 100% {
+			transform: scale(1);
+		}
+		50% {
+			transform: scale(1.3);
+		}
+	}
+
+	.hero-container {
+		max-width: 900px;
+		margin: 0 auto;
+		text-align: center;
+		position: relative;
+		z-index: 1;
+	}
+
+	.hero-title {
+		font-family: 'Squada One', system-ui, sans-serif;
+		font-size: 3rem;
+		margin: 0 0 1rem 0;
+		color: rgb(230, 148, 255);
+	}
+
+	.hero-subtitle {
+		font-size: 1.5rem;
+		margin: 0 0 1.5rem 0;
+		color: white;
+	}
+
+	.hero-description {
+		font-size: 1.125rem;
+		line-height: 1.8;
+		opacity: 0.9;
+	}
+
+	/* Section Headings */
+	.section-heading {
+		font-family: 'Squada One', system-ui, sans-serif;
+		font-size: 2.5rem;
+		text-align: center;
+		margin: 0 0 3rem 0;
+		color: rgb(230, 148, 255);
+	}
+
+	.heading-prefix {
+		color: white;
+	}
+
+	/* Team Section */
+	.team-section {
+		padding: 4rem 1.5rem;
+	}
+
+	.team-container {
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	.team-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 2rem;
+	}
+
+	.team-card {
+		background: rgba(230, 148, 255, 0.1);
+		border: 1px solid rgba(230, 148, 255, 0.2);
+		border-radius: 1rem;
+		padding: 2rem;
+		text-align: center;
+		transition: transform 0.2s, border-color 0.2s;
+	}
+
+	.team-card:hover {
+		transform: translateY(-4px);
+		border-color: rgba(230, 148, 255, 0.4);
+	}
+
+	.team-image {
+		width: 150px;
+		height: 150px;
+		margin: 0 auto 1.5rem;
+		border-radius: 50%;
+		overflow: hidden;
+		border: 3px solid rgb(230, 148, 255);
+	}
+
+	.team-image img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.team-info {
+		text-align: center;
+	}
+
+	.team-name {
+		font-family: 'Squada One', system-ui, sans-serif;
+		font-size: 1.5rem;
+		margin: 0 0 0.5rem 0;
+		color: rgb(230, 148, 255);
+	}
+
+	.team-role {
+		font-size: 1rem;
+		margin: 0;
+		opacity: 0.9;
+		color: rgb(230, 148, 255);
+	}
+
+	/* Join Section */
+	.join-section {
+		padding: 4rem 1.5rem;
+		background: rgba(230, 148, 255, 0.05);
+	}
+
+	.join-container {
+		max-width: 800px;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	.join-description {
+		font-size: 1.125rem;
+		margin: 0 0 2rem 0;
+		opacity: 0.9;
+	}
+
+	.join-button {
+		display: inline-block;
+		padding: 1rem 3rem;
+		background: rgb(230, 148, 255);
+		color: white;
+		text-decoration: none;
+		font-weight: 600;
+		border-radius: 0.5rem;
+		font-size: 1.125rem;
+		transition: transform 0.2s, opacity 0.2s;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	.join-button:hover {
+		transform: translateY(-2px);
+		opacity: 0.9;
+	}
+
+	/* Desktop Styles */
+	@media (min-width: 769px) {
+		.team-hero {
+			padding: 8rem 2rem 6rem;
+		}
+
+		.hero-title {
+			font-size: 4.5rem;
+		}
+
+		.hero-subtitle {
+			font-size: 2rem;
+		}
+
+		.hero-description {
+			font-size: 1.25rem;
+		}
+
+		.team-section {
+			padding: 6rem 2rem;
+		}
+
+		.section-heading {
+			font-size: 4rem;
+		}
+
+		.team-grid {
+			grid-template-columns: repeat(3, 1fr);
+			gap: 3rem;
+		}
+
+		.team-image {
+			width: 180px;
+			height: 180px;
+		}
+
+		.join-section {
+			padding: 6rem 2rem;
+		}
+	}
+</style>

@@ -1,0 +1,279 @@
+---
+import type { HeroContent } from '../lib/content';
+
+interface Props {
+	content: HeroContent;
+	splineUrl?: string;
+}
+
+const { content, splineUrl = '' } = Astro.props;
+---
+
+<section class="hero">
+	<div class="hero-spline">
+		<spline-viewer url="https://prod.spline.design/WKCpgqTWJIavlH1L/scene.splinecode"></spline-viewer>
+	</div>
+	<div class="hero-container">
+		<p class="hero-city" data-city-name>{content.cityName}</p>
+		<h1 class="hero-title" data-city-title>{content.title}</h1>
+		<p class="hero-subtitle" data-city-subtitle>{content.subtitle}</p>
+		<p class="hero-description" data-city-description>
+			{content.description}
+		</p>
+		<div class="hero-meta" data-city-meta>
+			<p class="hero-venue">{content.venue}</p>
+			<p class="hero-address">{content.address}</p>
+			<p class="hero-date">{content.date}</p>
+			<p class="hero-time">{content.time}</p>
+		</div>
+		<div class="hero-actions">
+			<a href={content.primaryCta.href} class="btn btn-primary">{content.primaryCta.text}</a>
+			<a href={content.secondaryCta.href} class="btn btn-secondary">{content.secondaryCta.text}</a>
+		</div>
+	</div>
+	</section>
+
+<script is:inline type="module" src="https://unpkg.com/@splinetool/viewer@1.9.48/build/spline-viewer.js"></script>
+
+<script>
+	import { getCityStore } from '../lib/cityStore';
+	import { heroContent } from '../lib/content';
+
+	const cityStore = getCityStore();
+	cityStore.init();
+
+	const titleEl = document.querySelector('[data-city-title]');
+	const cityNameEl = document.querySelector('[data-city-name]');
+	const subtitleEl = document.querySelector('[data-city-subtitle]');
+	const descriptionEl = document.querySelector('[data-city-description]');
+	const metaEl = document.querySelector('[data-city-meta]');
+
+	function updateContent(city: 'vancouver' | 'toronto') {
+		const content = heroContent[city];
+
+		if (titleEl) titleEl.textContent = content.title;
+		if (cityNameEl) cityNameEl.textContent = content.cityName;
+		if (subtitleEl) subtitleEl.textContent = content.subtitle;
+		if (descriptionEl) descriptionEl.textContent = content.description;
+
+		if (metaEl) {
+			const venueEl = metaEl.querySelector('.hero-venue');
+			const addressEl = metaEl.querySelector('.hero-address');
+			const dateEl = metaEl.querySelector('.hero-date');
+			const timeEl = metaEl.querySelector('.hero-time');
+
+			if (venueEl) venueEl.textContent = content.venue;
+			if (addressEl) addressEl.textContent = content.address;
+			if (dateEl) dateEl.textContent = content.date;
+			if (timeEl) timeEl.textContent = content.time;
+		}
+
+		// Update page title
+		document.title = `${content.title} - ${content.cityName}`;
+	}
+
+	// Initial update
+	updateContent(cityStore.getCity());
+
+	// Subscribe to city changes
+	cityStore.subscribe(updateContent);
+
+	// Load Spline scene
+	/*
+	const splineUrl = document.querySelector('[data-spline-url]')?.getAttribute('data-spline-url');
+	if (splineUrl) {
+		// Load Spline runtime library
+		import('https://unpkg.com/@splinetool/runtime@1.0.0/build/runtime.js').then((SplineModule) => {
+			const canvas = document.getElementById('spline-canvas');
+			if (canvas) {
+				// @ts-ignore - Spline Application is available from the module
+				const app = new SplineModule.Application(canvas);
+				app.load(splineUrl).catch((err) => {
+					console.error('Failed to load Spline scene:', err);
+				});
+			}
+		}).catch((err) => {
+			console.error('Failed to load Spline runtime:', err);
+		});
+	}
+	*/
+</script>
+
+<style>
+	.hero {
+		background: transparent;
+		color: white;
+		padding: 4rem 2rem 2rem 2rem;
+		text-align: center;
+		min-height: 100vh;
+		display: flex;
+		align-items: flex-start;
+		justify-content: center;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.hero-spline {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 0;
+		opacity: 1;
+		pointer-events: auto;
+	}
+
+	#spline-canvas {
+		width: 100%;
+		height: 100%;
+		display: block;
+		pointer-events: auto;
+	}
+
+
+	.hero-container {
+		max-width: 1200px;
+		margin: 0 auto;
+		position: relative;
+		z-index: 1;
+		pointer-events: none;
+	}
+
+	.hero-container * {
+		pointer-events: auto;
+	}
+
+	.hero-title {
+		font-size: 8rem;
+		font-weight: 800;
+		margin: 0 0 0.5rem 0;
+		line-height: 1;
+	}
+
+	.hero-city {
+		font-size: 1.5rem;
+		font-weight: 400;
+		margin: 0;
+		opacity: 1;
+		line-height: 1;
+		text-transform: uppercase;
+		color: rgb(61, 120, 171);
+	}
+
+	.hero-subtitle {
+		font-size: 1.5rem;
+		font-weight: 600;
+		margin: 0 0 1rem 0;
+		opacity: 0.95;
+	}
+
+	.hero-description {
+		font-size: 1.125rem;
+		line-height: 1.5;
+		margin: 0 0 1rem 0;
+		opacity: 0.7;
+		max-width: 600px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.hero-meta {
+		margin: 0 0 1.5rem 0;
+		opacity: 0.85;
+	}
+
+	.hero-venue {
+		font-size: 1.5rem;
+		margin: 0.5rem 0 0.25rem 0;
+		font-weight: 600;
+	}
+
+	.hero-address {
+		font-size: 1rem;
+		margin: 0 0 0.5rem 0;
+		opacity: 0.7;
+	}
+
+	.hero-date {
+		font-size: 1.5rem;
+		margin: 0.5rem 0 0.25rem 0;
+		font-weight: 600;
+	}
+
+	.hero-time {
+		font-size: 1rem;
+		margin: 0 0 0.5rem 0;
+		opacity: 0.7;
+	}
+
+	.hero-actions {
+		display: flex;
+		gap: 1rem;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	spline-viewer {
+		width: 100%;
+		height: 100%;
+	}
+
+	.btn {
+		padding: 0.875rem 2rem;
+		border-radius: 0.5rem;
+		text-decoration: none;
+		font-weight: 600;
+		transition: transform 0.2s, box-shadow 0.2s;
+		display: inline-block;
+	}
+
+	.btn:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+	}
+
+	.btn-primary {
+		background: rgb(168, 251, 90);
+		color: black;
+		text-transform: uppercase;
+	}
+
+	.btn-primary:hover {
+		background: rgb(150, 230, 75);
+	}
+
+	.btn-secondary {
+		background: transparent;
+		color: white;
+		border: 2px solid white;
+	}
+
+	@media (max-width: 768px) {
+		.hero {
+			padding: 2rem 1.5rem;
+		}
+
+		.hero-title {
+			font-size: 3.5rem;
+		}
+
+		.hero-city {
+			font-size: 1.25rem;
+		}
+
+		.hero-subtitle {
+			font-size: 1.25rem;
+		}
+
+		.hero-description {
+			font-size: 1rem;
+		}
+
+		.btn {
+			padding: 0.75rem 1.5rem;
+			font-size: 0.9rem;
+		}
+	}
+</style>
+

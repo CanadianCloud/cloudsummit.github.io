@@ -1,0 +1,102 @@
+---
+interface Props {
+	content: {
+		prefix: string;
+		heading: string;
+		description: string;
+		ctaText: string;
+		ctaHref: string;
+	};
+}
+
+const { content } = Astro.props;
+---
+
+<section class="newsletter">
+	<div class="newsletter-container">
+		<h2 class="newsletter-heading">
+			<span class="newsletter-prefix">{content.prefix} </span>
+			{content.heading}
+		</h2>
+		<p class="newsletter-description">{content.description}</p>
+		<a href={content.ctaHref} class="newsletter-button">
+			{content.ctaText}
+		</a>
+	</div>
+</section>
+
+<style>
+	.newsletter {
+		background: rgba(61, 120, 171, 0.05);
+		color: white;
+		padding: 4rem 1.5rem;
+	}
+
+	.newsletter-container {
+		max-width: 800px;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	.newsletter-heading {
+		font-family: 'Squada One', system-ui, sans-serif;
+		font-size: 2.5rem;
+		font-weight: 400;
+		margin: 0 0 1rem 0;
+		line-height: 1.2;
+		letter-spacing: 0.02em;
+		color: rgb(61, 120, 171);
+	}
+
+	.newsletter-prefix {
+		color: white;
+		font-family: 'Squada One', system-ui, sans-serif;
+		font-size: 2.5rem;
+		font-weight: 400;
+		letter-spacing: 0.02em;
+	}
+
+	.newsletter-description {
+		font-size: 1.125rem;
+		line-height: 1.6;
+		margin: 0 0 2rem 0;
+		opacity: 0.9;
+	}
+
+	.newsletter-button {
+		display: inline-block;
+		padding: 1rem 3rem;
+		background: rgb(61, 120, 171);
+		color: white;
+		text-decoration: none;
+		font-weight: 600;
+		border-radius: 0.5rem;
+		font-size: 1.125rem;
+		transition: transform 0.2s, opacity 0.2s;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	.newsletter-button:hover {
+		transform: translateY(-2px);
+		opacity: 0.9;
+	}
+
+	@media (min-width: 769px) {
+		.newsletter {
+			padding: 6rem 2rem;
+		}
+
+		.newsletter-heading {
+			font-size: 4rem;
+		}
+
+		.newsletter-prefix {
+			font-size: 4rem;
+		}
+
+		.newsletter-description {
+			font-size: 1.25rem;
+		}
+	}
+</style>

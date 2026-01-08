@@ -1,0 +1,163 @@
+---
+interface Props {
+	content: {
+		prefix: string;
+		heading: string;
+		description?: string;
+	};
+}
+
+const { content } = Astro.props;
+
+const sponsors = [
+	'aws-white.svg',
+	'couchbase-white.svg',
+	'datadog.svg',
+	'elastic.svg',
+	'fortinet.svg',
+	'Greydata_TrueWhite_Horizontal.svg',
+	'imblack.png',
+	'platformatic-approved.svg',
+	'ronin.svg',
+	'the-upgrade.webp',
+	'Vesper_White_Only.png',
+];
+---
+
+<section class="past-sponsors">
+	<div class="sponsors-container">
+		<h2 class="sponsors-heading">
+			<span class="sponsors-prefix">{content.prefix} </span>
+			{content.heading}
+		</h2>
+		{content.description && (
+			<p class="sponsors-description">{content.description}</p>
+		)}
+		<div class="sponsors-grid">
+			{sponsors.map((sponsor) => (
+				<div class="sponsor-item">
+					<img
+						src={`/images/sponsors/${sponsor}`}
+						alt={sponsor.replace('.svg', '').replace('.png', '').replace('.webp', '')}
+						class={sponsor === 'imblack.png' ? 'no-filter' : ''}
+					/>
+				</div>
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.past-sponsors {
+		background: black;
+		color: white;
+		padding: 4rem 1.5rem;
+	}
+
+	.sponsors-container {
+		max-width: 1200px;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	.sponsors-heading {
+		font-family: 'Squada One', system-ui, sans-serif;
+		font-size: 2.5rem;
+		font-weight: 400;
+		margin: 0 0 1rem 0;
+		line-height: 1.2;
+		letter-spacing: 0.02em;
+		color: rgb(168, 251, 90);
+	}
+
+	.sponsors-prefix {
+		color: white;
+		font-family: 'Squada One', system-ui, sans-serif;
+		font-size: 2.5rem;
+		font-weight: 400;
+		letter-spacing: 0.02em;
+	}
+
+	.sponsors-description {
+		font-size: 1.125rem;
+		line-height: 1.6;
+		margin: 0 auto 3rem;
+		max-width: 800px;
+		opacity: 0.9;
+	}
+
+	.sponsors-grid {
+		background: rgba(61, 120, 171, 0.1);
+		border: 1px solid rgba(61, 120, 171, 0.2);
+		border-radius: 1rem;
+		padding: 2rem;
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 2rem;
+		align-items: center;
+		justify-items: center;
+	}
+
+	.sponsor-item {
+		width: 100%;
+		max-width: 150px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+	}
+
+	.sponsor-item img {
+		width: 100%;
+		height: auto;
+		max-height: 60px;
+		object-fit: contain;
+		filter: brightness(0) invert(1);
+		transition: filter 0.3s ease, transform 0.2s;
+	}
+
+	.sponsor-item:hover img {
+		filter: none;
+		transform: scale(1.05);
+	}
+
+	.sponsor-item img.no-filter {
+		filter: none;
+	}
+
+	.sponsor-item:hover img.no-filter {
+		filter: none;
+	}
+
+	@media (min-width: 769px) {
+		.past-sponsors {
+			padding: 6rem 2rem;
+		}
+
+		.sponsors-heading {
+			font-size: 4rem;
+		}
+
+		.sponsors-prefix {
+			font-size: 4rem;
+		}
+
+		.sponsors-description {
+			font-size: 1.25rem;
+		}
+
+		.sponsors-grid {
+			grid-template-columns: repeat(5, 1fr);
+			gap: 3rem;
+			padding: 3rem;
+		}
+
+		.sponsor-item {
+			max-width: 180px;
+		}
+
+		.sponsor-item img {
+			max-height: 80px;
+		}
+	}
+</style>

@@ -1,0 +1,89 @@
+---
+---
+
+<div class="city-selector">
+	<label for="city-select" class="city-label">Select Location:</label>
+	<select id="city-select" class="city-select">
+		<option value="vancouver">Vancouver</option>
+		<option value="toronto">Toronto</option>
+	</select>
+</div>
+
+<script>
+	import { getCityStore } from '../lib/cityStore';
+	
+	function initCitySelector() {
+		const cityStore = getCityStore();
+		const select = document.getElementById('city-select') as HTMLSelectElement;
+		
+		if (select) {
+			// Initialize store
+			cityStore.init();
+			
+			// Set initial value
+			select.value = cityStore.getCity();
+			
+			// Update store when selection changes
+			select.addEventListener('change', (e) => {
+				const target = e.target as HTMLSelectElement;
+				cityStore.setCity(target.value as 'vancouver' | 'toronto');
+			});
+			
+			// Update select when store changes
+			cityStore.subscribe((city) => {
+				select.value = city;
+			});
+		}
+	}
+
+	// Run when DOM is ready
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initCitySelector);
+	} else {
+		initCitySelector();
+	}
+</script>
+
+<style>
+	.city-selector {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		margin: 0;
+	}
+
+	.city-label {
+		font-size: 0.75rem;
+		font-weight: 500;
+		color: inherit;
+		margin: 0;
+	}
+
+	.city-select {
+		padding: 0.5rem 1rem;
+		border: none;
+		border-radius: 0.5rem;
+		background: rgba(255, 255, 255, 0.1);
+		color: white;
+		font-size: 0.75rem;
+		font-weight: 500;
+		cursor: pointer;
+		transition: background 0.2s;
+		margin: 0;
+	}
+
+	.city-select option {
+		background: black;
+		color: white;
+	}
+
+	.city-select:hover {
+		background: rgba(255, 255, 255, 0.15);
+	}
+
+	.city-select:focus {
+		outline: none;
+		background: rgba(255, 255, 255, 0.15);
+		box-shadow: 0 0 0 3px rgba(61, 120, 171, 0.1);
+	}
+</style>

@@ -1,0 +1,241 @@
+---
+import CitySelector from './CitySelector.astro';
+import type { NavigationContent } from '../lib/content';
+
+interface Props {
+	content: NavigationContent;
+}
+
+const { content } = Astro.props;
+---
+
+<nav class="nav">
+	<div class="nav-container">
+		<a href="/" class="nav-logo">
+			<img src="/images/Cloud-summit-logo.svg" alt="Cloud Summit 2026" class="nav-logo-img" />
+		</a>
+		<button class="hamburger" aria-label="Toggle menu">
+			<span></span>
+			<span></span>
+			<span></span>
+		</button>
+		<div class="nav-right">
+			<ul class="nav-links">
+				{content.links.map(link => (
+					<li><a href={link.href} target={link.href.startsWith('http') ? '_blank' : undefined} rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}>{link.text}</a></li>
+				))}
+			</ul>
+			<CitySelector />
+			<a href={content.ctaHref} class="nav-cta">{content.ctaText}</a>
+		</div>
+	</div>
+</nav>
+
+<script>
+	import { getCityStore } from '../lib/cityStore';
+	import { citySpecificContent } from '../lib/content';
+	import type { City } from '../lib/content';
+
+	const hamburger = document.querySelector('.hamburger');
+	const navRight = document.querySelector('.nav-right');
+
+	hamburger?.addEventListener('click', () => {
+		hamburger.classList.toggle('active');
+		navRight?.classList.toggle('active');
+	});
+
+	// Close menu when clicking on a link
+	const navLinks = document.querySelectorAll('.nav-links a, .nav-cta');
+	navLinks.forEach(link => {
+		link.addEventListener('click', () => {
+			hamburger?.classList.remove('active');
+			navRight?.classList.remove('active');
+		});
+	});
+
+	// Update ticket URL when city changes
+	function updateTicketUrl() {
+		const cityStore = getCityStore();
+		const currentCity = cityStore.getCity();
+		const ticketLink = document.querySelector('.nav-links a[href*="luma.com"]') as HTMLAnchorElement;
+
+		if (ticketLink) {
+			ticketLink.href = citySpecificContent[currentCity].ticketUrl;
+		}
+	}
+
+	// Initialize and subscribe to city changes
+	function initCityAwareNav() {
+		const cityStore = getCityStore();
+		cityStore.init();
+
+		// Update ticket URL on initial load
+		updateTicketUrl();
+
+		// Subscribe to city changes
+		cityStore.subscribe((city: City) => {
+			updateTicketUrl();
+		});
+	}
+
+	// Run when DOM is ready
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initCityAwareNav);
+	} else {
+		initCityAwareNav();
+	}
+</script>
+
+<style>
+	.nav {
+		position: sticky;
+		top: 0;
+		background: black;
+		backdrop-filter: blur(10px);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+		z-index: 100;
+		color: white;
+	}
+
+	.nav-container {
+		max-width: 1440px;
+		margin: 0 auto;
+		padding: 1rem 1.5rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		position: relative;
+	}
+
+	.nav-logo {
+		text-decoration: none;
+		color: inherit;
+		display: flex;
+		align-items: center;
+		z-index: 101;
+	}
+
+	.nav-logo-img {
+		height: 2rem;
+		width: auto;
+		display: block;
+	}
+
+	.hamburger {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+		background: none;
+		border: none;
+		cursor: pointer;
+		padding: 0.5rem;
+		z-index: 101;
+	}
+
+	.hamburger span {
+		width: 25px;
+		height: 3px;
+		background: white;
+		transition: all 0.3s ease;
+		border-radius: 2px;
+	}
+
+	.hamburger.active span:nth-child(1) {
+		transform: rotate(45deg) translate(5px, 5px);
+	}
+
+	.hamburger.active span:nth-child(2) {
+		opacity: 0;
+	}
+
+	.hamburger.active span:nth-child(3) {
+		transform: rotate(-45deg) translate(7px, -6px);
+	}
+
+	.nav-right {
+		display: none;
+		flex-direction: column;
+		align-items: center;
+		gap: 1rem;
+		width: 100%;
+		position: absolute;
+		top: 100%;
+		left: 0;
+		background: black;
+		padding: 1.5rem;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	}
+
+	.nav-right.active {
+		display: flex;
+	}
+
+	.nav-links {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 1rem;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		align-items: center;
+	}
+
+	.nav-links a {
+		text-decoration: none;
+		color: inherit;
+		font-weight: 500;
+		transition: opacity 0.2s;
+		font-size: 0.75rem;
+	}
+
+	.nav-links a:hover {
+		opacity: 0.7;
+	}
+
+	.nav-cta {
+		background: rgb(168, 251, 90);
+		color: black !important;
+		padding: 0.5rem 1.5rem;
+		border-radius: 0.5rem;
+		transition: background 0.2s;
+		text-decoration: none;
+		text-transform: uppercase;
+		font-weight: 600;
+	}
+
+	.nav-cta:hover {
+		background: rgb(150, 230, 75);
+		opacity: 1;
+	}
+
+	@media (min-width: 769px) {
+		.nav-container {
+			padding: 1rem 2rem;
+		}
+
+		.nav-logo-img {
+			height: 2.5rem;
+		}
+
+		.hamburger {
+			display: none;
+		}
+
+		.nav-right {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			gap: 2rem;
+			width: auto;
+			position: static;
+			padding: 0;
+			border-bottom: none;
+		}
+
+		.nav-links {
+			gap: 2rem;
+			flex-wrap: nowrap;
+		}
+	}
+</style>

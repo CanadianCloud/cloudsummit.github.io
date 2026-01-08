@@ -1,0 +1,95 @@
+---
+interface Props {
+	content: {
+		heading: string;
+		description: string;
+	};
+}
+
+const { content } = Astro.props;
+---
+
+<section class="highlight-reel">
+	<div class="reel-container">
+		<div class="content-column">
+			<div class="video-container">
+				<video class="highlight-video" controls>
+					<source src="/video/Cloudsummit_2025.mp4" type="video/mp4">
+					Your browser does not support the video tag.
+				</video>
+				<div class="video-text">HIGHLIGHT<br/>REEL</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.highlight-reel {
+		background: black;
+		color: white;
+		padding: 3rem 1.5rem;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.reel-container {
+		max-width: 1440px;
+		margin: 0 auto;
+		padding: 0 1.5rem;
+		position: relative;
+	}
+
+	.content-column {
+		width: 100%;
+	}
+
+	.video-container {
+		position: relative;
+	}
+
+	.highlight-video {
+		width: 100%;
+		border-radius: 1rem;
+		display: block;
+	}
+
+	.video-text {
+		font-family: 'Doto', sans-serif;
+		font-size: 1.5rem;
+		font-weight: 700;
+		color: white;
+		opacity: 0.7;
+		writing-mode: horizontal-tb;
+		white-space: nowrap;
+		letter-spacing: 0.1em;
+		line-height: 0.8;
+		margin-top: 2rem;
+		text-align: center;
+	}
+
+	@media (min-width: 769px) {
+		.highlight-reel {
+			padding: 4rem 2rem;
+		}
+
+		.reel-container {
+			padding: 0 2rem;
+		}
+
+		.content-column {
+			width: 100%;
+			position: relative;
+		}
+
+		.video-text {
+			font-size: 6rem;
+			writing-mode: vertical-rl;
+			transform: rotate(180deg);
+			position: absolute;
+			right: -12rem;
+			bottom: 0;
+			margin-top: 0;
+			text-align: left;
+		}
+	}
+</style>

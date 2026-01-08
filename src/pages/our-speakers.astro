@@ -1,0 +1,702 @@
+---
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import ScrollAnimations from '../components/ScrollAnimations.astro';
+import { navigationContent, footerContent, citySpecificContent } from '../lib/content';
+
+const speakers = [
+	{
+		name: 'Matt Biilmann',
+		title: 'CEO and Co-Founder',
+		company: 'Netlify',
+		topic: 'AX and Why It Matters',
+		image: '/images/previous-speakers/matt-biilmann.png',
+	},
+	{
+		name: 'Eric Johnson',
+		title: 'Principal Developer Advocate',
+		company: 'Amazon Web Services (AWS)',
+		topic: 'Taking GenAI from Paper to Production with Serverless',
+		image: '/images/previous-speakers/eric-johnson.png',
+	},
+	{
+		name: 'Ahmad Awais',
+		title: 'CEO',
+		company: 'Langbase',
+		topic: 'Why the Best AI Agents Are Built Without Frameworks',
+		image: '/images/previous-speakers/ahmad-awais.jpg',
+	},
+	{
+		name: 'Luca Maraschi',
+		title: 'Co-Founder & CEO',
+		company: 'Platformatic',
+		topic: 'Scaling Node.js in Kubernetes: Metrics, Memory, and Mastery',
+		image: '/images/previous-speakers/luca-maraschi.png',
+	},
+	{
+		name: 'Denis Astahov',
+		title: 'Solutions Architect',
+		company: 'OpsGuru',
+		topic: 'How to become Cloud/DevOps Engineer from Zero',
+		image: '/images/previous-speakers/denis-astahov.png',
+	},
+	{
+		name: 'Aiman Parvaiz',
+		title: 'Director of DevOps',
+		company: 'NimbusStack',
+		topic: 'Driving Cloud Cost Efficiency: Multi-Cloud Strategies',
+		image: '/images/previous-speakers/aiman-parvaiz.png',
+	},
+	{
+		name: 'Brian Clendenin',
+		title: 'Enterprise Sales - Strategic',
+		company: 'Datadog',
+		topic: 'The Business Value of Observability in the Age of AI',
+		image: '/images/previous-speakers/brian-clendenin.png',
+	},
+	{
+		name: 'Farzad Khandan',
+		title: 'CTO & Co-Founder',
+		company: 'Innovimia Technologies',
+		topic: 'Building your Startups in the Cloud? Dos and Don\'ts',
+		image: '/images/previous-speakers/farzad khandan.jpeg',
+	},
+	{
+		name: 'Gabriel Caldwell',
+		title: 'CTO',
+		company: 'Tsunami Solutions',
+		topic: 'Cloud, AI & the Rise of the Next Billion-Dollar Idea',
+		image: '/images/previous-speakers/gabriel-caldwell.jpg',
+	},
+	{
+		name: 'Adetokunbo Ige',
+		title: 'Sr. DevOps Engineer',
+		company: 'Planview',
+		topic: 'Build and Deploy Dockerize Python Application to Azure',
+		image: '/images/previous-speakers/adetokunbo-ige.png',
+	},
+	{
+		name: 'Herman Chandi',
+		title: 'Cofounder & COO',
+		company: 'UrbanLogiq',
+		topic: 'Cloud, AI & the Rise of the Next Billion-Dollar Idea',
+		image: '/images/previous-speakers/herman-chandi.jpg',
+	},
+	{
+		name: 'Mark Gamble',
+		title: 'Director, Product and Solutions Marketing',
+		company: 'Couchbase',
+		topic: 'Modern Database Architecture',
+		image: '/images/previous-speakers/mark-gamble.jpg',
+	},
+	{
+		name: 'Matteo Collina',
+		title: 'Co-Founder & CTO',
+		company: 'Platformatic',
+		topic: 'Node.js Performance',
+		image: '/images/previous-speakers/matteo-collina.png',
+	},
+	{
+		name: 'Niti Jain',
+		title: 'Cloud Architect',
+		company: 'Microsoft',
+		topic: 'Azure Best Practices',
+		image: '/images/previous-speakers/niti-jain.png',
+	},
+	{
+		name: 'Noorain Panjwani',
+		title: 'Developer Advocate',
+		company: 'Tech Community',
+		topic: 'Community Building in Tech',
+		image: '/images/previous-speakers/noorain-panjwani.jpg',
+	},
+	{
+		name: 'Parice Brandies',
+		title: 'Cloud Engineer',
+		company: 'Tech Company',
+		topic: 'Cloud Infrastructure',
+		image: '/images/previous-speakers/parice brandies.jpg',
+	},
+	{
+		name: 'Sarang Gupta',
+		title: 'Solutions Architect',
+		company: 'Cloud Provider',
+		topic: 'Cloud Architecture Patterns',
+		image: '/images/previous-speakers/sarang-gupta.png',
+	},
+	{
+		name: 'Warren Lyne',
+		title: 'Tech Lead',
+		company: 'Enterprise Solutions',
+		topic: 'Enterprise Cloud Migration',
+		image: '/images/previous-speakers/warren-lyne.jpg',
+	},
+];
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Squada+One&family=Noto+Sans:wght@400;500;600;700&family=Doto:wght@100..900&display=swap" rel="stylesheet" />
+		<title>Call for Speakers - Cloud Summit 2026</title>
+	</head>
+	<body>
+		<Navigation content={navigationContent} />
+
+		<main class="speakers-page">
+			<!-- Hero Section -->
+			<section class="speakers-hero">
+				<div class="pulsing-squares">
+					<div class="square" style="left: 10%; top: 15%;"></div>
+					<div class="square" style="left: 25%; top: 25%;"></div>
+					<div class="square" style="left: 40%; top: 18%;"></div>
+					<div class="square" style="left: 55%; top: 30%;"></div>
+					<div class="square" style="left: 70%; top: 22%;"></div>
+					<div class="square" style="left: 85%; top: 35%;"></div>
+					<div class="square" style="left: 15%; top: 45%;"></div>
+					<div class="square" style="left: 35%; top: 50%;"></div>
+					<div class="square" style="left: 50%; top: 13%;"></div>
+					<div class="square" style="left: 65%; top: 55%;"></div>
+					<div class="square" style="left: 80%; top: 48%;"></div>
+					<div class="square" style="left: 20%; top: 60%;"></div>
+					<div class="square" style="left: 45%; top: 65%;"></div>
+					<div class="square" style="left: 75%; top: 70%;"></div>
+					<div class="square" style="left: 30%; top: 75%;"></div>
+				</div>
+				<div class="hero-container">
+					<h1 class="hero-title">Our Speakers</h1>
+					<p class="hero-subtitle">Learn from Industry-Leading Cloud Experts</p>
+					<p class="hero-description">
+						Cloud Summit 2026 brings together the brightest minds in cloud computing.
+						Hear from experts at AWS, Azure, Google Cloud, IBM Cloud, and leading tech companies
+						as they share insights, best practices, and the latest innovations.
+					</p>
+				</div>
+			</section>
+
+			<!-- Speakers Grid -->
+			<section class="speakers-section">
+				<div class="speakers-container">
+					<h2 class="section-heading">
+						<span class="heading-prefix">All </span>
+						Past Speakers
+					</h2>
+					<div class="speakers-grid">
+						{speakers.map((speaker) => (
+							<div class="speaker-card">
+								<div class="speaker-image">
+									<img src={speaker.image} alt={speaker.name} />
+								</div>
+								<div class="speaker-info">
+									<h3 class="speaker-name">{speaker.name}</h3>
+									<p class="speaker-title">{speaker.title}</p>
+									<p class="speaker-company">{speaker.company}</p>
+									<p class="speaker-topic">{speaker.topic}</p>
+								</div>
+							</div>
+						))}
+					</div>
+				</div>
+			</section>
+
+			<!-- Call for Speakers -->
+			<section class="cfs-section" id="speakers">
+				<div class="cfs-container">
+					<h2 class="section-heading">
+						<span class="heading-prefix">Become a </span>
+						Speaker
+					</h2>
+					<p class="cfs-description">
+						Are you a cloud expert with insights to share? We're looking for passionate speakers
+						to present at Cloud Summit 2026. Share your knowledge with hundreds of cloud professionals
+						and help shape the future of cloud computing in Canada.
+					</p>
+					<div class="cfs-dates">
+						<div class="cfs-date-card">
+							<h3>Vancouver</h3>
+							<p class="date-label">Call for Speakers Opens</p>
+							<p class="date-value">{citySpecificContent.vancouver.callForSpeakers}</p>
+						</div>
+						<div class="cfs-date-card">
+							<h3>Toronto</h3>
+							<p class="date-label">Call for Speakers Opens</p>
+							<p class="date-value">{citySpecificContent.toronto.callForSpeakers}</p>
+						</div>
+					</div>
+					<div class="cfs-benefits">
+						<div class="benefit-item">
+							<h3>Share Your Expertise</h3>
+							<p>Present your knowledge to 1,000+ cloud professionals</p>
+						</div>
+						<div class="benefit-item">
+							<h3>Build Your Brand</h3>
+							<p>Establish yourself as a thought leader in the cloud community</p>
+						</div>
+						<div class="benefit-item">
+							<h3>Network & Connect</h3>
+							<p>Meet fellow experts and expand your professional network</p>
+						</div>
+						<div class="benefit-item">
+							<h3>Get Recorded</h3>
+							<p>Main stage talks are professionally recorded and published</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Speaking Opportunities -->
+			<section class="opportunities-section">
+				<div class="opportunities-container">
+					<h2 class="section-heading">
+						<span class="heading-prefix">Speaking </span>
+						Formats
+					</h2>
+					<div class="opportunities-grid">
+						<div class="opportunity-card">
+							<h3>Keynote</h3>
+							<p class="duration">45 minutes</p>
+							<p>Main stage presentation for industry leaders and major announcements</p>
+						</div>
+						<div class="opportunity-card">
+							<h3>Workshop</h3>
+							<p class="duration">90 minutes</p>
+							<p>Hands-on, interactive sessions for deep-dive technical training</p>
+						</div>
+						<div class="opportunity-card">
+							<h3>Technical Talk</h3>
+							<p class="duration">30 minutes</p>
+							<p>In-depth presentations on specific cloud technologies and practices</p>
+						</div>
+						<div class="opportunity-card">
+							<h3>Lightning Talk</h3>
+							<p class="duration">10 minutes</p>
+							<p>Quick, focused presentations on specific topics or use cases</p>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<Footer content={footerContent} />
+		<ScrollAnimations />
+	</body>
+</html>
+
+<style is:global>
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+
+	html {
+		font-family: 'Noto Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+		line-height: 1.6;
+		color: #1a1a1a;
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		font-family: 'Squada One', system-ui, sans-serif;
+		font-weight: 400;
+		letter-spacing: 0.02em;
+	}
+
+	body {
+		min-height: 100vh;
+		background: black;
+		color: white;
+	}
+</style>
+
+<style>
+	.speakers-page {
+		background: black;
+		color: white;
+	}
+
+	/* Hero Section */
+	.speakers-hero {
+		padding: 6rem 1.5rem 4rem;
+		background: black;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.pulsing-squares {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		pointer-events: none;
+		z-index: 0;
+	}
+
+	.square {
+		position: absolute;
+		width: 15px;
+		height: 15px;
+		background: rgb(251, 113, 133);
+		animation: pulse 2s ease-in-out infinite;
+	}
+
+	/* Varied opacity for depth */
+	.square:nth-child(1) { animation-delay: 0s; opacity: 0.4; }
+	.square:nth-child(2) { animation-delay: 0.3s; opacity: 0.38; }
+	.square:nth-child(3) { animation-delay: 0.6s; opacity: 0.4; }
+	.square:nth-child(4) { animation-delay: 0.9s; opacity: 0.32; }
+	.square:nth-child(5) { animation-delay: 1.2s; opacity: 0.38; }
+	.square:nth-child(6) { animation-delay: 1.5s; opacity: 0.3; }
+	.square:nth-child(7) { animation-delay: 0.4s; opacity: 0.28; }
+	.square:nth-child(8) { animation-delay: 0.8s; opacity: 0.25; }
+	.square:nth-child(9) { animation-delay: 0.2s; opacity: 0.45; }
+	.square:nth-child(10) { animation-delay: 1.1s; opacity: 0.22; }
+	.square:nth-child(11) { animation-delay: 1.4s; opacity: 0.25; }
+	.square:nth-child(12) { animation-delay: 0.5s; opacity: 0.2; }
+	.square:nth-child(13) { animation-delay: 1.0s; opacity: 0.18; }
+	.square:nth-child(14) { animation-delay: 1.3s; opacity: 0.15; }
+	.square:nth-child(15) { animation-delay: 0.7s; opacity: 0.18; }
+
+	@keyframes pulse {
+		0%, 100% {
+			transform: scale(1);
+		}
+		50% {
+			transform: scale(1.3);
+		}
+	}
+
+	.hero-container {
+		max-width: 900px;
+		margin: 0 auto;
+		text-align: center;
+		position: relative;
+		z-index: 1;
+	}
+
+	.hero-title {
+		font-family: 'Squada One', system-ui, sans-serif;
+		font-size: 3rem;
+		margin: 0 0 1rem 0;
+		color: rgb(251, 113, 133);
+	}
+
+	.hero-subtitle {
+		font-size: 1.5rem;
+		margin: 0 0 1.5rem 0;
+		color: white;
+	}
+
+	.hero-description {
+		font-size: 1.125rem;
+		line-height: 1.8;
+		opacity: 0.9;
+	}
+
+	/* Section Headings */
+	.section-heading {
+		font-family: 'Squada One', system-ui, sans-serif;
+		font-size: 2.5rem;
+		text-align: center;
+		margin: 0 0 3rem 0;
+		color: rgb(251, 113, 133);
+	}
+
+	.heading-prefix {
+		color: white;
+	}
+
+	/* Speakers Section */
+	.speakers-section {
+		padding: 4rem 1.5rem;
+	}
+
+	.speakers-container {
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	.speakers-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 2rem;
+	}
+
+	.speaker-card {
+		background: rgba(61, 120, 171, 0.1);
+		border: 1px solid rgba(61, 120, 171, 0.2);
+		border-radius: 1rem;
+		padding: 2rem;
+		text-align: center;
+		transition: transform 0.2s, border-color 0.2s;
+	}
+
+	.speaker-card:hover {
+		transform: translateY(-4px);
+		border-color: rgba(61, 120, 171, 0.4);
+	}
+
+	.speaker-image {
+		width: 150px;
+		height: 150px;
+		margin: 0 auto 1.5rem;
+		border-radius: 50%;
+		overflow: hidden;
+		border: 3px solid rgb(251, 113, 133);
+	}
+
+	.speaker-image img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.speaker-info {
+		text-align: center;
+	}
+
+	.speaker-name {
+		font-family: 'Squada One', system-ui, sans-serif;
+		font-size: 1.5rem;
+		margin: 0 0 0.5rem 0;
+		color: white;
+	}
+
+	.speaker-title {
+		font-size: 1rem;
+		margin: 0 0 0.25rem 0;
+		font-weight: 600;
+		color: rgb(251, 113, 133);
+	}
+
+	.speaker-company {
+		font-size: 0.875rem;
+		margin: 0 0 0.75rem 0;
+		opacity: 0.8;
+	}
+
+	.speaker-topic {
+		font-size: 0.875rem;
+		margin: 0;
+		opacity: 0.7;
+		font-style: italic;
+	}
+
+	/* Call for Speakers */
+	.cfs-section {
+		padding: 4rem 1.5rem;
+		background: rgba(61, 120, 171, 0.05);
+	}
+
+	.cfs-container {
+		max-width: 1200px;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	.cfs-description {
+		font-size: 1.125rem;
+		margin: 0 auto 3rem;
+		max-width: 800px;
+		opacity: 0.9;
+		line-height: 1.8;
+	}
+
+	.cfs-dates {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1.5rem;
+		margin-bottom: 3rem;
+		max-width: 600px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.cfs-date-card {
+		background: rgba(251, 113, 133, 0.1);
+		border: 1px solid rgba(251, 113, 133, 0.3);
+		border-radius: 1rem;
+		padding: 1.5rem;
+		text-align: center;
+	}
+
+	.cfs-date-card h3 {
+		font-family: 'Squada One', system-ui, sans-serif;
+		font-size: 1.5rem;
+		margin: 0 0 0.5rem 0;
+		color: white;
+	}
+
+	.date-label {
+		font-size: 0.875rem;
+		margin: 0;
+		opacity: 0.7;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	.date-value {
+		font-size: 1.5rem;
+		font-weight: 700;
+		margin: 0.5rem 0 0 0;
+		color: rgb(251, 113, 133);
+	}
+
+	.cfs-benefits {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 2rem;
+		margin-bottom: 3rem;
+	}
+
+	.benefit-item {
+		background: rgba(61, 120, 171, 0.1);
+		border: 1px solid rgba(61, 120, 171, 0.2);
+		border-radius: 1rem;
+		padding: 2rem;
+		text-align: left;
+	}
+
+	.benefit-item h3 {
+		font-family: 'Squada One', system-ui, sans-serif;
+		font-size: 1.5rem;
+		margin: 0 0 0.75rem 0;
+		color: rgb(251, 113, 133);
+	}
+
+	.benefit-item p {
+		margin: 0;
+		opacity: 0.9;
+		line-height: 1.6;
+	}
+
+	.cfs-button {
+		display: inline-block;
+		padding: 1rem 3rem;
+		background: rgb(251, 113, 133);
+		color: white;
+		text-decoration: none;
+		font-weight: 600;
+		border-radius: 0.5rem;
+		font-size: 1.125rem;
+		transition: transform 0.2s, opacity 0.2s;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	.cfs-button:hover {
+		transform: translateY(-2px);
+		opacity: 0.9;
+	}
+
+	/* Opportunities Section */
+	.opportunities-section {
+		padding: 4rem 1.5rem;
+	}
+
+	.opportunities-container {
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	.opportunities-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 2rem;
+	}
+
+	.opportunity-card {
+		background: rgba(61, 120, 171, 0.1);
+		border: 1px solid rgba(61, 120, 171, 0.2);
+		border-radius: 1rem;
+		padding: 2rem;
+		text-align: center;
+	}
+
+	.opportunity-card h3 {
+		font-family: 'Squada One', system-ui, sans-serif;
+		font-size: 1.75rem;
+		margin: 0 0 0.5rem 0;
+		color: rgb(251, 113, 133);
+	}
+
+	.duration {
+		font-size: 0.875rem;
+		font-weight: 600;
+		margin: 0 0 1rem 0;
+		color: rgb(255, 193, 77);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	.opportunity-card p:not(.duration) {
+		margin: 0;
+		opacity: 0.9;
+		line-height: 1.6;
+	}
+
+	/* Desktop Styles */
+	@media (min-width: 769px) {
+		.speakers-hero {
+			padding: 8rem 2rem 6rem;
+		}
+
+		.hero-title {
+			font-size: 4.5rem;
+		}
+
+		.hero-subtitle {
+			font-size: 2rem;
+		}
+
+		.hero-description {
+			font-size: 1.25rem;
+		}
+
+		.speakers-section {
+			padding: 6rem 2rem;
+		}
+
+		.section-heading {
+			font-size: 4rem;
+		}
+
+		.speakers-grid {
+			grid-template-columns: repeat(3, 1fr);
+			gap: 3rem;
+		}
+
+		.speaker-image {
+			width: 180px;
+			height: 180px;
+		}
+
+		.cfs-section {
+			padding: 6rem 2rem;
+		}
+
+		.cfs-dates {
+			grid-template-columns: repeat(2, 1fr);
+			max-width: 700px;
+		}
+
+		.cfs-benefits {
+			grid-template-columns: repeat(2, 1fr);
+			gap: 3rem;
+		}
+
+		.opportunities-section {
+			padding: 6rem 2rem;
+		}
+
+		.opportunities-grid {
+			grid-template-columns: repeat(2, 1fr);
+			gap: 3rem;
+		}
+	}
+</style>

@@ -1,0 +1,165 @@
+---
+interface Props {
+	content: {
+		title: string;
+		prefix?: string;
+	};
+}
+
+const { content } = Astro.props;
+
+const logos = [
+	'aws-white.svg',
+	'azure.svg',
+	'googlecloud.svg',
+	'ibm.svg',
+	'oracle.svg',
+	'alibaba.svg',
+	'tencent-white.svg',
+	'huawei.svg',
+];
+---
+
+<section class="ticker-section">
+	<h2 class="ticker-title">
+		{content.prefix && <span class="ticker-prefix">{content.prefix} </span>}
+		{content.title}
+	</h2>
+	<div class="ticker-wrapper">
+		<div class="ticker-track">
+			{logos.map((logo, index) => (
+				<div class="ticker-item" data-index={index}>
+					<img src={`/images/cloud-platforms/${logo}`} alt={logo.replace('.svg', '')} />
+				</div>
+			))}
+		</div>
+	</div>
+</section>
+
+<script>
+	const track = document.querySelector('.ticker-track');
+	const items = document.querySelectorAll('.ticker-item');
+
+	if (track && items.length > 0) {
+		// Clone items for seamless loop
+		items.forEach(item => {
+			const clone = item.cloneNode(true) as HTMLElement;
+			track.appendChild(clone);
+		});
+
+		let position = 0;
+		const speed = 0.5; // pixels per frame
+		const gap = 96; // 6rem in pixels (matches CSS gap)
+
+		function animate() {
+			position -= speed;
+
+			const allItems = track.querySelectorAll('.ticker-item');
+			const firstItem = allItems[0] as HTMLElement;
+
+			if (firstItem && Math.abs(position) >= firstItem.offsetWidth + gap) {
+				// Move first item to the end
+				track.appendChild(firstItem);
+				position = 0;
+			}
+
+			track.style.transform = `translateX(${position}px)`;
+			requestAnimationFrame(animate);
+		}
+
+		animate();
+	}
+</script>
+
+<style>
+	.ticker-section {
+		background: black;
+		color: white;
+		padding: 4rem 1.5rem;
+		overflow: hidden;
+	}
+
+	.ticker-title {
+		font-family: 'Squada One', system-ui, sans-serif;
+		font-size: 2.5rem;
+		font-weight: 400;
+		margin: 0 0 2rem 0;
+		text-align: center;
+		letter-spacing: 0.02em;
+		color: rgb(230, 148, 255);
+	}
+
+	.ticker-prefix {
+		color: white;
+		font-family: 'Squada One', system-ui, sans-serif;
+		font-size: 2.5rem;
+		font-weight: 400;
+		letter-spacing: 0.02em;
+	}
+
+	.ticker-wrapper {
+		width: 100%;
+		overflow: hidden;
+		position: relative;
+	}
+
+	.ticker-track {
+		display: flex;
+		gap: 4rem;
+		will-change: transform;
+	}
+
+	.ticker-item {
+		flex-shrink: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-width: 150px;
+		cursor: pointer;
+	}
+
+	.ticker-item img {
+		height: 60px;
+		width: auto;
+		max-width: 150px;
+		object-fit: contain;
+		filter: brightness(0) invert(1);
+		transition: filter 0.3s ease;
+	}
+
+	.ticker-item:hover img {
+		filter: none;
+	}
+
+
+	@media (min-width: 769px) {
+		.ticker-section {
+			padding: 6rem 2rem;
+		}
+
+		.ticker-title {
+			font-size: 4rem;
+		}
+
+		.ticker-prefix {
+			font-size: 4rem;
+		}
+
+		.ticker-item {
+			min-width: 200px;
+		}
+
+		.ticker-item img {
+			height: 80px;
+			max-width: 200px;
+		}
+
+		.ticker-item:hover img {
+			filter: none;
+		}
+
+		.ticker-track {
+			gap: 6rem;
+		}
+	}
+</style>

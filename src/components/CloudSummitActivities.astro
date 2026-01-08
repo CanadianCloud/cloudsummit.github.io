@@ -1,0 +1,109 @@
+---
+interface Activity {
+	title: string;
+	description: string;
+	image: string;
+}
+
+interface Props {
+	content: {
+		activities: Activity[];
+	};
+}
+
+const { content } = Astro.props;
+---
+
+<section class="cloud-summit-activities">
+	<div class="activities-container">
+		<div class="activities-grid">
+			{content.activities.map((activity) => (
+				<div class="activity-item">
+					<img src={activity.image} alt={activity.title} class="activity-icon" />
+					<h3 class="activity-title">{activity.title}</h3>
+					<p class="activity-description">{activity.description}</p>
+				</div>
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.cloud-summit-activities {
+		background: black;
+		color: white;
+		padding: 0 1.5rem 4rem;
+	}
+
+	.activities-container {
+		max-width: 1440px;
+		margin: 0 auto;
+	}
+
+	.activities-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 2rem;
+	}
+
+	.activity-item {
+		padding: 2rem;
+		transition: transform 0.2s;
+		text-align: center;
+	}
+
+	.activity-item:hover {
+		transform: translateY(-2px);
+	}
+
+	.activity-icon {
+		width: 64px;
+		height: 64px;
+		margin-bottom: 1.5rem;
+		filter: brightness(0) saturate(100%) invert(45%) sepia(26%) saturate(1024%) hue-rotate(166deg) brightness(93%) contrast(87%);
+	}
+
+	.activity-title {
+		font-family: 'Squada One', system-ui, sans-serif;
+		font-size: 1.5rem;
+		margin: 0 0 0.75rem 0;
+		color: rgb(61, 120, 171);
+		font-weight: 400;
+		letter-spacing: 0.02em;
+	}
+
+	.activity-description {
+		margin: 0;
+		font-size: 1rem;
+		line-height: 1.6;
+		opacity: 0.9;
+	}
+
+	@media (min-width: 769px) {
+		.cloud-summit-activities {
+			padding: 0 2rem 6rem;
+		}
+
+		.activities-grid {
+			grid-template-columns: repeat(3, 1fr);
+			gap: 2rem;
+		}
+
+		.activity-item {
+			padding: 2.5rem;
+		}
+
+		.activity-icon {
+			width: 80px;
+			height: 80px;
+		}
+
+		.activity-title {
+			font-size: 1.75rem;
+		}
+
+		.activity-description {
+			font-size: 1.125rem;
+		}
+	}
+</style>

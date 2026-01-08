@@ -1,0 +1,66 @@
+---
+---
+
+<section class="see-you-there">
+	<div class="ticker-wrapper">
+		<div class="ticker-content">
+			<span class="ticker-text">BECOME A SPONSOR ヽ(•‿•)ノ</span>
+			<span class="ticker-text">BECOME A SPONSOR ヽ(•‿•)ノ</span>
+			<span class="ticker-text">BECOME A SPONSOR ヽ(•‿•)ノ</span>
+			<span class="ticker-text">BECOME A SPONSOR ヽ(•‿•)ノ</span>
+			<span class="ticker-text">BECOME A SPONSOR ヽ(•‿•)ノ</span>
+			<span class="ticker-text">BECOME A SPONSOR ヽ(•‿•)ノ</span>
+			<span class="ticker-text">BECOME A SPONSOR ヽ(•‿•)ノ</span>
+			<span class="ticker-text">BECOME A SPONSOR ヽ(•‿•)ノ</span>
+		</div>
+	</div>
+</section>
+
+<style>
+	.see-you-there {
+		background: black;
+		overflow: hidden;
+		padding: 2rem 0;
+	}
+
+	.ticker-wrapper {
+		width: 100%;
+		overflow: hidden;
+	}
+
+	.ticker-content {
+		display: flex;
+		gap: 2rem;
+		animation: ticker 20s linear infinite;
+		white-space: nowrap;
+	}
+
+	.ticker-text {
+		font-family: 'Doto', monospace;
+		font-size: 8rem;
+		font-weight: 900;
+		color: rgb(168, 251, 90);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		flex-shrink: 0;
+	}
+
+	@keyframes ticker {
+		0% {
+			transform: translateX(0);
+		}
+		100% {
+			transform: translateX(-50%);
+		}
+	}
+
+	@media (max-width: 768px) {
+		.ticker-text {
+			font-size: 4rem;
+		}
+
+		.see-you-there {
+			padding: 1.5rem 0;
+		}
+	}
+</style>

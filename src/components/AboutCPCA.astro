@@ -1,0 +1,219 @@
+---
+interface Props {
+	content: {
+		description: string;
+		ctaText: string;
+		ctaHref: string;
+	};
+}
+
+const { content } = Astro.props;
+---
+
+<section class="about-cpca" id="about">
+	<div class="cloud-transition-top">
+		<img src="/images/top-cloud.svg" alt="" />
+	</div>
+	<div class="about-wrapper">
+		<div class="about-container">
+			<div class="logo-column">
+				<img src="/images/cpca.svg" alt="CPCA Logo" class="cpca-logo" />
+			</div>
+			<div class="text-column">
+				<h2 class="about-description">{content.description}</h2>
+				<a href={content.ctaHref} class="cpca-cta">{content.ctaText}</a>
+			</div>
+		</div>
+	</div>
+	<div class="cloud-transition-bottom">
+		<img src="/images/bottom-cloud.svg" alt="" />
+	</div>
+	<div class="pulsing-squares">
+		<div class="square" style="left: 10%; top: 5%;"></div>
+		<div class="square" style="left: 25%; top: 15%;"></div>
+		<div class="square" style="left: 40%; top: 8%;"></div>
+		<div class="square" style="left: 55%; top: 20%;"></div>
+		<div class="square" style="left: 70%; top: 12%;"></div>
+		<div class="square" style="left: 85%; top: 25%;"></div>
+		<div class="square" style="left: 15%; top: 35%;"></div>
+		<div class="square" style="left: 35%; top: 40%;"></div>
+		<div class="square" style="left: 50%; top: 3%;"></div>
+		<div class="square" style="left: 65%; top: 45%;"></div>
+		<div class="square" style="left: 80%; top: 38%;"></div>
+		<div class="square" style="left: 20%; top: 50%;"></div>
+		<div class="square" style="left: 45%; top: 55%;"></div>
+		<div class="square" style="left: 75%; top: 60%;"></div>
+		<div class="square" style="left: 30%; top: 65%;"></div>
+	</div>
+</section>
+
+<style>
+	.about-cpca {
+		background: black;
+		color: white;
+		padding: 0;
+		position: relative;
+	}
+
+	.cloud-transition-top {
+		position: relative;
+		width: 100%;
+		height: auto;
+		line-height: 0;
+	}
+
+	.cloud-transition-top img {
+		width: 100%;
+		height: auto;
+		display: block;
+		transform: translateY(1px);
+	}
+
+	.cloud-transition-bottom {
+		position: relative;
+		width: 100%;
+		height: auto;
+		line-height: 0;
+	}
+
+	.cloud-transition-bottom img {
+		width: 100%;
+		height: auto;
+		display: block;
+		transform: translateY(-1px);
+	}
+
+	.pulsing-squares {
+		position: relative;
+		width: 100%;
+		height: 250px;
+		pointer-events: none;
+		z-index: 10;
+	}
+
+	.square {
+		position: absolute;
+		width: 15px;
+		height: 15px;
+		background: rgb(61, 120, 171);
+		animation: pulse 2s ease-in-out infinite;
+	}
+
+	/* Top squares - higher opacity */
+	.square:nth-child(1) { animation-delay: 0s; opacity: 0.9; }
+	.square:nth-child(2) { animation-delay: 0.3s; opacity: 0.85; }
+	.square:nth-child(3) { animation-delay: 0.6s; opacity: 0.9; }
+	.square:nth-child(4) { animation-delay: 0.9s; opacity: 0.75; }
+	.square:nth-child(5) { animation-delay: 1.2s; opacity: 0.85; }
+	.square:nth-child(6) { animation-delay: 1.5s; opacity: 0.7; }
+
+	/* Middle squares - medium opacity */
+	.square:nth-child(7) { animation-delay: 0.4s; opacity: 0.6; }
+	.square:nth-child(8) { animation-delay: 0.8s; opacity: 0.55; }
+	.square:nth-child(9) { animation-delay: 0.2s; opacity: 0.95; }
+	.square:nth-child(10) { animation-delay: 1.1s; opacity: 0.5; }
+	.square:nth-child(11) { animation-delay: 1.4s; opacity: 0.55; }
+
+	/* Bottom squares - lower opacity */
+	.square:nth-child(12) { animation-delay: 0.5s; opacity: 0.4; }
+	.square:nth-child(13) { animation-delay: 1.0s; opacity: 0.35; }
+	.square:nth-child(14) { animation-delay: 1.3s; opacity: 0.3; }
+	.square:nth-child(15) { animation-delay: 0.7s; opacity: 0.35; }
+
+	@keyframes pulse {
+		0%, 100% {
+			transform: scale(1);
+		}
+		50% {
+			transform: scale(1.3);
+		}
+	}
+
+	.about-wrapper {
+		background: rgb(61, 120, 171);
+		width: 100%;
+	}
+
+	.about-container {
+		max-width: 1440px;
+		margin: 0 auto;
+		padding: 0 2rem;
+		display: grid;
+		grid-template-columns: auto 1fr;
+		gap: 4rem;
+		align-items: center;
+	}
+
+	.logo-column {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.cpca-logo {
+		width: 100%;
+		max-width: 192px;
+		height: auto;
+	}
+
+	.text-column {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 2rem;
+	}
+
+	.cpca-cta {
+		display: inline-block;
+		padding: 1rem 2.5rem;
+		background: white;
+		color: rgb(61, 120, 171);
+		text-decoration: none;
+		font-weight: 600;
+		border-radius: 0.5rem;
+		font-size: 1.125rem;
+		transition: transform 0.2s, background 0.2s;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	.cpca-cta:hover {
+		transform: translateY(-2px);
+		background: rgba(255, 255, 255, 0.9);
+	}
+
+	.about-description {
+		font-family: 'Squada One', system-ui, sans-serif;
+		font-size: 2.5rem;
+		line-height: 1.4;
+		margin: 0;
+		font-weight: 400;
+		letter-spacing: 0.02em;
+	}
+
+	@media (max-width: 768px) {
+		.about-container {
+			grid-template-columns: 1fr;
+			gap: 2rem;
+			padding: 3rem 1.5rem;
+		}
+
+		.cpca-logo {
+			max-width: 180px;
+		}
+
+		.text-column {
+			align-items: center;
+		}
+
+		.about-description {
+			font-size: 1.5rem;
+			text-align: center;
+		}
+
+		.square {
+			width: 12px;
+			height: 12px;
+		}
+	}
+</style>

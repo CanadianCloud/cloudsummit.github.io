@@ -1,0 +1,731 @@
+---
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import ScrollAnimations from '../components/ScrollAnimations.astro';
+import { navigationContent, footerContent } from '../lib/content';
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Squada+One&family=Noto+Sans:wght@400;500;600;700&family=Doto:wght@100..900&display=swap" rel="stylesheet" />
+		<title>About Cloud Summit - Cloud Summit 2026</title>
+	</head>
+	<body>
+		<Navigation content={navigationContent} />
+
+		<main class="about-page">
+			<!-- Hero Section -->
+			<section class="about-hero">
+				<div class="pulsing-squares">
+					<div class="square" style="left: 10%; top: 15%;"></div>
+					<div class="square" style="left: 25%; top: 25%;"></div>
+					<div class="square" style="left: 40%; top: 18%;"></div>
+					<div class="square" style="left: 55%; top: 30%;"></div>
+					<div class="square" style="left: 70%; top: 22%;"></div>
+					<div class="square" style="left: 85%; top: 35%;"></div>
+					<div class="square" style="left: 15%; top: 45%;"></div>
+					<div class="square" style="left: 35%; top: 50%;"></div>
+					<div class="square" style="left: 50%; top: 13%;"></div>
+					<div class="square" style="left: 65%; top: 55%;"></div>
+					<div class="square" style="left: 80%; top: 48%;"></div>
+					<div class="square" style="left: 20%; top: 60%;"></div>
+					<div class="square" style="left: 45%; top: 65%;"></div>
+					<div class="square" style="left: 75%; top: 70%;"></div>
+					<div class="square" style="left: 30%; top: 75%;"></div>
+				</div>
+				<div class="hero-container">
+					<h1 class="hero-title">About Cloud Summit</h1>
+					<p class="hero-subtitle">Canada's Largest Multi-Cloud Conference</p>
+				</div>
+			</section>
+
+			<!-- History Section -->
+			<section class="history-section">
+				<div class="history-container">
+					<h2 class="section-heading">
+						<span class="heading-prefix">Our </span>
+						History
+					</h2>
+					<div class="history-content">
+						<p class="history-text">
+							Cloud Summit began with a vision to create Canada's premier multi-cloud conference, bringing together
+							professionals from across the cloud ecosystem. What started as a single-city event has grown into
+							a nationwide movement, connecting thousands of cloud practitioners, decision-makers, and innovators.
+						</p>
+						<p class="history-text">
+							Through the years, we've maintained our commitment to excellence, community, and charitable giving.
+							Each Cloud Summit event not only advances cloud knowledge and networking but also contributes to
+							meaningful causes, raising over $10,000 annually for local charities.
+						</p>
+						<p class="history-text">
+							Today, Cloud Summit proudly serves both Vancouver and Toronto, establishing itself as the largest
+							gathering of AWS, Azure, Google Cloud, and IBM Cloud experts in Canada. Our events feature world-class
+							speakers, hands-on workshops, and unparalleled networking opportunities that continue to shape the
+							future of cloud computing in Canada.
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<!-- CPCA Section -->
+			<section class="cpca-section">
+				<div class="cpca-container">
+					<div class="cpca-logo-wrapper">
+						<img src="/images/cpca.svg" alt="CPCA Logo" class="cpca-logo" />
+					</div>
+					<div class="cpca-content">
+						<h2 class="section-heading cpca-heading">
+							Canadian Public Cloud Association's <span class="heading-suffix">Purpose</span>
+						</h2>
+						<ol class="cpca-list">
+							<li>To educate the local technology community.</li>
+							<li>To give back to the local community through charity.</li>
+							<li>To bring together the local technology community.</li>
+						</ol>
+					</div>
+				</div>
+			</section>
+
+			<!-- Event Stats -->
+			<section class="stats-section">
+				<div class="stats-container">
+					<h2 class="section-heading">
+						<span class="heading-prefix">Cloud Summit </span>
+						By The Numbers
+					</h2>
+					<div class="stats-grid">
+						<div class="stat-item">
+							<h3 class="stat-number">800+</h3>
+							<p class="stat-label">In-Person Attendees</p>
+						</div>
+						<div class="stat-item">
+							<h3 class="stat-number">19</h3>
+							<p class="stat-label">Expert Speakers</p>
+						</div>
+						<div class="stat-item">
+							<h3 class="stat-number">12+</h3>
+							<p class="stat-label">Sponsors & Communities</p>
+						</div>
+						<div class="stat-item">
+							<h3 class="stat-number">$10,000+</h3>
+							<p class="stat-label">Raised for Charity to date</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- What to Expect -->
+			<section class="expect-section">
+				<div class="expect-container">
+					<h2 class="section-heading">
+						<span class="heading-prefix">What To </span>
+						Expect
+					</h2>
+					<div class="expect-grid">
+						<div class="expect-item">
+							<h3>Keynote Speakers</h3>
+							<p>Industry leaders sharing insights on the latest cloud technologies and trends</p>
+						</div>
+						<div class="expect-item">
+							<h3>Workshops</h3>
+							<p>Hands-on learning sessions to develop practical cloud skills</p>
+						</div>
+						<div class="expect-item">
+							<h3>Networking</h3>
+							<p>Connect with peers, potential employers, and industry experts</p>
+						</div>
+						<div class="expect-item">
+							<h3>Latest Technologies</h3>
+							<p>Explore cutting-edge cloud innovations from leading providers</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Locations -->
+			<section class="locations-section">
+				<div class="locations-container">
+					<h2 class="section-heading">
+						<span class="heading-prefix">Event </span>
+						Locations
+					</h2>
+					<div class="locations-grid">
+						<div class="location-card">
+							<div class="location-image">
+								<img src="/images/locations/science-world-vancouver.jpg" alt="Science World Vancouver" />
+							</div>
+							<div class="location-content">
+								<h3>Vancouver</h3>
+								<p class="location-venue">Science World</p>
+								<p class="location-address">
+									<a href="https://maps.app.goo.gl/DQbdiQLYB1qe1iZn7" target="_blank" rel="noopener noreferrer" class="address-link">
+										1455 Quebec St, Vancouver, BC V6A 3Z7
+									</a>
+								</p>
+								<p class="location-date">Friday, May 1st, 2026 • 2pm-9pm</p>
+								<p class="location-description">
+									Connect with over 1,000 cloud professionals and decision-makers at
+									this premier gathering of cloud experts.
+								</p>
+							</div>
+						</div>
+						<div class="location-card">
+							<div class="location-image">
+								<img src="/images/locations/northeastern-university-toronto.png" alt="Northeastern University Toronto" />
+							</div>
+							<div class="location-content">
+								<h3>Toronto</h3>
+								<p class="location-venue">Northeastern University</p>
+								<p class="location-address">
+									<a href="https://maps.app.goo.gl/tqLCm7Z6r1ctT4Db8" target="_blank" rel="noopener noreferrer" class="address-link">
+										375 Queen St W, Toronto, ON M5V 2A5
+									</a>
+								</p>
+								<p class="location-date">Saturday, August 29th, 2026 • 12pm-6pm</p>
+								<p class="location-description">
+									Connect with over 1,500 cloud professionals and decision-makers at
+									this premier gathering of cloud experts.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<Footer content={footerContent} />
+		<ScrollAnimations />
+	</body>
+</html>
+
+<style is:global>
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+
+	html {
+		font-family: 'Noto Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+		line-height: 1.6;
+		color: #1a1a1a;
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		font-family: 'Squada One', system-ui, sans-serif;
+		font-weight: 400;
+		letter-spacing: 0.02em;
+	}
+
+	body {
+		min-height: 100vh;
+		background: black;
+		color: white;
+	}
+</style>
+
+<style>
+	.about-page {
+		background: black;
+		color: white;
+	}
+
+	/* Hero Section */
+	.about-hero {
+		padding: 6rem 1.5rem 4rem;
+		background: black;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.pulsing-squares {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		pointer-events: none;
+		z-index: 0;
+	}
+
+	.square {
+		position: absolute;
+		width: 15px;
+		height: 15px;
+		background: rgb(61, 120, 171);
+		animation: pulse 2s ease-in-out infinite;
+	}
+
+	/* Varied opacity for depth */
+	.square:nth-child(1) { animation-delay: 0s; opacity: 0.4; }
+	.square:nth-child(2) { animation-delay: 0.3s; opacity: 0.38; }
+	.square:nth-child(3) { animation-delay: 0.6s; opacity: 0.4; }
+	.square:nth-child(4) { animation-delay: 0.9s; opacity: 0.32; }
+	.square:nth-child(5) { animation-delay: 1.2s; opacity: 0.38; }
+	.square:nth-child(6) { animation-delay: 1.5s; opacity: 0.3; }
+	.square:nth-child(7) { animation-delay: 0.4s; opacity: 0.28; }
+	.square:nth-child(8) { animation-delay: 0.8s; opacity: 0.25; }
+	.square:nth-child(9) { animation-delay: 0.2s; opacity: 0.45; }
+	.square:nth-child(10) { animation-delay: 1.1s; opacity: 0.22; }
+	.square:nth-child(11) { animation-delay: 1.4s; opacity: 0.25; }
+	.square:nth-child(12) { animation-delay: 0.5s; opacity: 0.2; }
+	.square:nth-child(13) { animation-delay: 1.0s; opacity: 0.18; }
+	.square:nth-child(14) { animation-delay: 1.3s; opacity: 0.15; }
+	.square:nth-child(15) { animation-delay: 0.7s; opacity: 0.18; }
+
+	@keyframes pulse {
+		0%, 100% {
+			transform: scale(1);
+		}
+		50% {
+			transform: scale(1.3);
+		}
+	}
+
+	.hero-container {
+		max-width: 900px;
+		margin: 0 auto;
+		text-align: center;
+		position: relative;
+		z-index: 1;
+	}
+
+	.hero-title {
+		font-family: 'Squada One', system-ui, sans-serif;
+		font-size: 3rem;
+		margin: 0 0 1rem 0;
+		color: rgb(61, 120, 171);
+	}
+
+	.hero-subtitle {
+		font-size: 1.5rem;
+		margin: 0;
+		color: white;
+		opacity: 0.9;
+	}
+
+	/* Section Headings */
+	.section-heading {
+		font-family: 'Squada One', system-ui, sans-serif;
+		font-size: 2.5rem;
+		margin: 0 0 2rem 0;
+		color: rgb(61, 120, 171);
+	}
+
+	.cpca-section .section-heading {
+		font-size: 1.75rem;
+		color: white;
+	}
+
+	.heading-prefix {
+		color: white;
+	}
+
+	.heading-suffix {
+		color: white;
+	}
+
+	/* History Section */
+	.history-section {
+		padding: 4rem 1.5rem;
+		background: rgba(61, 120, 171, 0.05);
+	}
+
+	.history-container {
+		max-width: 900px;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	.history-content {
+		text-align: left;
+	}
+
+	.history-text {
+		font-size: 1.125rem;
+		line-height: 1.8;
+		opacity: 0.9;
+		margin: 0 0 1.5rem 0;
+	}
+
+	.history-text:last-child {
+		margin-bottom: 0;
+	}
+
+	/* Previous Speakers Section */
+	.speakers-section {
+		padding: 4rem 1.5rem;
+	}
+
+	.speakers-container {
+		max-width: 1200px;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	.speakers-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 2rem;
+	}
+
+	.speaker-card {
+		background: rgba(61, 120, 171, 0.1);
+		border: 1px solid rgba(61, 120, 171, 0.2);
+		border-radius: 1rem;
+		padding: 2rem;
+		transition: transform 0.2s, background 0.2s;
+	}
+
+	.speaker-card:hover {
+		transform: translateY(-4px);
+		background: rgba(61, 120, 171, 0.15);
+	}
+
+	.speaker-image {
+		width: 150px;
+		height: 150px;
+		margin: 0 auto 1.5rem;
+		border-radius: 50%;
+		overflow: hidden;
+		border: 3px solid rgb(168, 251, 90);
+	}
+
+	.speaker-image img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.speaker-name {
+		font-family: 'Squada One', system-ui, sans-serif;
+		font-size: 1.5rem;
+		margin: 0 0 0.5rem 0;
+		color: rgb(168, 251, 90);
+	}
+
+	.speaker-title {
+		font-size: 1rem;
+		margin: 0;
+		opacity: 0.8;
+	}
+
+	/* CPCA Section */
+	.cpca-section {
+		padding: 4rem 1.5rem;
+		background: rgb(61, 120, 171);
+	}
+
+	.cpca-container {
+		max-width: 1200px;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+		align-items: center;
+	}
+
+	.cpca-logo-wrapper {
+		display: flex;
+		justify-content: center;
+	}
+
+	.cpca-logo {
+		width: 100%;
+		max-width: 150px;
+		height: auto;
+	}
+
+	.cpca-content {
+		text-align: center;
+	}
+
+	.cpca-list {
+		font-size: 1rem;
+		line-height: 1.8;
+		margin: 0;
+		padding-left: 1.5rem;
+		text-align: left;
+	}
+
+	.cpca-list li {
+		margin-bottom: 0.5rem;
+	}
+
+	.cpca-list li:last-child {
+		margin-bottom: 0;
+	}
+
+	/* Stats Section */
+	.stats-section {
+		padding: 4rem 1.5rem;
+		background: rgba(61, 120, 171, 0.05);
+	}
+
+	.stats-container {
+		max-width: 1200px;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	.stats-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 2rem;
+	}
+
+	.stat-item {
+		background: rgba(61, 120, 171, 0.1);
+		border: 1px solid rgba(61, 120, 171, 0.2);
+		border-radius: 1rem;
+		padding: 2rem;
+	}
+
+	.stat-number {
+		font-family: 'Squada One', system-ui, sans-serif;
+		font-size: 3rem;
+		margin: 0 0 0.5rem 0;
+		color: rgb(168, 251, 90);
+	}
+
+	.stat-label {
+		font-size: 1rem;
+		margin: 0;
+		opacity: 0.9;
+	}
+
+	/* What to Expect */
+	.expect-section {
+		padding: 4rem 1.5rem;
+	}
+
+	.expect-container {
+		max-width: 1200px;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	.expect-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 2rem;
+	}
+
+	.expect-item {
+		background: rgba(61, 120, 171, 0.1);
+		border: 1px solid rgba(61, 120, 171, 0.2);
+		border-radius: 1rem;
+		padding: 2rem;
+		text-align: left;
+	}
+
+	.expect-item h3 {
+		font-family: 'Squada One', system-ui, sans-serif;
+		font-size: 1.5rem;
+		margin: 0 0 0.75rem 0;
+		color: rgb(61, 120, 171);
+	}
+
+	.expect-item p {
+		margin: 0;
+		opacity: 0.9;
+		line-height: 1.6;
+	}
+
+	/* Locations */
+	.locations-section {
+		padding: 4rem 1.5rem;
+		background: rgba(61, 120, 171, 0.05);
+	}
+
+	.locations-container {
+		max-width: 1200px;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	.locations-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 2rem;
+	}
+
+	.location-card {
+		background: rgba(61, 120, 171, 0.1);
+		border: 1px solid rgba(61, 120, 171, 0.2);
+		border-radius: 1rem;
+		overflow: hidden;
+		text-align: left;
+	}
+
+	.location-image {
+		width: 100%;
+		height: 200px;
+		overflow: hidden;
+	}
+
+	.location-image img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.location-content {
+		padding: 2rem;
+	}
+
+	.location-card h3 {
+		font-family: 'Squada One', system-ui, sans-serif;
+		font-size: 2rem;
+		margin: 0 0 0.75rem 0;
+		color: rgb(251, 113, 133);
+	}
+
+	.location-venue {
+		font-size: 1.25rem;
+		font-weight: 600;
+		margin: 0 0 0.5rem 0;
+		color: rgb(168, 251, 90);
+	}
+
+	.location-address {
+		font-size: 1rem;
+		margin: 0 0 0.5rem 0;
+	}
+
+	.address-link {
+		color: white;
+		text-decoration: none;
+		opacity: 0.8;
+		transition: opacity 0.2s;
+	}
+
+	.address-link:hover {
+		opacity: 1;
+		text-decoration: underline;
+	}
+
+	.location-date {
+		font-size: 1rem;
+		margin: 0 0 1rem 0;
+		opacity: 0.8;
+	}
+
+	.location-description {
+		margin: 0;
+		opacity: 0.9;
+		line-height: 1.6;
+	}
+
+	/* Desktop Styles */
+	@media (min-width: 769px) {
+		.about-hero {
+			padding: 8rem 2rem 6rem;
+		}
+
+		.hero-title {
+			font-size: 4.5rem;
+		}
+
+		.hero-subtitle {
+			font-size: 2rem;
+		}
+
+		.section-heading {
+			font-size: 4rem;
+		}
+
+		.cpca-section .section-heading {
+			font-size: 2.5rem;
+		}
+
+		.history-section {
+			padding: 6rem 2rem;
+		}
+
+		.history-text {
+			font-size: 1.25rem;
+		}
+
+		.speakers-section {
+			padding: 6rem 2rem;
+		}
+
+		.speakers-grid {
+			grid-template-columns: repeat(3, 1fr);
+			gap: 3rem;
+		}
+
+		.speaker-image {
+			width: 200px;
+			height: 200px;
+		}
+
+		.speaker-name {
+			font-size: 1.75rem;
+		}
+
+		.speaker-title {
+			font-size: 1.125rem;
+		}
+
+		.cpca-section {
+			padding: 6rem 2rem;
+		}
+
+		.cpca-container {
+			flex-direction: row;
+			gap: 4rem;
+			text-align: left;
+		}
+
+		.cpca-logo {
+			max-width: 200px;
+		}
+
+		.cpca-content {
+			text-align: left;
+			flex: 1;
+		}
+
+		.cpca-list {
+			font-size: 1.125rem;
+		}
+
+		.stats-section {
+			padding: 6rem 2rem;
+		}
+
+		.stats-grid {
+			grid-template-columns: repeat(4, 1fr);
+		}
+
+		.expect-section {
+			padding: 6rem 2rem;
+		}
+
+		.expect-grid {
+			grid-template-columns: repeat(2, 1fr);
+			gap: 3rem;
+		}
+
+		.locations-section {
+			padding: 6rem 2rem;
+		}
+
+		.locations-grid {
+			grid-template-columns: repeat(2, 1fr);
+			gap: 3rem;
+		}
+
+		.location-image {
+			height: 300px;
+		}
+	}
+</style>
