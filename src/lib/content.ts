@@ -190,8 +190,8 @@ export function getFooterContent(city: City) {
 			{ text: '2025 Press Release', href: 'https://cloudsummit.ca/press' },
 		],
 		previousYears: [
-			{ text: '2025', href: 'https://2025.cloudsummit.ca' },
-			{ text: '2024', href: 'https://2024.cloudsummit.ca' },
+			{ text: '2025', href: 'https://cloudsummit.ca/archive/2025/index.html' },
+			{ text: '2024', href: 'https://cloudsummit.ca/archive/2024.html' },
 		],
 	};
 }
