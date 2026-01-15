@@ -192,7 +192,6 @@ export function getFooterContent(city: City) {
 		previousYears: [
 			{ text: '2025', href: 'https://2025.cloudsummit.ca' },
 			{ text: '2024', href: 'https://2024.cloudsummit.ca' },
-			{ text: '2023', href: 'https://2023.cloudsummit.ca' },
 		],
 	};
 }
