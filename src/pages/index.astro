@@ -5,6 +5,7 @@ import CityModal from '../components/CityModal.astro';
 import AboutCPCA from '../components/AboutCPCA.astro';
 import WhatIsCloudSummit from '../components/WhatIsCloudSummit.astro';
 import EventLocations from '../components/EventLocations.astro';
+import EventMap from '../components/EventMap.astro';
 import CloudSummitActivities from '../components/CloudSummitActivities.astro';
 import SummitSummary from '../components/SummitSummary.astro';
 import HighlightReel from '../components/HighlightReel.astro';
@@ -14,7 +15,7 @@ import Newsletter from '../components/Newsletter.astro';
 import Footer from '../components/Footer.astro';
 import SeeYouThere from '../components/SeeYouThere.astro';
 import ScrollAnimations from '../components/ScrollAnimations.astro';
-import { heroContent, navigationContent, aboutCPCAContent, whatIsCloudSummitContent, cloudSummitActivitiesContent, eventHighlightsContent, tickerContent, pastSponsorsContent, newsletterContent, footerContent, defaultCity } from '../lib/content';
+import { heroContent, navigationContent, aboutCPCAContent, whatIsCloudSummitContent, cloudSummitActivitiesContent, eventHighlightsContent, tickerContent, eventMapContent, pastSponsorsContent, newsletterContent, footerContent, defaultCity } from '../lib/content';
 
 // Use default city for SSR, will be updated client-side
 const content = heroContent[defaultCity];
@@ -39,6 +40,7 @@ const content = heroContent[defaultCity];
 		<CloudSummitActivities content={cloudSummitActivitiesContent} />
 		<AboutCPCA content={aboutCPCAContent} />
 		<EventLocations />
+		<EventMap content={eventMapContent} />
 		<SummitSummary content={eventHighlightsContent} />
 		<HighlightReel content={eventHighlightsContent} />
 		<Ticker content={tickerContent} />
