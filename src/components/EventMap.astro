@@ -26,11 +26,13 @@ const hasPdf = Boolean(content.pdfHref);
 		})();
 	</script>
 	<div class="event-map-outer">
-		<h2 id="event-map-heading" class="section-heading">
-			<span class="heading-prefix">Event </span>
-			Map
-		</h2>
-		<p class="event-map-venue">{content.venueLabel}</p>
+		<div class="event-map-header">
+			<h2 id="event-map-heading" class="section-heading">
+				<span class="heading-prefix">Event </span>
+				Map
+			</h2>
+			<p class="event-map-venue">{content.venueLabel}</p>
+		</div>
 
 		<div class="event-map-card">
 			<div class="event-map-toolbar">
@@ -211,7 +213,12 @@ const hasPdf = Boolean(content.pdfHref);
 		margin: 0 auto;
 	}
 
-	.section-heading {
+	/* Match EventLocations "Two Event Locations" heading block */
+	.event-map-header {
+		margin-bottom: 3rem;
+	}
+
+	.event-map-section .section-heading {
 		font-family: 'Squada One', system-ui, sans-serif;
 		font-size: 2.5rem;
 		text-align: center;
@@ -219,15 +226,18 @@ const hasPdf = Boolean(content.pdfHref);
 		color: rgb(255, 193, 77);
 	}
 
-	.heading-prefix {
-		color: #fff;
+	.event-map-section .heading-prefix {
+		color: white;
+		font-family: 'Squada One', system-ui, sans-serif;
 	}
 
+	/* Match Newsletter description body text */
 	.event-map-venue {
 		text-align: center;
-		margin: 0 0 2rem 0;
-		font-size: 1.05rem;
-		opacity: 0.85;
+		margin: 0;
+		font-size: 1.125rem;
+		line-height: 1.6;
+		opacity: 0.9;
 	}
 
 	.event-map-card {
@@ -253,14 +263,16 @@ const hasPdf = Boolean(content.pdfHref);
 		display: inline-flex;
 		gap: 0.35rem;
 		background: #d1d5db;
-		padding: 0.25rem;
+		padding: 0.35rem;
 		border-radius: 8px;
 	}
 
+	/* Same font treatment as Newsletter .newsletter-description */
 	.event-map-tab {
-		font-family: 'Noto Sans', system-ui, sans-serif;
-		font-size: 0.9rem;
-		font-weight: 600;
+		font-family: 'Noto Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+		font-size: 1.125rem;
+		font-weight: 400;
+		line-height: 1.6;
 		padding: 0.45rem 1rem;
 		border: none;
 		border-radius: 6px;
@@ -277,30 +289,40 @@ const hasPdf = Boolean(content.pdfHref);
 	.event-map-tab.active {
 		background: #fff;
 		color: #111827;
+		font-weight: 600;
 		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
 	}
 
+	/* Match Newsletter "Subscribe to Newsletter" CTA */
 	.event-map-download {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		padding: 0.5rem 1rem;
-		font-size: 0.875rem;
-		font-weight: 600;
-		border-radius: 6px;
+		display: inline-block;
+		padding: 1rem 3rem;
+		background: rgb(61, 120, 171);
+		color: white;
 		text-decoration: none;
-		background: rgb(168, 251, 90);
-		color: #111827;
-		transition: background 0.15s, transform 0.15s, color 0.15s;
+		font-weight: 600;
+		border-radius: 0.5rem;
+		font-size: 1.125rem;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		transition: transform 0.2s, opacity 0.2s;
 	}
 
 	.event-map-download:hover {
-		background: rgb(148, 232, 72);
-		color: #0a0a0a;
+		transform: translateY(-2px);
+		opacity: 0.9;
 	}
 
 	.event-map-download--disabled {
+		display: inline-block;
+		padding: 1rem 3rem;
 		background: #9ca3af;
+		color: white;
+		font-weight: 600;
+		border-radius: 0.5rem;
+		font-size: 1.125rem;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
 		cursor: not-allowed;
 		pointer-events: none;
 	}
@@ -413,15 +435,26 @@ const hasPdf = Boolean(content.pdfHref);
 		}
 	}
 
-	@media (min-width: 900px) {
+	@media (min-width: 769px) {
 		.event-map-section {
 			padding: 6rem 2rem;
 		}
 
-		.section-heading {
+		.event-map-section .section-heading {
 			font-size: 4rem;
 		}
 
+		.event-map-venue {
+			font-size: 1.25rem;
+		}
+
+		.event-map-tab {
+			font-size: 1.25rem;
+			padding: 0.5rem 1.25rem;
+		}
+	}
+
+	@media (min-width: 900px) {
 		.event-map-legend-grid {
 			grid-template-columns: repeat(4, minmax(0, 1fr));
 			gap: 0.65rem 1.25rem;
