@@ -1,0 +1,56 @@
+---
+import type { VenueLogisticsSection } from '../lib/content';
+
+interface Props {
+	content: VenueLogisticsSection;
+}
+
+const { content } = Astro.props;
+
+---
+
+<section class="venueLogistic">
+	<h1> { content.title }</h1>
+</section>
+
+<style>
+	.venueLogistic {}
+</style>
+
+<script>
+	import { getCityStore } from "../lib/cityStore";
+	import { getVenueLogistics, type City } from "../lib/content";
+		
+
+	// Run when DOM is ready
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", initCityAwareNav);
+	} else {
+		initCityAwareNav();
+	}
+
+
+	function updateVenueLogistics() {
+		const cityStore = getCityStore();
+		const currentCity = cityStore.getCity();
+		
+		console.log(getVenueLogistics(currentCity));
+		
+	}
+
+	function initCityAwareNav() {
+		const cityStore = getCityStore();
+		cityStore.init();
+
+	
+		// Update ticket URL on initial load
+		updateVenueLogistics();
+
+		// Subscribe to city changes
+		cityStore.subscribe((city: City) => {
+			updateVenueLogistics();
+		});
+	}
+
+
+</script>

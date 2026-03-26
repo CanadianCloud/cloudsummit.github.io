@@ -15,10 +15,12 @@ import Newsletter from '../components/Newsletter.astro';
 import Footer from '../components/Footer.astro';
 import SeeYouThere from '../components/SeeYouThere.astro';
 import ScrollAnimations from '../components/ScrollAnimations.astro';
-import { heroContent, navigationContent, aboutCPCAContent, whatIsCloudSummitContent, cloudSummitActivitiesContent, eventHighlightsContent, tickerContent, eventMapContent, pastSponsorsContent, newsletterContent, footerContent, defaultCity } from '../lib/content';
+import VenueLogisticsSection from '../components/VenueLogisticsSection.astro';
+import { heroContent, navigationContent, aboutCPCAContent, whatIsCloudSummitContent, cloudSummitActivitiesContent, eventHighlightsContent, tickerContent, eventMapContent, pastSponsorsContent, newsletterContent, footerContent, defaultCity,VenueLogisticsContent  } from '../lib/content';
 
 // Use default city for SSR, will be updated client-side
 const content = heroContent[defaultCity];
+ 
 ---
 
 <html lang="en">
@@ -34,6 +36,7 @@ const content = heroContent[defaultCity];
 	</head>
 	<body>
 		<CityModal />
+		<VenueLogisticsSection content={VenueLogisticsContent} />
 		<Navigation content={navigationContent} />
 		<Hero content={content} />
 		<WhatIsCloudSummit content={whatIsCloudSummitContent} />

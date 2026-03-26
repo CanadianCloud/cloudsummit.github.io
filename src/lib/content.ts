@@ -380,3 +380,121 @@ export const newsletterContent = {
   ctaText: 'Subscribe to Newsletter',
   ctaHref: 'https://tally.so/r/mR6RBl',
 };
+
+export interface VenueLogisticsSection {
+  title: string;
+  intro: string;
+  publicTransport: {
+    title: string;
+    bullets: string[];
+    externalLink?: string;
+  };
+  parking: {
+    title: string;
+    bullets: string[];
+    externalLink?: string;
+  };
+  accessibility: {
+    title: string;
+    bullets: string[];
+    externalLink?: string;
+  };
+  gettingHere: {
+    title: string;
+    bullets: string[];
+    mapEmbedUrl?: string;
+    externalLink?: string;
+  };
+}
+
+export const venueLogisticsContent: Record<City, VenueLogisticsSection> = {
+  vancouver: {
+    title: "Venue Logistics – Vancouver",
+    intro:
+      "Practical information to help you get to Science World and navigate the venue on event day.",
+
+    publicTransport: {
+      title: "Public Transport",
+      bullets: [
+        "Located next to Main Street–Science World SkyTrain Station (Expo Line).",
+        "Short walk from bus stops at Main & Terminal.",
+        "Bike racks available at the front entrance.",
+        "Mobi Bike Share station located near the entrance under the SkyTrain overpass.",
+        "Aquabus and False Creek Ferries stop nearby with routes from Granville Island, Yaletown, Kitsilano, and English Bay."
+      ],
+      externalLink: "https://www.scienceworld.ca/visit-us/getting-here/"
+    },
+
+    parking: {
+      title: "Parking",
+      bullets: [
+        "Paid parking available in lots around Science World.",
+        "Limited capacity — early arrival recommended.",
+        "Designated parking for Evo and Share Now across Quebec St.",
+        "No bus parking available.",
+        "Parking rates: 1h $5.25, 2h $9.95, 4h $15.25, Until 6:30PM $20.95, 5pm–2am $10.50.",
+        "Payment supported via phone and credit card.",
+        "Rates may change during special events; pay inside at admissions for special rates."
+      ],
+      externalLink: "https://www.scienceworld.ca/visit-us/getting-here/"
+    },
+
+    accessibility: {
+      title: "Accessibility",
+      bullets: [
+        "Six wheelchair-accessible parking spaces in north and south lots; first-come, first-served.",
+        "Button-operated automated entry and exit doors.",
+        "Ramps provide access to first and second floors and the OMNIMAX theatre.",
+        "Two elevators between first and second floors; Connection Zone elevator recommended for Wonder Gallery.",
+        "Service dogs must be leashed, accompanied, and well-behaved.",
+        "All washrooms have baby-change facilities; all except OMNIMAX ramp washrooms are wheelchair-accessible."
+      ],
+      externalLink: "https://www.scienceworld.ca/accessibility/"
+    },
+
+    gettingHere: {
+      title: "Getting to the Venue",
+      bullets: [
+        "Address: 1455 Quebec Street, Vancouver, BC.",
+        "Located along the False Creek Seawall with easy access by transit, bike, ferry, or car.",
+        "Arrive early to allow time for parking or transit delays."
+      ],
+      mapEmbedUrl: "YOUR_GOOGLE_MAPS_EMBED_URL"
+    }
+  },
+
+  toronto: {
+    title: "Venue Logistics – Toronto",
+    intro: "Venue logistics information for Toronto will be added soon.",
+
+    publicTransport: {
+      title: "Public Transport",
+      bullets: ["Details coming soon."]
+    },
+
+    parking: {
+      title: "Parking",
+      bullets: ["Details coming soon."]
+    },
+
+    accessibility: {
+      title: "Accessibility",
+      bullets: ["Details coming soon."]
+    },
+
+    gettingHere: {
+      title: "Getting to the Venue",
+      bullets: ["Details coming soon."]
+    }
+  }
+};
+
+
+
+export function getVenueLogistics(city: City): VenueLogisticsSection {
+ 
+  return venueLogisticsContent[city];
+};
+
+export const VenueLogisticsContent: VenueLogisticsSection =
+  getVenueLogistics(defaultCity);
