@@ -61,7 +61,7 @@ const hasPdf = Boolean(content.pdfHref);
 							target="_blank"
 							rel="noopener noreferrer"
 						>
-							Download Map PDF
+							Download Map
 						</a>
 					) : (
 						<span class="event-map-download event-map-download--disabled" aria-disabled="true">
@@ -261,7 +261,6 @@ const hasPdf = Boolean(content.pdfHref);
 		display: inline-flex;
 		gap: 0.35rem;
 		background: rgba(255, 255, 255, 0.08);
-		padding: 0.35rem;
 		border-radius: 8px;
 	}
 
@@ -295,7 +294,7 @@ const hasPdf = Boolean(content.pdfHref);
 	/* Match Newsletter "Subscribe to Newsletter" CTA */
 	.event-map-download {
 		display: inline-block;
-		padding: 0.75rem 2rem;
+		padding: 0.2rem 1rem;
 		background: rgb(168, 251, 90);
 		color: black;
 		text-decoration: none;
@@ -315,7 +314,7 @@ const hasPdf = Boolean(content.pdfHref);
 
 	.event-map-download--disabled {
 		display: inline-block;
-		padding: 0.75rem 2rem;
+		padding: 0.2rem 1rem;
 		background: #9ca3af;
 		color: white;
 		font-weight: 600;
@@ -455,13 +454,13 @@ const hasPdf = Boolean(content.pdfHref);
 		}
 
 		.event-map-download {
-			padding: 1rem 3rem;
+			padding: 0.5rem 2rem;
 			font-size: 1.125rem;
 			letter-spacing: 0.05em;
 		}
 
 		.event-map-download--disabled {
-			padding: 1rem 3rem;
+			padding: 0.5rem 2rem;
 			font-size: 1.125rem;
 			letter-spacing: 0.05em;
 		}
