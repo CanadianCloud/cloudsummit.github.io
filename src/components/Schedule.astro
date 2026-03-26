@@ -1,0 +1,51 @@
+---
+// import type { CitySchedule } from "../lib/cityContent"
+
+// interface Props {
+//     props: CitySchedule[]
+// }
+
+// const { props } = Astro.props;
+import { cityContent } from "../lib/cityContent"
+---
+
+<section class="schedule">
+    <h2>Schedule</h2>
+    <div id="wrapper">
+        {cityContent.vancouver.schedule.map((event) => {
+            return <div class="item">
+                { event.endTime? <p class="time">{event.startTime} - {event.endTime}</p> : <p class="time">{event.startTime}</p>}
+                {event.activities.map((activity) => {
+                    return <ul class="activities">
+                        <li>{activity}</li>
+                    </ul>
+                })}
+            </div>
+        })}
+    </div>
+</section>
+
+<style>
+    .schedule {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    #wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .time {
+        font-weight: bold;
+    }
+    .activities {
+        list-style-type: none;
+    }
+</style>
