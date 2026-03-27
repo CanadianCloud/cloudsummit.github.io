@@ -68,8 +68,6 @@ const { content, splineUrl = '' } = Astro.props;
 			if (timeEl) timeEl.textContent = content.time;
 		}
 
-		// Update page title
-		document.title = `${content.title} - ${content.cityName}`;
 	}
 
 	// Initial update
