@@ -1,11 +1,20 @@
 ---
+import Newsletter from "../components/Newsletter.astro";
+import type { NavigationContent } from "../lib/content";
 interface Props {
 	content: {
 		copyright: string;
-		links?: Array<{ text: string; href: string }>;
+		links?: Array<{ col: number; text: string; href: string }>;
 		social?: Array<{ name: string; url: string }>;
 		pressReleases?: Array<{ text: string; href: string }>;
 		previousYears?: Array<{ text: string; href: string }>;
+		newsletter: {
+			prefix: string;
+			heading: string;
+			description: string;
+			ctaText: string;
+			ctaHref: string;
+		};
 	};
 }
 
@@ -92,56 +101,56 @@ const currentYear = new Date().getFullYear();
 			</div>
 
 			<div class="footer-column">
-				<h4 class="footer-heading">Navigation</h4>
+				<h4 class="footer-heading">To Do</h4>
 				{
 					content.links && (
 						<nav class="footer-nav">
-							{content.links.map((link) => (
-								<a target="_blank" href={link.href}>{link.text}</a>
-							))}
+							{content.links
+								.filter((link) => link.col === 1)
+								.map((link) => (
+									<a target="_blank" href={link.href}>
+										{link.text}
+									</a>
+								))}
 						</nav>
 					)
 				}
 			</div>
-
 			<div class="footer-column">
-				<h4 class="footer-heading">Press</h4>
+				<h4 class="footer-heading">About</h4>
 				{
-					content.pressReleases && (
+					content.links && (
 						<nav class="footer-nav">
-							{content.pressReleases.map((link) => (
-								<a
-									href={link.href}
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									{link.text}
-								</a>
-							))}
+							{content.links
+								.filter((link) => link.col === 2)
+								.map((link) => (
+									<a target="_blank" href={link.href}>
+										{link.text}
+									</a>
+								))}
 						</nav>
 					)
 				}
 			</div>
-
 			<div class="footer-column">
 				<h4 class="footer-heading">Previous Years</h4>
 				{
-					content.previousYears && (
+					content.links && (
 						<nav class="footer-nav">
-							{content.previousYears.map((link) => (
-								<a
-									href={link.href}
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									{link.text}
-								</a>
-							))}
+							{content.links
+								.filter((link) => link.col === 3)
+								.map((link) => (
+									<a target="_blank" href={link.href}>
+										{link.text}
+									</a>
+								))}
 						</nav>
 					)
 				}
 			</div>
 		</div>
+
+		{(<Newsletter content={content.newsletter} />)}
 
 		<div class="footer-bottom">
 			<p class="footer-copyright">
