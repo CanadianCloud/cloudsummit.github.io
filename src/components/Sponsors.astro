@@ -1,3 +1,66 @@
+---
+import { sponsors } from "../lib/content"
+const platinumSponsors = sponsors.filter(sponsor => sponsor.ranking === 'Platinum');
+const diamondSponsors = sponsors.filter(sponsors => sponsors.ranking === 'Diamond');
+---
+
 <section class="sponsors">
-    
+    <h2 class="sponsors-heading">Sponsors</h2>
+    <div>
+        <h3 id="sponsors-platinum">Platinum</h3>
+        <div>
+            {platinumSponsors.map((sponsor) => {
+                return <figure class="sponsor-platinum">
+                    <img class="sponsor-logo" src={sponsor.logo}/>
+                    <p class="sponsor-name">{sponsor.name}</p>
+                </figure>
+            })}
+        </div>
+    </div>
+    <div>
+        <h3 id="sponsors-diamond">Diamond</h3>
+        <div>
+            {diamondSponsors.map((sponsor) => {
+                return <figure class="sponsor-diamond">
+                    {sponsor.name === 'Fortinet' ? <div id="fortinet-bg"><img class="sponsor-logo" id="fortinet" src={sponsor.logo}/></div> : <img class="sponsor-logo" src={sponsor.logo}/>}
+                    <p class="sponsor-name">{sponsor.name}</p>
+                </figure>
+            })}
+        </div>
+    </div>
 </section>
+
+<style>
+    .sponsors {
+        text-align: center;
+    }
+    .sponsors-heading {
+        font-family: 'Squada One', system-ui, sans-serif;
+		font-size: 2.5rem;
+		font-weight: 400;
+		margin: 0 0 1rem 0;
+		line-height: 1.2;
+		letter-spacing: 0.02em;
+		color: rgb(168, 251, 90);
+    }
+    .sponsor-logo {
+        max-width: 50%;
+    }
+    #sponsors-platinum {
+        color: #6ABAC3;
+    }
+    #sponsors-diamond {
+        color: #B367B3;
+    }
+    #fortinet-bg {
+        background-color: white;
+        display: flex;
+        justify-content: center;
+        justify-self: center;
+    }
+    #fortinet {
+        display: flex;
+        justify-self: center;
+        align-self: center;
+    }
+</style>

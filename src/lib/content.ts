@@ -46,6 +46,12 @@ interface CommunityPartners {
   logo: string;
 }
 
+interface Sponsors {
+  ranking: "Gold" | "Platinum" | "Diamond";
+  name: string;
+  logo: string;
+}
+
 export type City = "vancouver" | "toronto";
 
 export const defaultCity: City = "vancouver";
@@ -269,5 +275,18 @@ export const communityPartners: CommunityPartners[] = [
   {
     name: 'Microsoft',
     logo: '../../public/images/community-partners/Microsoft_logo.svg.png'
+  }
+]
+
+export const sponsors: Sponsors[] = [
+  {
+    ranking: 'Platinum',
+    name: 'AWS',
+    logo: '../../public/images/sponsors/aws-white.svg'
+  },
+  {
+    ranking: 'Diamond',
+    name: 'Fortinet',
+    logo: '../../public/images/sponsors/Fortinet_Logo.png'
   }
 ]
