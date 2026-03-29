@@ -355,7 +355,8 @@ export function getFooterContent(city: City) {
     links: [
       { text: 'About Cloud Summit', href: '/about-cloud-summit' },
       { text: 'Our Event Team', href: '/our-team' },
-      { text: 'Call for Speakers', href: '/our-speakers' },
+      { text: 'Call for Speakers', href: 'https://tally.so/r/rjBeN5' },
+      { text: 'Enter Hackathon', href: 'https://hackerrivals.com/' },
       { text: 'Sponsorship Info', href: '/our-sponsors' },
       {
         text: 'Get Earlybird Tickets',

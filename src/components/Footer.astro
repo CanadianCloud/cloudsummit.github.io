@@ -18,78 +18,154 @@ const currentYear = new Date().getFullYear();
 		<div class="footer-top">
 			<div class="footer-column footer-brand">
 				<div class="footer-logo">
-					<img src="/images/Cloud-summit-logo.svg" alt="Cloud Summit 2026" />
+					<img
+						src="/images/Cloud-summit-logo.svg"
+						alt="Cloud Summit 2026"
+					/>
 				</div>
-				{content.social && (
-					<div class="footer-social">
-						{content.social.map(social => (
-							<a href={social.url} target="_blank" rel="noopener noreferrer" aria-label={social.name}>
-								{social.name === 'Instagram' && (
-									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-								)}
-								{social.name === 'LinkedIn' && (
-									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-								)}
-							</a>
-						))}
-					</div>
-				)}
+				{
+					content.social && (
+						<div class="footer-social">
+							{content.social.map((social) => (
+								<a
+									href={social.url}
+									target="_blank"
+									rel="noopener noreferrer"
+									aria-label={social.name}
+								>
+									{social.name === "Instagram" && (
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width="24"
+											height="24"
+											viewBox="0 0 24 24"
+											fill="none"
+											stroke="currentColor"
+											stroke-width="2"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+										>
+											<rect
+												width="20"
+												height="20"
+												x="2"
+												y="2"
+												rx="5"
+												ry="5"
+											/>
+											<path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+											<line
+												x1="17.5"
+												x2="17.51"
+												y1="6.5"
+												y2="6.5"
+											/>
+										</svg>
+									)}
+									{social.name === "LinkedIn" && (
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width="24"
+											height="24"
+											viewBox="0 0 24 24"
+											fill="none"
+											stroke="currentColor"
+											stroke-width="2"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+										>
+											<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+											<rect
+												width="4"
+												height="12"
+												x="2"
+												y="9"
+											/>
+											<circle cx="4" cy="4" r="2" />
+										</svg>
+									)}
+								</a>
+							))}
+						</div>
+					)
+				}
 			</div>
 
 			<div class="footer-column">
 				<h4 class="footer-heading">Navigation</h4>
-				{content.links && (
-					<nav class="footer-nav">
-						{content.links.map(link => (
-							<a href={link.href}>{link.text}</a>
-						))}
-					</nav>
-				)}
+				{
+					content.links && (
+						<nav class="footer-nav">
+							{content.links.map((link) => (
+								<a target="_blank" href={link.href}>{link.text}</a>
+							))}
+						</nav>
+					)
+				}
 			</div>
 
 			<div class="footer-column">
 				<h4 class="footer-heading">Press</h4>
-				{content.pressReleases && (
-					<nav class="footer-nav">
-						{content.pressReleases.map(link => (
-							<a href={link.href} target="_blank" rel="noopener noreferrer">{link.text}</a>
-						))}
-					</nav>
-				)}
+				{
+					content.pressReleases && (
+						<nav class="footer-nav">
+							{content.pressReleases.map((link) => (
+								<a
+									href={link.href}
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									{link.text}
+								</a>
+							))}
+						</nav>
+					)
+				}
 			</div>
 
 			<div class="footer-column">
 				<h4 class="footer-heading">Previous Years</h4>
-				{content.previousYears && (
-					<nav class="footer-nav">
-						{content.previousYears.map(link => (
-							<a href={link.href} target="_blank" rel="noopener noreferrer">{link.text}</a>
-						))}
-					</nav>
-				)}
+				{
+					content.previousYears && (
+						<nav class="footer-nav">
+							{content.previousYears.map((link) => (
+								<a
+									href={link.href}
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									{link.text}
+								</a>
+							))}
+						</nav>
+					)
+				}
 			</div>
 		</div>
 
 		<div class="footer-bottom">
 			<p class="footer-copyright">
-				© {currentYear} {content.copyright}
+				© {currentYear}
+				{content.copyright}
 			</p>
 		</div>
 	</div>
 </footer>
 
 <script>
-	import { getCityStore } from '../lib/cityStore';
-	import { citySpecificContent } from '../lib/content';
-	import type { City } from '../lib/content';
+	import { getCityStore } from "../lib/cityStore";
+	import { citySpecificContent } from "../lib/content";
+	import type { City } from "../lib/content";
 
 	// Update ticket URL when city changes
 	function updateTicketUrl() {
 		const cityStore = getCityStore();
 		const currentCity = cityStore.getCity();
-		const ticketLinks = document.querySelectorAll('.footer-nav a[href*="luma.com"]') as NodeListOf<HTMLAnchorElement>;
+		const ticketLinks = document.querySelectorAll(
+			'.footer-nav a[href*="luma.com"]',
+		) as NodeListOf<HTMLAnchorElement>;
 
-		ticketLinks.forEach(link => {
+		ticketLinks.forEach((link) => {
 			link.href = citySpecificContent[currentCity].ticketUrl;
 		});
 	}
@@ -109,8 +185,8 @@ const currentYear = new Date().getFullYear();
 	}
 
 	// Run when DOM is ready
-	if (document.readyState === 'loading') {
-		document.addEventListener('DOMContentLoaded', initCityAwareFooter);
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", initCityAwareFooter);
 	} else {
 		initCityAwareFooter();
 	}
@@ -153,9 +229,21 @@ const currentYear = new Date().getFullYear();
 	}
 
 	.footer-heading {
-		font-family: 'Squada One', system-ui, sans-serif;
+		/* font-family: 'Squada One', system-ui, sans-serif; */
+		font-family:
+			"Noto Sans",
+			system-ui,
+			-apple-system,
+			BlinkMacSystemFont,
+			"Segoe UI",
+			Roboto,
+			Oxygen,
+			Ubuntu,
+			Cantarell,
+			sans-serif;
 		font-size: 1.25rem;
 		margin: 0;
+		line-height: 1;
 		color: rgb(255, 193, 77);
 	}
 
