@@ -37,8 +37,8 @@ export interface NavLink {
 
 export interface NavigationContent {
   links: NavLink[];
-  ctaText: string;
-  ctaHref: string;
+  // ctaText: string; Disabled as part of Issue #3 (Header & Navigation update)
+  // ctaHref: string; Disabled as part of Issue #3 (Header & Navigation update)
 }
 
 export type City = 'vancouver' | 'toronto';
@@ -88,8 +88,18 @@ export function getHeroContent(city: City): HeroContent {
   return {
     ...sharedHeroContent,
     ...citySpecificContent[city],
+    // Added as part of Issue #3 (Header & Navigation)
+    primaryCta: {
+      text: 'Get Your Ticket',
+      href: citySpecificContent[city].ticketUrl,
+    },
+    secondaryCta: {
+      text: '',
+      href: '',
+    },
   };
 }
+
 
 // For backwards compatibility
 export const heroContent: Record<City, HeroContent> = {
@@ -97,21 +107,37 @@ export const heroContent: Record<City, HeroContent> = {
   toronto: getHeroContent('toronto'),
 };
 
+// Disabled as part of Issue #3 (Header & Navigation update)
+// Reason: This button is removed according to new design requirements
+// // Helper function to get navigation content with city-specific ticket URL
+// export function getNavigationContent(city: City): NavigationContent {
+//   return {
+//     links: [
+//       { text: 'About Cloud Summit', href: '/about-cloud-summit' },
+//       // { text: 'Our Event Team', href: '/our-team' },
+//       { text: 'Call for Speakers', href: '/our-speakers' },
+//       { text: 'Sponsorship Info', href: '/our-sponsors' },
+//       {
+//         text: 'Get Earlybird Tickets',
+//         href: citySpecificContent[city].ticketUrl,
+//       },
+//     ],
+//     ctaText: 'Become a Sponsor',
+//     ctaHref: 'https://tally.so/r/wLqXvO',
+//   };
+
+// }
+
+// Added as part of Issue #3 (Header & Navigation)
+// Reason: Replace old CTAs with new "Get Your Ticket" button
+// Link is dynamic based on selected city
 // Helper function to get navigation content with city-specific ticket URL
 export function getNavigationContent(city: City): NavigationContent {
   return {
     links: [
-      { text: 'About Cloud Summit', href: '/about-cloud-summit' },
-      // { text: 'Our Event Team', href: '/our-team' },
-      { text: 'Call for Speakers', href: '/our-speakers' },
-      { text: 'Sponsorship Info', href: '/our-sponsors' },
-      {
-        text: 'Get Earlybird Tickets',
-        href: citySpecificContent[city].ticketUrl,
-      },
-    ],
-    ctaText: 'Become a Sponsor',
-    ctaHref: 'https://tally.so/r/wLqXvO',
+      { text: 'Get Tickets', href: citySpecificContent[city].ticketUrl },
+      { text: 'Apply to Volunteer', href: sharedHeroContent.primaryCta.href },     
+    ]
   };
 }
 
@@ -234,7 +260,7 @@ export const eventMapContent = {
         {
           iconSrc: '/images/event-map/icons/lockers-1-dollar.png',
           title: 'Lockers',
-          detail: '1 dollar',
+          detail: '$1',
         },
         {
           iconSrc: '/images/event-map/icons/community-stage.png',
@@ -250,7 +276,8 @@ export const eventMapContent = {
       id: 'floor-2',
       label: 'Floor 2',
       imageSrc: '/images/event-map/floor-2.png',
-      imageAlt: 'Science World Floor 2 map with highlighted areas and wayfinding icons',
+      imageAlt:
+        'Science World Floor 2 map with highlighted areas and wayfinding icons',
       legend: [
         {
           iconSrc: '/images/event-map/icons/ai-experience.png',
@@ -281,7 +308,7 @@ export const eventMapContent = {
         {
           iconSrc: '/images/event-map/icons/lockers-1-dollar.png',
           title: 'Lockers',
-          detail: '1 dollar',
+          detail: '$1',
         },
         {
           iconSrc: '/images/event-map/icons/quiet-area-phone-calls.png',
@@ -303,8 +330,8 @@ export const eventMapContent = {
         },
         {
           iconSrc: '/images/event-map/icons/after-party-entrance.png',
-          title: 'After party',
-          detail: 'entrance',
+          title: 'After party entrance',
+          detail: 'restricted access',
         },
         {
           iconSrc: '/images/event-map/icons/washrooms.png',
