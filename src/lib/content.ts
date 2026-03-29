@@ -350,41 +350,6 @@ export const eventMapContent = {
 
 export type EventMapContent = typeof eventMapContent;
 
-// // Helper function to get footer content with city-specific ticket URL
-// export function getFooterContent(city: City) {
-//   return {
-//     copyright: 'Cloud Summit. All rights reserved.',
-//     links: [
-//       { text: 'About Cloud Summit', href: '/about-cloud-summit' },
-//       { text: 'Our Event Team', href: '/our-team' },
-//       { text: 'Call for Speakers', href: 'https://tally.so/r/rjBeN5' },
-//       { text: 'Enter Hackathon', href: 'https://hackerrivals.com/' },
-//       { text: 'Sponsorship Info', href: '/our-sponsors' },
-//       {
-//         text: 'Get Earlybird Tickets',
-//         href: citySpecificContent[city].ticketUrl,
-//       },
-//     ],
-//     social: [
-//       {
-//         name: 'Instagram',
-//         url: 'https://www.instagram.com/canadiancloudninja/',
-//       },
-//       {
-//         name: 'LinkedIn',
-//         url: 'https://www.linkedin.com/showcase/vancouvercloudsummit',
-//       },
-//     ],
-//     pressReleases: [
-//       { text: '2025 Press Release', href: 'https://cloudsummit.ca/press' },
-//     ],
-//     previousYears: [
-//       { text: '2025', href: 'https://cloudsummit.ca/archive/2025/index.html' },
-//       { text: '2024', href: 'https://cloudsummit.ca/archive/2024.html' },
-//     ],
-//   };
-// }
-
 // Helper function to get footer content with city-specific ticket URL
 export function getFooterContent(city: City) {
   return {
