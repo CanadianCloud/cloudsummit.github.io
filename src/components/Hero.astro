@@ -7,6 +7,8 @@ interface Props {
 }
 
 const { content, splineUrl = '' } = Astro.props;
+ 
+
 ---
 
 <section class="hero">
@@ -27,8 +29,10 @@ const { content, splineUrl = '' } = Astro.props;
 			<p class="hero-time">{content.time}</p>
 		</div>
 		<div class="hero-actions">
-			<a href={content.primaryCta.href} class="btn btn-primary">{content.primaryCta.text}</a>
-			<a href={content.secondaryCta.href} class="btn btn-secondary">{content.secondaryCta.text}</a>
+			<a href={content.primaryCta.href} class="btn btn-primary" data-hero-primary-Cta>{content.primaryCta.text}</a>
+			<!-- <a href={content.secondaryCta.href} class="btn btn-secondary">{content.secondaryCta.text}</a> -->
+	
+
 		</div>
 	</div>
 	</section>
@@ -36,6 +40,7 @@ const { content, splineUrl = '' } = Astro.props;
 <script is:inline type="module" src="https://unpkg.com/@splinetool/viewer@1.9.48/build/spline-viewer.js"></script>
 
 <script>
+
 	import { getCityStore } from '../lib/cityStore';
 	import { heroContent } from '../lib/content';
 
@@ -47,10 +52,13 @@ const { content, splineUrl = '' } = Astro.props;
 	const subtitleEl = document.querySelector('[data-city-subtitle]');
 	const descriptionEl = document.querySelector('[data-city-description]');
 	const metaEl = document.querySelector('[data-city-meta]');
+	const ctaButton = document.querySelector('[data-hero-primary-Cta]');
 
+	
 	function updateContent(city: 'vancouver' | 'toronto') {
 		const content = heroContent[city];
-
+      
+		
 		if (titleEl) titleEl.textContent = content.title;
 		if (cityNameEl) cityNameEl.textContent = content.cityName;
 		if (subtitleEl) subtitleEl.textContent = content.subtitle;
@@ -67,6 +75,16 @@ const { content, splineUrl = '' } = Astro.props;
 			if (dateEl) dateEl.textContent = content.date;
 			if (timeEl) timeEl.textContent = content.time;
 		}
+
+
+
+if (ctaButton) {
+  ctaButton.href = content.primaryCta.href;
+  ctaButton.textContent = content.primaryCta.text;
+}
+
+		// Update page title
+		document.title = `${content.title} - ${content.cityName}`;
 
 	}
 
@@ -95,6 +113,7 @@ const { content, splineUrl = '' } = Astro.props;
 		});
 	}
 	*/
+
 </script>
 
 <style>
