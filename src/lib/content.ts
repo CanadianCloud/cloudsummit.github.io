@@ -41,6 +41,11 @@ export interface NavigationContent {
   ctaHref: string;
 }
 
+interface CommunityPartners {
+  name: string;
+  logo: string;
+}
+
 export type City = "vancouver" | "toronto";
 
 export const defaultCity: City = "vancouver";
@@ -243,3 +248,26 @@ export const newsletterContent = {
   ctaText: "Subscribe to Newsletter",
   ctaHref: "https://tally.so/r/mR6RBl",
 };
+
+export const communityPartners: CommunityPartners[] = [
+  {
+    name: 'AWS',
+    logo: '../../public/images/community-partners/aws-day-logo.png'
+  },
+  {
+    name: 'Google Developer Group',
+    logo: '../../public/images/community-partners/gdg-logo.png'
+  },
+  {
+    name: 'ISACA',
+    logo: '../../public/images/community-partners/ISACA.png'
+  },
+  {
+    name: 'Hacker Rivals',
+    logo: '../../public/images/community-partners/Logo-Oct25-Black.png'
+  },
+  {
+    name: 'Microsoft',
+    logo: '../../public/images/community-partners/Microsoft_logo.svg.png'
+  }
+]

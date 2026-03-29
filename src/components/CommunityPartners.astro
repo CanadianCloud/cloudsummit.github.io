@@ -1,0 +1,71 @@
+---
+import { communityPartners } from "../lib/content"
+---
+
+<section class="community-partners">
+    <h2 id="community-partners-heading">Community Partners</h2>
+    <div id="partners-container">
+        {communityPartners.map((partner, index) => {
+            return <figure class="partner" id={`partner-${index + 1}`}>
+                <img class="partner-logo" src={partner.logo}/>
+                <figcaption class="partner-name">{partner.name}</figcaption>
+            </figure>
+        })}
+    </div>
+</section>
+
+<style>
+    .community-partners {
+        text-align: center;
+    }
+    #community-partners-heading {
+        font-family: 'Squada One', system-ui, sans-serif;
+		font-size: 2.5rem;
+		font-weight: 400;
+		margin: 0 0 1rem 0;
+		line-height: 1.2;
+		letter-spacing: 0.02em;
+		color: rgb(168, 251, 90);
+    }
+    .partner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1.25rem;
+    }
+    .partner-logo {
+        max-width: 30%;
+        height: auto;
+    }
+    .partner-name {
+        font-size: 1.25rem;
+    }
+    @media (min-width: 768px) {
+        #partners-container {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+        }
+        #partner-1 {
+            grid-column-start: 1;
+            grid-column-end: 3;
+        }
+        #partner-2 {
+            grid-column-start: 3;
+            grid-column-end: 5;
+        }
+        #partner-3 {
+            grid-column-start: 5;
+            grid-column-end: 7;
+        }
+        #partner-4 {
+            grid-column-start: 2;
+            grid-column-end: 4;
+        }
+        #partner-5 {
+            grid-column-start: 4;
+            grid-column-end: 6;
+        }
+    }
+</style>

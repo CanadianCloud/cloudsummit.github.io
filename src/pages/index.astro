@@ -15,6 +15,8 @@ import Footer from '../components/Footer.astro';
 import SeeYouThere from '../components/SeeYouThere.astro';
 import ScrollAnimations from '../components/ScrollAnimations.astro';
 import { heroContent, navigationContent, aboutCPCAContent, whatIsCloudSummitContent, cloudSummitActivitiesContent, eventHighlightsContent, tickerContent, pastSponsorsContent, newsletterContent, footerContent, defaultCity } from '../lib/content';
+import Sponsors from '../components/Sponsors.astro';
+import CommunityPartners from '../components/CommunityPartners.astro';
 
 // Use default city for SSR, will be updated client-side
 const content = heroContent[defaultCity];
@@ -42,6 +44,8 @@ const content = heroContent[defaultCity];
 		<SummitSummary content={eventHighlightsContent} />
 		<HighlightReel content={eventHighlightsContent} />
 		<Ticker content={tickerContent} />
+		<CommunityPartners></CommunityPartners>
+		<!-- <Sponsors></Sponspors>		 -->
 		<PastSponsors content={pastSponsorsContent} />
 		<Newsletter content={newsletterContent} />
 		<SeeYouThere />
