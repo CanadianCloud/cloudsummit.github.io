@@ -407,3 +407,182 @@ export const newsletterContent = {
   ctaText: 'Subscribe to Newsletter',
   ctaHref: 'https://tally.so/r/mR6RBl',
 };
+
+export interface VenueLink {
+  url: string;
+  text: string;
+}
+
+export interface VenueLogisticsBase {
+  title: string;
+  bullets: string[];
+  externalLink?: VenueLink[];
+}
+export interface VenueLogisticsSectionNewVersion {
+  CityTitle: string;
+  intro: string;
+  section: VenueLogisticsBase[];
+}
+
+export const venueLogisticsContentNewVersion: Record<City, VenueLogisticsSectionNewVersion> = {
+  vancouver: {
+    CityTitle: 'Vancouver',
+    intro: 'This is Intro Of Vancouver Venu',
+    section: [
+      {
+        title: 'Getting Here',
+        bullets: [
+          '1455 Quebec Street',
+          'Vancouver, BC, V6A 3Z7',
+          '604.443.7440',
+          'Science World is located in the heart of Vancouver along the False Creek Seawall, and is easily reached by almost any way you can travel. We offer rentable lockers for your belongings and a number of other amenities to make your visit easy and comfortable.',
+        ],
+        externalLink: [
+          {
+            url: 'https://goo.gl/maps/BUgVAAx1xjzZxBHu6',
+            text: 'Open in Maps',
+          },
+
+        ]
+      },
+      {
+        title: 'Transit',
+        bullets: [
+          'We are located across the street from the Main Street-Science World Skytrain Station along the Expo line, and a short walk from bus stops at Main and Terminal.',
+        ],
+        externalLink: [
+          {
+            text: 'Plan Your Trip with TransLink',
+            url: 'https://www.google.com/maps/dir//Science+World+at+TELUS+World+of+Science,+1455+Quebec+St,+Vancouver,+BC+V6A+3Z7/@49.2733548,-123.1738736,12z/data=!3m1!4b1!4m9!4m8!1m0!1m5!1m1!1s0x548671638bf0919d:0x218237371f987037!2m2!1d-123.103834!2d49.273376!3e3?hl=en',
+          }
+        ],
+
+      },
+
+      {
+        title: 'Bike',
+        bullets: [
+          'You’ll find ample racks for locking up your bike in the plaza at the front entrance. Ensure you bring your own secure lock!',
+        ],
+        externalLink: [
+
+        ],
+
+      },
+
+      {
+        title: 'Mobi Bike Share',
+        bullets: [
+          'A Mobi Bike Share station is located just across the seawall cycling path near the front entrance, just under the Skytrain overpass. For more information about using Mobi, please visit the Mobi website.',
+        ],
+        externalLink: [
+          {
+            url: 'https://www.mobibikes.ca/',
+            text: 'Visit Mobi Bike Share',
+          },
+        ],
+
+      },
+
+      {
+        title: 'Ferry',
+        bullets: [
+          'The Aquabus and False Creek Ferries both stop nearby and are easy ways to get here from Granville Island, English Bay, Yaletown, and Kitsilano. Check their websites for more details about docking locations, fees, and schedules.',
+        ],
+        externalLink: [
+          {
+            url: 'https://theaquabus.com/',
+            text: 'Aquabus Website'
+          },
+          {
+            url: 'https://granvilleislandferries.bc.ca/',
+            text: 'False Creek Ferries Website',
+          },
+        ],
+
+      },
+
+      {
+        title: 'Car Share',
+        bullets: [
+          'Designated parking for Evo and Share Now (formerly Car2Go) vehicles are available in the parking lot across Quebec St.',
+        ],
+        externalLink: [],
+
+      },
+
+      {
+        title: 'Parking',
+        bullets: [
+          'We encourage all visitors to take transit but for those visitors who decide to drive we do have limited pay parking spaces. Please note that we do not have bus parking available.',
+          'Parking Rates',
+          '1 Hour           $5.25',
+          '2 Hours          $9.95',
+          '4 Hours          $15.25',
+          'Until 6:30PM     $20.95',
+          'From 5pm-2am     $10.50',
+          'Pay parking areas support payment by phone and credit card.',
+          'During special events in the neighbourhood these parking rates may change. In these cases, please pay inside at admissions to get the regular parking rate.',
+        ],
+        externalLink: [],
+
+      },
+      {
+        title: 'Accessible Parking',
+        bullets: [
+          'There are six wheelchair-accessible spaces in the parking lots. These are available on a first-come, first-served basis, and are located in the lots to the north and south of Science World. Ramps are available to reach the sidewalk.',
+        ],
+        externalLink: [],
+      },
+      {
+        title: 'Automated Entry and Exit Doors',
+        bullets: [          
+          'Science World has button-operated automated entry doors and exit doors.',
+
+        ],
+        externalLink: [],
+      },
+
+      {
+        title: 'Ramps and Elevators',
+        bullets: [
+          'Science World has ramps that allow access to the first- and second-floor galleries, as well as to the OMNIMAX®️ theatre on the fifth floor. There are also two elevators which run between the first and second floors. We recommend using the elevator in the Connection Zone (near the lobby) to access the Wonder gallery.',
+
+        ],
+        externalLink: [],
+      },
+      {
+        title: 'Service Animals',
+        bullets: [
+          'Service dogs must be on a leash and in the company of their owner at all times. For the safety and comfort of all guests, service dogs must be well-behaved during their visit. Staff reserve the right to ask non-compliant owners and their dogs to leave the premises.',
+
+        ],
+        externalLink: [],
+      },
+      {
+        title: 'Washrooms',
+        bullets: [
+          'All public washrooms at Science World are equipped with baby-change facilities. All washrooms except for those on the OMNIMAX®️ ramp are wheelchair-accessible.',
+
+        ],
+        externalLink: [],
+      },
+
+    ],
+
+  },
+  toronto: {
+    CityTitle: 'Toronto',
+    intro: 'Comming Soon',
+    section: [
+    ],
+  },
+
+}
+
+
+
+
+
+
+

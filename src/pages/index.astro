@@ -15,11 +15,15 @@ import Newsletter from '../components/Newsletter.astro';
 import Footer from '../components/Footer.astro';
 import SeeYouThere from '../components/SeeYouThere.astro';
 import ScrollAnimations from '../components/ScrollAnimations.astro';
-import { heroContent, navigationContent, aboutCPCAContent, whatIsCloudSummitContent, cloudSummitActivitiesContent, eventHighlightsContent, tickerContent, pastSponsorsContent, newsletterContent, footerContent, defaultCity } from '../lib/content';
+
+import VenueLogisticsSectionSecondVersion from '../components/VenueLogisticsSectionSecondVersion.astro';
+import { heroContent, navigationContent, aboutCPCAContent, whatIsCloudSummitContent, cloudSummitActivitiesContent, eventHighlightsContent, tickerContent, eventMapContent, pastSponsorsContent, newsletterContent, footerContent, defaultCity,VenueLogisticsContent,venueLogisticsContentNewVersion   } from '../lib/content';
 import Schedule from '../components/Schedule.astro';
 
-// Use default city for SSR, will be updated client-side
+
+// Use default city for venueLogisticsContentNewVersionSSR, will be updated client-side
 const content = heroContent[defaultCity];
+
 
 const homepageKeywords = [
 	'cloud summit canada',
@@ -80,7 +84,7 @@ const vancouverDescription =
 	'Join Cloud Summit Vancouver on May 1, 2026 at Science World for cloud talks, workshops, networking, sponsors, and community events.';
 const torontoDescription =
 	'Join Cloud Summit Toronto on August 29, 2026 for a multi-cloud conference featuring speakers, sponsors, workshops, and community networking.';
----
+
 
 <html lang="en">
 	<head>
@@ -97,7 +101,7 @@ const torontoDescription =
 	</head>
 	<body>
 		<CityModal />
-		<Navigation content={navigationContent} />
+		<Navigation content={navigationContent} />		
 		<Hero content={content} />
 		<WhatIsCloudSummit content={whatIsCloudSummitContent} />
 		<CloudSummitActivities content={cloudSummitActivitiesContent} />
@@ -109,7 +113,8 @@ const torontoDescription =
 		<Ticker content={tickerContent} />
 		<PastSponsors content={pastSponsorsContent} />
 		<Newsletter content={newsletterContent} />
-		<SeeYouThere />
+		<SeeYouThere />	
+		<VenueLogisticsSectionSecondVersion content={venueLogisticsContentNewVersion} />
 		<EventMap content={eventMapContent} />
 		<Footer content={footerContent} />
 		<ScrollAnimations />
