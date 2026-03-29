@@ -1,3 +1,5 @@
+import { Group } from "lucide-astro";
+
 export interface CitySpecificContent {
   cityName: string;
   venue: string;
@@ -136,7 +138,7 @@ export function getNavigationContent(city: City): NavigationContent {
   return {
     links: [
       { text: 'Get Tickets', href: citySpecificContent[city].ticketUrl },
-      { text: 'Apply to Volunteer', href: sharedHeroContent.primaryCta.href },     
+      { text: 'Apply to Volunteer', href: sharedHeroContent.primaryCta.href },
     ]
   };
 }
@@ -348,20 +350,62 @@ export const eventMapContent = {
 
 export type EventMapContent = typeof eventMapContent;
 
+// // Helper function to get footer content with city-specific ticket URL
+// export function getFooterContent(city: City) {
+//   return {
+//     copyright: 'Cloud Summit. All rights reserved.',
+//     links: [
+//       { text: 'About Cloud Summit', href: '/about-cloud-summit' },
+//       { text: 'Our Event Team', href: '/our-team' },
+//       { text: 'Call for Speakers', href: 'https://tally.so/r/rjBeN5' },
+//       { text: 'Enter Hackathon', href: 'https://hackerrivals.com/' },
+//       { text: 'Sponsorship Info', href: '/our-sponsors' },
+//       {
+//         text: 'Get Earlybird Tickets',
+//         href: citySpecificContent[city].ticketUrl,
+//       },
+//     ],
+//     social: [
+//       {
+//         name: 'Instagram',
+//         url: 'https://www.instagram.com/canadiancloudninja/',
+//       },
+//       {
+//         name: 'LinkedIn',
+//         url: 'https://www.linkedin.com/showcase/vancouvercloudsummit',
+//       },
+//     ],
+//     pressReleases: [
+//       { text: '2025 Press Release', href: 'https://cloudsummit.ca/press' },
+//     ],
+//     previousYears: [
+//       { text: '2025', href: 'https://cloudsummit.ca/archive/2025/index.html' },
+//       { text: '2024', href: 'https://cloudsummit.ca/archive/2024.html' },
+//     ],
+//   };
+// }
+
 // Helper function to get footer content with city-specific ticket URL
 export function getFooterContent(city: City) {
   return {
     copyright: 'Cloud Summit. All rights reserved.',
     links: [
-      { text: 'About Cloud Summit', href: '/about-cloud-summit' },
-      { text: 'Our Event Team', href: '/our-team' },
-      { text: 'Call for Speakers', href: 'https://tally.so/r/rjBeN5' },
-      { text: 'Enter Hackathon', href: 'https://hackerrivals.com/' },
-      { text: 'Sponsorship Info', href: '/our-sponsors' },
-      {
-        text: 'Get Earlybird Tickets',
-        href: citySpecificContent[city].ticketUrl,
-      },
+
+      { col: 1, text: 'Get a Ticket', href: citySpecificContent[city].ticketUrl },
+      { col: 1, text: 'Call for Speakers', href: 'https://cloudsummit-github-hq6t7rc7t-nichanun-pongpattarawits-projects.vercel.app/our-speakers' },
+      { col: 1, text: 'Become a Sponsor', href: 'https://tally.so/r/wLqXvO' },
+      { col: 1, text: 'Apply to Volunteer', href: 'https://tally.so/r/mBVZjA' },
+      { col: 1, text: 'Enter Hackathon', href: 'https://hackerrivals.com/' },
+
+      { col: 2, text: 'Press Release', href: 'https://cloudsummit.ca/press' },
+      { col: 2, text: 'About Cloud Summit', href: 'https://cloudsummit.ca/about-cloud-summit/' },
+      { col: 2, text: 'Subscribe to Newsletter', href: 'https://tally.so/r/mR6RBl' },
+      // { col: 2, text: 'Our Event Team', href: '/our-team' },
+      // { col: 2, text: 'Sponsorship Info', href: '/our-sponsors' },
+
+      { col: 3, text: '2025', href: 'https://cloudsummit.ca/archive/2025/index.html' },
+      { col: 3, text: '2024', href: 'https://cloudsummit.ca/archive/2024.html' },
+
     ],
     social: [
       {
@@ -372,14 +416,25 @@ export function getFooterContent(city: City) {
         name: 'LinkedIn',
         url: 'https://www.linkedin.com/showcase/vancouvercloudsummit',
       },
-    ],
-    pressReleases: [
-      { text: '2025 Press Release', href: 'https://cloudsummit.ca/press' },
-    ],
+    ],    
+    // pressReleases: [
+    //   { text: '2025 Press Release', href: 'https://cloudsummit.ca/press' },
+    // ],
     previousYears: [
       { text: '2025', href: 'https://cloudsummit.ca/archive/2025/index.html' },
       { text: '2024', href: 'https://cloudsummit.ca/archive/2024.html' },
     ],
+
+    newsletter: 
+      {
+        prefix: 'Stay',
+        heading: 'Connected',
+        description:
+          'Subscribe to our newsletter to receive the latest updates about Cloud Summit 2026, speaker announcements, and exclusive content.',
+        ctaText: 'Subscribe to Newsletter',
+        ctaHref: 'https://tally.so/r/mR6RBl',
+      }
+    ,
   };
 }
 
@@ -537,7 +592,7 @@ export const venueLogisticsContentNewVersion: Record<City, VenueLogisticsSection
       },
       {
         title: 'Automated Entry and Exit Doors',
-        bullets: [          
+        bullets: [
           'Science World has button-operated automated entry doors and exit doors.',
 
         ],
