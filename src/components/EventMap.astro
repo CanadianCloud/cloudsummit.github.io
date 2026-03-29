@@ -61,7 +61,7 @@ const hasPdf = Boolean(content.pdfHref);
 							target="_blank"
 							rel="noopener noreferrer"
 						>
-							Download Map PDF
+							Download Map
 						</a>
 					) : (
 						<span class="event-map-download event-map-download--disabled" aria-disabled="true">
@@ -241,7 +241,6 @@ const hasPdf = Boolean(content.pdfHref);
 	}
 
 	.event-map-card {
-		background: #f3f4f6;
 		border-radius: 12px;
 		overflow: hidden;
 		border: 1px solid rgba(255, 255, 255, 0.08);
@@ -255,74 +254,74 @@ const hasPdf = Boolean(content.pdfHref);
 		justify-content: space-between;
 		gap: 1rem;
 		padding: 0.75rem 1rem;
-		background: #e5e7eb;
 		border-bottom: 1px solid #d1d5db;
 	}
 
 	.event-map-tabs {
 		display: inline-flex;
 		gap: 0.35rem;
-		background: #d1d5db;
-		padding: 0.35rem;
+		background: rgba(255, 255, 255, 0.08);
 		border-radius: 8px;
 	}
 
 	/* Same font treatment as Newsletter .newsletter-description */
 	.event-map-tab {
 		font-family: 'Noto Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-		font-size: 1.125rem;
+		font-size: 1rem;
 		font-weight: 400;
 		line-height: 1.6;
-		padding: 0.45rem 1rem;
+		padding: 0.35rem 0.85rem;
 		border: none;
 		border-radius: 6px;
 		cursor: pointer;
 		background: transparent;
-		color: #374151;
+		color: rgba(255, 255, 255, 0.9);
 		transition: background 0.15s, color 0.15s;
 	}
 
 	.event-map-tab:hover {
-		color: #111827;
+		color: #ffffff;
+		background: rgba(61, 120, 171, 0.18);
 	}
 
 	.event-map-tab.active {
-		background: #fff;
-		color: #111827;
+		background: rgb(61, 120, 171);
+		color: #ffffff;
 		font-weight: 600;
-		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
 	}
 
 	/* Match Newsletter "Subscribe to Newsletter" CTA */
 	.event-map-download {
 		display: inline-block;
-		padding: 1rem 3rem;
-		background: rgb(61, 120, 171);
-		color: white;
+		padding: 0.2rem 1rem;
+		background: rgb(168, 251, 90);
+		color: black;
 		text-decoration: none;
 		font-weight: 600;
 		border-radius: 0.5rem;
-		font-size: 1.125rem;
+		font-size: 1rem;
 		text-transform: uppercase;
-		letter-spacing: 0.05em;
+		letter-spacing: 0.04em;
 		transition: transform 0.2s, opacity 0.2s;
 	}
 
 	.event-map-download:hover {
 		transform: translateY(-2px);
 		opacity: 0.9;
+		background: rgb(150, 230, 75);
 	}
 
 	.event-map-download--disabled {
 		display: inline-block;
-		padding: 1rem 3rem;
+		padding: 0.2rem 1rem;
 		background: #9ca3af;
 		color: white;
 		font-weight: 600;
 		border-radius: 0.5rem;
-		font-size: 1.125rem;
+		font-size: 1rem;
 		text-transform: uppercase;
-		letter-spacing: 0.05em;
+		letter-spacing: 0.04em;
 		cursor: not-allowed;
 		pointer-events: none;
 	}
@@ -361,8 +360,9 @@ const hasPdf = Boolean(content.pdfHref);
 	}
 
 	.event-map-legend {
-		background: #4b5563;
+		background: #070d12;
 		color: #e5e7eb;
+		border: 1px solid rgba(61,120,171,0.2);
 		padding: 1.25rem 1rem 1.5rem;
 	}
 
@@ -451,6 +451,18 @@ const hasPdf = Boolean(content.pdfHref);
 		.event-map-tab {
 			font-size: 1.25rem;
 			padding: 0.5rem 1.25rem;
+		}
+
+		.event-map-download {
+			padding: 0.5rem 2rem;
+			font-size: 1.125rem;
+			letter-spacing: 0.05em;
+		}
+
+		.event-map-download--disabled {
+			padding: 0.5rem 2rem;
+			font-size: 1.125rem;
+			letter-spacing: 0.05em;
 		}
 	}
 

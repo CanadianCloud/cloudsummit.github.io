@@ -260,7 +260,7 @@ export const eventMapContent = {
         {
           iconSrc: '/images/event-map/icons/lockers-1-dollar.png',
           title: 'Lockers',
-          detail: '1 dollar',
+          detail: '$1',
         },
         {
           iconSrc: '/images/event-map/icons/community-stage.png',
@@ -276,7 +276,8 @@ export const eventMapContent = {
       id: 'floor-2',
       label: 'Floor 2',
       imageSrc: '/images/event-map/floor-2.png',
-      imageAlt: 'Science World Floor 2 map with highlighted areas and wayfinding icons',
+      imageAlt:
+        'Science World Floor 2 map with highlighted areas and wayfinding icons',
       legend: [
         {
           iconSrc: '/images/event-map/icons/ai-experience.png',
@@ -307,7 +308,7 @@ export const eventMapContent = {
         {
           iconSrc: '/images/event-map/icons/lockers-1-dollar.png',
           title: 'Lockers',
-          detail: '1 dollar',
+          detail: '$1',
         },
         {
           iconSrc: '/images/event-map/icons/quiet-area-phone-calls.png',
@@ -329,8 +330,8 @@ export const eventMapContent = {
         },
         {
           iconSrc: '/images/event-map/icons/after-party-entrance.png',
-          title: 'After party',
-          detail: 'entrance',
+          title: 'After party entrance',
+          detail: 'restricted access',
         },
         {
           iconSrc: '/images/event-map/icons/washrooms.png',
