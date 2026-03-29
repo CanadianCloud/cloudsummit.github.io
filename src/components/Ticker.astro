@@ -9,14 +9,14 @@ interface Props {
 const { content } = Astro.props;
 
 const logos = [
-	'aws-white.svg',
-	'azure.svg',
-	'googlecloud.svg',
-	'ibm.svg',
-	'oracle.svg',
-	'alibaba.svg',
-	'tencent-white.svg',
-	'huawei.svg',
+	{ file: 'aws-white.svg', name: 'AWS' },
+	{ file: 'azure.svg', name: 'Microsoft Azure' },
+	{ file: 'googlecloud.svg', name: 'Google Cloud' },
+	{ file: 'ibm.svg', name: 'IBM Cloud' },
+	{ file: 'oracle.svg', name: 'Oracle Cloud' },
+	{ file: 'alibaba.svg', name: 'Alibaba Cloud' },
+	{ file: 'tencent-white.svg', name: 'Tencent Cloud' },
+	{ file: 'huawei.svg', name: 'Huawei Cloud' },
 ];
 ---
 
@@ -29,7 +29,7 @@ const logos = [
 		<div class="ticker-track">
 			{logos.map((logo, index) => (
 				<div class="ticker-item" data-index={index}>
-					<img src={`/images/cloud-platforms/${logo}`} alt={logo.replace('.svg', '')} />
+					<img src={`/images/cloud-platforms/${logo.file}`} alt={logo.name} />
 				</div>
 			))}
 		</div>
