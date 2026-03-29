@@ -15,7 +15,8 @@ import Newsletter from '../components/Newsletter.astro';
 import Footer from '../components/Footer.astro';
 import SeeYouThere from '../components/SeeYouThere.astro';
 import ScrollAnimations from '../components/ScrollAnimations.astro';
-import { heroContent, navigationContent, aboutCPCAContent, whatIsCloudSummitContent, cloudSummitActivitiesContent, eventHighlightsContent, tickerContent, eventMapContent, pastSponsorsContent, newsletterContent, footerContent, defaultCity } from '../lib/content';
+import { heroContent, navigationContent, aboutCPCAContent, whatIsCloudSummitContent, cloudSummitActivitiesContent, eventHighlightsContent, tickerContent, pastSponsorsContent, newsletterContent, footerContent, defaultCity } from '../lib/content';
+import Schedule from '../components/Schedule.astro';
 
 // Use default city for SSR, will be updated client-side
 const content = heroContent[defaultCity];
@@ -102,6 +103,7 @@ const torontoDescription =
 		<CloudSummitActivities content={cloudSummitActivitiesContent} />
 		<AboutCPCA content={aboutCPCAContent} />
 		<EventLocations />
+		<Schedule></Schedule>
 		<SummitSummary content={eventHighlightsContent} />
 		<HighlightReel content={eventHighlightsContent} />
 		<Ticker content={tickerContent} />
