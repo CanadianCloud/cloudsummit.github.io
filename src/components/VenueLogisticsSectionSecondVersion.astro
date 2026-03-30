@@ -9,18 +9,26 @@ interface Props {
 const { content } = Astro.props;
 
 
-const allCitiesLogistics = Object.values(content);
+const cityEntries = Object.entries(content) as [
+  City,
+  VenueLogisticsSectionNewVersion,
+][];
 ---
 
 {
-  allCitiesLogistics.map((cityData) => (
+  cityEntries.map(([cityKey, cityData]) => (
     <div
       data-city-box
-      {...{ [`data-city-${cityData.CityTitle.toLowerCase()}-box`]: true }}
-    >      
-      <div class="Box">
-        <h1 class="hero-city-title">{cityData.CityTitle}</h1>
-        <p class="hero-city-intro">{cityData.intro}</p>
+      {...{ [`data-city-${cityKey}-box`]: true }}
+    >
+      <div class="Box venue-logistics-title-box">
+        <div class="venue-logistics-header">
+          <h2 class="section-heading venue-logistics-heading">
+            <span class="heading-prefix">Venue </span>
+            Logistics
+          </h2>
+          <p class="venue-logistics-venue">{cityData.venueLabel}</p>
+        </div>
       </div>
       {cityData.section.map((item) => (
         <div class="Box">
@@ -71,6 +79,56 @@ const allCitiesLogistics = Object.values(content);
   transform: scale(1.01); 
   box-shadow: 0 4px 10px rgba(255, 193, 77, 0.25); 
 }
+
+  /* Venue Logistics title block should be flat like Event Map heading */
+  .Box.venue-logistics-title-box {
+    border: none;
+    box-shadow: none;
+  }
+
+  .Box.venue-logistics-title-box:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .venue-logistics-header {
+    margin-bottom: 0;
+    text-align: center;
+  }
+
+  .venue-logistics-title-box .venue-logistics-heading {
+    font-family: "Squada One", system-ui, sans-serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin: 0 0 0.5rem 0;
+    color: rgb(255, 193, 77);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    text-transform: none;
+  }
+
+  .venue-logistics-title-box .venue-logistics-heading .heading-prefix {
+    color: white;
+    font-family: "Squada One", system-ui, sans-serif;
+  }
+
+  .venue-logistics-venue {
+    text-align: center;
+    margin: 0;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    opacity: 0.9;
+  }
+
+  @media (min-width: 769px) {
+    .venue-logistics-title-box .venue-logistics-heading {
+      font-size: 4rem;
+    }
+
+    .venue-logistics-venue {
+      font-size: 1.25rem;
+    }
+  }
 
   .hero-city-title {
     font-size: 2.5rem;
@@ -188,8 +246,8 @@ const allCitiesLogistics = Object.values(content);
 </style>
 
 <script>
-  import { string } from "astro:schema";
   import { getCityStore } from "../lib/cityStore";
+  import type { City } from "../lib/content";
 
   // Run when DOM is ready
   if (document.readyState === "loading") {

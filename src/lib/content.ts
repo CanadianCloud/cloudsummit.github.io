@@ -60,6 +60,8 @@ export const defaultCity: City = 'vancouver';
 export const sharedHeroContent = {
   title: 'Cloud Summit 2026',
   subtitle: "Sponsor Canada's Largest Multi-Cloud Conference",
+  description:
+    "Cloud Summit 2026 is Canada's multi-cloud conference, bringing together cloud professionals, developers, architects, sponsors, and communities in Vancouver and Toronto.",
   primaryCta: {
     text: 'Become a Volunteer',
     href: 'https://tally.so/r/mBVZjA',
@@ -359,6 +361,64 @@ export const eventMapContent = {
 
 export type EventMapContent = typeof eventMapContent;
 
+// Venue logistics (city-specific)
+export interface VenueLink {
+  url: string;
+  text: string;
+}
+
+export interface VenueLogisticsBase {
+  title: string;
+  bullets: string[];
+  externalLink?: VenueLink[];
+}
+
+export interface VenueLogisticsSectionNewVersion {
+  // Subtitle under "Venue Logistics" header (e.g. "Vancouver · Science World")
+  venueLabel: string;
+  section: VenueLogisticsBase[];
+}
+
+export const venueLogisticsContentNewVersion: Record<
+  City,
+  VenueLogisticsSectionNewVersion
+> = {
+  vancouver: {
+    venueLabel: "This is Intro Of Vancouver Venue",
+    section: [
+      {
+        title: "Getting Here",
+        bullets: [
+          "1455 Quebec Street",
+          "Vancouver, BC, V6A 3Z7",
+          "604.443.7440",
+          "Science World is located along the False Creek Seawall and is easily reached by transit and walking routes.",
+        ],
+      },
+      {
+        title: "Transit",
+        bullets: [
+          "Science World is near the Main Street-Science World Skytrain Station (Expo Line).",
+          "A short walk from bus stops at Main and Terminal.",
+        ],
+      },
+      {
+        title: "Parking",
+        bullets: [
+          "Limited pay parking spaces are available for visitors who drive.",
+          "Parking rates and details will be shared closer to the event date.",
+        ],
+      },
+    ],
+  },
+  toronto: {
+    venueLabel: "Toronto · Northeastern University",
+    section: [],
+  },
+};
+
+export type VenueLogisticsContent = typeof venueLogisticsContentNewVersion;
+
 // Helper function to get footer content with city-specific ticket URL
 export function getFooterContent(city: City) {
   return {
@@ -438,7 +498,7 @@ export const communityPartners: CommunityPartners[] = [
   },
   {
     name: 'Microsoft',
-    logo: '../../public/images/community-partners/Microsoft_logo.svg.png'
+    logo: '../../public/images/community-partners/Microsoft_logo.png'
   }
 ]
 
