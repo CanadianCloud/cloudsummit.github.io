@@ -11,7 +11,11 @@ interface Props {
 
 const { content } = Astro.props;
 
-const cityEntries = Object.entries(content) as [City, VenueLogisticsSectionNewVersion][];
+
+const cityEntries = Object.entries(content) as [
+  City,
+  VenueLogisticsSectionNewVersion,
+][];
 ---
 
 {
@@ -96,6 +100,41 @@ const cityEntries = Object.entries(content) as [City, VenueLogisticsSectionNewVe
   }
 
   .venue-logistics-title-box .venue-logistics-heading {
+    font-family: "Squada One", system-ui, sans-serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin: 0 0 0.5rem 0;
+    color: rgb(255, 193, 77);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    text-transform: none;
+  }
+
+  .venue-logistics-title-box .venue-logistics-heading .heading-prefix {
+    color: white;
+    font-family: "Squada One", system-ui, sans-serif;
+  }
+
+  .venue-logistics-venue {
+    text-align: center;
+    margin: 0;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    opacity: 0.9;
+  }
+
+  @media (min-width: 769px) {
+    .venue-logistics-title-box .venue-logistics-heading {
+      font-size: 4rem;
+    }
+
+    .venue-logistics-venue {
+      font-size: 1.25rem;
+    }
+  }
+
+  .hero-city-title {
+    font-size: 2.5rem;
     font-family: "Squada One", system-ui, sans-serif;
     font-size: 2.5rem;
     text-align: center;

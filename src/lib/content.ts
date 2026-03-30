@@ -43,7 +43,18 @@ export interface NavigationContent {
   // ctaHref: string; Disabled as part of Issue #3 (Header & Navigation update)
 }
 
-export type City = 'vancouver' | 'toronto';
+interface CommunityPartners {
+  name: string;
+  logo: string;
+}
+
+interface Sponsors {
+  ranking: "Gold" | "Platinum" | "Diamond";
+  name: string;
+  logo: string;
+}
+
+export type City = "vancouver" | "toronto";
 
 export const defaultCity: City = 'vancouver';
 
@@ -51,6 +62,8 @@ export const defaultCity: City = 'vancouver';
 export const sharedHeroContent = {
   title: 'Cloud Summit 2026',
   subtitle: "Sponsor Canada's Largest Multi-Cloud Conference",
+  description:
+    "Cloud Summit 2026 is Canada's multi-cloud conference, bringing together cloud professionals, developers, architects, sponsors, and communities in Vancouver and Toronto.",
   primaryCta: {
     text: 'Become a Volunteer',
     href: 'https://tally.so/r/mBVZjA',
@@ -350,6 +363,64 @@ export const eventMapContent = {
 
 export type EventMapContent = typeof eventMapContent;
 
+// Venue logistics (city-specific)
+export interface VenueLink {
+  url: string;
+  text: string;
+}
+
+export interface VenueLogisticsBase {
+  title: string;
+  bullets: string[];
+  externalLink?: VenueLink[];
+}
+
+export interface VenueLogisticsSectionNewVersion {
+  // Subtitle under "Venue Logistics" header (e.g. "Vancouver · Science World")
+  venueLabel: string;
+  section: VenueLogisticsBase[];
+}
+
+export const venueLogisticsContentNewVersion: Record<
+  City,
+  VenueLogisticsSectionNewVersion
+> = {
+  vancouver: {
+    venueLabel: "This is Intro Of Vancouver Venue",
+    section: [
+      {
+        title: "Getting Here",
+        bullets: [
+          "1455 Quebec Street",
+          "Vancouver, BC, V6A 3Z7",
+          "604.443.7440",
+          "Science World is located along the False Creek Seawall and is easily reached by transit and walking routes.",
+        ],
+      },
+      {
+        title: "Transit",
+        bullets: [
+          "Science World is near the Main Street-Science World Skytrain Station (Expo Line).",
+          "A short walk from bus stops at Main and Terminal.",
+        ],
+      },
+      {
+        title: "Parking",
+        bullets: [
+          "Limited pay parking spaces are available for visitors who drive.",
+          "Parking rates and details will be shared closer to the event date.",
+        ],
+      },
+    ],
+  },
+  toronto: {
+    venueLabel: "Toronto · Northeastern University",
+    section: [],
+  },
+};
+
+export type VenueLogisticsContent = typeof venueLogisticsContentNewVersion;
+
 // Helper function to get footer content with city-specific ticket URL
 export function getFooterContent(city: City) {
   return {
@@ -429,179 +500,38 @@ export const newsletterContent = {
   ctaHref: 'https://tally.so/r/mR6RBl',
 };
 
-export interface VenueLink {
-  url: string;
-  text: string;
-}
-
-export interface VenueLogisticsBase {
-  title: string;
-  bullets: string[];
-  externalLink?: VenueLink[];
-}
-export interface VenueLogisticsSectionNewVersion {
-  /** Subtitle under the main heading, same pattern as Event Map (e.g. Vancouver · Science World) */
-  venueLabel: string;
-  section: VenueLogisticsBase[];
-}
-
-export const venueLogisticsContentNewVersion: Record<City, VenueLogisticsSectionNewVersion> = {
-  vancouver: {
-    venueLabel: 'This is Intro Of Vancouver Venue',
-    section: [
-      {
-        title: 'Getting Here',
-        bullets: [
-          '1455 Quebec Street',
-          'Vancouver, BC, V6A 3Z7',
-          '604.443.7440',
-          'Science World is located in the heart of Vancouver along the False Creek Seawall, and is easily reached by almost any way you can travel. We offer rentable lockers for your belongings and a number of other amenities to make your visit easy and comfortable.',
-        ],
-        externalLink: [
-          {
-            url: 'https://goo.gl/maps/BUgVAAx1xjzZxBHu6',
-            text: 'Open in Maps',
-          },
-
-        ]
-      },
-      {
-        title: 'Transit',
-        bullets: [
-          'We are located across the street from the Main Street-Science World Skytrain Station along the Expo line, and a short walk from bus stops at Main and Terminal.',
-        ],
-        externalLink: [
-          {
-            text: 'Plan Your Trip with TransLink',
-            url: 'https://www.google.com/maps/dir//Science+World+at+TELUS+World+of+Science,+1455+Quebec+St,+Vancouver,+BC+V6A+3Z7/@49.2733548,-123.1738736,12z/data=!3m1!4b1!4m9!4m8!1m0!1m5!1m1!1s0x548671638bf0919d:0x218237371f987037!2m2!1d-123.103834!2d49.273376!3e3?hl=en',
-          }
-        ],
-
-      },
-
-      {
-        title: 'Bike',
-        bullets: [
-          'You’ll find ample racks for locking up your bike in the plaza at the front entrance. Ensure you bring your own secure lock!',
-        ],
-        externalLink: [
-
-        ],
-
-      },
-
-      {
-        title: 'Mobi Bike Share',
-        bullets: [
-          'A Mobi Bike Share station is located just across the seawall cycling path near the front entrance, just under the Skytrain overpass. For more information about using Mobi, please visit the Mobi website.',
-        ],
-        externalLink: [
-          {
-            url: 'https://www.mobibikes.ca/',
-            text: 'Visit Mobi Bike Share',
-          },
-        ],
-
-      },
-
-      {
-        title: 'Ferry',
-        bullets: [
-          'The Aquabus and False Creek Ferries both stop nearby and are easy ways to get here from Granville Island, English Bay, Yaletown, and Kitsilano. Check their websites for more details about docking locations, fees, and schedules.',
-        ],
-        externalLink: [
-          {
-            url: 'https://theaquabus.com/',
-            text: 'Aquabus Website'
-          },
-          {
-            url: 'https://granvilleislandferries.bc.ca/',
-            text: 'False Creek Ferries Website',
-          },
-        ],
-
-      },
-
-      {
-        title: 'Car Share',
-        bullets: [
-          'Designated parking for Evo and Share Now (formerly Car2Go) vehicles are available in the parking lot across Quebec St.',
-        ],
-        externalLink: [],
-
-      },
-
-      {
-        title: 'Parking',
-        bullets: [
-          'We encourage all visitors to take transit but for those visitors who decide to drive we do have limited pay parking spaces. Please note that we do not have bus parking available.',
-          'Parking Rates',
-          '1 Hour           $5.25',
-          '2 Hours          $9.95',
-          '4 Hours          $15.25',
-          'Until 6:30PM     $20.95',
-          'From 5pm-2am     $10.50',
-          'Pay parking areas support payment by phone and credit card.',
-          'During special events in the neighbourhood these parking rates may change. In these cases, please pay inside at admissions to get the regular parking rate.',
-        ],
-        externalLink: [],
-
-      },
-      {
-        title: 'Accessible Parking',
-        bullets: [
-          'There are six wheelchair-accessible spaces in the parking lots. These are available on a first-come, first-served basis, and are located in the lots to the north and south of Science World. Ramps are available to reach the sidewalk.',
-        ],
-        externalLink: [],
-      },
-      {
-        title: 'Automated Entry and Exit Doors',
-        bullets: [
-          'Science World has button-operated automated entry doors and exit doors.',
-
-        ],
-        externalLink: [],
-      },
-
-      {
-        title: 'Ramps and Elevators',
-        bullets: [
-          'Science World has ramps that allow access to the first- and second-floor galleries, as well as to the OMNIMAX®️ theatre on the fifth floor. There are also two elevators which run between the first and second floors. We recommend using the elevator in the Connection Zone (near the lobby) to access the Wonder gallery.',
-
-        ],
-        externalLink: [],
-      },
-      {
-        title: 'Service Animals',
-        bullets: [
-          'Service dogs must be on a leash and in the company of their owner at all times. For the safety and comfort of all guests, service dogs must be well-behaved during their visit. Staff reserve the right to ask non-compliant owners and their dogs to leave the premises.',
-
-        ],
-        externalLink: [],
-      },
-      {
-        title: 'Washrooms',
-        bullets: [
-          'All public washrooms at Science World are equipped with baby-change facilities. All washrooms except for those on the OMNIMAX®️ ramp are wheelchair-accessible.',
-
-        ],
-        externalLink: [],
-      },
-
-    ],
-
+export const communityPartners: CommunityPartners[] = [
+  {
+    name: 'AWS',
+    logo: '../../public/images/community-partners/aws-day-logo.png'
   },
-  toronto: {
-    venueLabel: 'Toronto · Northeastern University',
-    section: [
-    ],
+  {
+    name: 'Google Developer Group',
+    logo: '../../public/images/community-partners/gdg-logo.png'
   },
+  {
+    name: 'ISACA',
+    logo: '../../public/images/community-partners/ISACA.png'
+  },
+  {
+    name: 'Hacker Rivals',
+    logo: '../../public/images/community-partners/Logo-Oct25-Black.png'
+  },
+  {
+    name: 'Microsoft',
+    logo: '../../public/images/community-partners/Microsoft_logo.png'
+  }
+]
 
-}
-
-
-
-
-
-
-
+export const sponsors: Sponsors[] = [
+  {
+    ranking: 'Platinum',
+    name: 'AWS',
+    logo: '../../public/images/sponsors/aws-white.svg'
+  },
+  {
+    ranking: 'Diamond',
+    name: 'Fortinet',
+    logo: '../../public/images/sponsors/Fortinet_Logo.png'
+  }
+]
