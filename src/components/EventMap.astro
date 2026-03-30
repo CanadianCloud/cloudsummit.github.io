@@ -1,0 +1,485 @@
+---
+import type { EventMapContent } from '../lib/content';
+
+interface Props {
+	content: EventMapContent;
+}
+
+const { content } = Astro.props;
+const hasPdf = Boolean(content.pdfHref);
+---
+
+<section
+	class="event-map-section"
+	id="event-map"
+	aria-labelledby="event-map-heading"
+	data-vancouver-only
+>
+	<script is:inline>
+		(function () {
+			try {
+				if (new URLSearchParams(window.location.search).get('city') === 'toronto') {
+					var el = document.getElementById('event-map');
+					if (el) el.classList.add('event-map-section--hidden');
+				}
+			} catch (e) {}
+		})();
+	</script>
+	<div class="event-map-outer">
+		<div class="event-map-header">
+			<h2 id="event-map-heading" class="section-heading">
+				<span class="heading-prefix">Event </span>
+				Map
+			</h2>
+			<p class="event-map-venue">{content.venueLabel}</p>
+		</div>
+
+		<div class="event-map-card">
+			<div class="event-map-toolbar">
+				<div class="event-map-tabs" role="tablist" aria-label="Floor selection">
+					{
+						content.floors.map((floor, i) => (
+							<button
+								type="button"
+								class:list={['event-map-tab', { active: i === 0 }]}
+								role="tab"
+								aria-selected={i === 0 ? 'true' : 'false'}
+								aria-controls={`event-map-panel-${floor.id}`}
+								id={`event-map-tab-${floor.id}`}
+								data-floor-index={String(i)}
+							>
+								{floor.label}
+							</button>
+						))
+					}
+				</div>
+				{
+					hasPdf ? (
+						<a
+							href={content.pdfHref}
+							class="event-map-download"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							Download Map
+						</a>
+					) : (
+						<span class="event-map-download event-map-download--disabled" aria-disabled="true">
+							PDF coming soon
+						</span>
+					)
+				}
+			</div>
+
+			<div class="event-map-panels">
+				{
+					content.floors.map((floor, i) => (
+						<div
+							class:list={['event-map-panel', { active: i === 0 }]}
+							id={`event-map-panel-${floor.id}`}
+							role="tabpanel"
+							aria-labelledby={`event-map-tab-${floor.id}`}
+							aria-hidden={i !== 0 ? 'true' : 'false'}
+							data-floor-index={String(i)}
+						>
+							{floor.imageSrc ? (
+								<img
+									src={floor.imageSrc}
+									alt={floor.imageAlt}
+									class="event-map-image"
+									loading="eager"
+									decoding="async"
+								/>
+							) : (
+								<div class="event-map-placeholder">
+									<p>Floor plan coming soon</p>
+								</div>
+							)}
+						</div>
+					))
+				}
+			</div>
+
+			<div class="event-map-legend">
+				{
+					content.floors.map((floor, i) => (
+						<div
+							class:list={['event-map-legend-view', { active: i === 0 }]}
+							data-floor-index={String(i)}
+							aria-hidden={i !== 0 ? 'true' : 'false'}
+						>
+							<div class="event-map-legend-grid">
+								{
+									floor.legend.map((item) => (
+										<div class="event-map-legend-item">
+											<img
+												src={item.iconSrc}
+												alt=""
+												class="event-map-legend-icon"
+												loading="lazy"
+												decoding="async"
+											/>
+											<span class="event-map-legend-text">
+												<span class="event-map-legend-title">{item.title}</span>
+												{'detail' in item && item.detail ? (
+													<span class="event-map-legend-detail">{item.detail}</span>
+												) : null}
+											</span>
+										</div>
+									))
+								}
+							</div>
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</div>
+</section>
+
+<script is:inline>
+	(function () {
+		function initEventMap(root) {
+			if (!root || root.dataset.eventMapInit === '1') return;
+			root.dataset.eventMapInit = '1';
+			var tabs = root.querySelectorAll('.event-map-tab');
+			var panels = root.querySelectorAll('.event-map-panel');
+			var legendViews = root.querySelectorAll('.event-map-legend-view');
+			tabs.forEach(function (tab) {
+				tab.addEventListener('click', function () {
+					var idx = tab.getAttribute('data-floor-index');
+					if (idx === null) return;
+					tabs.forEach(function (t) {
+						var on = t.getAttribute('data-floor-index') === idx;
+						t.classList.toggle('active', on);
+						t.setAttribute('aria-selected', on ? 'true' : 'false');
+					});
+					panels.forEach(function (p) {
+						var on = p.getAttribute('data-floor-index') === idx;
+						p.classList.toggle('active', on);
+						p.setAttribute('aria-hidden', on ? 'false' : 'true');
+					});
+					legendViews.forEach(function (v) {
+						var on = v.getAttribute('data-floor-index') === idx;
+						v.classList.toggle('active', on);
+						v.setAttribute('aria-hidden', on ? 'false' : 'true');
+					});
+				});
+			});
+		}
+		function run() {
+			var section = document.getElementById('event-map');
+			if (section) initEventMap(section);
+		}
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', run);
+		} else {
+			run();
+		}
+	})();
+</script>
+
+<script>
+	import { getCityStore } from '../lib/cityStore';
+	import type { City } from '../lib/cityContent';
+
+	function syncEventMapVisibility(city: City) {
+		const el = document.getElementById('event-map');
+		if (!el) return;
+		const show = city === 'vancouver';
+		el.classList.toggle('event-map-section--hidden', !show);
+		el.setAttribute('aria-hidden', show ? 'false' : 'true');
+	}
+
+	const store = getCityStore();
+	store.init();
+	syncEventMapVisibility(store.getCity());
+	store.subscribe(syncEventMapVisibility);
+</script>
+
+<style>
+	.event-map-section.event-map-section--hidden {
+		display: none !important;
+	}
+
+	.event-map-section {
+		background: #0a0a0a;
+		color: #fff;
+		padding: 4rem 1.5rem;
+	}
+
+	.event-map-outer {
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	/* Match EventLocations "Two Event Locations" heading block */
+	.event-map-header {
+		margin-bottom: 3rem;
+	}
+
+	.event-map-section .section-heading {
+		font-family: 'Squada One', system-ui, sans-serif;
+		font-size: 2.5rem;
+		text-align: center;
+		margin: 0 0 0.5rem 0;
+		color: rgb(255, 193, 77);
+	}
+
+	.event-map-section .heading-prefix {
+		color: white;
+		font-family: 'Squada One', system-ui, sans-serif;
+	}
+
+	/* Match Newsletter description body text */
+	.event-map-venue {
+		text-align: center;
+		margin: 0;
+		font-size: 1.125rem;
+		line-height: 1.6;
+		opacity: 0.9;
+	}
+
+	.event-map-card {
+		border-radius: 12px;
+		overflow: hidden;
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+	}
+
+	.event-map-toolbar {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		padding: 0.75rem 1rem;
+		border-bottom: 1px solid #d1d5db;
+	}
+
+	.event-map-tabs {
+		display: inline-flex;
+		gap: 0.35rem;
+		background: rgba(255, 255, 255, 0.08);
+		border-radius: 8px;
+	}
+
+	/* Same font treatment as Newsletter .newsletter-description */
+	.event-map-tab {
+		font-family: 'Noto Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+		font-size: 1rem;
+		font-weight: 400;
+		line-height: 1.6;
+		padding: 0.35rem 0.85rem;
+		border: none;
+		border-radius: 6px;
+		cursor: pointer;
+		background: transparent;
+		color: rgba(255, 255, 255, 0.9);
+		transition: background 0.15s, color 0.15s;
+	}
+
+	.event-map-tab:hover {
+		color: #ffffff;
+		background: rgba(61, 120, 171, 0.18);
+	}
+
+	.event-map-tab.active {
+		background: rgb(61, 120, 171);
+		color: #ffffff;
+		font-weight: 600;
+		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+	}
+
+	/* Match Newsletter "Subscribe to Newsletter" CTA */
+	.event-map-download {
+		display: inline-block;
+		padding: 0.2rem 1rem;
+		background: rgb(168, 251, 90);
+		color: black;
+		text-decoration: none;
+		font-weight: 600;
+		border-radius: 0.5rem;
+		font-size: 1rem;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		transition: transform 0.2s, opacity 0.2s;
+	}
+
+	.event-map-download:hover {
+		transform: translateY(-2px);
+		opacity: 0.9;
+		background: rgb(150, 230, 75);
+	}
+
+	.event-map-download--disabled {
+		display: inline-block;
+		padding: 0.2rem 1rem;
+		background: #9ca3af;
+		color: white;
+		font-weight: 600;
+		border-radius: 0.5rem;
+		font-size: 1rem;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		cursor: not-allowed;
+		pointer-events: none;
+	}
+
+	.event-map-panels {
+		background: #fff;
+		min-height: 220px;
+	}
+
+	.event-map-panel {
+		display: none !important;
+		padding: 0;
+	}
+
+	.event-map-panel.active {
+		display: block !important;
+	}
+
+	.event-map-image {
+		display: block;
+		width: 100%;
+		height: auto;
+		max-height: min(70vh, 640px);
+		object-fit: contain;
+		object-position: center;
+		background: #fff;
+	}
+
+	.event-map-placeholder {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 240px;
+		color: #6b7280;
+		font-size: 1rem;
+	}
+
+	.event-map-legend {
+		background: #070d12;
+		color: #e5e7eb;
+		border: 1px solid rgba(61,120,171,0.2);
+		padding: 1.25rem 1rem 1.5rem;
+	}
+
+	.event-map-legend-view {
+		display: none !important;
+	}
+
+	.event-map-legend-view.active {
+		display: block !important;
+	}
+
+	.event-map-legend-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 0.5rem 0.6rem;
+		max-width: 1000px;
+		margin: 0 auto;
+		font-size: 0.72rem;
+		line-height: 1.3;
+	}
+
+	.event-map-legend-item {
+		display: flex;
+		align-items: center;
+		gap: 0.4rem;
+		min-width: 0;
+	}
+
+	.event-map-legend-icon {
+		flex-shrink: 0;
+		width: 28px;
+		height: 28px;
+		object-fit: contain;
+		object-position: center;
+	}
+
+	.event-map-legend-text {
+		display: flex;
+		flex-direction: column;
+		gap: 0.1rem;
+		min-width: 0;
+	}
+
+	.event-map-legend-title {
+		font-weight: 600;
+		color: #f9fafb;
+		line-height: 1.25;
+	}
+
+	.event-map-legend-detail {
+		font-size: 0.85em;
+		color: #d1d5db;
+		line-height: 1.25;
+	}
+
+	@media (min-width: 640px) {
+		.event-map-legend-grid {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 0.6rem 1rem;
+			font-size: 0.78rem;
+		}
+
+		.event-map-legend-item {
+			gap: 0.55rem;
+		}
+
+		.event-map-legend-icon {
+			width: 34px;
+			height: 34px;
+		}
+	}
+
+	@media (min-width: 769px) {
+		.event-map-section {
+			padding: 6rem 2rem;
+		}
+
+		.event-map-section .section-heading {
+			font-size: 4rem;
+		}
+
+		.event-map-venue {
+			font-size: 1.25rem;
+		}
+
+		.event-map-tab {
+			font-size: 1.25rem;
+			padding: 0.5rem 1.25rem;
+		}
+
+		.event-map-download {
+			padding: 0.5rem 2rem;
+			font-size: 1.125rem;
+			letter-spacing: 0.05em;
+		}
+
+		.event-map-download--disabled {
+			padding: 0.5rem 2rem;
+			font-size: 1.125rem;
+			letter-spacing: 0.05em;
+		}
+	}
+
+	@media (min-width: 900px) {
+		.event-map-legend-grid {
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+			gap: 0.65rem 1.25rem;
+			font-size: 0.8125rem;
+		}
+
+		.event-map-legend-item {
+			gap: 0.65rem;
+		}
+
+		.event-map-legend-icon {
+			width: 40px;
+			height: 40px;
+		}
+	}
+</style>

@@ -1,6 +1,6 @@
 ---
-import CitySelector from './CitySelector.astro';
-import type { NavigationContent } from '../lib/content';
+import CitySelector from "./CitySelector.astro";
+import type { NavigationContent } from "../lib/content";
 
 interface Props {
 	content: NavigationContent;
@@ -12,7 +12,11 @@ const { content } = Astro.props;
 <nav class="nav">
 	<div class="nav-container">
 		<a href="/" class="nav-logo">
-			<img src="/images/Cloud-summit-logo.svg" alt="Cloud Summit 2026" class="nav-logo-img" />
+			<img
+				src="/images/Cloud-summit-logo.svg"
+				alt="Cloud Summit 2026"
+				class="nav-logo-img"
+			/>
 		</a>
 		<button class="hamburger" aria-label="Toggle menu">
 			<span></span>
@@ -21,35 +25,57 @@ const { content } = Astro.props;
 		</button>
 		<div class="nav-right">
 			<ul class="nav-links">
-				{content.links.map(link => (
-					<li><a href={link.href} target={link.href.startsWith('http') ? '_blank' : undefined} rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}>{link.text}</a></li>
-				))}
+				{
+					content.links.map((link) => (
+						<li>
+							<a
+								href={link.href}
+								target={
+									link.href.startsWith("http")
+										? "_blank"
+										: undefined
+								}
+								rel={
+									link.href.startsWith("http")
+										? "noopener noreferrer"
+										: undefined
+								}
+							>
+								{link.text}
+							</a>
+						</li>
+					))
+				}
 			</ul>
 			<CitySelector />
-			<a href={content.ctaHref} class="nav-cta">{content.ctaText}</a>
+			<!-- Disabled as part of Issue #3 (Header & Navigation update)
+     			Reason: Old CTA removed according to new design requirements -->
+			<!-- <a href={content.ctaHref} class="nav-cta">{content.ctaText}</a> -->
+
+			<!-- <a href={content.ctaHref} class="nav-cta">{content.ctaText}</a> -->
 		</div>
 	</div>
 </nav>
 
 <script>
-	import { getCityStore } from '../lib/cityStore';
-	import { citySpecificContent } from '../lib/content';
-	import type { City } from '../lib/content';
+	import { getCityStore } from "../lib/cityStore";
+	import { citySpecificContent } from "../lib/content";
+	import type { City } from "../lib/content";
 
-	const hamburger = document.querySelector('.hamburger');
-	const navRight = document.querySelector('.nav-right');
+	const hamburger = document.querySelector(".hamburger");
+	const navRight = document.querySelector(".nav-right");
 
-	hamburger?.addEventListener('click', () => {
-		hamburger.classList.toggle('active');
-		navRight?.classList.toggle('active');
+	hamburger?.addEventListener("click", () => {
+		hamburger.classList.toggle("active");
+		navRight?.classList.toggle("active");
 	});
 
 	// Close menu when clicking on a link
-	const navLinks = document.querySelectorAll('.nav-links a, .nav-cta');
-	navLinks.forEach(link => {
-		link.addEventListener('click', () => {
-			hamburger?.classList.remove('active');
-			navRight?.classList.remove('active');
+	const navLinks = document.querySelectorAll(".nav-links a, .nav-cta");
+	navLinks.forEach((link) => {
+		link.addEventListener("click", () => {
+			hamburger?.classList.remove("active");
+			navRight?.classList.remove("active");
 		});
 	});
 
@@ -57,7 +83,9 @@ const { content } = Astro.props;
 	function updateTicketUrl() {
 		const cityStore = getCityStore();
 		const currentCity = cityStore.getCity();
-		const ticketLink = document.querySelector('.nav-links a[href*="luma.com"]') as HTMLAnchorElement;
+		const ticketLink = document.querySelector(
+			'.nav-links a[href*="luma.com"]',
+		) as HTMLAnchorElement;
 
 		if (ticketLink) {
 			ticketLink.href = citySpecificContent[currentCity].ticketUrl;
@@ -79,8 +107,8 @@ const { content } = Astro.props;
 	}
 
 	// Run when DOM is ready
-	if (document.readyState === 'loading') {
-		document.addEventListener('DOMContentLoaded', initCityAwareNav);
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", initCityAwareNav);
 	} else {
 		initCityAwareNav();
 	}

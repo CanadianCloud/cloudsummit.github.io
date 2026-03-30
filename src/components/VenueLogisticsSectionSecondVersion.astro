@@ -1,0 +1,306 @@
+---
+import type {
+  City,
+  VenueLogisticsSectionNewVersion,
+} from "../lib/content";
+
+
+interface Props {
+  content: Record<City, VenueLogisticsSectionNewVersion>;
+}
+
+const { content } = Astro.props;
+
+
+const cityEntries = Object.entries(content) as [
+  City,
+  VenueLogisticsSectionNewVersion,
+][];
+---
+
+{
+  cityEntries.map(([cityKey, cityData]) => (
+    <div
+      data-city-box
+      {...{ [`data-city-${cityKey}-box`]: true }}
+    >      
+      <div class="Box venue-logistics-title-box">
+        <div class="venue-logistics-header">
+          <h2 class="section-heading venue-logistics-heading">
+            <span class="heading-prefix">Venue </span>
+            Logistics
+          </h2>
+          <p class="venue-logistics-venue">{cityData.venueLabel}</p>
+        </div>
+      </div>
+      {cityData.section.map((item) => (
+        <div class="Box">
+          <h3 class="hero-city-section-title">{item.title}</h3>
+          <ul>
+            {item.bullets.map((bullet) => (
+              <li class="hero-city-section-bullet">{bullet}</li>
+            ))}
+          </ul>
+
+          {item.externalLink && item.externalLink.length > 0 && (
+            <div class="btn-group">
+              {item.externalLink.map((link) => (
+                <a
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn btn-primary"
+                >
+                  {link.text}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  ))
+}
+
+<style>
+  .hidden-city {
+    display: none !important;
+  }
+
+  .Box {
+    width: 80%; 
+    margin: 0 auto;
+    padding: 10px; 
+    background: transparent;
+    border: 1px solid rgba(255, 193, 77, 0.8);
+    border-radius: 8px; 
+    box-sizing: border-box; 
+    margin-bottom: 5px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .Box:hover {
+  transform: scale(1.01); 
+  box-shadow: 0 4px 10px rgba(255, 193, 77, 0.25); 
+}
+
+  .Box.venue-logistics-title-box {
+    border: none;
+    box-shadow: none;
+  }
+
+  .Box.venue-logistics-title-box:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* Match Event Map `.event-map-section .section-heading` + `.event-map-venue` */
+  .venue-logistics-header {
+    margin-bottom: 0;
+    text-align: center;
+  }
+
+  .venue-logistics-title-box .venue-logistics-heading {
+    font-family: "Squada One", system-ui, sans-serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin: 0 0 0.5rem 0;
+    color: rgb(255, 193, 77);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    text-transform: none;
+  }
+
+  .venue-logistics-title-box .venue-logistics-heading .heading-prefix {
+    color: white;
+    font-family: "Squada One", system-ui, sans-serif;
+  }
+
+  .venue-logistics-venue {
+    text-align: center;
+    margin: 0;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    opacity: 0.9;
+  }
+
+  @media (min-width: 769px) {
+    .venue-logistics-title-box .venue-logistics-heading {
+      font-size: 4rem;
+    }
+
+    .venue-logistics-venue {
+      font-size: 1.25rem;
+    }
+  }
+
+  .hero-city-title {
+    font-size: 2.5rem;
+    font-family: "Squada One", system-ui, sans-serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin: 0 0 0.5rem 0;
+    color: rgb(255, 193, 77);
+    line-height: 1;
+    text-transform: none;
+  }
+
+  .venue-logistics-title-box .venue-logistics-heading .heading-prefix {
+    color: white;
+    font-family: "Squada One", system-ui, sans-serif;
+  }
+
+  .venue-logistics-venue {
+    text-align: center;
+    margin: 0;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    opacity: 0.9;
+  }
+
+  @media (min-width: 769px) {
+    .venue-logistics-title-box .venue-logistics-heading {
+      font-size: 4rem;
+    }
+
+    .venue-logistics-venue {
+      font-size: 1.25rem;
+    }
+  }
+
+  .hero-city-section-title {
+    font-size: 1.5rem;
+    font-family:
+      "Noto Sans",
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      sans-serif;
+    color: rgb(249, 215, 174);
+    margin: 0 0 0.5rem 0;
+    line-height: 1;
+    letter-spacing: 0.02em;
+   
+    opacity: 1;
+    display: block;
+  }
+  .hero-city-section-bullet {
+    font-size: 0.8rem;
+    font-family:
+      "Noto Sans",
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      sans-serif;
+    color: rgb(221, 220, 220);
+    margin: 0 0 0.5rem 0;
+    line-height: 2;
+    letter-spacing: 0.02em;
+   
+    opacity: 1;
+    display: block;
+  }
+
+  .btn-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    padding: 0.85rem 2rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: none;
+    display: inline-block;
+  }
+
+  .btn-primary {
+    background: rgb(255, 193, 77);
+    color: black;
+  }
+
+  .btn-primary:hover {
+    background: rgb(240, 175, 60);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+  }
+
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .section-divider {
+    width: 100%;
+
+    margin: 0.5rem auto; 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15); 
+  }
+</style>
+
+<script>
+  import { getCityStore } from "../lib/cityStore";
+  import type { City } from "../lib/content";
+
+  // Run when DOM is ready
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initCityAwareNav);
+  } else {
+    initCityAwareNav();
+  }
+
+  function toggleVenueLogistics() {
+    const cityStore = getCityStore();
+    const currentCity = cityStore.getCity();
+    const boxNameForHide = `[data-city-box]`;
+    const allBoxesHide = document.querySelectorAll(boxNameForHide);
+    allBoxesHide.forEach((box) => {
+      box.classList.add("hidden-city");
+    });
+    const boxNameForShow = `[data-city-${currentCity}-box]`;
+    const allBoxesShow = document.querySelectorAll(boxNameForShow);
+    allBoxesShow.forEach((box) => {
+      box.classList.remove("hidden-city");
+    });
+  }
+
+  function clearVenueSection() {
+    document.querySelectorAll("[data-logistics-delete]").forEach((el) => {
+      el.innerHTML = "";
+    });
+  }
+
+  function initCityAwareNav() {
+    const cityStore = getCityStore();
+    cityStore.init();
+
+    // Update ticket URL on initial load
+    toggleVenueLogistics();
+
+    // Subscribe to city changes
+    cityStore.subscribe((city: City) => {
+      toggleVenueLogistics();
+    });
+  }
+</script>
