@@ -41,6 +41,14 @@ export interface NavigationContent {
   ctaHref: string;
 }
 
+export interface Speaker {
+  speakername: string;
+  title: string;
+  company: string;
+  topic: string;
+  image: string;
+}
+
 export type City = "vancouver" | "toronto";
 
 export const defaultCity: City = "vancouver";
@@ -243,3 +251,48 @@ export const newsletterContent = {
   ctaText: "Subscribe to Newsletter",
   ctaHref: "https://tally.so/r/mR6RBl",
 };
+
+export const speakerContent: Speaker[] = [
+  {
+    speakername: "Matt Biilmann",
+    title: "CEO and Co-Founder",
+    company: "Netlify",
+    topic: "AX and Why It Matters",
+    image: "/images/previous-speakers/matt-biilmann.png",
+  },
+  {
+    speakername: "Eric Johnson",
+    title: "Principal Developer Advocate",
+    company: "Amazon Web Services (AWS)",
+    topic: "Taking GenAI from Paper to Production with Serverless",
+    image: "/images/previous-speakers/eric-johnson.png",
+  },
+  {
+    speakername: "Ahmad Awais",
+    title: "CEO",
+    company: "Langbase",
+    topic: "Why the Best AI Agents Are Built Without Frameworks",
+    image: "/images/previous-speakers/ahmad-awais.jpg",
+  },
+  {
+    name: "Luca Maraschi",
+    title: "Co-Founder & CEO",
+    company: "Platformatic",
+    topic: "Scaling Node.js in Kubernetes: Metrics, Memory, and Mastery",
+    image: "/images/previous-speakers/luca-maraschi.png",
+  },
+  {
+    speakername: "Denis Astahov",
+    title: "Solutions Architect",
+    company: "OpsGuru",
+    topic: "How to become Cloud/DevOps Engineer from Zero",
+    image: "/images/previous-speakers/denis-astahov.png",
+  },
+  {
+    speakername: "Aiman Parvaiz",
+    title: "Director of DevOps",
+    company: "NimbusStack",
+    topic: "Driving Cloud Cost Efficiency: Multi-Cloud Strategies",
+    image: "/images/previous-speakers/aiman-parvaiz.png",
+  },
+];
