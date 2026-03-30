@@ -357,19 +357,19 @@ export function getFooterContent(city: City) {
     links: [
 
       { col: 1, text: 'Get a Ticket', href: citySpecificContent[city].ticketUrl },
-      { col: 1, text: 'Call for Speakers', href: 'https://cloudsummit-github-hq6t7rc7t-nichanun-pongpattarawits-projects.vercel.app/our-speakers' },
+      { col: 1, text: 'Call for Speakers', href: '/our-speakers/' },
       { col: 1, text: 'Become a Sponsor', href: 'https://tally.so/r/wLqXvO' },
       { col: 1, text: 'Apply to Volunteer', href: 'https://tally.so/r/mBVZjA' },
       { col: 1, text: 'Enter Hackathon', href: 'https://hackerrivals.com/' },
 
-      { col: 2, text: 'Press Release', href: 'https://cloudsummit.ca/press' },
-      { col: 2, text: 'About Cloud Summit', href: 'https://cloudsummit.ca/about-cloud-summit/' },
+      { col: 2, text: 'Press Release', href: '/archive/2025/index.html' },
+      { col: 2, text: 'About Cloud Summit', href: '/about-cloud-summit/' },
       { col: 2, text: 'Subscribe to Newsletter', href: 'https://tally.so/r/mR6RBl' },
       // { col: 2, text: 'Our Event Team', href: '/our-team' },
       // { col: 2, text: 'Sponsorship Info', href: '/our-sponsors' },
 
-      { col: 3, text: '2025', href: 'https://cloudsummit.ca/archive/2025/index.html' },
-      { col: 3, text: '2024', href: 'https://cloudsummit.ca/archive/2024.html' },
+      { col: 3, text: '2025', href: '/archive/2025/index.html' },
+      { col: 3, text: '2024', href: '/archive/2024.html' },
 
     ],
     social: [
@@ -383,11 +383,11 @@ export function getFooterContent(city: City) {
       },
     ],    
     // pressReleases: [
-    //   { text: '2025 Press Release', href: 'https://cloudsummit.ca/press' },
+    //   { text: '2025 Press Release', href: '/archive/2025/index.html' },
     // ],
     previousYears: [
-      { text: '2025', href: 'https://cloudsummit.ca/archive/2025/index.html' },
-      { text: '2024', href: 'https://cloudsummit.ca/archive/2024.html' },
+      { text: '2025', href: '/archive/2025/index.html' },
+      { text: '2024', href: '/archive/2024.html' },
     ],
 
     newsletter: 
@@ -440,15 +440,14 @@ export interface VenueLogisticsBase {
   externalLink?: VenueLink[];
 }
 export interface VenueLogisticsSectionNewVersion {
-  CityTitle: string;
-  intro: string;
+  /** Subtitle under the main heading, same pattern as Event Map (e.g. Vancouver · Science World) */
+  venueLabel: string;
   section: VenueLogisticsBase[];
 }
 
 export const venueLogisticsContentNewVersion: Record<City, VenueLogisticsSectionNewVersion> = {
   vancouver: {
-    CityTitle: 'Vancouver',
-    intro: 'This is Intro Of Vancouver Venu',
+    venueLabel: 'This is Intro Of Vancouver Venue',
     section: [
       {
         title: 'Getting Here',
@@ -593,8 +592,7 @@ export const venueLogisticsContentNewVersion: Record<City, VenueLogisticsSection
 
   },
   toronto: {
-    CityTitle: 'Toronto',
-    intro: 'Comming Soon',
+    venueLabel: 'Toronto · Northeastern University',
     section: [
     ],
   },
