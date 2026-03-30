@@ -1,5 +1,8 @@
 ---
-import type { City, VenueLogisticsSectionNewVersion } from "../lib/content";
+import type {
+  City,
+  VenueLogisticsSectionNewVersion,
+} from "../lib/content";
 
 
 interface Props {
@@ -20,7 +23,7 @@ const cityEntries = Object.entries(content) as [
     <div
       data-city-box
       {...{ [`data-city-${cityKey}-box`]: true }}
-    >
+    >      
       <div class="Box venue-logistics-title-box">
         <div class="venue-logistics-header">
           <h2 class="section-heading venue-logistics-heading">
@@ -80,7 +83,6 @@ const cityEntries = Object.entries(content) as [
   box-shadow: 0 4px 10px rgba(255, 193, 77, 0.25); 
 }
 
-  /* Venue Logistics title block should be flat like Event Map heading */
   .Box.venue-logistics-title-box {
     border: none;
     box-shadow: none;
@@ -91,6 +93,7 @@ const cityEntries = Object.entries(content) as [
     box-shadow: none;
   }
 
+  /* Match Event Map `.event-map-section .section-heading` + `.event-map-venue` */
   .venue-logistics-header {
     margin-bottom: 0;
     text-align: center;
@@ -133,24 +136,35 @@ const cityEntries = Object.entries(content) as [
   .hero-city-title {
     font-size: 2.5rem;
     font-family: "Squada One", system-ui, sans-serif;
-    color: rgb(255, 193, 77);
+    font-size: 2.5rem;
+    text-align: center;
     margin: 0 0 0.5rem 0;
+    color: rgb(255, 193, 77);
     line-height: 1;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    opacity: 1;
-    display: block;
+    text-transform: none;
   }
 
-  .hero-city-intro {
-    font-size: 1rem;
-    font-family: "Squada One", system-ui, sans-serif;
+  .venue-logistics-title-box .venue-logistics-heading .heading-prefix {
     color: white;
-    margin: 0 0 0.5rem 0;
-    line-height: 1;
-    letter-spacing: 0.02em;    
-    opacity: 1;
-    display: block;
+    font-family: "Squada One", system-ui, sans-serif;
+  }
+
+  .venue-logistics-venue {
+    text-align: center;
+    margin: 0;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    opacity: 0.9;
+  }
+
+  @media (min-width: 769px) {
+    .venue-logistics-title-box .venue-logistics-heading {
+      font-size: 4rem;
+    }
+
+    .venue-logistics-venue {
+      font-size: 1.25rem;
+    }
   }
 
   .hero-city-section-title {
