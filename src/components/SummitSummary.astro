@@ -250,9 +250,55 @@ const { content } = Astro.props;
 		grid-row: span 3;
 	}
 
+	/* Mobile: force a clean 2-column grid (no big spans) */
+	@media (max-width: 768px) {
+		.bento-grid {
+			grid-template-columns: 60% 40%;
+			grid-auto-flow: row dense;
+			grid-auto-rows: minmax(120px, auto);
+			gap: 0.75rem;
+		}
+
+		.bento-1x3,
+		.bento-3x2,
+		.bento-2x2,
+		.bento-2x3 {
+			grid-column: span 1;
+			grid-row: span 1;
+		}
+
+		/* Keep photos in the 60% column, cards in the 40% column */
+		.bento-item {
+			grid-column: 2;
+		}
+
+		.bento-item.bento-photo {
+			grid-column: 1;
+		}
+
+		/* Put the Cloud Summit logo card in the 60% column */
+		.bento-item.bento-dark {
+			grid-column: 1;
+		}
+
+		.bento-item {
+			min-height: 120px;
+		}
+
+		.bento-item.bento-photo {
+			aspect-ratio: 4 / 3;
+		}
+
+		.bento-photo img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+
 	@media (min-width: 769px) {
 		.summit-summary {
-			padding: 4rem 2rem;
+			padding: 4.5rem 2rem;
 		}
 
 		.summary-container {

@@ -11,7 +11,7 @@ const { content } = Astro.props;
 <!-- Homepage: shown for Vancouver only (see script) -->
 <section id="homepage-speakers" class="speakers-section">
   <div class="speakers-container">
-    <h2 class="section-heading">
+    <h2 class="section-heading speakers-heading">
       <span class="heading-prefix">All </span>
       Speakers
     </h2>
@@ -67,7 +67,7 @@ const { content } = Astro.props;
   }
 
   .speakers-section {
-    padding: 4rem 1.5rem;
+    padding: 3rem 1.5rem;
     background: #000;
     color: #fff;
   }
@@ -77,9 +77,27 @@ const { content } = Astro.props;
     margin: 0 auto;
   }
 
+  .speakers-heading.section-heading {
+    font-family: "Squada One", system-ui, sans-serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin: 0 0 3rem 0;
+    color: rgb(255, 193, 77);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+  }
+
+  .heading-prefix {
+    color: white;
+    font-family: "Squada One", system-ui, sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+
   .speakers-grid {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 2rem;
   }
 
@@ -105,7 +123,7 @@ const { content } = Astro.props;
     margin: 0 auto 1.5rem;
     border-radius: 50%;
     overflow: hidden;
-    border: 3px solid rgb(251, 113, 133);
+    border: 3px solid rgb(255, 193, 77);
   }
 
   .speaker-image img {
@@ -129,7 +147,7 @@ const { content } = Astro.props;
     font-size: 1rem;
     margin: 0 0 0.25rem 0;
     font-weight: 600;
-    color: rgb(251, 113, 133);
+    color: rgb(255, 193, 77);
   }
 
   .speaker-company {
@@ -163,10 +181,10 @@ const { content } = Astro.props;
     }
 
     .speakers-section {
-      padding: 6rem 2rem;
+      padding: 4.5rem 2rem;
     }
 
-    .section-heading {
+    .speakers-heading.section-heading {
       font-size: 4rem;
     }
 
@@ -181,7 +199,7 @@ const { content } = Astro.props;
     }
 
     .cfs-section {
-      padding: 6rem 2rem;
+      padding: 4.5rem 2rem;
     }
 
     .cfs-dates {
@@ -195,7 +213,7 @@ const { content } = Astro.props;
     }
 
     .opportunities-section {
-      padding: 6rem 2rem;
+      padding: 4.5rem 2rem;
     }
 
     .opportunities-grid {

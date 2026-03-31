@@ -37,7 +37,38 @@ const { content, splineUrl = '' } = Astro.props;
 	</div>
 	</section>
 
-<script is:inline type="module" src="https://unpkg.com/@splinetool/viewer@1.9.48/build/spline-viewer.js"></script>
+<script is:inline>
+	(function () {
+		// Defer Spline web component load to improve first paint.
+		function loadSpline() {
+			try {
+				if (document.querySelector('script[data-spline-viewer]')) return;
+				var s = document.createElement('script');
+				s.type = 'module';
+				s.src = 'https://unpkg.com/@splinetool/viewer@1.9.48/build/spline-viewer.js';
+				s.setAttribute('data-spline-viewer', '1');
+				document.head.appendChild(s);
+			} catch (e) {}
+		}
+
+		function schedule() {
+			// Prefer idle time; fallback to a short timeout.
+			// @ts-ignore
+			if (typeof requestIdleCallback === 'function') {
+				// @ts-ignore
+				requestIdleCallback(loadSpline, { timeout: 2500 });
+			} else {
+				setTimeout(loadSpline, 800);
+			}
+		}
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', schedule);
+		} else {
+			schedule();
+		}
+	})();
+</script>
 
 <script>
 
@@ -193,6 +224,10 @@ if (ctaButton) {
 		max-width: 600px;
 		margin-left: auto;
 		margin-right: auto;
+	}
+
+	.hero-description:empty {
+		display: none;
 	}
 
 	.hero-meta {

@@ -139,7 +139,7 @@ const showFooterNewsletter = false;
 				<h4 class="footer-heading">Previous Years</h4>
 				{
 					content.links && (
-						<nav class="footer-nav">
+						<nav class="footer-nav footer-nav--two-col">
 							{content.links
 								.filter((link) => link.col === 3)
 								.map((link) => (
@@ -257,6 +257,34 @@ const showFooterNewsletter = false;
 		gap: 0.75rem;
 	}
 
+	/* Mobile: show footer link details in 2 columns */
+	@media (max-width: 768px) {
+		.footer-nav {
+			display: block;
+			columns: 2;
+			column-gap: 1.75rem;
+		}
+
+		/* For short lists (e.g. Previous Years), force real 2 columns */
+		.footer-nav.footer-nav--two-col {
+			columns: unset;
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			column-gap: 1.75rem;
+		}
+
+		.footer-nav a {
+			display: inline-block;
+			width: 100%;
+			margin: 0 0 0.75rem 0;
+			break-inside: avoid;
+		}
+
+		.footer-nav.footer-nav--two-col a {
+			margin: 0;
+		}
+	}
+
 	/* Match .activity-description */
 	.footer-nav a {
 		color: white;
@@ -329,6 +357,18 @@ const showFooterNewsletter = false;
 
 		.footer-nav a {
 			font-size: 1.125rem;
+		}
+
+		.footer-nav--two-col {
+			columns: 2;
+			column-gap: 1.75rem;
+		}
+
+		.footer-nav--two-col a {
+			display: inline-block;
+			width: 100%;
+			margin: 0 0 0.75rem 0;
+			break-inside: avoid;
 		}
 
 		.footer-copyright {
