@@ -637,36 +637,36 @@ export const speakerContent: Speaker[] = [
 export const communityPartners: CommunityPartners[] = [
   {
     name: 'AWS',
-    logo: '../../public/images/community-partners/aws-day-logo.png'
+    logo: '/images/community-partners/aws-day-logo.png',
   },
   {
     name: 'Google Developer Group',
-    logo: '../../public/images/community-partners/gdg-logo.png'
+    logo: '/images/community-partners/gdg-logo.png',
   },
   {
     name: 'ISACA',
-    logo: '../../public/images/community-partners/ISACA.png'
+    logo: '/images/community-partners/ISACA.png',
   },
   {
     name: 'Hacker Rivals',
-    logo: '../../public/images/community-partners/Logo-Oct25-Black.png'
+    logo: '/images/community-partners/Logo-Oct25-Black.png',
   },
   {
     name: 'Microsoft',
-    logo: '../../public/images/community-partners/Microsoft_logo.png'
-  }
-]
+    logo: '/images/community-partners/Microsoft_logo.png',
+  },
+];
 
 export const sponsors: Sponsors[] = [
   {
     ranking: 'Platinum',
     name: 'AWS',
-    logo: '../../public/images/sponsors/aws-white.svg'
+    logo: '/images/sponsors/aws-white.svg',
   },
   {
     ranking: 'Diamond',
     name: 'Fortinet',
-    logo: '../../public/images/sponsors/Fortinet_Logo.png'
-  }
-]
+    logo: '/images/sponsors/Fortinet_Logo.png',
+  },
+];
 
