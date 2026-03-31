@@ -1,6 +1,9 @@
 ---
-import type { City, VenueLogisticsSectionNewVersion } from "../lib/content";
-
+import type {
+  City,
+  VenueLogisticsBase,
+  VenueLogisticsSectionNewVersion,
+} from "../lib/content";
 
 interface Props {
   content: Record<City, VenueLogisticsSectionNewVersion>;
@@ -8,74 +11,97 @@ interface Props {
 
 const { content } = Astro.props;
 
+const PHONE_DISPLAY = "604.443.7440";
+const PHONE_HREF = "tel:+16044437440";
+const DIRECTIONS_TEXT = "Directions via Google Maps";
 
+/** Short bullets forced to <p> (below paragraph length threshold) */
+const PARAGRAPH_LINES = new Set([
+  "Science World has button-operated automated entry doors and exit doors.",
+  "All public washrooms at Science World are equipped with baby-change facilities.",
+]);
+
+type SubtitleEntry = { iconClass: string; label: string };
+
+const SUBTITLE_BY_LINE = new Map<string, SubtitleEntry>(
+  (
+    [
+      ["Bus Routes", "fa-solid fa-bus", "Bus Routes"],
+      ["Bus Rotes", "fa-solid fa-bus", "Bus Routes"],
+      ["Skytrain", "fa-solid fa-train-subway", "SkyTrain"],
+      ["Ferry", "fa-solid fa-ship", "Ferry"],
+      ["Accessible Parking", "fa-solid fa-square-parking", "Accessible Parking"],
+      [
+        "Automated Entry and Exit Doors",
+        "fa-solid fa-door-open",
+        "Automated Entry and Exit Doors",
+      ],
+      ["Ramps and Elevators", "fa-solid fa-elevator", "Ramps and Elevators"],
+      ["Service Animals", "fa-solid fa-paw", "Service Animals"],
+      ["Washrooms", "fa-solid fa-restroom", "Washrooms"],
+      ["Bike (Personal)", "fa-solid fa-bicycle", "Bike (Personal)"],
+      ["Mobi Bike Share", "fa-solid fa-bicycle", "Mobi Bike Share"],
+      ["Car Share", "fa-solid fa-car", "Car Share"],
+      ["Parking", "fa-solid fa-square-parking", "Parking"],
+      ["Parking Rates", "fa-solid fa-dollar-sign", "Parking Rates"],
+      ["Payment Options", "fa-solid fa-credit-card", "Payment Options"],
+      ["Notes", "fa-solid fa-triangle-exclamation", "Notes"],
+    ] as const
+  ).map(([match, iconClass, label]) => [
+    match,
+    { iconClass, label },
+  ]),
+);
+
+const CARD_TITLE_ICONS: Array<[string, string]> = [
+  ["getting to the venue", "fa-solid fa-location-dot"],
+  ["public transport", "fa-solid fa-bus"],
+  ["active & shared mobility", "fa-solid fa-bicycle"],
+  ["vehicle access", "fa-solid fa-car"],
+  ["accessibility", "fa-solid fa-universal-access"],
+];
+
+function getVenueFaIcon(title: string): string {
+  const t = title.toLowerCase();
+  for (const [needle, icon] of CARD_TITLE_ICONS) {
+    if (t.includes(needle)) return icon;
+  }
+  return "fa-solid fa-circle-info";
+}
+
+function parseSubtitleLine(line: string): SubtitleEntry | null {
+  return SUBTITLE_BY_LINE.get(line.trim()) ?? null;
+}
+
+function splitAtFerry(bullets: string[]) {
+  const i = bullets.indexOf("Ferry");
+  if (i < 0) {
+    return { visible: bullets, deferred: [] as string[] };
+  }
+  return {
+    visible: bullets.slice(0, i),
+    deferred: bullets.slice(i),
+  };
+}
+
+function footerLinks(item: VenueLogisticsBase) {
+  const links = item.externalLink;
+  if (!links?.length) return [];
+  if (item.title === "Public Transport") {
+    return links.filter((l) => l.text === "View Schedule");
+  }
+  return links.filter((l) => l.text !== DIRECTIONS_TEXT);
+}
+
+function afterFooterLinks(item: VenueLogisticsBase) {
+  const links = item.externalLink;
+  if (!links?.length || item.title !== "Public Transport") return [];
+  return links.filter(
+    (l) => l.text !== "View Schedule" && l.text !== DIRECTIONS_TEXT,
+  );
+}
 
 const allCitiesLogistics = Object.values(content);
-const getVenueIcon = (title: string) => {
-  const t = title.toLowerCase();
-  if (t.includes('getting here')) return '🚌';
-  if (t.includes('transit')) return '🚌';
-  if (t.includes('public transport')) return '🚌';
-  if (t.includes('parking')) return '🅿️';
-  if (t.includes('accessible')) return '♿';
-  if (t.includes('bike')) return '🚲';
-  if (t.includes('mobi')) return '🚲';
-  if (t.includes('ferry')) return '⛴️';
-  if (t.includes('car share')) return '🚗';
-  if (t.includes('automated entry') || t.includes('entry and exit')) return '🚪';
-  if (t.includes('ramp') || t.includes('elevator')) return '🛗';
-  if (t.includes('service animals')) return '🐾';
-  if (t.includes('washrooms')) return '🚻';
-  return '📍';
-};
-
-const getVenueFaIcon = (title: string) => {
-  const t = title.toLowerCase();
-  if (t.includes('getting to the venue')) return 'fa-solid fa-location-dot';
-  if (t.includes('public transport')) return 'fa-solid fa-bus';
-  if (t.includes('active & shared mobility')) return 'fa-solid fa-bicycle';
-  if (t.includes('vehicle access')) return 'fa-solid fa-car';
-  if (t.includes('accessibility')) return 'fa-solid fa-universal-access';
-  return 'fa-solid fa-circle-info';
-};
-
-const parseSubtitleLine = (line: string) => {
-  const trimmed = line.trim();
-  const entries: Array<[string, string, string]> = [
-    ['Bus Routes', 'fa-solid fa-bus', 'Bus Routes'],
-    ['Bus Rotes', 'fa-solid fa-bus', 'Bus Routes'],
-    ['Skytrain', 'fa-solid fa-train-subway', 'SkyTrain'],
-    ['Ferry', 'fa-solid fa-ship', 'Ferry'],
-    ['Accessible Parking', 'fa-solid fa-square-parking', 'Accessible Parking'],
-    ['Automated Entry and Exit Doors', 'fa-solid fa-door-open', 'Automated Entry and Exit Doors'],
-    ['Ramps and Elevators', 'fa-solid fa-elevator', 'Ramps and Elevators'],
-    ['Service Animals', 'fa-solid fa-paw', 'Service Animals'],
-    ['Washrooms', 'fa-solid fa-restroom', 'Washrooms'],
-  ];
-  for (const [match, iconClass, label] of entries) {
-    if (trimmed === match) return { iconClass, label };
-  }
-
-  const emojiMap: Array<[string, string]> = [
-    ['🚲', 'fa-solid fa-bicycle'],
-    ['🚗', 'fa-solid fa-car'],
-    ['🅿️', 'fa-solid fa-square-parking'],
-    ['🚪', 'fa-solid fa-door-open'],
-    ['🛗', 'fa-solid fa-elevator'],
-    ['🐾', 'fa-solid fa-paw'],
-    ['🚻', 'fa-solid fa-restroom'],
-    ['💲', 'fa-solid fa-dollar-sign'],
-    ['💳', 'fa-solid fa-credit-card'],
-    ['⚠️', 'fa-solid fa-triangle-exclamation'],
-  ];
-  for (const [emoji, iconClass] of emojiMap) {
-    if (trimmed.startsWith(emoji)) {
-      const label = trimmed.replace(emoji, '').trim();
-      return { iconClass, label };
-    }
-  }
-  return null;
-};
 ---
 
 {
@@ -83,252 +109,199 @@ const parseSubtitleLine = (line: string) => {
     <div
       data-city-box
       {...{ [`data-city-${cityData.CityTitle.toLowerCase()}-box`]: true }}
-    >      
+    >
       <div class="Box venue-logistics-title-box">
         <div class="venue-logistics-header">
           <h2 class="section-heading venue-logistics-heading">
             <span class="heading-prefix">Venue </span>
             Logistics
           </h2>
-          <p class="venue-logistics-intro">{cityData.intro}</p>
+          {cityData.intro.trim() !== "" && (
+            <p class="venue-logistics-intro">{cityData.intro}</p>
+          )}
         </div>
       </div>
       <div class="venue-logistics-grid-wrap">
         <div class="venue-logistics-grid">
-          {cityData.section.map((item) => (
-            <div
-              class:list={[
-                'venue-logistics-card',
-                { 'venue-logistics-card--full': item.title === 'Accessibility & Facilities' },
-              ]}
-            >
-              {/** Render "Ferry" after the CTA area (not in bullets) */}
-              {(() => {
-                const ferryIndex = item.bullets.findIndex((b) => b === 'Ferry');
-                const deferredSubtitles = ferryIndex >= 0 ? item.bullets.slice(ferryIndex) : [];
-                const visibleBullets = ferryIndex >= 0 ? item.bullets.slice(0, ferryIndex) : item.bullets;
-                return (
-                  <>
-              <div class="venue-logistics-card-header">
-                <span class="venue-logistics-card-icon" aria-hidden="true">
-                  <i class={getVenueFaIcon(item.title)} aria-hidden="true"></i>
-                </span>
-                <h3 class="venue-logistics-card-title">{item.title}</h3>
-              </div>
-
-              <div class="venue-logistics-card-body">
-                {item.title === 'Getting to the Venue' && (
-                  <img
-                    class="venue-logistics-card-image"
-                    src="/images/vanue/vanue.png"
-                    alt="Map view for getting to the venue"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                )}
-                {visibleBullets.map((bullet) => {
-                  const isParagraph = bullet.length > 120;
-                  if (isParagraph) {
-                    return <p class="venue-logistics-paragraph">{bullet}</p>;
-                  }
-                  
-                  if (bullet === 'Science World has button-operated automated entry doors and exit doors.') {
-                    return <p class="venue-logistics-paragraph">{bullet}</p>;
-                  }
-
-                  if (
-                    bullet ===
-                    'All public washrooms at Science World are equipped with baby-change facilities.'
-                  ) {
-                    return <p class="venue-logistics-paragraph">{bullet}</p>;
-                  }
-
-                  const isSubheading =
-                    bullet === 'Bus Routes' ||
-                    bullet === 'Skytrain' ||
-                    bullet === 'Bus Rotes';
-
-                  if (isSubheading) {
-                    const parsed = parseSubtitleLine(bullet);
-                    return (
-                      <div class="venue-logistics-subtitle">
-                        {parsed ? <i class={parsed.iconClass} aria-hidden="true"></i> : null}
-                        <span>{parsed ? parsed.label : bullet}</span>
-                      </div>
-                    );
-                  }
-
-                  // Accessibility & Facilities headings (no emoji in content)
-                  if (
-                    bullet === 'Accessible Parking' ||
-                    bullet === 'Automated Entry and Exit Doors' ||
-                    bullet === 'Ramps and Elevators' ||
-                    bullet === 'Service Animals' ||
-                    bullet === 'Washrooms'
-                  ) {
-                    const parsed = parseSubtitleLine(bullet);
-                    return (
-                      <div class="venue-logistics-subtitle">
-                        {parsed ? <i class={parsed.iconClass} aria-hidden="true"></i> : null}
-                        <span>{parsed ? parsed.label : bullet}</span>
-                      </div>
-                    );
-                  }
-
-                  if (bullet.trim().startsWith('🚲')) {
-                    const parsed = parseSubtitleLine(bullet);
-                    return (
-                      <div class="venue-logistics-subtitle">
-                        {parsed ? <i class={parsed.iconClass} aria-hidden="true"></i> : null}
-                        <span>{parsed ? parsed.label : bullet}</span>
-                      </div>
-                    );
-                  }
-
-                  if (
-                    bullet.trim().startsWith('🚗') ||
-                    bullet.trim().startsWith('🅿️') ||
-                    bullet.trim().startsWith('🚪') ||
-                    bullet.trim().startsWith('🛗') ||
-                    bullet.trim().startsWith('🐾') ||
-                    bullet.trim().startsWith('🚻') ||
-                    bullet.trim().startsWith('💲') ||
-                    bullet.trim().startsWith('💳') ||
-                    bullet.trim().startsWith('⚠️')
-                  ) {
-                    const parsed = parseSubtitleLine(bullet);
-                    return (
-                      <div class="venue-logistics-subtitle">
-                        {parsed ? <i class={parsed.iconClass} aria-hidden="true"></i> : null}
-                        <span>{parsed ? parsed.label : bullet}</span>
-                      </div>
-                    );
-                  }
-
-                  if (bullet === '604.443.7440') {
-                    return (
-                      <div class="venue-logistics-bullet-row">
-                        <span class="venue-logistics-check" aria-hidden="true">
-                          •
-                        </span>
-                        <a href="tel:+16044437440" class="venue-logistics-inline-link">
-                          604.443.7440
-                        </a>
-                      </div>
-                    );
-                  }
-
-                  if (bullet === 'Directions via Google Maps') {
-                    const mapsLink = item.externalLink?.find(
-                      (l) => l.text === 'Directions via Google Maps' && Boolean(l.url),
-                    );
-                    if (!mapsLink?.url) {
-                      return null;
-                    }
-                    return (
-                      <div class="venue-logistics-inline-cta">
-                        <a
-                          href={mapsLink.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          class="venue-logistics-cta"
-                        >
-                          {mapsLink.text}
-                        </a>
-                      </div>
-                    );
-                  }
-
-                  const matchingLink = item.externalLink?.find(
-                    (link) => link.text === bullet && Boolean(link.url),
-                  );
-
-                  const trimmed = bullet.trim();
-                  const isCheckItem = trimmed.startsWith('✔');
-                  const checkText = isCheckItem ? '✔' : '•';
-                  const displayText = isCheckItem
-                    ? trimmed.replace(/^✔\s*/, '')
-                    : bullet;
-
-                  return (
-                    <div class="venue-logistics-bullet-row">
-                      <span class="venue-logistics-check" aria-hidden="true">
-                        {checkText}
-                      </span>
-                      {matchingLink ? (
-                        <a
-                          href={matchingLink.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          class="venue-logistics-inline-link"
-                        >
-                          {displayText}
-                        </a>
-                      ) : (
-                        <span>{displayText}</span>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-
-              {item.externalLink && item.externalLink.length > 0 && (
-                <div class="venue-logistics-card-footer">
-                  {(item.title === 'Public Transport'
-                    ? item.externalLink.filter((link) => link.text === 'View Schedule')
-                    : item.externalLink.filter((link) => link.text !== 'Directions via Google Maps')
-                  ).map((link) => (
-                    <a
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="venue-logistics-cta"
-                    >
-                      {link.text}
-                    </a>
-                  ))}
+          {cityData.section.map((item) => {
+            const { visible, deferred } = splitAtFerry(item.bullets);
+            const cardFooterLinks = footerLinks(item);
+            const cardAfterFooterLinks = afterFooterLinks(item);
+            return (
+              <div
+                class:list={[
+                  "venue-logistics-card",
+                  {
+                    "venue-logistics-card--full":
+                      item.title === "Accessibility & Facilities",
+                  },
+                ]}
+              >
+                <div class="venue-logistics-card-header">
+                  <span class="venue-logistics-card-icon" aria-hidden="true">
+                    <i class={getVenueFaIcon(item.title)} aria-hidden="true" />
+                  </span>
+                  <h3 class="venue-logistics-card-title">{item.title}</h3>
                 </div>
-              )}
-              {deferredSubtitles.length > 0 && (
-                <div class="venue-logistics-after-footer">
-                  {deferredSubtitles.map((line, idx) => {
-                    const isTitle =
-                      idx === 0 ||
-                      line === 'Routes connect from:' ||
-                      line === 'Aquabus and False Creek Ferries Routes connect from:';
-                    if (isTitle) {
+
+                <div class="venue-logistics-card-body">
+                  {item.title === "Getting to the Venue" && (
+                    <img
+                      class="venue-logistics-card-image"
+                      src="/images/vanue/vanue.png"
+                      alt="Map view for getting to the venue"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  )}
+                  {visible.map((bullet) => {
+                    const asParagraph =
+                      bullet.length > 120 || PARAGRAPH_LINES.has(bullet);
+                    if (asParagraph) {
                       return (
-                        <div
-                          class:list={[
-                            'venue-logistics-subtitle',
-                            {
-                              'venue-logistics-subtitle--normal':
-                                line === 'Aquabus and False Creek Ferries Routes connect from:',
-                            },
-                          ]}
-                        >
-                          {line}
+                        <p class="venue-logistics-paragraph">{bullet}</p>
+                      );
+                    }
+
+                    const parsedSubtitle = parseSubtitleLine(bullet);
+                    if (parsedSubtitle) {
+                      return (
+                        <div class="venue-logistics-subtitle">
+                          <i
+                            class={parsedSubtitle.iconClass}
+                            aria-hidden="true"
+                          />
+                          <span>{parsedSubtitle.label}</span>
                         </div>
                       );
                     }
+
+                    if (bullet === PHONE_DISPLAY) {
+                      return (
+                        <div class="venue-logistics-bullet-row">
+                          <span class="venue-logistics-check" aria-hidden="true">
+                            •
+                          </span>
+                          <a href={PHONE_HREF} class="venue-logistics-inline-link">
+                            {PHONE_DISPLAY}
+                          </a>
+                        </div>
+                      );
+                    }
+
+                    if (bullet === DIRECTIONS_TEXT) {
+                      const mapsLink = item.externalLink?.find(
+                        (l) => l.text === DIRECTIONS_TEXT && Boolean(l.url),
+                      );
+                      if (!mapsLink?.url) return null;
+                      return (
+                        <div class="venue-logistics-inline-cta">
+                          <a
+                            href={mapsLink.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="venue-logistics-cta"
+                          >
+                            {mapsLink.text}
+                          </a>
+                        </div>
+                      );
+                    }
+
+                    const matchingLink = item.externalLink?.find(
+                      (link) => link.text === bullet && Boolean(link.url),
+                    );
+                    const trimmed = bullet.trim();
+                    const isCheckItem = trimmed.startsWith("✔");
+                    const checkMark = isCheckItem ? "✔" : "•";
+                    const displayText = isCheckItem
+                      ? trimmed.replace(/^✔\s*/, "")
+                      : bullet;
+
                     return (
-                      <div class="venue-logistics-bullet-row venue-logistics-bullet-row--after-footer">
+                      <div class="venue-logistics-bullet-row">
                         <span class="venue-logistics-check" aria-hidden="true">
-                          ✓
+                          {checkMark}
                         </span>
-                        <span>{line}</span>
+                        {matchingLink ? (
+                          <a
+                            href={matchingLink.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="venue-logistics-inline-link"
+                          >
+                            {displayText}
+                          </a>
+                        ) : (
+                          <span>{displayText}</span>
+                        )}
                       </div>
                     );
                   })}
-                  {item.title === 'Public Transport' && item.externalLink && item.externalLink.length > 0 && (
-                    <div class="venue-logistics-after-footer-ctas">
-                      {item.externalLink
-                        .filter(
-                          (link) =>
-                            link.text !== 'View Schedule' &&
-                            link.text !== 'Directions via Google Maps',
-                        )
-                        .map((link) => (
+                </div>
+
+                {cardFooterLinks.length > 0 && (
+                  <div class="venue-logistics-card-footer">
+                    {cardFooterLinks.map((link) => (
+                      <a
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="venue-logistics-cta"
+                      >
+                        {link.text}
+                      </a>
+                    ))}
+                  </div>
+                )}
+
+                {deferred.length > 0 && (
+                  <div class="venue-logistics-after-footer">
+                    {deferred.map((line, idx) => {
+                      const isTitle =
+                        idx === 0 ||
+                        line === "Routes connect from:" ||
+                        line ===
+                          "Aquabus and False Creek Ferries Routes connect from:";
+                      if (isTitle) {
+                        if (
+                          line ===
+                          "Aquabus and False Creek Ferries Routes connect from:"
+                        ) {
+                          return (
+                            <div class="venue-logistics-subtitle venue-logistics-subtitle--normal">
+                              {line}
+                            </div>
+                          );
+                        }
+                        const parsed = parseSubtitleLine(line);
+                        if (parsed) {
+                          return (
+                            <div class="venue-logistics-subtitle">
+                              <i
+                                class={parsed.iconClass}
+                                aria-hidden="true"
+                              />
+                              <span>{parsed.label}</span>
+                            </div>
+                          );
+                        }
+                        return (
+                          <div class="venue-logistics-subtitle">{line}</div>
+                        );
+                      }
+                      return (
+                        <div class="venue-logistics-bullet-row venue-logistics-bullet-row--after-footer">
+                          <span class="venue-logistics-check" aria-hidden="true">
+                            ✓
+                          </span>
+                          <span>{line}</span>
+                        </div>
+                      );
+                    })}
+                    {cardAfterFooterLinks.length > 0 && (
+                      <div class="venue-logistics-after-footer-ctas">
+                        {cardAfterFooterLinks.map((link) => (
                           <a
                             href={link.url}
                             target="_blank"
@@ -338,15 +311,13 @@ const parseSubtitleLine = (line: string) => {
                             {link.text}
                           </a>
                         ))}
-                    </div>
-                  )}
-                </div>
-              )}
-                  </>
-                );
-              })()}
-            </div>
-          ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
@@ -359,22 +330,24 @@ const parseSubtitleLine = (line: string) => {
   }
 
   .Box {
-    width: 80%; 
+    width: 80%;
     margin: 0 auto;
-    padding: 10px; 
+    padding: 10px;
     background: transparent;
     border: 1px solid rgba(255, 193, 77, 0.8);
-    border-radius: 8px; 
-    box-sizing: border-box; 
+    border-radius: 8px;
+    box-sizing: border-box;
     margin-bottom: 5px;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
   }
-  .Box:hover {
-  transform: scale(1.01); 
-  box-shadow: 0 4px 10px rgba(255, 193, 77, 0.25); 
-}
 
-  /* Header/title block for "Venue Logistics" should not show a border */
+  .Box:hover {
+    transform: scale(1.01);
+    box-shadow: 0 4px 10px rgba(255, 193, 77, 0.25);
+  }
+
   .venue-logistics-title-box {
     border: none !important;
     box-shadow: none !important;
@@ -391,14 +364,13 @@ const parseSubtitleLine = (line: string) => {
   }
 
   .venue-logistics-heading.section-heading {
-    font-family: 'Squada One', system-ui, sans-serif;
+    font-family: "Squada One", system-ui, sans-serif;
     font-size: 2.5rem;
     text-align: center;
     margin: 0 0 0.5rem 0;
     color: rgb(255, 193, 77);
   }
 
-  /* Match EventMap heading sizing (4rem on desktop) */
   @media (min-width: 769px) {
     .venue-logistics-heading.section-heading {
       font-size: 4rem;
@@ -407,15 +379,7 @@ const parseSubtitleLine = (line: string) => {
 
   .heading-prefix {
     color: white;
-    font-family: 'Squada One', system-ui, sans-serif;
-  }
-
-  .venue-logistics-venue {
-    text-align: center;
-    margin: 0;
-    font-size: 1.125rem;
-    line-height: 1.6;
-    opacity: 0.9;
+    font-family: "Squada One", system-ui, sans-serif;
   }
 
   .venue-logistics-intro {
@@ -428,107 +392,11 @@ const parseSubtitleLine = (line: string) => {
   }
 
   @media (min-width: 769px) {
-    .venue-logistics-venue {
-      font-size: 1.25rem;
-    }
-
     .venue-logistics-intro {
       font-size: 1.25rem;
     }
   }
 
-  .hero-city-section-title {
-    font-size: 1.5rem;
-    font-family:
-      "Noto Sans",
-      system-ui,
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      Roboto,
-      Oxygen,
-      Ubuntu,
-      Cantarell,
-      sans-serif;
-    color: rgb(249, 215, 174);
-    margin: 0 0 0.5rem 0;
-    line-height: 1;
-    letter-spacing: 0.02em;
-   
-    opacity: 1;
-    display: block;
-  }
-  .hero-city-section-bullet {
-    font-size: 0.8rem;
-    font-family:
-      "Noto Sans",
-      system-ui,
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      Roboto,
-      Oxygen,
-      Ubuntu,
-      Cantarell,
-      sans-serif;
-    color: rgb(221, 220, 220);
-    margin: 0 0 0.5rem 0;
-    line-height: 2;
-    letter-spacing: 0.02em;
-   
-    opacity: 1;
-    display: block;
-  }
-
-  .btn-group {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-
-  .btn {
-    padding: 0.85rem 2rem;
-    border-radius: 0.5rem;
-    font-weight: 600;
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-    transition: all 0.2s ease;
-    cursor: pointer;
-    border: none;
-    display: inline-block;
-  }
-
-  .btn-primary {
-    background: rgb(255, 193, 77);
-    color: black;
-  }
-
-  .btn-primary:hover {
-    background: rgb(240, 175, 60);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
-  }
-
-  .btn-secondary {
-    background: transparent;
-    color: white;
-    border: 2px solid white;
-  }
-
-  .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: translateY(-2px);
-  }
-
-  .section-divider {
-    width: 100%;
-
-    margin: 0.5rem auto; 
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15); 
-  }
-
-  /* --- Card grid layout (matches your reference photo) --- */
   [data-city-box] {
     background: black;
     color: white;
@@ -557,9 +425,7 @@ const parseSubtitleLine = (line: string) => {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 1.75rem;
     }
-  }
 
-  @media (min-width: 769px) {
     .venue-logistics-card--full {
       grid-column: 1 / -1;
     }
@@ -601,10 +467,9 @@ const parseSubtitleLine = (line: string) => {
     line-height: 1;
   }
 
-  /* Match CloudSummitActivities .activity-title ("Discover Communities", etc.) */
   .venue-logistics-card-title {
     margin: 0;
-    font-family: 'Squada One', system-ui, sans-serif;
+    font-family: "Squada One", system-ui, sans-serif;
     font-size: 1.5rem;
     line-height: 1.2;
     font-weight: 400;
@@ -625,7 +490,6 @@ const parseSubtitleLine = (line: string) => {
     margin-bottom: 0.95rem;
   }
 
-  /* Accessibility & Facilities: 2 columns inside the card */
   @media (min-width: 769px) {
     .venue-logistics-card--full .venue-logistics-card-body {
       display: grid;
@@ -641,12 +505,21 @@ const parseSubtitleLine = (line: string) => {
     }
   }
 
-  /* Match Newsletter / Event Map body copy */
   .venue-logistics-bullet-row {
     display: flex;
     gap: 0.5rem;
     align-items: flex-start;
-    font-family: 'Noto Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family:
+      "Noto Sans",
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      sans-serif;
     font-size: 1.125rem;
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.9);
@@ -659,18 +532,17 @@ const parseSubtitleLine = (line: string) => {
   }
 
   .venue-logistics-check {
-    color: #01A88D;
+    color: #01a88d;
     font-weight: 900;
     flex: 0 0 auto;
   }
 
-  /* In-card subheads (e.g. Car Share, Bus Routes): step below main card title, align with Activity titles */
   .venue-logistics-subtitle {
     margin-top: 0.25rem;
     padding-top: 0.25rem;
-    font-family: 'Squada One', system-ui, sans-serif;
+    font-family: "Squada One", system-ui, sans-serif;
     font-size: 1.125rem;
-    font-weight: 400;
+    font-weight: 700;
     letter-spacing: 0.02em;
     line-height: 1.3;
     color: rgb(61, 120, 171);
@@ -690,9 +562,18 @@ const parseSubtitleLine = (line: string) => {
     }
   }
 
-  /* Plain intro line (e.g. ferry routes lead-in): Newsletter body, not Squada */
   .venue-logistics-subtitle--normal {
-    font-family: 'Noto Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family:
+      "Noto Sans",
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      sans-serif;
     font-size: 1.125rem;
     line-height: 1.6;
     font-weight: 400;
@@ -725,7 +606,17 @@ const parseSubtitleLine = (line: string) => {
 
   .venue-logistics-paragraph {
     margin: 0;
-    font-family: 'Noto Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family:
+      "Noto Sans",
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      sans-serif;
     font-size: 1.125rem;
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.9);
@@ -769,7 +660,6 @@ const parseSubtitleLine = (line: string) => {
     padding-top: 0.75rem;
   }
 
-  /* Same as "Visit Mobi Bike Share" / Newsletter subscribe CTA */
   .venue-logistics-cta {
     display: inline-block;
     padding: 0.5rem 1.15rem;
@@ -779,7 +669,9 @@ const parseSubtitleLine = (line: string) => {
     border-radius: 0.5rem;
     font-size: 0.8125rem;
     text-decoration: none;
-    transition: transform 0.2s, opacity 0.2s;
+    transition:
+      transform 0.2s,
+      opacity 0.2s;
     text-transform: none;
     letter-spacing: 0.02em;
   }
@@ -792,10 +684,9 @@ const parseSubtitleLine = (line: string) => {
 </style>
 
 <script>
-  import { string } from "astro:schema";
+  import type { City } from "../lib/content";
   import { getCityStore } from "../lib/cityStore";
 
-  // Run when DOM is ready
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initCityAwareNav);
   } else {
@@ -805,33 +696,21 @@ const parseSubtitleLine = (line: string) => {
   function toggleVenueLogistics() {
     const cityStore = getCityStore();
     const currentCity = cityStore.getCity();
-    const boxNameForHide = `[data-city-box]`;
-    const allBoxesHide = document.querySelectorAll(boxNameForHide);
-    allBoxesHide.forEach((box) => {
+    document.querySelectorAll("[data-city-box]").forEach((box) => {
       box.classList.add("hidden-city");
     });
-    const boxNameForShow = `[data-city-${currentCity}-box]`;
-    const allBoxesShow = document.querySelectorAll(boxNameForShow);
-    allBoxesShow.forEach((box) => {
-      box.classList.remove("hidden-city");
-    });
-  }
-
-  function clearVenueSection() {
-    document.querySelectorAll("[data-logistics-delete]").forEach((el) => {
-      el.innerHTML = "";
-    });
+    document
+      .querySelectorAll(`[data-city-${currentCity}-box]`)
+      .forEach((box) => {
+        box.classList.remove("hidden-city");
+      });
   }
 
   function initCityAwareNav() {
     const cityStore = getCityStore();
     cityStore.init();
-
-    // Update ticket URL on initial load
     toggleVenueLogistics();
-
-    // Subscribe to city changes
-    cityStore.subscribe((city: City) => {
+    cityStore.subscribe((_city: City) => {
       toggleVenueLogistics();
     });
   }

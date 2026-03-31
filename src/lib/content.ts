@@ -427,7 +427,7 @@ export interface VenueLogisticsSectionNewVersion {
 export const venueLogisticsContentNewVersion: Record<City, VenueLogisticsSectionNewVersion> = {
   vancouver: {
     CityTitle: 'Vancouver',
-    intro: 'This is Intro Of Vancouver Venue',
+    intro: '',
     section: [
       {
         title: 'Getting to the Venue',
@@ -447,10 +447,10 @@ export const venueLogisticsContentNewVersion: Record<City, VenueLogisticsSection
       {
         title: 'Active & Shared Mobility',
         bullets: [
-          '🚲 Bike (Personal)',
+          'Bike (Personal)',
           'Bike racks available at the front plaza',
           'Visitors must bring their own lock',
-          '🚲 Mobi Bike Share',
+          'Mobi Bike Share',
           'Station located near the entrance (under SkyTrain overpass)',
           'Accessible via seawall cycling path',
         ],
@@ -498,23 +498,23 @@ export const venueLogisticsContentNewVersion: Record<City, VenueLogisticsSection
       {
         title: 'Vehicle Access',
         bullets: [
-          '🚗 Car Share',
+          'Car Share',
           'Evo',
           'Share Now (formerly Car2Go)',
           'Designated parking available across Quebec St',
-          '🅿️ Parking',
+          'Parking',
           'Limited paid parking available',
           'No bus parking',
-          '💲 Parking Rates',
+          'Parking Rates',
           '1 Hour – $5.25',
           '2 Hours – $9.95',
           '4 Hours – $15.25',
           'Until 6:30 PM – $20.95',
           'From 5 PM – 2 AM – $10.50',
-          '💳 Payment Options',
+          'Payment Options',
           'Phone payment',
           'Credit card',
-          '⚠️ Notes',
+          'Notes',
           'Rates may change during special events',
           'Pay inside admissions to get regular rates during events',
         ],
