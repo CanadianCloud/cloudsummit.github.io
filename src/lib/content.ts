@@ -1,5 +1,3 @@
-import { Group } from "lucide-astro";
-
 export interface CitySpecificContent {
   cityName: string;
   venue: string;
@@ -43,6 +41,7 @@ export interface NavigationContent {
   // ctaHref: string; Disabled as part of Issue #3 (Header & Navigation update)
 }
 
+<<<<<<< feature/committee-section
 export interface Committee {
   name: string;
   title: string;
@@ -50,6 +49,28 @@ export interface Committee {
   bio: string;
   image: string;
 }
+=======
+interface CommunityPartners {
+  name: string;
+  logo: string;
+}
+
+interface Sponsors {
+  ranking: "Gold" | "Platinum" | "Diamond";
+  name: string;
+  logo: string;
+}
+
+export interface Speaker {
+  speakername: string;
+  title: string;
+  company: string;
+  topic: string;
+  image: string;
+}
+
+export type City = "vancouver" | "toronto";
+>>>>>>> staging
 
 export type City = "vancouver" | "toronto";
 
@@ -59,6 +80,7 @@ export const defaultCity: City = "vancouver";
 export const sharedHeroContent = {
   title: "Cloud Summit 2026",
   subtitle: "Sponsor Canada's Largest Multi-Cloud Conference",
+  description: '',
   primaryCta: {
     text: "Become a Volunteer",
     href: "https://tally.so/r/mBVZjA",
@@ -357,6 +379,24 @@ export const eventMapContent = {
 
 export type EventMapContent = typeof eventMapContent;
 
+// Venue logistics (city-specific)
+export interface VenueLink {
+  url: string;
+  text: string;
+}
+
+export interface VenueLogisticsBase {
+  title: string;
+  bullets: string[];
+  externalLink?: VenueLink[];
+}
+
+export interface VenueLogisticsSectionNewVersion {
+  CityTitle: string;
+  intro: string;
+  section: VenueLogisticsBase[];
+}
+
 // Helper function to get footer content with city-specific ticket URL
 export function getFooterContent(city: City) {
   return {
@@ -440,6 +480,7 @@ export const newsletterContent = {
   ctaHref: "https://tally.so/r/mR6RBl",
 };
 
+<<<<<<< feature/committee-section
 export interface VenueLink {
   url: string;
   text: string;
@@ -475,10 +516,29 @@ export const venueLogisticsContentNewVersion: Record<
           {
             url: "https://goo.gl/maps/BUgVAAx1xjzZxBHu6",
             text: "Open in Maps",
+=======
+export const venueLogisticsContentNewVersion: Record<City, VenueLogisticsSectionNewVersion> = {
+  vancouver: {
+    CityTitle: 'Vancouver',
+    intro: '',
+    section: [
+      {
+        title: 'Getting to the Venue',
+        bullets: [
+          '1455 Quebec Street, Vancouver, BC, V6A 3Z7',
+          '604.443.7440',
+          'Directions via Google Maps',
+        ],
+        externalLink: [
+          {
+            url: 'https://maps.app.goo.gl/DLdorR8GHCFJvXQp8',
+            text: 'Directions via Google Maps',
+>>>>>>> staging
           },
         ],
       },
       {
+<<<<<<< feature/committee-section
         title: "Transit",
         bullets: [
           "We are located across the street from the Main Street-Science World Skytrain Station along the Expo line, and a short walk from bus stops at Main and Terminal.",
@@ -549,10 +609,85 @@ export const venueLogisticsContentNewVersion: Record<
           "From 5pm-2am     $10.50",
           "Pay parking areas support payment by phone and credit card.",
           "During special events in the neighbourhood these parking rates may change. In these cases, please pay inside at admissions to get the regular parking rate.",
+=======
+        title: 'Active & Shared Mobility',
+        bullets: [
+          'Bike (Personal)',
+          'Bike racks available at the front plaza',
+          'Visitors must bring their own lock',
+          'Mobi Bike Share',
+          'Station located near the entrance (under SkyTrain overpass)',
+          'Accessible via seawall cycling path',
+        ],
+        externalLink: [
+          {
+            url: 'https://www.mobibikes.ca/en/',
+            text: 'Visit Mobi Bike Share',
+          },
+        ],
+      },
+
+      {
+        title: 'Public Transport',
+        bullets: [
+          'Bus Routes',
+          'Bus 19 - Metrotown / Stanley Park',
+          'Bus 22 - Knight / Downtown',
+          'Bus 3 - Main / Downtown',
+          'Bus 8 - Fraser / Downtown',
+          'Skytrain',
+          'Expo Line - Main Street-Science World',
+          'Ferry',
+          'Aquabus and False Creek Ferries Routes connect from:',
+          'Granville Island',
+          'English Bay',
+          'Yaletown',
+          'Kitsilano',
+        ],
+        externalLink: [
+          {
+            text: 'View Schedule',
+            url: 'https://www.translink.ca/schedules-and-maps/skytrain?term=22',
+          },
+          {
+            url: 'https://theaquabus.com/',
+            text: 'Aquabus',
+          },
+          {
+            url: 'https://granvilleislandferries.bc.ca/',
+            text: 'False Creek Ferries',
+          },
+        ],
+      },
+
+      {
+        title: 'Vehicle Access',
+        bullets: [
+          'Car Share',
+          'Evo',
+          'Share Now (formerly Car2Go)',
+          'Designated parking available across Quebec St',
+          'Parking',
+          'Limited paid parking available',
+          'No bus parking',
+          'Parking Rates',
+          '1 Hour – $5.25',
+          '2 Hours – $9.95',
+          '4 Hours – $15.25',
+          'Until 6:30 PM – $20.95',
+          'From 5 PM – 2 AM – $10.50',
+          'Payment Options',
+          'Phone payment',
+          'Credit card',
+          'Notes',
+          'Rates may change during special events',
+          'Pay inside admissions to get regular rates during events',
+>>>>>>> staging
         ],
         externalLink: [],
       },
       {
+<<<<<<< feature/committee-section
         title: "Accessible Parking",
         bullets: [
           "There are six wheelchair-accessible spaces in the parking lots. These are available on a first-come, first-served basis, and are located in the lots to the north and south of Science World. Ramps are available to reach the sidewalk.",
@@ -592,10 +727,33 @@ export const venueLogisticsContentNewVersion: Record<
   },
   toronto: {
     venueLabel: "Toronto · Northeastern University",
+=======
+        title: 'Accessibility & Facilities',
+        bullets: [
+          'Accessible Parking',
+          'There are six wheelchair-accessible spaces in the parking lots. These are available on a first-come, first-served basis, and are located in the lots to the north and south of Science World. Ramps are available to reach the sidewalk.',
+          'Automated Entry and Exit Doors',
+          'Science World has button-operated automated entry doors and exit doors.',
+          'Ramps and Elevators',
+          'Science World has ramps that allow access to the first- and second-floor galleries. There are also two elevators which run between the first and second floors. We recommend using the elevator in the Connection Zone (near the lobby) to access the Wonder gallery.',
+          'Service Animals',
+          'Service dogs must be on a leash and in the company of their owner at all times. For the safety and comfort of all guests, service dogs must be well-behaved during their visit. Staff reserve the right to ask non-compliant owners and their dogs to leave the premises.',
+          'Washrooms',
+          'All public washrooms at Science World are equipped with baby-change facilities.',
+        ],
+        externalLink: [],
+      },
+    ],
+  },
+  toronto: {
+    CityTitle: 'Toronto',
+    intro: 'Comming Soon',
+>>>>>>> staging
     section: [],
   },
 };
 
+<<<<<<< feature/committee-section
 export const committeeContent: Committee[] = [
   {
     name: "Matt Carolan",
@@ -668,3 +826,88 @@ export const committeeContent: Committee[] = [
     image: "/images/committee/philip-black.png",
   },
 ];
+=======
+export type VenueLogisticsContent = typeof venueLogisticsContentNewVersion;
+
+export const speakerContent: Speaker[] = [
+  {
+    speakername: "Matt Biilmann",
+    title: "CEO and Co-Founder",
+    company: "Netlify",
+    topic: "AX and Why It Matters",
+    image: "/images/previous-speakers/matt-biilmann.png",
+  },
+  {
+    speakername: "Eric Johnson",
+    title: "Principal Developer Advocate",
+    company: "Amazon Web Services (AWS)",
+    topic: "Taking GenAI from Paper to Production with Serverless",
+    image: "/images/previous-speakers/eric-johnson.png",
+  },
+  {
+    speakername: "Ahmad Awais",
+    title: "CEO",
+    company: "Langbase",
+    topic: "Why the Best AI Agents Are Built Without Frameworks",
+    image: "/images/previous-speakers/ahmad-awais.jpg",
+  },
+  {
+    speakername: "Luca Maraschi",
+    title: "Co-Founder & CEO",
+    company: "Platformatic",
+    topic: "Scaling Node.js in Kubernetes: Metrics, Memory, and Mastery",
+    image: "/images/previous-speakers/luca-maraschi.png",
+  },
+  {
+    speakername: "Denis Astahov",
+    title: "Solutions Architect",
+    company: "OpsGuru",
+    topic: "How to become Cloud/DevOps Engineer from Zero",
+    image: "/images/previous-speakers/denis-astahov.png",
+  },
+  {
+    speakername: "Aiman Parvaiz",
+    title: "Director of DevOps",
+    company: "NimbusStack",
+    topic: "Driving Cloud Cost Efficiency: Multi-Cloud Strategies",
+    image: "/images/previous-speakers/aiman-parvaiz.png",
+  },
+];
+
+export const communityPartners: CommunityPartners[] = [
+  {
+    name: 'AWS',
+    logo: '/images/community-partners/aws-day-logo.png',
+  },
+  {
+    name: 'Google Developer Group',
+    logo: '/images/community-partners/gdg-logo.png',
+  },
+  {
+    name: 'ISACA',
+    logo: '/images/community-partners/ISACA.png',
+  },
+  {
+    name: 'Hacker Rivals',
+    logo: '/images/community-partners/Logo-Oct25-Black.png',
+  },
+  {
+    name: 'Microsoft',
+    logo: '/images/community-partners/Microsoft_logo.png',
+  },
+];
+
+export const sponsors: Sponsors[] = [
+  {
+    ranking: 'Platinum',
+    name: 'AWS',
+    logo: '/images/sponsors/aws-white.svg',
+  },
+  {
+    ranking: 'Diamond',
+    name: 'Fortinet',
+    logo: '/images/sponsors/Fortinet_Logo.png',
+  },
+];
+
+>>>>>>> staging

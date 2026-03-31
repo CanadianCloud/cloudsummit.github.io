@@ -33,15 +33,24 @@ class CityStore {
 		// Only skip if city is the same AND we're not forcing an update
 		// This allows updating the URL even if the city value is the same
 		if (this.currentCity === city && !forceUpdate) return;
-		
+
+		const previousCity = this.currentCity;
 		this.currentCity = city;
-		
+
 		if (updateUrl && typeof window !== 'undefined') {
 			setCityInUrl(city);
 		}
-		
-		// Notify all listeners
-		this.listeners.forEach(listener => listener(city));
+
+		// Explicit city switch (dropdown/modal): jump to top. Skip for popstate (updateUrl false).
+		if (
+			typeof window !== 'undefined' &&
+			updateUrl &&
+			previousCity !== city
+		) {
+			window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+		}
+
+		this.listeners.forEach((listener) => listener(city));
 	}
 
 	subscribe(listener: (city: City) => void): () => void {
