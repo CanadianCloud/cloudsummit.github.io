@@ -34,8 +34,10 @@ import {
 	footerContent,
 	defaultCity,
 	venueLogisticsContentNewVersion,
+	speakerContent,
 } from '../lib/content';
 import Schedule from '../components/Schedule.astro';
+import Speaker from '../components/Speaker.astro';
 
 
 // Use default city for venueLogisticsContentNewVersionSSR, will be updated client-side
@@ -103,7 +105,6 @@ const torontoDescription =
 	'Join Cloud Summit Toronto on August 29, 2026 for a multi-cloud conference featuring speakers, sponsors, workshops, and community networking.';
 ---
 
----
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
@@ -139,6 +140,7 @@ const torontoDescription =
 		 
 			
 		<Schedule />
+		<Speaker content={speakerContent} />
 		<VenueLogisticsSectionSecondVersion content={venueLogisticsContentNewVersion} />
 		<EventMap content={eventMapContent} />
 		<Newsletter content={newsletterContent} />

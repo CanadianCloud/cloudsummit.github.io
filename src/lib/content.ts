@@ -382,50 +382,10 @@ export interface VenueLogisticsBase {
 }
 
 export interface VenueLogisticsSectionNewVersion {
-  // Subtitle under "Venue Logistics" header (e.g. "Vancouver · Science World")
-  venueLabel: string;
+  CityTitle: string;
+  intro: string;
   section: VenueLogisticsBase[];
 }
-
-export const venueLogisticsContentNewVersion: Record<
-  City,
-  VenueLogisticsSectionNewVersion
-> = {
-  vancouver: {
-    venueLabel: "This is Intro Of Vancouver Venue",
-    section: [
-      {
-        title: "Getting Here",
-        bullets: [
-          "1455 Quebec Street",
-          "Vancouver, BC, V6A 3Z7",
-          "604.443.7440",
-          "Science World is located along the False Creek Seawall and is easily reached by transit and walking routes.",
-        ],
-      },
-      {
-        title: "Transit",
-        bullets: [
-          "Science World is near the Main Street-Science World Skytrain Station (Expo Line).",
-          "A short walk from bus stops at Main and Terminal.",
-        ],
-      },
-      {
-        title: "Parking",
-        bullets: [
-          "Limited pay parking spaces are available for visitors who drive.",
-          "Parking rates and details will be shared closer to the event date.",
-        ],
-      },
-    ],
-  },
-  toronto: {
-    venueLabel: "Toronto · Northeastern University",
-    section: [],
-  },
-};
-
-export type VenueLogisticsContent = typeof venueLogisticsContentNewVersion;
 
 // Helper function to get footer content with city-specific ticket URL
 export function getFooterContent(city: City) {
@@ -505,22 +465,6 @@ export const newsletterContent = {
   ctaText: 'Subscribe to Newsletter',
   ctaHref: 'https://tally.so/r/mR6RBl',
 };
-
-export interface VenueLink {
-  url: string;
-  text: string;
-}
-
-export interface VenueLogisticsBase {
-  title: string;
-  bullets: string[];
-  externalLink?: VenueLink[];
-}
-export interface VenueLogisticsSectionNewVersion {
-  CityTitle: string;
-  intro: string;
-  section: VenueLogisticsBase[];
-}
 
 export const venueLogisticsContentNewVersion: Record<City, VenueLogisticsSectionNewVersion> = {
   vancouver: {
@@ -634,8 +578,16 @@ export const venueLogisticsContentNewVersion: Record<City, VenueLogisticsSection
         ],
         externalLink: [],
       },
-
     ],
+  },
+  toronto: {
+    CityTitle: 'Toronto',
+    intro: 'Comming Soon',
+    section: [],
+  },
+};
+
+export type VenueLogisticsContent = typeof venueLogisticsContentNewVersion;
 
 export const speakerContent: Speaker[] = [
   {

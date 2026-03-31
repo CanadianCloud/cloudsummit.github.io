@@ -8,8 +8,8 @@ interface Props {
 const { content } = Astro.props;
 ---
 
-<!-- Speakers Grid -->
-<section class="speakers-section">
+<!-- Homepage: shown for Vancouver only (see script) -->
+<section id="homepage-speakers" class="speakers-section">
   <div class="speakers-container">
     <h2 class="section-heading">
       <span class="heading-prefix">All </span>
@@ -35,9 +35,41 @@ const { content } = Astro.props;
   </div>
 </section>
 
+<script>
+  import { getCityStore } from "../lib/cityStore";
+  import type { City } from "../lib/content";
+
+  function syncHomeSpeakersVisibility(city: City) {
+    const el = document.getElementById("homepage-speakers");
+    if (!el) return;
+    const show = city === "vancouver";
+    el.classList.toggle("speakers-section--hidden", !show);
+    el.setAttribute("aria-hidden", show ? "false" : "true");
+  }
+
+  function initHomeSpeakersCity() {
+    const cityStore = getCityStore();
+    cityStore.init();
+    syncHomeSpeakersVisibility(cityStore.getCity());
+    cityStore.subscribe(syncHomeSpeakersVisibility);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initHomeSpeakersCity);
+  } else {
+    initHomeSpeakersCity();
+  }
+</script>
+
 <style>
+  .speakers-section.speakers-section--hidden {
+    display: none !important;
+  }
+
   .speakers-section {
     padding: 4rem 1.5rem;
+    background: #000;
+    color: #fff;
   }
 
   .speakers-container {
