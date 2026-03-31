@@ -73,7 +73,7 @@ export interface FAQ {
   answer: string;
 }
 
-export type City = "vancouver" | "toronto";
+export type City = 'vancouver' | 'toronto';
 
 export const defaultCity: City = 'vancouver';
 
@@ -81,7 +81,7 @@ export const defaultCity: City = 'vancouver';
 export const sharedHeroContent = {
   title: 'Cloud Summit 2026',
   subtitle: "Sponsor Canada's Largest Multi-Cloud Conference",
-  description: "",
+  description: '',
   primaryCta: {
     text: 'Become a Volunteer',
     href: 'https://tally.so/r/mBVZjA',
@@ -486,120 +486,120 @@ export const venueLogisticsContentNewVersion: Record<
   VenueLogisticsSectionNewVersion
 > = {
   vancouver: {
-    CityTitle: "Vancouver",
-    intro: "",
+    CityTitle: 'Vancouver',
+    intro: '',
     section: [
       {
-        title: "Getting to the Venue",
+        title: 'Getting to the Venue',
         bullets: [
-          "1455 Quebec Street, Vancouver, BC, V6A 3Z7",
-          "604.443.7440",
-          "Directions via Google Maps",
+          '1455 Quebec Street, Vancouver, BC, V6A 3Z7',
+          '604.443.7440',
+          'Directions via Google Maps',
         ],
         externalLink: [
           {
-            url: "https://maps.app.goo.gl/DLdorR8GHCFJvXQp8",
-            text: "Directions via Google Maps",
+            url: 'https://maps.app.goo.gl/DLdorR8GHCFJvXQp8',
+            text: 'Directions via Google Maps',
           },
         ],
       },
       {
-        title: "Active & Shared Mobility",
+        title: 'Active & Shared Mobility',
         bullets: [
-          "Bike (Personal)",
-          "Bike racks available at the front plaza",
-          "Visitors must bring their own lock",
-          "Mobi Bike Share",
-          "Station located near the entrance (under SkyTrain overpass)",
-          "Accessible via seawall cycling path",
+          'Bike (Personal)',
+          'Bike racks available at the front plaza',
+          'Visitors must bring their own lock',
+          'Mobi Bike Share',
+          'Station located near the entrance (under SkyTrain overpass)',
+          'Accessible via seawall cycling path',
         ],
         externalLink: [
           {
-            url: "https://www.mobibikes.ca/en/",
-            text: "Visit Mobi Bike Share",
-          },
-        ],
-      },
-
-      {
-        title: "Public Transport",
-        bullets: [
-          "Bus Routes",
-          "Bus 19 - Metrotown / Stanley Park",
-          "Bus 22 - Knight / Downtown",
-          "Bus 3 - Main / Downtown",
-          "Bus 8 - Fraser / Downtown",
-          "Skytrain",
-          "Expo Line - Main Street-Science World",
-          "Ferry",
-          "Aquabus and False Creek Ferries Routes connect from:",
-          "Granville Island",
-          "English Bay",
-          "Yaletown",
-          "Kitsilano",
-        ],
-        externalLink: [
-          {
-            text: "View Schedule",
-            url: "https://www.translink.ca/schedules-and-maps/skytrain?term=22",
-          },
-          {
-            url: "https://theaquabus.com/",
-            text: "Aquabus",
-          },
-          {
-            url: "https://granvilleislandferries.bc.ca/",
-            text: "False Creek Ferries",
+            url: 'https://www.mobibikes.ca/en/',
+            text: 'Visit Mobi Bike Share',
           },
         ],
       },
 
       {
-        title: "Vehicle Access",
+        title: 'Public Transport',
         bullets: [
-          "Car Share",
-          "Evo",
-          "Share Now (formerly Car2Go)",
-          "Designated parking available across Quebec St",
-          "Parking",
-          "Limited paid parking available",
-          "No bus parking",
-          "Parking Rates",
-          "1 Hour – $5.25",
-          "2 Hours – $9.95",
-          "4 Hours – $15.25",
-          "Until 6:30 PM – $20.95",
-          "From 5 PM – 2 AM – $10.50",
-          "Payment Options",
-          "Phone payment",
-          "Credit card",
-          "Notes",
-          "Rates may change during special events",
-          "Pay inside admissions to get regular rates during events",
+          'Bus Routes',
+          'Bus 19 - Metrotown / Stanley Park',
+          'Bus 22 - Knight / Downtown',
+          'Bus 3 - Main / Downtown',
+          'Bus 8 - Fraser / Downtown',
+          'Skytrain',
+          'Expo Line - Main Street-Science World',
+          'Ferry',
+          'Aquabus and False Creek Ferries Routes connect from:',
+          'Granville Island',
+          'English Bay',
+          'Yaletown',
+          'Kitsilano',
+        ],
+        externalLink: [
+          {
+            text: 'View Schedule',
+            url: 'https://www.translink.ca/schedules-and-maps/skytrain?term=22',
+          },
+          {
+            url: 'https://theaquabus.com/',
+            text: 'Aquabus',
+          },
+          {
+            url: 'https://granvilleislandferries.bc.ca/',
+            text: 'False Creek Ferries',
+          },
+        ],
+      },
+
+      {
+        title: 'Vehicle Access',
+        bullets: [
+          'Car Share',
+          'Evo',
+          'Share Now (formerly Car2Go)',
+          'Designated parking available across Quebec St',
+          'Parking',
+          'Limited paid parking available',
+          'No bus parking',
+          'Parking Rates',
+          '1 Hour – $5.25',
+          '2 Hours – $9.95',
+          '4 Hours – $15.25',
+          'Until 6:30 PM – $20.95',
+          'From 5 PM – 2 AM – $10.50',
+          'Payment Options',
+          'Phone payment',
+          'Credit card',
+          'Notes',
+          'Rates may change during special events',
+          'Pay inside admissions to get regular rates during events',
         ],
         externalLink: [],
       },
       {
-        title: "Accessibility & Facilities",
+        title: 'Accessibility & Facilities',
         bullets: [
-          "Accessible Parking",
-          "There are six wheelchair-accessible spaces in the parking lots. These are available on a first-come, first-served basis, and are located in the lots to the north and south of Science World. Ramps are available to reach the sidewalk.",
-          "Automated Entry and Exit Doors",
-          "Science World has button-operated automated entry doors and exit doors.",
-          "Ramps and Elevators",
-          "Science World has ramps that allow access to the first- and second-floor galleries. There are also two elevators which run between the first and second floors. We recommend using the elevator in the Connection Zone (near the lobby) to access the Wonder gallery.",
-          "Service Animals",
-          "Service dogs must be on a leash and in the company of their owner at all times. For the safety and comfort of all guests, service dogs must be well-behaved during their visit. Staff reserve the right to ask non-compliant owners and their dogs to leave the premises.",
-          "Washrooms",
-          "All public washrooms at Science World are equipped with baby-change facilities.",
+          'Accessible Parking',
+          'There are six wheelchair-accessible spaces in the parking lots. These are available on a first-come, first-served basis, and are located in the lots to the north and south of Science World. Ramps are available to reach the sidewalk.',
+          'Automated Entry and Exit Doors',
+          'Science World has button-operated automated entry doors and exit doors.',
+          'Ramps and Elevators',
+          'Science World has ramps that allow access to the first- and second-floor galleries. There are also two elevators which run between the first and second floors. We recommend using the elevator in the Connection Zone (near the lobby) to access the Wonder gallery.',
+          'Service Animals',
+          'Service dogs must be on a leash and in the company of their owner at all times. For the safety and comfort of all guests, service dogs must be well-behaved during their visit. Staff reserve the right to ask non-compliant owners and their dogs to leave the premises.',
+          'Washrooms',
+          'All public washrooms at Science World are equipped with baby-change facilities.',
         ],
         externalLink: [],
       },
     ],
   },
   toronto: {
-    CityTitle: "Toronto",
-    intro: "Comming Soon",
+    CityTitle: 'Toronto',
+    intro: 'Comming Soon',
     section: [],
   },
 };
@@ -726,159 +726,170 @@ export const committeeContent: Committee[] = [
 
 export const communityPartners: CommunityPartner[] = [
   {
-    name: "AWS",
-    logo: "/images/community-partners/aws-day-logo.png",
+    name: 'AWS',
+    logo: '/images/community-partners/aws-day-logo.png',
   },
   {
-    name: "Google Developer Group",
-    logo: "/images/community-partners/gdg-logo.png",
+    name: 'Google Developer Group',
+    logo: '/images/community-partners/gdg-logo.png',
   },
   {
-    name: "ISACA",
-    logo: "/images/community-partners/ISACA.png",
+    name: 'ISACA',
+    logo: '/images/community-partners/ISACA.png',
   },
   {
-    name: "Hacker Rivals",
-    logo: "/images/community-partners/Logo-Oct25-Black.png",
+    name: 'Hacker Rivals',
+    logo: '/images/community-partners/Logo-Oct25-Black.png',
   },
   {
-    name: "Microsoft",
-    logo: "/images/community-partners/Microsoft_logo.png",
+    name: 'Microsoft',
+    logo: '/images/community-partners/Microsoft_logo.png',
   },
 ];
 
 export const sponsors: Sponsor[] = [
   {
-    ranking: "Platinum",
-    name: "AWS",
-    logo: "/images/sponsors/aws-white.svg",
+    ranking: 'Platinum',
+    name: 'AWS',
+    logo: '/images/sponsors/aws-white.svg',
   },
   {
-    ranking: "Diamond",
-    name: "Fortinet",
-    logo: "/images/sponsors/Fortinet_Logo.png",
+    ranking: 'Diamond',
+    name: 'Fortinet',
+    logo: '/images/sponsors/Fortinet_Logo.png',
   },
 ];
 
 export const faqContent: FAQ[] = [
   {
-    question: "What is Cloud Summit?",
+    question: 'What is Cloud Summit?',
     answer:
-      "Cloud Summit is a community-led tech event bringing together cloud practitioners, developers, architects, security professionals, data teams, and technology leaders for a day of learning, networking, and inspiration.",
+      'Cloud Summit is a community-led tech event bringing together cloud practitioners, developers, architects, security professionals, data teams, and technology leaders for a day of learning, networking, and inspiration.',
   },
   {
-    question: "When is Cloud Summit?",
-    answer: "It takes place on May 1, 2026.",
-  },
-  {
-    question: "Where is the event being held?",
-    answer: "The event is being held at Science World in Vancouver, BC.",
-  },
-  {
-    question: "Who should attend?",
-    answer: "",
-  },
-  {
-    question: "What can I expect at the event?",
+    question: 'When is Cloud Summit?',
     answer:
-      "You can expect a day of technical talks, community connection, community and sponsor booths, networking, interactive experiences, and great conversations with people from across the local tech community.",
+      'For Cloud Summit Vancouver it takes place on May 1, 2026.\nFor Cloud Summit Toronto it takes place on August 29, 2026.',
   },
   {
-    question: "Is this a vendor event?",
+    question: 'Where is the event being held?',
     answer:
-      "No. Cloud Summit is community-led and built to be valuable first. Sponsors help make the event possible, but the goal is to create a genuinely useful and enjoyable experience for attendees.",
+      'For Vancouver the event is being held at Science World in Vancouver, BC.\nFor Toronto the event is being held at Northeastern University in Toronto, ON.',
   },
   {
-    question: "Will there be technical talks?",
+    question: 'Who should attend?',
+    answer: `Cloud Summit is designed for anyone working in or around modern technology, including:
+Cloud engineers and architects
+Developers
+Security professionals
+DevOps and platform teams
+IT leaders
+Students and aspiring technologists
+
+Whether you're deeply technical or just looking to better understand where cloud and AI are heading, there will be something for you.`,
+  },
+  {
+    question: 'What can I expect at the event?',
     answer:
-      "Yes. The event features technical and community-focused sessions from experienced speakers across cloud, AI, security, infrastructure, development, operations, and leadership.",
+      'You can expect a day of technical talks, community connection, community and sponsor booths, networking, interactive experiences, and great conversations with people from across the local tech community.',
   },
   {
-    question: "Is the event only for AWS users?",
+    question: 'Is this a vendor event?',
     answer:
-      "No. Cloud Summit is not limited to one platform. It is designed for the broader cloud and technology community.",
+      'No. Cloud Summit is community-led and built to be valuable first. Sponsors help make the event possible, but the goal is to create a genuinely useful and enjoyable experience for attendees.',
   },
   {
-    question: "Are tickets required?",
+    question: 'Will there be technical talks?',
     answer:
-      "Yes. Attendees need a ticket to attend. You can register through the official event page linked on CloudSummit.ca.",
+      'Yes. The event features technical and community-focused sessions from experienced speakers across cloud, AI, security, infrastructure, development, operations, and leadership.',
   },
   {
-    question: "Are there early bird or discount tickets?",
+    question: 'Is the event only for AWS users?',
     answer:
-      "Ticket pricing may change over time, and discounted pricing may be available during certain periods. Check the event page for the latest ticket details.",
+      'No. Cloud Summit is not limited to one platform. It is designed for the broader cloud and technology community.',
   },
   {
-    question: "What is included with my ticket?",
+    question: 'Are tickets required?',
     answer:
-      "Your ticket includes access to the event, sessions, sponsor area, and community experiences. Food, drinks, swag, or extras may vary depending on the final event plan and sponsors.",
+      'Yes. Attendees need a ticket to attend. You can register through the official event page linked on CloudSummit.ca.',
   },
   {
-    question: "Is the event for beginners or only advanced attendees?",
+    question: 'Are there early bird or discount tickets?',
     answer:
-      "Both. Some sessions will be beginner-friendly, while others will go deeper technically. The event is designed to appeal to a broad range of experience levels.",
+      'Ticket pricing may change over time, and discounted pricing may be available during certain periods. Check the event page for the latest ticket details.',
   },
   {
-    question: "Will the schedule be published in advance",
+    question: 'What is included with my ticket?',
     answer:
-      "Yes. Speaker and schedule details will be released on the website as they are confirmed.",
+      'Your ticket includes access to the event, sessions, sponsor area, and community experiences. Food, drinks, swag, or extras may vary depending on the final event plan and sponsors.',
   },
   {
-    question: "Can I apply to speak?",
+    question: 'Is the event for beginners or only advanced attendees?',
     answer:
-      "Yes. If the call for speakers is open, you can apply through the speaker submission link on CloudSummit.ca",
+      'Both. Some sessions will be beginner-friendly, while others will go deeper technically. The event is designed to appeal to a broad range of experience levels.',
   },
   {
-    question: "Can my company sponsor the event?",
+    question: 'Will the schedule be published in advance?',
     answer:
-      "Yes. Cloud Summit works with sponsors who want to support the local tech community and be part of the event experience. Sponsorship details are available on the website.",
+      'Yes. Speaker and schedule details will be released on the website as they are confirmed.',
   },
   {
-    question: "Can I volunteer?",
+    question: 'Can I apply to speak?',
     answer:
-      "Yes. Volunteers are a big part of what makes Cloud Summit possible. If volunteer applications are open, you can sign up through the website.",
+      'Yes. If the call for speakers is open, you can apply through the speaker submission link on CloudSummit.ca.',
   },
   {
-    question: "Is the venue accessible?",
+    question: 'Can my company sponsor the event?',
     answer:
-      "Both venues in Vancouver and Toronto were selected due to their accessibility. If you have a particular accessibility need, please contact the team in advance.",
+      'Yes. Cloud Summit works with sponsors who want to support the local tech community and be part of the event experience. Sponsorship details are available on the website.',
   },
   {
-    question: "Is there parking at the venue?",
+    question: 'Can I volunteer?',
     answer:
-      "There are parking options near very close to both venues, but availability and pricing may vary. Public transit is also a convenient option for many attendees.",
+      'Yes. Volunteers are a big part of what makes Cloud Summit possible. If volunteer applications are open, you can sign up through the website.',
   },
   {
-    question: "What is the best way to get there?",
+    question: 'Is the venue accessible?',
     answer:
-      "Cloud Summit Vancouver is held at Science World, 1455 Quebec Street. The venue is easy to reach by car, rideshare, public transit, or on foot. The scenic False Creek seawall runs right by Science World, the Main Street–Science World SkyTrain station is directly across the road, and there are two paid parking lots immediately outside the building off Quebec Street.",
+      'Both venues in Vancouver and Toronto were selected due to their accessibility. If you have a particular accessibility need, please contact the team in advance.',
   },
   {
-    question: "Will food and drinks be available?",
+    question: 'Is there parking at the venue?',
     answer:
-      "Food and drinks will be available during the event with a food court lounge on the ground floor and a snack bar on the second floor. ",
+      'There are parking options near very close to both venues, but availability and pricing may vary. Public transit is also a convenient option for many attendees.',
   },
   {
-    question: "Will sessions be recorded?",
-    answer: "Some sessions or event content will be photographed or recorded. ",
+    question: 'What is the best way to get there?',
+    answer: `For Vancouver, Cloud Summit is held at Science World, 1455 Quebec Street. The venue is easy to reach by car, rideshare, public transit, or on foot. The scenic False Creek seawall runs right by Science World, the Main Street–Science World SkyTrain station is directly across the road, and there are two paid parking lots immediately outside the building off Quebec Street.
+
+For Toronto, Cloud Summit is held at Northeastern University, 375 Queen Street West in downtown Toronto. The venue is easy to reach by public transit or on foot, with Osgoode Station about a five-minute walk away and the 501 Queen streetcar stopping nearby in both directions.`,
   },
   {
-    question: "Can I transfer my ticket if I can’t attend?",
-    answer: "We do not offer refunds or exchanges.",
-  },
-  {
-    question: "Is Cloud Summit a nonprofit event?",
+    question: 'Will food and drinks be available?',
     answer:
-      "Yes. Cloud Summit is community-led, and supporting the local community is a core part of the event. Event profits are directed towards the nominated charity and no one from the organizing group, is paid anything. That includes directors to volunteers.",
+      'Food and drinks will be available during the event with a food court lounge on the ground floor and a snack bar on the second floor.',
   },
   {
-    question: "Is there a code of conduct?",
-    answer:
-      "Yes. We want Cloud Summit to be welcoming, inclusive, and respectful for everyone attending. Attendees, speakers, volunteers, and sponsors are all expected to behave professionally and respectfully.",
+    question: 'Will sessions be recorded?',
+    answer: 'Some sessions or event content will be photographed or recorded.',
   },
   {
-    question: "How do I stay updated?",
+    question: 'Can I transfer my ticket if I can’t attend?',
+    answer: 'We do not offer refunds or exchanges.',
+  },
+  {
+    question: 'Is Cloud Summit a nonprofit event?',
     answer:
-      "The best way is to check CloudSummit.ca regularly and follow the event’s social channels for speaker announcements, schedule updates, and new event details.",
+      'Yes. Cloud Summit is community-led, and supporting the local community is a core part of the event. Event profits are directed towards the nominated charity and no one from the organizing group, is paid anything. That includes directors to volunteers.',
+  },
+  {
+    question: 'Is there a code of conduct?',
+    answer:
+      'Yes. We want Cloud Summit to be welcoming, inclusive, and respectful for everyone attending. Attendees, speakers, volunteers, and sponsors are all expected to behave professionally and respectfully.',
+  },
+  {
+    question: 'How do I stay updated?',
+    answer:
+      'The best way is to check CloudSummit.ca regularly and follow the event’s social channels for speaker announcements, schedule updates, and new event details.',
   },
 ];
