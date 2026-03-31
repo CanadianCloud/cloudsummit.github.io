@@ -11,7 +11,14 @@ const { content } = Astro.props;
 <!-- Committee Grid -->
 <section class="committee-section">
   <div class="committee-container">
-    <h2 class="section-heading">Meet the Team!</h2>
+    <div class="committee-title-box">
+      <div class="committee-header">
+        <h2 class="section-heading committee-heading">
+          <span class="heading-prefix">Meet the </span>
+          Team!
+        </h2>
+      </div>
+    </div>
     <div class="committee-grid">
       {
         content.map((committee) => (
@@ -23,7 +30,9 @@ const { content } = Astro.props;
               <h3 class="committee-name">{committee.name}</h3>
               <p class="committee-title">{committee.title}</p>
               <p class="committee-link">
-                <a href={committee.link}>Linkedin</a>
+                <a href={committee.link} target="_blank" rel="noopener noreferrer">
+                  Linkedin
+                </a>
               </p>
               <p class="committee-bio">{committee.bio}</p>
             </div>
@@ -42,6 +51,39 @@ const { content } = Astro.props;
   .committee-container {
     max-width: 1200px;
     margin: 0 auto;
+  }
+
+  /* Match Venue Logistics: `.Box` + `.venue-logistics-title-box` spacing above the grid */
+  .committee-title-box {
+    width: 80%;
+    margin: 0 auto 5px;
+    padding: 10px;
+    box-sizing: border-box;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  .committee-header {
+    text-align: center;
+  }
+
+  .committee-heading.section-heading {
+    font-family: "Squada One", system-ui, sans-serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin: 0 0 0.5rem 0;
+    color: rgb(255, 193, 77);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+  }
+
+  .committee-heading .heading-prefix {
+    color: white;
+    font-family: "Squada One", system-ui, sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.02em;
   }
 
   .committee-grid {
@@ -96,6 +138,7 @@ const { content } = Astro.props;
     font-size: 1.5rem;
     margin: 0 0 0.5rem 0;
     color: white;
+    text-align: center;
   }
 
   .committee-title,
@@ -104,6 +147,7 @@ const { content } = Astro.props;
     margin: 0 0 0.25rem 0;
     font-weight: 600;
     color: rgb(251, 113, 133);
+    text-align: center;
   }
   /* Desktop Styles */
   @media (min-width: 769px) {
@@ -127,9 +171,8 @@ const { content } = Astro.props;
       padding: 6rem 2rem;
     }
 
-    .section-heading {
+    .committee-heading.section-heading {
       font-size: 4rem;
-      text-align: center;
     }
 
     .committee-grid {
@@ -145,6 +188,13 @@ const { content } = Astro.props;
 
     .committee-info {
       width: 70%;
+      text-align: left;
+    }
+
+    .committee-name,
+    .committee-title,
+    .committee-link {
+      text-align: left;
     }
 
     .committee-bio {

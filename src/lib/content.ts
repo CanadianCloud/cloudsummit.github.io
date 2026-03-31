@@ -41,7 +41,6 @@ export interface NavigationContent {
   // ctaHref: string; Disabled as part of Issue #3 (Header & Navigation update)
 }
 
-<<<<<<< feature/committee-section
 export interface Committee {
   name: string;
   title: string;
@@ -49,13 +48,13 @@ export interface Committee {
   bio: string;
   image: string;
 }
-=======
-interface CommunityPartners {
+
+export interface CommunityPartner {
   name: string;
   logo: string;
 }
 
-interface Sponsors {
+export interface Sponsor {
   ranking: "Gold" | "Platinum" | "Diamond";
   name: string;
   logo: string;
@@ -68,9 +67,6 @@ export interface Speaker {
   topic: string;
   image: string;
 }
-
-export type City = "vancouver" | "toronto";
->>>>>>> staging
 
 export type City = "vancouver" | "toronto";
 
@@ -480,43 +476,6 @@ export const newsletterContent = {
   ctaHref: "https://tally.so/r/mR6RBl",
 };
 
-<<<<<<< feature/committee-section
-export interface VenueLink {
-  url: string;
-  text: string;
-}
-
-export interface VenueLogisticsBase {
-  title: string;
-  bullets: string[];
-  externalLink?: VenueLink[];
-}
-export interface VenueLogisticsSectionNewVersion {
-  /** Subtitle under the main heading, same pattern as Event Map (e.g. Vancouver · Science World) */
-  venueLabel: string;
-  section: VenueLogisticsBase[];
-}
-
-export const venueLogisticsContentNewVersion: Record<
-  City,
-  VenueLogisticsSectionNewVersion
-> = {
-  vancouver: {
-    venueLabel: "This is Intro Of Vancouver Venue",
-    section: [
-      {
-        title: "Getting Here",
-        bullets: [
-          "1455 Quebec Street",
-          "Vancouver, BC, V6A 3Z7",
-          "604.443.7440",
-          "Science World is located in the heart of Vancouver along the False Creek Seawall, and is easily reached by almost any way you can travel. We offer rentable lockers for your belongings and a number of other amenities to make your visit easy and comfortable.",
-        ],
-        externalLink: [
-          {
-            url: "https://goo.gl/maps/BUgVAAx1xjzZxBHu6",
-            text: "Open in Maps",
-=======
 export const venueLogisticsContentNewVersion: Record<City, VenueLogisticsSectionNewVersion> = {
   vancouver: {
     CityTitle: 'Vancouver',
@@ -533,83 +492,10 @@ export const venueLogisticsContentNewVersion: Record<City, VenueLogisticsSection
           {
             url: 'https://maps.app.goo.gl/DLdorR8GHCFJvXQp8',
             text: 'Directions via Google Maps',
->>>>>>> staging
           },
         ],
       },
       {
-<<<<<<< feature/committee-section
-        title: "Transit",
-        bullets: [
-          "We are located across the street from the Main Street-Science World Skytrain Station along the Expo line, and a short walk from bus stops at Main and Terminal.",
-        ],
-        externalLink: [
-          {
-            text: "Plan Your Trip with TransLink",
-            url: "https://www.google.com/maps/dir//Science+World+at+TELUS+World+of+Science,+1455+Quebec+St,+Vancouver,+BC+V6A+3Z7/@49.2733548,-123.1738736,12z/data=!3m1!4b1!4m9!4m8!1m0!1m5!1m1!1s0x548671638bf0919d:0x218237371f987037!2m2!1d-123.103834!2d49.273376!3e3?hl=en",
-          },
-        ],
-      },
-
-      {
-        title: "Bike",
-        bullets: [
-          "You’ll find ample racks for locking up your bike in the plaza at the front entrance. Ensure you bring your own secure lock!",
-        ],
-        externalLink: [],
-      },
-
-      {
-        title: "Mobi Bike Share",
-        bullets: [
-          "A Mobi Bike Share station is located just across the seawall cycling path near the front entrance, just under the Skytrain overpass. For more information about using Mobi, please visit the Mobi website.",
-        ],
-        externalLink: [
-          {
-            url: "https://www.mobibikes.ca/",
-            text: "Visit Mobi Bike Share",
-          },
-        ],
-      },
-
-      {
-        title: "Ferry",
-        bullets: [
-          "The Aquabus and False Creek Ferries both stop nearby and are easy ways to get here from Granville Island, English Bay, Yaletown, and Kitsilano. Check their websites for more details about docking locations, fees, and schedules.",
-        ],
-        externalLink: [
-          {
-            url: "https://theaquabus.com/",
-            text: "Aquabus Website",
-          },
-          {
-            url: "https://granvilleislandferries.bc.ca/",
-            text: "False Creek Ferries Website",
-          },
-        ],
-      },
-
-      {
-        title: "Car Share",
-        bullets: [
-          "Designated parking for Evo and Share Now (formerly Car2Go) vehicles are available in the parking lot across Quebec St.",
-        ],
-        externalLink: [],
-      },
-
-      {
-        title: "Parking",
-        bullets: [
-          "We encourage all visitors to take transit but for those visitors who decide to drive we do have limited pay parking spaces. Please note that we do not have bus parking available.",
-          "Parking Rates",
-          "1 Hour           $5.25",
-          "2 Hours          $9.95",
-          "4 Hours          $15.25",
-          "Until 6:30PM     $20.95",
-          "From 5pm-2am     $10.50",
-          "Pay parking areas support payment by phone and credit card.",
-          "During special events in the neighbourhood these parking rates may change. In these cases, please pay inside at admissions to get the regular parking rate.",
-=======
         title: 'Active & Shared Mobility',
         bullets: [
           'Bike (Personal)',
@@ -682,52 +568,10 @@ export const venueLogisticsContentNewVersion: Record<City, VenueLogisticsSection
           'Notes',
           'Rates may change during special events',
           'Pay inside admissions to get regular rates during events',
->>>>>>> staging
         ],
         externalLink: [],
       },
       {
-<<<<<<< feature/committee-section
-        title: "Accessible Parking",
-        bullets: [
-          "There are six wheelchair-accessible spaces in the parking lots. These are available on a first-come, first-served basis, and are located in the lots to the north and south of Science World. Ramps are available to reach the sidewalk.",
-        ],
-        externalLink: [],
-      },
-      {
-        title: "Automated Entry and Exit Doors",
-        bullets: [
-          "Science World has button-operated automated entry doors and exit doors.",
-        ],
-        externalLink: [],
-      },
-
-      {
-        title: "Ramps and Elevators",
-        bullets: [
-          "Science World has ramps that allow access to the first- and second-floor galleries, as well as to the OMNIMAX®️ theatre on the fifth floor. There are also two elevators which run between the first and second floors. We recommend using the elevator in the Connection Zone (near the lobby) to access the Wonder gallery.",
-        ],
-        externalLink: [],
-      },
-      {
-        title: "Service Animals",
-        bullets: [
-          "Service dogs must be on a leash and in the company of their owner at all times. For the safety and comfort of all guests, service dogs must be well-behaved during their visit. Staff reserve the right to ask non-compliant owners and their dogs to leave the premises.",
-        ],
-        externalLink: [],
-      },
-      {
-        title: "Washrooms",
-        bullets: [
-          "All public washrooms at Science World are equipped with baby-change facilities. All washrooms except for those on the OMNIMAX®️ ramp are wheelchair-accessible.",
-        ],
-        externalLink: [],
-      },
-    ],
-  },
-  toronto: {
-    venueLabel: "Toronto · Northeastern University",
-=======
         title: 'Accessibility & Facilities',
         bullets: [
           'Accessible Parking',
@@ -748,85 +592,10 @@ export const venueLogisticsContentNewVersion: Record<City, VenueLogisticsSection
   toronto: {
     CityTitle: 'Toronto',
     intro: 'Comming Soon',
->>>>>>> staging
     section: [],
   },
 };
 
-<<<<<<< feature/committee-section
-export const committeeContent: Committee[] = [
-  {
-    name: "Matt Carolan",
-    title: "Event Director",
-    link: "https://www.linkedin.com/in/matthewcarolan/",
-    bio: "Matt Carolan is the founder of Cloud Summit and a cloud and security leader with deep experience in platform engineering, enterprise architecture, and cloud transformation. He helps organizations make clear, practical decisions across security, cost, resilience, and operational complexity, combining hands-on technical depth with a global perspective shaped by living and working across Australia, Dubai, Seattle, and Vancouver.",
-    image: "/images/committee/matt-black.png",
-  },
-  {
-    name: "Bibi Souza",
-    title: "Mentor ",
-    link: "https://www.linkedin.com/in/bibschan/",
-    bio: "Bibi is a community builder and strategic leader with experience across software engineering, project management, and advocacy. She is passionate about bringing people together and helping them grow, with a strong track record of turning fragmented audiences into thriving communities. As an exited founder, she brings an experimental mindset, a bias toward action, and thoughtful risk-taking to everything she builds. At Cloud Summit, she helps shape community with intention, energy, and purpose.",
-    image: "/images/committee/bibi-black.png",
-  },
-  {
-    name: "Andrey Barkov",
-    title: "Emcee",
-    link: "https://www.linkedin.com/in/andreybarkov/",
-    bio: "Andrey is one of the emcees for Cloud Summit Vancouver. He is an experienced software engineer with a background in web applications, cloud infrastructure, and microservices, with expertise across Angular, React, C#, Node.js, Azure, and AWS. He brings strong technical knowledge and an agile mindset to the Cloud Summit community.",
-    image: "/images/committee/andrey-black.png",
-  },
-  {
-    name: "Warren Lyne",
-    title: "Emcee",
-    link: "https://www.linkedin.com/in/warrenlyne/",
-    bio: "Warren is one of the emcees for Cloud Summit Vancouver. He brings over 20 years of experience across cloud, technical sales, and business development, helping enterprise customers use technology to drive innovation and growth. With deep knowledge of cloud strategy, enterprise solutions, and digital transformation, he combines technical credibility with strong leadership and communication skills.",
-    image: "/images/committee/warren-black.png",
-  },
-  {
-    name: "Fabio Simka Coutinho",
-    title: "Venue and Logistics Co-Lead",
-    link: "https://www.linkedin.com/in/fabio-simka/",
-    bio: "Fabio is the Venue and Logistics Co-Lead for Cloud Summit Vancouver. After 10 years working in healthcare leadership, he transitioned into tech and is now focused on data engineering across AWS, Azure, and Databricks. With experience in high-pressure environments where communication, accountability, and clarity were essential, he brings a thoughtful, dependable approach to building systems and solving problems. His background gives him a strong focus on reliability, real-world impact, and the people behind the data.",
-    image: "/images/committee/fabio-black.png",
-  },
-  {
-    name: "Jhan (Shanky) Silva",
-    title: "Sponsorship Lead",
-    link: "https://www.linkedin.com/in/shankyjs/",
-    bio: "Shanky is the Sponsorship Lead for Cloud Summit Vancouver. With a strong background in DevOps, automation, and modern development and deployment practices, he brings a practical, goal-oriented approach to building and improving technical processes. A self-driven learner who enjoys creating agile products, Shanky is passionate about continuous improvement, innovation, and helping great ideas gain momentum.",
-    image: "/images/committee/shanky-black.png",
-  },
-  {
-    name: "Michael Carlos",
-    title: "Speaker and Community Lead",
-    link: "https://www.linkedin.com/in/mcarlos/",
-    bio: "Shanky is the Sponsorship Lead for Cloud Summit Vancouver. With a strong background in DevOps, automation, and modern development and deployment practices, he brings a practical, goal-oriented approach to building and improving technical processes. A self-driven learner who enjoys creating agile products, Shanky is passionate about continuous improvement, innovation, and helping great ideas gain momentum.",
-    image: "/images/committee/michael-black.png",
-  },
-  {
-    name: "Nichanun Pong (Luck)",
-    title: "Developer Lead",
-    link: "https://www.linkedin.com/in/nichanun-pong/",
-    bio: "Luck is the Developer Lead for Cloud Summit Vancouver. A full-stack developer and product owner, she brings experience across e-commerce, gaming, insurance, and IT, with a focus on building user-centric, data-driven products that connect business goals with strong technical execution. His background includes JavaScript, React, Node.js, PHP, Laravel, SQL, Python, AWS, and Docker.",
-    image: "/images/committee/luck-black.png",
-  },
-  {
-    name: "Fernando Stoelting",
-    title: "Venue and Logistics Co-Lead ",
-    link: "https://www.linkedin.com/in/fstoelting/",
-    bio: "Shanky is the Sponsorship Lead for Cloud Summit Vancouver. With a strong background in DevOps, automation, and modern development and deployment practices, he brings a practical, goal-oriented approach to building and improving technical processes. A self-driven learner who enjoys creating agile products, Shanky is passionate about continuous improvement, innovation, and helping great ideas gain momentum.",
-    image: "/images/committee/fernando-black.png",
-  },
-  {
-    name: "Philip Mak",
-    title: "Volunteer Lead",
-    link: "https://www.linkedin.com/in/philip-mak-b2b92823a/",
-    bio: "Philip is the Volunteer Lead for Cloud Summit Vancouver. He is a project management professional with experience leading data-driven technical projects across AI, education technology, and community-focused platforms. With a strong background in collaboration, analytics, and user-centered problem solving, he brings an organized and thoughtful approach to supporting volunteers and helping teams succeed.",
-    image: "/images/committee/philip-black.png",
-  },
-];
-=======
 export type VenueLogisticsContent = typeof venueLogisticsContentNewVersion;
 
 export const speakerContent: Speaker[] = [
@@ -874,7 +643,80 @@ export const speakerContent: Speaker[] = [
   },
 ];
 
-export const communityPartners: CommunityPartners[] = [
+export const committeeContent: Committee[] = [
+  {
+    name: "Matt Carolan",
+    title: "Event Director",
+    link: "https://www.linkedin.com/in/matthewcarolan/",
+    bio: "Matt Carolan is the founder of Cloud Summit and a cloud and security leader with deep experience in platform engineering, enterprise architecture, and cloud transformation. He helps organizations make clear, practical decisions across security, cost, resilience, and operational complexity, combining hands-on technical depth with a global perspective shaped by living and working across Australia, Dubai, Seattle, and Vancouver.",
+    image: "/images/committee/matt-black.png",
+  },
+  {
+    name: "Bibi Souza",
+    title: "Mentor",
+    link: "https://www.linkedin.com/in/bibschan/",
+    bio: "Bibi is a community builder and strategic leader with experience across software engineering, project management, and advocacy. She is passionate about bringing people together and helping them grow, with a strong track record of turning fragmented audiences into thriving communities. As an exited founder, she brings an experimental mindset, a bias toward action, and thoughtful risk-taking to everything she builds. At Cloud Summit, she helps shape community with intention, energy, and purpose.",
+    image: "/images/committee/bibi-black.png",
+  },
+  {
+    name: "Andrey Barkov",
+    title: "Emcee",
+    link: "https://www.linkedin.com/in/andreybarkov/",
+    bio: "Andrey is one of the emcees for Cloud Summit Vancouver. He is an experienced software engineer with a background in web applications, cloud infrastructure, and microservices, with expertise across Angular, React, C#, Node.js, Azure, and AWS. He brings strong technical knowledge and an agile mindset to the Cloud Summit community.",
+    image: "/images/committee/andrey-black.png",
+  },
+  {
+    name: "Warren Lyne",
+    title: "Emcee",
+    link: "https://www.linkedin.com/in/warrenlyne/",
+    bio: "Warren is one of the emcees for Cloud Summit Vancouver. He brings over 20 years of experience across cloud, technical sales, and business development, helping enterprise customers use technology to drive innovation and growth. With deep knowledge of cloud strategy, enterprise solutions, and digital transformation, he combines technical credibility with strong leadership and communication skills.",
+    image: "/images/committee/warren-black.png",
+  },
+  {
+    name: "Fabio Simka Coutinho",
+    title: "Venue and Logistics Co-Lead",
+    link: "https://www.linkedin.com/in/fabio-simka/",
+    bio: "Fabio is the Venue and Logistics Co-Lead for Cloud Summit Vancouver. After 10 years working in healthcare leadership, he transitioned into tech and is now focused on data engineering across AWS, Azure, and Databricks. With experience in high-pressure environments where communication, accountability, and clarity were essential, he brings a thoughtful, dependable approach to building systems and solving problems. His background gives him a strong focus on reliability, real-world impact, and the people behind the data.",
+    image: "/images/committee/fabio-black.png",
+  },
+  {
+    name: "Jhan (Shanky) Silva",
+    title: "Sponsorship Lead",
+    link: "https://www.linkedin.com/in/shankyjs/",
+    bio: "Shanky is the Sponsorship Lead for Cloud Summit Vancouver. With a strong background in DevOps, automation, and modern development and deployment practices, he brings a practical, goal-oriented approach to building and improving technical processes. A self-driven learner who enjoys creating agile products, Shanky is passionate about continuous improvement, innovation, and helping great ideas gain momentum.",
+    image: "/images/committee/shanky-black.png",
+  },
+  {
+    name: "Michael Carlos",
+    title: "Speaker and Community Lead",
+    link: "https://www.linkedin.com/in/mcarlos/",
+    bio: "Michael Carlos is the Speaker and Community Lead for Cloud Summit Vancouver. He brings over 30 years of software engineering experience, including two decades leading development teams, along with a deep interest in AI, robotics, game technology, physics, and evolutionary algorithms. His mix of technical depth and visionary thinking helps shape the ideas, conversations, and community that make Cloud Summit stand out.",
+    image: "/images/committee/michael-black.png",
+  },
+  {
+    name: "Nichanun Pong (Luck)",
+    title: "Developer Lead",
+    link: "https://www.linkedin.com/in/nichanun-pong/",
+    bio: "Luck is the Developer Lead for Cloud Summit Vancouver. A full-stack developer and product owner, she brings experience across e-commerce, gaming, insurance, and IT, with a focus on building user-centric, data-driven products that connect business goals with strong technical execution. His background includes JavaScript, React, Node.js, PHP, Laravel, SQL, Python, AWS, and Docker.",
+    image: "/images/committee/luck-black.png",
+  },
+  {
+    name: "Fernando Stoelting",
+    title: "Venue and Logistics Co-Lead",
+    link: "https://www.linkedin.com/in/fstoelting/",
+    bio: "Fernando is the Venue and Logistics Co-Lead for Cloud Summit Vancouver. He brings 8 years of tech leadership experience across Canada, the US, and Latin America, with a focus on delivering meaningful projects, aligning technology with business goals, and building collaborative, high-performing teams.",
+    image: "/images/committee/fernando-black.png",
+  },
+  {
+    name: "Philip Mak",
+    title: "Volunteer Lead",
+    link: "https://www.linkedin.com/in/philip-mak-b2b92823a/",
+    bio: "Philip is the Volunteer Lead for Cloud Summit Vancouver. He is a project management professional with experience leading data-driven technical projects across AI, education technology, and community-focused platforms. With a strong background in collaboration, analytics, and user-centered problem solving, he brings an organized and thoughtful approach to supporting volunteers and helping teams succeed.",
+    image: "/images/committee/philip-black.png",
+  },
+];
+
+export const communityPartners: CommunityPartner[] = [
   {
     name: 'AWS',
     logo: '/images/community-partners/aws-day-logo.png',
@@ -897,7 +739,7 @@ export const communityPartners: CommunityPartners[] = [
   },
 ];
 
-export const sponsors: Sponsors[] = [
+export const sponsors: Sponsor[] = [
   {
     ranking: 'Platinum',
     name: 'AWS',
@@ -910,4 +752,3 @@ export const sponsors: Sponsors[] = [
   },
 ];
 
->>>>>>> staging
