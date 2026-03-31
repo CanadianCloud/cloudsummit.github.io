@@ -506,6 +506,136 @@ export const newsletterContent = {
   ctaHref: 'https://tally.so/r/mR6RBl',
 };
 
+export interface VenueLink {
+  url: string;
+  text: string;
+}
+
+export interface VenueLogisticsBase {
+  title: string;
+  bullets: string[];
+  externalLink?: VenueLink[];
+}
+export interface VenueLogisticsSectionNewVersion {
+  CityTitle: string;
+  intro: string;
+  section: VenueLogisticsBase[];
+}
+
+export const venueLogisticsContentNewVersion: Record<City, VenueLogisticsSectionNewVersion> = {
+  vancouver: {
+    CityTitle: 'Vancouver',
+    intro: '',
+    section: [
+      {
+        title: 'Getting to the Venue',
+        bullets: [
+          '1455 Quebec Street, Vancouver, BC, V6A 3Z7',
+          '604.443.7440',
+          'Directions via Google Maps',
+        ],
+        externalLink: [
+          {
+            url: 'https://maps.app.goo.gl/DLdorR8GHCFJvXQp8',
+            text: 'Directions via Google Maps',
+          },
+
+        ]
+      },
+      {
+        title: 'Active & Shared Mobility',
+        bullets: [
+          'Bike (Personal)',
+          'Bike racks available at the front plaza',
+          'Visitors must bring their own lock',
+          'Mobi Bike Share',
+          'Station located near the entrance (under SkyTrain overpass)',
+          'Accessible via seawall cycling path',
+        ],
+        externalLink: [
+          {
+            url: 'https://www.mobibikes.ca/en/',
+            text: 'Visit Mobi Bike Share',
+          },
+        ],
+      },
+
+      {
+        title: 'Public Transport',
+        bullets: [
+          'Bus Routes',
+          'Bus 19 - Metrotown / Stanley Park',
+          'Bus 22 - Knight / Downtown',
+          'Bus 3 - Main / Downtown',
+          'Bus 8 - Fraser / Downtown',
+          'Skytrain',
+          'Expo Line - Main Street-Science World',
+          'Ferry',
+          'Aquabus and False Creek Ferries Routes connect from:',
+          'Granville Island',
+          'English Bay',
+          'Yaletown',
+          'Kitsilano',
+        ],
+        externalLink: [
+          {
+            text: 'View Schedule',
+            url: 'https://www.translink.ca/schedules-and-maps/skytrain?term=22',
+          },
+          {
+            url: 'https://theaquabus.com/',
+            text: 'Aquabus',
+          },
+          {
+            url: 'https://granvilleislandferries.bc.ca/',
+            text: 'False Creek Ferries',
+          },
+        ],
+      },
+
+      {
+        title: 'Vehicle Access',
+        bullets: [
+          'Car Share',
+          'Evo',
+          'Share Now (formerly Car2Go)',
+          'Designated parking available across Quebec St',
+          'Parking',
+          'Limited paid parking available',
+          'No bus parking',
+          'Parking Rates',
+          '1 Hour – $5.25',
+          '2 Hours – $9.95',
+          '4 Hours – $15.25',
+          'Until 6:30 PM – $20.95',
+          'From 5 PM – 2 AM – $10.50',
+          'Payment Options',
+          'Phone payment',
+          'Credit card',
+          'Notes',
+          'Rates may change during special events',
+          'Pay inside admissions to get regular rates during events',
+        ],
+        externalLink: [],
+      },
+      {
+        title: 'Accessibility & Facilities',
+        bullets: [
+          'Accessible Parking',
+          'There are six wheelchair-accessible spaces in the parking lots. These are available on a first-come, first-served basis, and are located in the lots to the north and south of Science World. Ramps are available to reach the sidewalk.',
+          'Automated Entry and Exit Doors',
+          'Science World has button-operated automated entry doors and exit doors.',
+          'Ramps and Elevators',
+          'Science World has ramps that allow access to the first- and second-floor galleries. There are also two elevators which run between the first and second floors. We recommend using the elevator in the Connection Zone (near the lobby) to access the Wonder gallery.',
+          'Service Animals',
+          'Service dogs must be on a leash and in the company of their owner at all times. For the safety and comfort of all guests, service dogs must be well-behaved during their visit. Staff reserve the right to ask non-compliant owners and their dogs to leave the premises.',
+          'Washrooms',
+          'All public washrooms at Science World are equipped with baby-change facilities.',
+        ],
+        externalLink: [],
+      },
+
+    ],
 
 export const speakerContent: Speaker[] = [
   {
