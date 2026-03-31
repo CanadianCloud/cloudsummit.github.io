@@ -1,0 +1,159 @@
+---
+import type { Committee } from "../lib/content";
+
+interface Props {
+  content: Committee[];
+}
+
+const { content } = Astro.props;
+---
+
+<!-- Committee Grid -->
+<section class="committee-section">
+  <div class="committee-container">
+    <h2 class="section-heading">Meet the Team!</h2>
+    <div class="committee-grid">
+      {
+        content.map((committee) => (
+          <div class="committee-card">
+            <div class="committee-image">
+              <img src={committee.image} alt={committee.name} />
+            </div>
+            <div class="committee-info">
+              <h3 class="committee-name">{committee.name}</h3>
+              <p class="committee-title">{committee.title}</p>
+              <p class="committee-link">
+                <a href={committee.link}>Linkedin</a>
+              </p>
+              <p class="committee-bio">{committee.bio}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .committee-section {
+    padding: 4rem 1.5rem;
+  }
+
+  .committee-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .committee-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .committee-card {
+    background: rgba(61, 120, 171, 0.1);
+    border: 1px solid rgba(61, 120, 171, 0.2);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    text-align: center;
+    transition:
+      transform 0.2s,
+      border-color 0.2s;
+  }
+
+  .committee-link {
+    a:link,
+    a:visited {
+      color: rgb(113, 198, 251);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .committee-image {
+    width: 150px;
+    /* height: 150px; */
+    margin: 0 auto 1.5rem;
+    border-radius: 20%;
+    overflow: hidden;
+    /* border: 3px solid rgb(113, 198, 251); */
+  }
+
+  .committee-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .committee-info {
+    text-align: left;
+  }
+
+  .committee-name {
+    font-family: "Squada One", system-ui, sans-serif;
+    font-size: 1.5rem;
+    margin: 0 0 0.5rem 0;
+    color: white;
+  }
+
+  .committee-title,
+  .committee-link {
+    font-size: 1rem;
+    margin: 0 0 0.25rem 0;
+    font-weight: 600;
+    color: rgb(251, 113, 133);
+  }
+  /* Desktop Styles */
+  @media (min-width: 769px) {
+    .committee-hero {
+      padding: 8rem 2rem 6rem;
+    }
+
+    .hero-title {
+      font-size: 4.5rem;
+    }
+
+    .hero-subtitle {
+      font-size: 2rem;
+    }
+
+    .hero-description {
+      font-size: 1.25rem;
+    }
+
+    .committee-section {
+      padding: 6rem 2rem;
+    }
+
+    .section-heading {
+      font-size: 4rem;
+      text-align: center;
+    }
+
+    .committee-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .committee-image {
+      width: 50%;
+      /* height: 100px; */
+      border-radius: 1rem;
+    }
+
+    .committee-info {
+      width: 70%;
+    }
+
+    .committee-bio {
+      font-size: 0.8rem;
+    }
+    .committee-card {
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+    }
+  }
+</style>
