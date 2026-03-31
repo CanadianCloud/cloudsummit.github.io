@@ -55,7 +55,7 @@ export interface CommunityPartner {
 }
 
 export interface Sponsor {
-  ranking: "Gold" | "Platinum" | "Diamond";
+  ranking: 'Gold' | 'Platinum' | 'Diamond';
   name: string;
   logo: string;
 }
@@ -73,46 +73,46 @@ export interface FAQ {
   answer: string;
 }
 
-export type City = "vancouver" | "toronto";
+export type City = 'vancouver' | 'toronto';
 
-export const defaultCity: City = "vancouver";
+export const defaultCity: City = 'vancouver';
 
 // Shared content across all cities
 export const sharedHeroContent = {
-  title: "Cloud Summit 2026",
+  title: 'Cloud Summit 2026',
   subtitle: "Sponsor Canada's Largest Multi-Cloud Conference",
-  description: "",
+  description: '',
   primaryCta: {
-    text: "Become a Volunteer",
-    href: "https://tally.so/r/mBVZjA",
+    text: 'Become a Volunteer',
+    href: 'https://tally.so/r/mBVZjA',
   },
   secondaryCta: {
-    text: "Become a Speaker",
-    href: "https://tally.so/r/rjBeN5",
+    text: 'Become a Speaker',
+    href: 'https://tally.so/r/rjBeN5',
   },
 };
 
 // City-specific content
 export const citySpecificContent: Record<City, CitySpecificContent> = {
   vancouver: {
-    cityName: "Vancouver",
-    venue: "Science World",
-    address: "1455 Quebec St, Vancouver, BC V6A 3Z7",
-    addressUrl: "https://maps.app.goo.gl/DQbdiQLYB1qe1iZn7",
-    date: "Friday, May 1st, 2026",
-    time: "2pm - 9pm",
-    callForSpeakers: "February 2026",
-    ticketUrl: "https://luma.com/cloudsummit26",
+    cityName: 'Vancouver',
+    venue: 'Science World',
+    address: '1455 Quebec St, Vancouver, BC V6A 3Z7',
+    addressUrl: 'https://maps.app.goo.gl/DQbdiQLYB1qe1iZn7',
+    date: 'Friday, May 1st, 2026',
+    time: '2pm - 9pm',
+    callForSpeakers: 'February 2026',
+    ticketUrl: 'https://luma.com/cloudsummit26',
   },
   toronto: {
-    cityName: "Toronto",
-    venue: "Northeastern University",
-    address: "375 Queen St W, Toronto, ON M5V 2A5",
-    addressUrl: "https://maps.app.goo.gl/tqLCm7Z6r1ctT4Db8",
-    date: "Saturday, August 29th, 2026",
-    time: "12pm - 6pm",
-    callForSpeakers: "April 2026",
-    ticketUrl: "https://luma.com/0xpa2rxj",
+    cityName: 'Toronto',
+    venue: 'Northeastern University',
+    address: '375 Queen St W, Toronto, ON M5V 2A5',
+    addressUrl: 'https://maps.app.goo.gl/tqLCm7Z6r1ctT4Db8',
+    date: 'Saturday, August 29th, 2026',
+    time: '12pm - 6pm',
+    callForSpeakers: 'April 2026',
+    ticketUrl: 'https://luma.com/0xpa2rxj',
   },
 };
 
@@ -123,20 +123,20 @@ export function getHeroContent(city: City): HeroContent {
     ...citySpecificContent[city],
     // Added as part of Issue #3 (Header & Navigation)
     primaryCta: {
-      text: "Get Your Ticket",
+      text: 'Get Your Ticket',
       href: citySpecificContent[city].ticketUrl,
     },
     secondaryCta: {
-      text: "",
-      href: "",
+      text: '',
+      href: '',
     },
   };
 }
 
 // For backwards compatibility
 export const heroContent: Record<City, HeroContent> = {
-  vancouver: getHeroContent("vancouver"),
-  toronto: getHeroContent("toronto"),
+  vancouver: getHeroContent('vancouver'),
+  toronto: getHeroContent('toronto'),
 };
 
 // Disabled as part of Issue #3 (Header & Navigation update)
@@ -167,8 +167,8 @@ export const heroContent: Record<City, HeroContent> = {
 export function getNavigationContent(city: City): NavigationContent {
   return {
     links: [
-      { text: "Get Tickets", href: citySpecificContent[city].ticketUrl },
-      { text: "Apply to Volunteer", href: sharedHeroContent.primaryCta.href },
+      { text: 'Get Tickets', href: citySpecificContent[city].ticketUrl },
+      { text: 'Apply to Volunteer', href: sharedHeroContent.primaryCta.href },
     ],
   };
 }
@@ -179,13 +179,13 @@ export const navigationContent: NavigationContent =
 
 export const aboutCPCAContent = {
   description:
-    "As a non-profit organization, our purpose is to bring together & educate the local tech community about the cloud and support our local community through charity.",
-  ctaText: "Learn More About CPCA",
-  ctaHref: "https://canadiancloud.org",
+    'As a non-profit organization, our purpose is to bring together & educate the local tech community about the cloud and support our local community through charity.',
+  ctaText: 'Learn More About CPCA',
+  ctaHref: 'https://canadiancloud.org',
 };
 
 export const whatIsCloudSummitContent = {
-  heading: "Cloud Summit?",
+  heading: 'Cloud Summit?',
   description:
     "Canada's premier multi-cloud conference bringing together 1,000+ cloud professionals, industry leaders, and decision-makers from AWS, Azure, Google Cloud, and IBM Cloud ecosystems. Connect, learn, and shape the future of cloud computing.",
 };
@@ -193,185 +193,185 @@ export const whatIsCloudSummitContent = {
 export const cloudSummitActivitiesContent = {
   activities: [
     {
-      title: "Expand Your Network",
+      title: 'Expand Your Network',
       description:
-        "Connect with industry leaders, decision-makers, and cloud professionals from across the country and beyond.",
-      image: "/images/activities/networking.svg",
+        'Connect with industry leaders, decision-makers, and cloud professionals from across the country and beyond.',
+      image: '/images/activities/networking.svg',
     },
     {
-      title: "Watch Presentations",
+      title: 'Watch Presentations',
       description:
-        "Learn from expert speakers sharing the latest trends, best practices, and cloud innovations that are shaping the industry.",
-      image: "/images/activities/presentations.svg",
+        'Learn from expert speakers sharing the latest trends, best practices, and cloud innovations that are shaping the industry.',
+      image: '/images/activities/presentations.svg',
     },
     {
-      title: "Meet Tech Companies",
+      title: 'Meet Tech Companies',
       description:
-        "Discover cutting-edge solutions and services from leading cloud technology providers, sponsors, and innovative startups.",
-      image: "/images/activities/tech_companies.svg",
+        'Discover cutting-edge solutions and services from leading cloud technology providers, sponsors, and innovative startups.',
+      image: '/images/activities/tech_companies.svg',
     },
     {
-      title: "High-Pressure Live Cloud Builds",
+      title: 'High-Pressure Live Cloud Builds',
       description:
-        "Watch top teams race the clock in live cloud showdowns, shipping under pressure as the crowd votes and shapes the action.",
-      image: "/images/activities/laptop.svg",
+        'Watch top teams race the clock in live cloud showdowns, shipping under pressure as the crowd votes and shapes the action.',
+      image: '/images/activities/laptop.svg',
     },
     {
-      title: "Discover Communities",
+      title: 'Discover Communities',
       description:
-        "Connect with local user groups, developer communities, and professional cloud organizations that drive innovation.",
-      image: "/images/activities/communities.svg",
+        'Connect with local user groups, developer communities, and professional cloud organizations that drive innovation.',
+      image: '/images/activities/communities.svg',
     },
     {
-      title: "Participate in Workshops",
+      title: 'Participate in Workshops',
       description:
-        "Get hands-on experience through interactive sessions on cloud platforms, tools, and practical implementations that matter.",
-      image: "/images/activities/workshops.svg",
+        'Get hands-on experience through interactive sessions on cloud platforms, tools, and practical implementations that matter.',
+      image: '/images/activities/workshops.svg',
     },
   ],
 };
 
 export const eventHighlightsContent = {
-  heading: "Event Highlights",
+  heading: 'Event Highlights',
   description:
-    "Explore what makes Cloud Summit an unforgettable experience for cloud professionals.",
+    'Explore what makes Cloud Summit an unforgettable experience for cloud professionals.',
 };
 
 export const tickerContent = {
-  title: "Cloud Providers",
-  prefix: "Explore",
+  title: 'Cloud Providers',
+  prefix: 'Explore',
 };
 
 export const eventMapContent = {
   /** Vancouver venue (Science World) — swap images/PDF when final assets are ready */
-  venueLabel: "Vancouver · Science World",
-  pdfHref: "/images/event-map/cloud-summit-floorplan.pdf",
+  venueLabel: 'Vancouver · Science World',
+  pdfHref: '/images/event-map/cloud-summit-floorplan.pdf',
   floors: [
     {
-      id: "floor-1",
-      label: "Floor 1",
-      imageSrc: "/images/event-map/floor-1.png",
+      id: 'floor-1',
+      label: 'Floor 1',
+      imageSrc: '/images/event-map/floor-1.png',
       imageAlt:
-        "Isometric floor plan for Science World Floor 1 with highlighted areas and wayfinding icons",
+        'Isometric floor plan for Science World Floor 1 with highlighted areas and wayfinding icons',
       legend: [
         {
-          iconSrc: "/images/event-map/icons/volunteers-lounge-restricted.png",
-          title: "Volunteers lounge",
-          detail: "restricted access",
+          iconSrc: '/images/event-map/icons/volunteers-lounge-restricted.png',
+          title: 'Volunteers lounge',
+          detail: 'restricted access',
         },
         {
-          iconSrc: "/images/event-map/icons/community-lounge-food-drinks.png",
-          title: "Community lounge",
-          detail: "food and drinks",
+          iconSrc: '/images/event-map/icons/community-lounge-food-drinks.png',
+          title: 'Community lounge',
+          detail: 'food and drinks',
         },
         {
-          iconSrc: "/images/event-map/icons/speakers-lounge-restricted.png",
-          title: "Speakers lounge",
-          detail: "restricted access",
+          iconSrc: '/images/event-map/icons/speakers-lounge-restricted.png',
+          title: 'Speakers lounge',
+          detail: 'restricted access',
         },
         {
-          iconSrc: "/images/event-map/icons/water-refill-station.png",
-          title: "Water refill station",
+          iconSrc: '/images/event-map/icons/water-refill-station.png',
+          title: 'Water refill station',
         },
         {
-          iconSrc: "/images/event-map/icons/washrooms.png",
-          title: "Washrooms",
+          iconSrc: '/images/event-map/icons/washrooms.png',
+          title: 'Washrooms',
         },
         {
-          iconSrc: "/images/event-map/icons/registration-tickets.png",
-          title: "Registration and tickets",
+          iconSrc: '/images/event-map/icons/registration-tickets.png',
+          title: 'Registration and tickets',
         },
         {
-          iconSrc: "/images/event-map/icons/venue-map-schedule.png",
-          title: "Venue map and schedule",
+          iconSrc: '/images/event-map/icons/venue-map-schedule.png',
+          title: 'Venue map and schedule',
         },
         {
-          iconSrc: "/images/event-map/icons/entrance-exit.png",
-          title: "Entrance and exit",
+          iconSrc: '/images/event-map/icons/entrance-exit.png',
+          title: 'Entrance and exit',
         },
         {
-          iconSrc: "/images/event-map/icons/lockers-1-dollar.png",
-          title: "Lockers",
-          detail: "$1",
+          iconSrc: '/images/event-map/icons/lockers-1-dollar.png',
+          title: 'Lockers',
+          detail: '$1',
         },
         {
-          iconSrc: "/images/event-map/icons/community-stage.png",
-          title: "Community stage",
+          iconSrc: '/images/event-map/icons/community-stage.png',
+          title: 'Community stage',
         },
         {
-          iconSrc: "/images/event-map/icons/elevator.png",
-          title: "Elevator",
+          iconSrc: '/images/event-map/icons/elevator.png',
+          title: 'Elevator',
         },
       ],
     },
     {
-      id: "floor-2",
-      label: "Floor 2",
-      imageSrc: "/images/event-map/floor-2.png",
+      id: 'floor-2',
+      label: 'Floor 2',
+      imageSrc: '/images/event-map/floor-2.png',
       imageAlt:
-        "Science World Floor 2 map with highlighted areas and wayfinding icons",
+        'Science World Floor 2 map with highlighted areas and wayfinding icons',
       legend: [
         {
-          iconSrc: "/images/event-map/icons/ai-experience.png",
-          title: "Artificial Intelligence",
-          detail: "experience",
+          iconSrc: '/images/event-map/icons/ai-experience.png',
+          title: 'Artificial Intelligence',
+          detail: 'experience',
         },
         {
-          iconSrc: "/images/event-map/icons/sound-visual-experience.png",
-          title: "Sound and visual",
-          detail: "experience",
+          iconSrc: '/images/event-map/icons/sound-visual-experience.png',
+          title: 'Sound and visual',
+          detail: 'experience',
         },
         {
-          iconSrc: "/images/event-map/icons/no-food-drink-allowed.png",
-          title: "No food or drink allowed",
+          iconSrc: '/images/event-map/icons/no-food-drink-allowed.png',
+          title: 'No food or drink allowed',
         },
         {
-          iconSrc: "/images/event-map/icons/hackathon-teams-room.png",
-          title: "Hackathon teams room",
+          iconSrc: '/images/event-map/icons/hackathon-teams-room.png',
+          title: 'Hackathon teams room',
         },
         {
-          iconSrc: "/images/event-map/icons/water-refill-station.png",
-          title: "Water refill station",
+          iconSrc: '/images/event-map/icons/water-refill-station.png',
+          title: 'Water refill station',
         },
         {
-          iconSrc: "/images/event-map/icons/venue-map-schedule.png",
-          title: "Venue map and schedule",
+          iconSrc: '/images/event-map/icons/venue-map-schedule.png',
+          title: 'Venue map and schedule',
         },
         {
-          iconSrc: "/images/event-map/icons/lockers-1-dollar.png",
-          title: "Lockers",
-          detail: "$1",
+          iconSrc: '/images/event-map/icons/lockers-1-dollar.png',
+          title: 'Lockers',
+          detail: '$1',
         },
         {
-          iconSrc: "/images/event-map/icons/quiet-area-phone-calls.png",
-          title: "Quiet area to take",
-          detail: "phone calls",
+          iconSrc: '/images/event-map/icons/quiet-area-phone-calls.png',
+          title: 'Quiet area to take',
+          detail: 'phone calls',
         },
         {
-          iconSrc: "/images/event-map/icons/main-stage.png",
-          title: "Main stage",
+          iconSrc: '/images/event-map/icons/main-stage.png',
+          title: 'Main stage',
         },
         {
-          iconSrc: "/images/event-map/icons/cloud-security-experience.png",
-          title: "Cloud security",
-          detail: "experience",
+          iconSrc: '/images/event-map/icons/cloud-security-experience.png',
+          title: 'Cloud security',
+          detail: 'experience',
         },
         {
-          iconSrc: "/images/event-map/icons/elevator.png",
-          title: "Elevator",
+          iconSrc: '/images/event-map/icons/elevator.png',
+          title: 'Elevator',
         },
         {
-          iconSrc: "/images/event-map/icons/after-party-entrance.png",
-          title: "After party entrance",
-          detail: "restricted access",
+          iconSrc: '/images/event-map/icons/after-party-entrance.png',
+          title: 'After party entrance',
+          detail: 'restricted access',
         },
         {
-          iconSrc: "/images/event-map/icons/washrooms.png",
-          title: "Washrooms",
+          iconSrc: '/images/event-map/icons/washrooms.png',
+          title: 'Washrooms',
         },
         {
-          iconSrc: "/images/event-map/icons/cloud-chamber.png",
-          title: "Cloud chamber",
+          iconSrc: '/images/event-map/icons/cloud-chamber.png',
+          title: 'Cloud chamber',
         },
       ],
     },
@@ -401,56 +401,56 @@ export interface VenueLogisticsSectionNewVersion {
 // Helper function to get footer content with city-specific ticket URL
 export function getFooterContent(city: City) {
   return {
-    copyright: "Cloud Summit. All rights reserved.",
+    copyright: 'Cloud Summit. All rights reserved.',
     links: [
       {
         col: 1,
-        text: "Get a Ticket",
+        text: 'Get a Ticket',
         href: citySpecificContent[city].ticketUrl,
       },
-      { col: 1, text: "Call for Speakers", href: "/our-speakers/" },
-      { col: 1, text: "Become a Sponsor", href: "https://tally.so/r/wLqXvO" },
-      { col: 1, text: "Apply to Volunteer", href: "https://tally.so/r/mBVZjA" },
-      { col: 1, text: "Enter Hackathon", href: "https://hackerrivals.com/" },
+      { col: 1, text: 'Call for Speakers', href: '/our-speakers/' },
+      { col: 1, text: 'Become a Sponsor', href: 'https://tally.so/r/wLqXvO' },
+      { col: 1, text: 'Apply to Volunteer', href: 'https://tally.so/r/mBVZjA' },
+      { col: 1, text: 'Enter Hackathon', href: 'https://hackerrivals.com/' },
 
-      { col: 2, text: "Press Release", href: "/archive/2025/index.html" },
-      { col: 2, text: "About Cloud Summit", href: "/about-cloud-summit/" },
+      { col: 2, text: 'Press Release', href: '/archive/2025/index.html' },
+      { col: 2, text: 'About Cloud Summit', href: '/about-cloud-summit/' },
       {
         col: 2,
-        text: "Subscribe to Newsletter",
-        href: "https://tally.so/r/mR6RBl",
+        text: 'Subscribe to Newsletter',
+        href: 'https://tally.so/r/mR6RBl',
       },
       // { col: 2, text: 'Our Event Team', href: '/our-team' },
       // { col: 2, text: 'Sponsorship Info', href: '/our-sponsors' },
 
-      { col: 3, text: "2025", href: "/archive/2025/index.html" },
-      { col: 3, text: "2024", href: "/archive/2024.html" },
+      { col: 3, text: '2025', href: '/archive/2025/index.html' },
+      { col: 3, text: '2024', href: '/archive/2024.html' },
     ],
     social: [
       {
-        name: "Instagram",
-        url: "https://www.instagram.com/canadiancloudninja/",
+        name: 'Instagram',
+        url: 'https://www.instagram.com/canadiancloudninja/',
       },
       {
-        name: "LinkedIn",
-        url: "https://www.linkedin.com/showcase/vancouvercloudsummit",
+        name: 'LinkedIn',
+        url: 'https://www.linkedin.com/showcase/vancouvercloudsummit',
       },
     ],
     // pressReleases: [
     //   { text: '2025 Press Release', href: '/archive/2025/index.html' },
     // ],
     previousYears: [
-      { text: "2025", href: "/archive/2025/index.html" },
-      { text: "2024", href: "/archive/2024.html" },
+      { text: '2025', href: '/archive/2025/index.html' },
+      { text: '2024', href: '/archive/2024.html' },
     ],
 
     newsletter: {
-      prefix: "Stay",
-      heading: "Connected",
+      prefix: 'Stay',
+      heading: 'Connected',
       description:
-        "Subscribe to our newsletter to receive the latest updates about Cloud Summit 2026, speaker announcements, and exclusive content.",
-      ctaText: "Subscribe to Newsletter",
-      ctaHref: "https://tally.so/r/mR6RBl",
+        'Subscribe to our newsletter to receive the latest updates about Cloud Summit 2026, speaker announcements, and exclusive content.',
+      ctaText: 'Subscribe to Newsletter',
+      ctaHref: 'https://tally.so/r/mR6RBl',
     },
   };
 }
@@ -459,26 +459,26 @@ export function getFooterContent(city: City) {
 export const footerContent = getFooterContent(defaultCity);
 
 export const pastSponsorsContent = {
-  prefix: "Thank You",
-  heading: "Past Sponsors",
+  prefix: 'Thank You',
+  heading: 'Past Sponsors',
   description:
-    "We are grateful to our past sponsors who have supported Cloud Summit and helped make our events successful.",
+    'We are grateful to our past sponsors who have supported Cloud Summit and helped make our events successful.',
 };
 
 export const sponsorshipSponsorsContent = {
-  prefix: "Our",
-  heading: "Past Sponsors",
+  prefix: 'Our',
+  heading: 'Past Sponsors',
   description:
-    "We are grateful to our sponsors who have supported Cloud Summit and helped make our events successful.",
+    'We are grateful to our sponsors who have supported Cloud Summit and helped make our events successful.',
 };
 
 export const newsletterContent = {
-  prefix: "Stay",
-  heading: "Connected",
+  prefix: 'Stay',
+  heading: 'Connected',
   description:
-    "Subscribe to our newsletter to receive the latest updates about Cloud Summit 2026, speaker announcements, and exclusive content.",
-  ctaText: "Subscribe to Newsletter",
-  ctaHref: "https://tally.so/r/mR6RBl",
+    'Subscribe to our newsletter to receive the latest updates about Cloud Summit 2026, speaker announcements, and exclusive content.',
+  ctaText: 'Subscribe to Newsletter',
+  ctaHref: 'https://tally.so/r/mR6RBl',
 };
 
 export const venueLogisticsContentNewVersion: Record<
@@ -486,120 +486,120 @@ export const venueLogisticsContentNewVersion: Record<
   VenueLogisticsSectionNewVersion
 > = {
   vancouver: {
-    CityTitle: "Vancouver",
-    intro: "",
+    CityTitle: 'Vancouver',
+    intro: '',
     section: [
       {
-        title: "Getting to the Venue",
+        title: 'Getting to the Venue',
         bullets: [
-          "1455 Quebec Street, Vancouver, BC, V6A 3Z7",
-          "604.443.7440",
-          "Directions via Google Maps",
+          '1455 Quebec Street, Vancouver, BC, V6A 3Z7',
+          '604.443.7440',
+          'Directions via Google Maps',
         ],
         externalLink: [
           {
-            url: "https://maps.app.goo.gl/DLdorR8GHCFJvXQp8",
-            text: "Directions via Google Maps",
+            url: 'https://maps.app.goo.gl/DLdorR8GHCFJvXQp8',
+            text: 'Directions via Google Maps',
           },
         ],
       },
       {
-        title: "Active & Shared Mobility",
+        title: 'Active & Shared Mobility',
         bullets: [
-          "Bike (Personal)",
-          "Bike racks available at the front plaza",
-          "Visitors must bring their own lock",
-          "Mobi Bike Share",
-          "Station located near the entrance (under SkyTrain overpass)",
-          "Accessible via seawall cycling path",
+          'Bike (Personal)',
+          'Bike racks available at the front plaza',
+          'Visitors must bring their own lock',
+          'Mobi Bike Share',
+          'Station located near the entrance (under SkyTrain overpass)',
+          'Accessible via seawall cycling path',
         ],
         externalLink: [
           {
-            url: "https://www.mobibikes.ca/en/",
-            text: "Visit Mobi Bike Share",
-          },
-        ],
-      },
-
-      {
-        title: "Public Transport",
-        bullets: [
-          "Bus Routes",
-          "Bus 19 - Metrotown / Stanley Park",
-          "Bus 22 - Knight / Downtown",
-          "Bus 3 - Main / Downtown",
-          "Bus 8 - Fraser / Downtown",
-          "Skytrain",
-          "Expo Line - Main Street-Science World",
-          "Ferry",
-          "Aquabus and False Creek Ferries Routes connect from:",
-          "Granville Island",
-          "English Bay",
-          "Yaletown",
-          "Kitsilano",
-        ],
-        externalLink: [
-          {
-            text: "View Schedule",
-            url: "https://www.translink.ca/schedules-and-maps/skytrain?term=22",
-          },
-          {
-            url: "https://theaquabus.com/",
-            text: "Aquabus",
-          },
-          {
-            url: "https://granvilleislandferries.bc.ca/",
-            text: "False Creek Ferries",
+            url: 'https://www.mobibikes.ca/en/',
+            text: 'Visit Mobi Bike Share',
           },
         ],
       },
 
       {
-        title: "Vehicle Access",
+        title: 'Public Transport',
         bullets: [
-          "Car Share",
-          "Evo",
-          "Share Now (formerly Car2Go)",
-          "Designated parking available across Quebec St",
-          "Parking",
-          "Limited paid parking available",
-          "No bus parking",
-          "Parking Rates",
-          "1 Hour – $5.25",
-          "2 Hours – $9.95",
-          "4 Hours – $15.25",
-          "Until 6:30 PM – $20.95",
-          "From 5 PM – 2 AM – $10.50",
-          "Payment Options",
-          "Phone payment",
-          "Credit card",
-          "Notes",
-          "Rates may change during special events",
-          "Pay inside admissions to get regular rates during events",
+          'Bus Routes',
+          'Bus 19 - Metrotown / Stanley Park',
+          'Bus 22 - Knight / Downtown',
+          'Bus 3 - Main / Downtown',
+          'Bus 8 - Fraser / Downtown',
+          'Skytrain',
+          'Expo Line - Main Street-Science World',
+          'Ferry',
+          'Aquabus and False Creek Ferries Routes connect from:',
+          'Granville Island',
+          'English Bay',
+          'Yaletown',
+          'Kitsilano',
+        ],
+        externalLink: [
+          {
+            text: 'View Schedule',
+            url: 'https://www.translink.ca/schedules-and-maps/skytrain?term=22',
+          },
+          {
+            url: 'https://theaquabus.com/',
+            text: 'Aquabus',
+          },
+          {
+            url: 'https://granvilleislandferries.bc.ca/',
+            text: 'False Creek Ferries',
+          },
+        ],
+      },
+
+      {
+        title: 'Vehicle Access',
+        bullets: [
+          'Car Share',
+          'Evo',
+          'Share Now (formerly Car2Go)',
+          'Designated parking available across Quebec St',
+          'Parking',
+          'Limited paid parking available',
+          'No bus parking',
+          'Parking Rates',
+          '1 Hour – $5.25',
+          '2 Hours – $9.95',
+          '4 Hours – $15.25',
+          'Until 6:30 PM – $20.95',
+          'From 5 PM – 2 AM – $10.50',
+          'Payment Options',
+          'Phone payment',
+          'Credit card',
+          'Notes',
+          'Rates may change during special events',
+          'Pay inside admissions to get regular rates during events',
         ],
         externalLink: [],
       },
       {
-        title: "Accessibility & Facilities",
+        title: 'Accessibility & Facilities',
         bullets: [
-          "Accessible Parking",
-          "There are six wheelchair-accessible spaces in the parking lots. These are available on a first-come, first-served basis, and are located in the lots to the north and south of Science World. Ramps are available to reach the sidewalk.",
-          "Automated Entry and Exit Doors",
-          "Science World has button-operated automated entry doors and exit doors.",
-          "Ramps and Elevators",
-          "Science World has ramps that allow access to the first- and second-floor galleries. There are also two elevators which run between the first and second floors. We recommend using the elevator in the Connection Zone (near the lobby) to access the Wonder gallery.",
-          "Service Animals",
-          "Service dogs must be on a leash and in the company of their owner at all times. For the safety and comfort of all guests, service dogs must be well-behaved during their visit. Staff reserve the right to ask non-compliant owners and their dogs to leave the premises.",
-          "Washrooms",
-          "All public washrooms at Science World are equipped with baby-change facilities.",
+          'Accessible Parking',
+          'There are six wheelchair-accessible spaces in the parking lots. These are available on a first-come, first-served basis, and are located in the lots to the north and south of Science World. Ramps are available to reach the sidewalk.',
+          'Automated Entry and Exit Doors',
+          'Science World has button-operated automated entry doors and exit doors.',
+          'Ramps and Elevators',
+          'Science World has ramps that allow access to the first- and second-floor galleries. There are also two elevators which run between the first and second floors. We recommend using the elevator in the Connection Zone (near the lobby) to access the Wonder gallery.',
+          'Service Animals',
+          'Service dogs must be on a leash and in the company of their owner at all times. For the safety and comfort of all guests, service dogs must be well-behaved during their visit. Staff reserve the right to ask non-compliant owners and their dogs to leave the premises.',
+          'Washrooms',
+          'All public washrooms at Science World are equipped with baby-change facilities.',
         ],
         externalLink: [],
       },
     ],
   },
   toronto: {
-    CityTitle: "Toronto",
-    intro: "Comming Soon",
+    CityTitle: 'Toronto',
+    intro: 'Comming Soon',
     section: [],
   },
 };
@@ -608,277 +608,288 @@ export type VenueLogisticsContent = typeof venueLogisticsContentNewVersion;
 
 export const speakerContent: Speaker[] = [
   {
-    speakername: "Matt Biilmann",
-    title: "CEO and Co-Founder",
-    company: "Netlify",
-    topic: "AX and Why It Matters",
-    image: "/images/previous-speakers/matt-biilmann.png",
+    speakername: 'Matt Biilmann',
+    title: 'CEO and Co-Founder',
+    company: 'Netlify',
+    topic: 'AX and Why It Matters',
+    image: '/images/previous-speakers/matt-biilmann.png',
   },
   {
-    speakername: "Eric Johnson",
-    title: "Principal Developer Advocate",
-    company: "Amazon Web Services (AWS)",
-    topic: "Taking GenAI from Paper to Production with Serverless",
-    image: "/images/previous-speakers/eric-johnson.png",
+    speakername: 'Eric Johnson',
+    title: 'Principal Developer Advocate',
+    company: 'Amazon Web Services (AWS)',
+    topic: 'Taking GenAI from Paper to Production with Serverless',
+    image: '/images/previous-speakers/eric-johnson.png',
   },
   {
-    speakername: "Ahmad Awais",
-    title: "CEO",
-    company: "Langbase",
-    topic: "Why the Best AI Agents Are Built Without Frameworks",
-    image: "/images/previous-speakers/ahmad-awais.jpg",
+    speakername: 'Ahmad Awais',
+    title: 'CEO',
+    company: 'Langbase',
+    topic: 'Why the Best AI Agents Are Built Without Frameworks',
+    image: '/images/previous-speakers/ahmad-awais.jpg',
   },
   {
-    speakername: "Luca Maraschi",
-    title: "Co-Founder & CEO",
-    company: "Platformatic",
-    topic: "Scaling Node.js in Kubernetes: Metrics, Memory, and Mastery",
-    image: "/images/previous-speakers/luca-maraschi.png",
+    speakername: 'Luca Maraschi',
+    title: 'Co-Founder & CEO',
+    company: 'Platformatic',
+    topic: 'Scaling Node.js in Kubernetes: Metrics, Memory, and Mastery',
+    image: '/images/previous-speakers/luca-maraschi.png',
   },
   {
-    speakername: "Denis Astahov",
-    title: "Solutions Architect",
-    company: "OpsGuru",
-    topic: "How to become Cloud/DevOps Engineer from Zero",
-    image: "/images/previous-speakers/denis-astahov.png",
+    speakername: 'Denis Astahov',
+    title: 'Solutions Architect',
+    company: 'OpsGuru',
+    topic: 'How to become Cloud/DevOps Engineer from Zero',
+    image: '/images/previous-speakers/denis-astahov.png',
   },
   {
-    speakername: "Aiman Parvaiz",
-    title: "Director of DevOps",
-    company: "NimbusStack",
-    topic: "Driving Cloud Cost Efficiency: Multi-Cloud Strategies",
-    image: "/images/previous-speakers/aiman-parvaiz.png",
+    speakername: 'Aiman Parvaiz',
+    title: 'Director of DevOps',
+    company: 'NimbusStack',
+    topic: 'Driving Cloud Cost Efficiency: Multi-Cloud Strategies',
+    image: '/images/previous-speakers/aiman-parvaiz.png',
   },
 ];
 
 export const committeeContent: Committee[] = [
   {
-    name: "Matt Carolan",
-    title: "Event Director",
-    link: "https://www.linkedin.com/in/matthewcarolan/",
-    bio: "Matt Carolan is the founder of Cloud Summit and a cloud and security leader with deep experience in platform engineering, enterprise architecture, and cloud transformation. He helps organizations make clear, practical decisions across security, cost, resilience, and operational complexity, combining hands-on technical depth with a global perspective shaped by living and working across Australia, Dubai, Seattle, and Vancouver.",
-    image: "/images/committee/matt-black.png",
+    name: 'Matt Carolan',
+    title: 'Event Director',
+    link: 'https://www.linkedin.com/in/matthewcarolan/',
+    bio: 'Matt Carolan is the founder of Cloud Summit and a cloud and security leader with deep experience in platform engineering, enterprise architecture, and cloud transformation. He helps organizations make clear, practical decisions across security, cost, resilience, and operational complexity, combining hands-on technical depth with a global perspective shaped by living and working across Australia, Dubai, Seattle, and Vancouver.',
+    image: '/images/committee/matt-black.png',
   },
   {
-    name: "Bibi Souza",
-    title: "Mentor",
-    link: "https://www.linkedin.com/in/bibschan/",
-    bio: "Bibi is a community builder and strategic leader with experience across software engineering, project management, and advocacy. She is passionate about bringing people together and helping them grow, with a strong track record of turning fragmented audiences into thriving communities. As an exited founder, she brings an experimental mindset, a bias toward action, and thoughtful risk-taking to everything she builds. At Cloud Summit, she helps shape community with intention, energy, and purpose.",
-    image: "/images/committee/bibi-black.png",
+    name: 'Bibi Souza',
+    title: 'Mentor',
+    link: 'https://www.linkedin.com/in/bibschan/',
+    bio: 'Bibi is a community builder and strategic leader with experience across software engineering, project management, and advocacy. She is passionate about bringing people together and helping them grow, with a strong track record of turning fragmented audiences into thriving communities. As an exited founder, she brings an experimental mindset, a bias toward action, and thoughtful risk-taking to everything she builds. At Cloud Summit, she helps shape community with intention, energy, and purpose.',
+    image: '/images/committee/bibi-black.png',
   },
   {
-    name: "Andrey Barkov",
-    title: "Emcee",
-    link: "https://www.linkedin.com/in/andreybarkov/",
-    bio: "Andrey is one of the emcees for Cloud Summit Vancouver. He is an experienced software engineer with a background in web applications, cloud infrastructure, and microservices, with expertise across Angular, React, C#, Node.js, Azure, and AWS. He brings strong technical knowledge and an agile mindset to the Cloud Summit community.",
-    image: "/images/committee/andrey-black.png",
+    name: 'Andrey Barkov',
+    title: 'Emcee',
+    link: 'https://www.linkedin.com/in/andreybarkov/',
+    bio: 'Andrey is one of the emcees for Cloud Summit Vancouver. He is an experienced software engineer with a background in web applications, cloud infrastructure, and microservices, with expertise across Angular, React, C#, Node.js, Azure, and AWS. He brings strong technical knowledge and an agile mindset to the Cloud Summit community.',
+    image: '/images/committee/andrey-black.png',
   },
   {
-    name: "Warren Lyne",
-    title: "Emcee",
-    link: "https://www.linkedin.com/in/warrenlyne/",
-    bio: "Warren is one of the emcees for Cloud Summit Vancouver. He brings over 20 years of experience across cloud, technical sales, and business development, helping enterprise customers use technology to drive innovation and growth. With deep knowledge of cloud strategy, enterprise solutions, and digital transformation, he combines technical credibility with strong leadership and communication skills.",
-    image: "/images/committee/warren-black.png",
+    name: 'Warren Lyne',
+    title: 'Emcee',
+    link: 'https://www.linkedin.com/in/warrenlyne/',
+    bio: 'Warren is one of the emcees for Cloud Summit Vancouver. He brings over 20 years of experience across cloud, technical sales, and business development, helping enterprise customers use technology to drive innovation and growth. With deep knowledge of cloud strategy, enterprise solutions, and digital transformation, he combines technical credibility with strong leadership and communication skills.',
+    image: '/images/committee/warren-black.png',
   },
   {
-    name: "Fabio Simka Coutinho",
-    title: "Venue and Logistics Co-Lead",
-    link: "https://www.linkedin.com/in/fabio-simka/",
-    bio: "Fabio is the Venue and Logistics Co-Lead for Cloud Summit Vancouver. After 10 years working in healthcare leadership, he transitioned into tech and is now focused on data engineering across AWS, Azure, and Databricks. With experience in high-pressure environments where communication, accountability, and clarity were essential, he brings a thoughtful, dependable approach to building systems and solving problems. His background gives him a strong focus on reliability, real-world impact, and the people behind the data.",
-    image: "/images/committee/fabio-black.png",
+    name: 'Fabio Simka Coutinho',
+    title: 'Venue and Logistics Co-Lead',
+    link: 'https://www.linkedin.com/in/fabio-simka/',
+    bio: 'Fabio is the Venue and Logistics Co-Lead for Cloud Summit Vancouver. After 10 years working in healthcare leadership, he transitioned into tech and is now focused on data engineering across AWS, Azure, and Databricks. With experience in high-pressure environments where communication, accountability, and clarity were essential, he brings a thoughtful, dependable approach to building systems and solving problems. His background gives him a strong focus on reliability, real-world impact, and the people behind the data.',
+    image: '/images/committee/fabio-black.png',
   },
   {
-    name: "Jhan (Shanky) Silva",
-    title: "Sponsorship Lead",
-    link: "https://www.linkedin.com/in/shankyjs/",
-    bio: "Shanky is the Sponsorship Lead for Cloud Summit Vancouver. With a strong background in DevOps, automation, and modern development and deployment practices, he brings a practical, goal-oriented approach to building and improving technical processes. A self-driven learner who enjoys creating agile products, Shanky is passionate about continuous improvement, innovation, and helping great ideas gain momentum.",
-    image: "/images/committee/shanky-black.png",
+    name: 'Jhan (Shanky) Silva',
+    title: 'Sponsorship Lead',
+    link: 'https://www.linkedin.com/in/shankyjs/',
+    bio: 'Shanky is the Sponsorship Lead for Cloud Summit Vancouver. With a strong background in DevOps, automation, and modern development and deployment practices, he brings a practical, goal-oriented approach to building and improving technical processes. A self-driven learner who enjoys creating agile products, Shanky is passionate about continuous improvement, innovation, and helping great ideas gain momentum.',
+    image: '/images/committee/shanky-black.png',
   },
   {
-    name: "Michael Carlos",
-    title: "Speaker and Community Lead",
-    link: "https://www.linkedin.com/in/mcarlos/",
-    bio: "Michael Carlos is the Speaker and Community Lead for Cloud Summit Vancouver. He brings over 30 years of software engineering experience, including two decades leading development teams, along with a deep interest in AI, robotics, game technology, physics, and evolutionary algorithms. His mix of technical depth and visionary thinking helps shape the ideas, conversations, and community that make Cloud Summit stand out.",
-    image: "/images/committee/michael-black.png",
+    name: 'Michael Carlos',
+    title: 'Speaker and Community Lead',
+    link: 'https://www.linkedin.com/in/mcarlos/',
+    bio: 'Michael Carlos is the Speaker and Community Lead for Cloud Summit Vancouver. He brings over 30 years of software engineering experience, including two decades leading development teams, along with a deep interest in AI, robotics, game technology, physics, and evolutionary algorithms. His mix of technical depth and visionary thinking helps shape the ideas, conversations, and community that make Cloud Summit stand out.',
+    image: '/images/committee/michael-black.png',
   },
   {
-    name: "Nichanun Pong (Luck)",
-    title: "Developer Lead",
-    link: "https://www.linkedin.com/in/nichanun-pong/",
-    bio: "Luck is the Developer Lead for Cloud Summit Vancouver. A full-stack developer and product owner, she brings experience across e-commerce, gaming, insurance, and IT, with a focus on building user-centric, data-driven products that connect business goals with strong technical execution. His background includes JavaScript, React, Node.js, PHP, Laravel, SQL, Python, AWS, and Docker.",
-    image: "/images/committee/luck-black.png",
+    name: 'Nichanun Pong (Luck)',
+    title: 'Developer Lead',
+    link: 'https://www.linkedin.com/in/nichanun-pong/',
+    bio: 'Luck is the Developer Lead for Cloud Summit Vancouver. A full-stack developer and product owner, she brings experience across e-commerce, gaming, insurance, and IT, with a focus on building user-centric, data-driven products that connect business goals with strong technical execution. His background includes JavaScript, React, Node.js, PHP, Laravel, SQL, Python, AWS, and Docker.',
+    image: '/images/committee/luck-black.png',
   },
   {
-    name: "Fernando Stoelting",
-    title: "Venue and Logistics Co-Lead",
-    link: "https://www.linkedin.com/in/fstoelting/",
-    bio: "Fernando is the Venue and Logistics Co-Lead for Cloud Summit Vancouver. He brings 8 years of tech leadership experience across Canada, the US, and Latin America, with a focus on delivering meaningful projects, aligning technology with business goals, and building collaborative, high-performing teams.",
-    image: "/images/committee/fernando-black.png",
+    name: 'Fernando Stoelting',
+    title: 'Venue and Logistics Co-Lead',
+    link: 'https://www.linkedin.com/in/fstoelting/',
+    bio: 'Fernando is the Venue and Logistics Co-Lead for Cloud Summit Vancouver. He brings 8 years of tech leadership experience across Canada, the US, and Latin America, with a focus on delivering meaningful projects, aligning technology with business goals, and building collaborative, high-performing teams.',
+    image: '/images/committee/fernando-black.png',
   },
   {
-    name: "Philip Mak",
-    title: "Volunteer Lead",
-    link: "https://www.linkedin.com/in/philip-mak-b2b92823a/",
-    bio: "Philip is the Volunteer Lead for Cloud Summit Vancouver. He is a project management professional with experience leading data-driven technical projects across AI, education technology, and community-focused platforms. With a strong background in collaboration, analytics, and user-centered problem solving, he brings an organized and thoughtful approach to supporting volunteers and helping teams succeed.",
-    image: "/images/committee/philip-black.png",
+    name: 'Philip Mak',
+    title: 'Volunteer Lead',
+    link: 'https://www.linkedin.com/in/philip-mak-b2b92823a/',
+    bio: 'Philip is the Volunteer Lead for Cloud Summit Vancouver. He is a project management professional with experience leading data-driven technical projects across AI, education technology, and community-focused platforms. With a strong background in collaboration, analytics, and user-centered problem solving, he brings an organized and thoughtful approach to supporting volunteers and helping teams succeed.',
+    image: '/images/committee/philip-black.png',
   },
 ];
 
 export const communityPartners: CommunityPartner[] = [
   {
-    name: "AWS",
-    logo: "/images/community-partners/aws-day-logo.png",
+    name: 'AWS',
+    logo: '/images/community-partners/aws-day-logo.png',
   },
   {
-    name: "Google Developer Group",
-    logo: "/images/community-partners/gdg-logo.png",
+    name: 'Google Developer Group',
+    logo: '/images/community-partners/gdg-logo.png',
   },
   {
-    name: "ISACA",
-    logo: "/images/community-partners/ISACA.png",
+    name: 'ISACA',
+    logo: '/images/community-partners/ISACA.png',
   },
   {
-    name: "Hacker Rivals",
-    logo: "/images/community-partners/Logo-Oct25-Black.png",
+    name: 'Hacker Rivals',
+    logo: '/images/community-partners/Logo-Oct25-Black.png',
   },
   {
-    name: "Microsoft",
-    logo: "/images/community-partners/Microsoft_logo.png",
+    name: 'Microsoft',
+    logo: '/images/community-partners/Microsoft_logo.png',
   },
 ];
 
 export const sponsors: Sponsor[] = [
   {
-    ranking: "Platinum",
-    name: "AWS",
-    logo: "/images/sponsors/aws-white.svg",
+    ranking: 'Platinum',
+    name: 'AWS',
+    logo: '/images/sponsors/aws-white.svg',
   },
   {
-    ranking: "Diamond",
-    name: "Fortinet",
-    logo: "/images/sponsors/Fortinet_Logo.png",
+    ranking: 'Diamond',
+    name: 'Fortinet',
+    logo: '/images/sponsors/Fortinet_Logo.png',
   },
 ];
 
 export const faqContent: FAQ[] = [
   {
-    question: "What is Cloud Summit?",
+    question: 'What is Cloud Summit?',
     answer:
-      "Cloud Summit is a community-led tech event bringing together cloud practitioners, developers, architects, security professionals, data teams, and technology leaders for a day of learning, networking, and inspiration.",
+      'Cloud Summit is a community-led tech event bringing together cloud practitioners, developers, architects, security professionals, data teams, and technology leaders for a day of learning, networking, and inspiration.',
   },
   {
-    question: "When is Cloud Summit?",
-    answer: "It takes place on May 1, 2026.",
-  },
-  {
-    question: "Where is the event being held?",
-    answer: "The event is being held at Science World in Vancouver, BC.",
-  },
-  {
-    question: "Who should attend?",
-    answer: "",
-  },
-  {
-    question: "What can I expect at the event?",
+    question: 'When is Cloud Summit?',
     answer:
-      "You can expect a day of technical talks, community connection, community and sponsor booths, networking, interactive experiences, and great conversations with people from across the local tech community.",
+      'For Cloud Summit Vancouver it takes place on May 1, 2026.\nFor Cloud Summit Toronto it takes place on August 29, 2026.',
   },
   {
-    question: "Is this a vendor event?",
+    question: 'Where is the event being held?',
     answer:
-      "No. Cloud Summit is community-led and built to be valuable first. Sponsors help make the event possible, but the goal is to create a genuinely useful and enjoyable experience for attendees.",
+      'For Vancouver the event is being held at Science World in Vancouver, BC.\nFor Toronto the event is being held at Northeastern University in Toronto, ON.',
   },
   {
-    question: "Will there be technical talks?",
+    question: 'Who should attend?',
+    answer: `Cloud Summit is designed for anyone working in or around modern technology, including:
+Cloud engineers and architects
+Developers
+Security professionals
+DevOps and platform teams
+IT leaders
+Students and aspiring technologists
+
+Whether you're deeply technical or just looking to better understand where cloud and AI are heading, there will be something for you.`,
+  },
+  {
+    question: 'What can I expect at the event?',
     answer:
-      "Yes. The event features technical and community-focused sessions from experienced speakers across cloud, AI, security, infrastructure, development, operations, and leadership.",
+      'You can expect a day of technical talks, community connection, community and sponsor booths, networking, interactive experiences, and great conversations with people from across the local tech community.',
   },
   {
-    question: "Is the event only for AWS users?",
+    question: 'Is this a vendor event?',
     answer:
-      "No. Cloud Summit is not limited to one platform. It is designed for the broader cloud and technology community.",
+      'No. Cloud Summit is community-led and built to be valuable first. Sponsors help make the event possible, but the goal is to create a genuinely useful and enjoyable experience for attendees.',
   },
   {
-    question: "Are tickets required?",
+    question: 'Will there be technical talks?',
     answer:
-      "Yes. Attendees need a ticket to attend. You can register through the official event page linked on CloudSummit.ca.",
+      'Yes. The event features technical and community-focused sessions from experienced speakers across cloud, AI, security, infrastructure, development, operations, and leadership.',
   },
   {
-    question: "Are there early bird or discount tickets?",
+    question: 'Is the event only for AWS users?',
     answer:
-      "Ticket pricing may change over time, and discounted pricing may be available during certain periods. Check the event page for the latest ticket details.",
+      'No. Cloud Summit is not limited to one platform. It is designed for the broader cloud and technology community.',
   },
   {
-    question: "What is included with my ticket?",
+    question: 'Are tickets required?',
     answer:
-      "Your ticket includes access to the event, sessions, sponsor area, and community experiences. Food, drinks, swag, or extras may vary depending on the final event plan and sponsors.",
+      'Yes. Attendees need a ticket to attend. You can register through the official event page linked on CloudSummit.ca.',
   },
   {
-    question: "Is the event for beginners or only advanced attendees?",
+    question: 'Are there early bird or discount tickets?',
     answer:
-      "Both. Some sessions will be beginner-friendly, while others will go deeper technically. The event is designed to appeal to a broad range of experience levels.",
+      'Ticket pricing may change over time, and discounted pricing may be available during certain periods. Check the event page for the latest ticket details.',
   },
   {
-    question: "Will the schedule be published in advance",
+    question: 'What is included with my ticket?',
     answer:
-      "Yes. Speaker and schedule details will be released on the website as they are confirmed.",
+      'Your ticket includes access to the event, sessions, sponsor area, and community experiences. Food, drinks, swag, or extras may vary depending on the final event plan and sponsors.',
   },
   {
-    question: "Can I apply to speak?",
+    question: 'Is the event for beginners or only advanced attendees?',
     answer:
-      "Yes. If the call for speakers is open, you can apply through the speaker submission link on CloudSummit.ca",
+      'Both. Some sessions will be beginner-friendly, while others will go deeper technically. The event is designed to appeal to a broad range of experience levels.',
   },
   {
-    question: "Can my company sponsor the event?",
+    question: 'Will the schedule be published in advance?',
     answer:
-      "Yes. Cloud Summit works with sponsors who want to support the local tech community and be part of the event experience. Sponsorship details are available on the website.",
+      'Yes. Speaker and schedule details will be released on the website as they are confirmed.',
   },
   {
-    question: "Can I volunteer?",
+    question: 'Can I apply to speak?',
     answer:
-      "Yes. Volunteers are a big part of what makes Cloud Summit possible. If volunteer applications are open, you can sign up through the website.",
+      'Yes. If the call for speakers is open, you can apply through the speaker submission link on CloudSummit.ca.',
   },
   {
-    question: "Is the venue accessible?",
+    question: 'Can my company sponsor the event?',
     answer:
-      "Both venues in Vancouver and Toronto were selected due to their accessibility. If you have a particular accessibility need, please contact the team in advance.",
+      'Yes. Cloud Summit works with sponsors who want to support the local tech community and be part of the event experience. Sponsorship details are available on the website.',
   },
   {
-    question: "Is there parking at the venue?",
+    question: 'Can I volunteer?',
     answer:
-      "There are parking options near very close to both venues, but availability and pricing may vary. Public transit is also a convenient option for many attendees.",
+      'Yes. Volunteers are a big part of what makes Cloud Summit possible. If volunteer applications are open, you can sign up through the website.',
   },
   {
-    question: "What is the best way to get there?",
+    question: 'Is the venue accessible?',
     answer:
-      "Cloud Summit Vancouver is held at Science World, 1455 Quebec Street. The venue is easy to reach by car, rideshare, public transit, or on foot. The scenic False Creek seawall runs right by Science World, the Main Street–Science World SkyTrain station is directly across the road, and there are two paid parking lots immediately outside the building off Quebec Street.",
+      'Both venues in Vancouver and Toronto were selected due to their accessibility. If you have a particular accessibility need, please contact the team in advance.',
   },
   {
-    question: "Will food and drinks be available?",
+    question: 'Is there parking at the venue?',
     answer:
-      "Food and drinks will be available during the event with a food court lounge on the ground floor and a snack bar on the second floor. ",
+      'There are parking options near very close to both venues, but availability and pricing may vary. Public transit is also a convenient option for many attendees.',
   },
   {
-    question: "Will sessions be recorded?",
-    answer: "Some sessions or event content will be photographed or recorded. ",
+    question: 'What is the best way to get there?',
+    answer: `For Vancouver, Cloud Summit is held at Science World, 1455 Quebec Street. The venue is easy to reach by car, rideshare, public transit, or on foot. The scenic False Creek seawall runs right by Science World, the Main Street–Science World SkyTrain station is directly across the road, and there are two paid parking lots immediately outside the building off Quebec Street.
+
+For Toronto, Cloud Summit is held at Northeastern University, 375 Queen Street West in downtown Toronto. The venue is easy to reach by public transit or on foot, with Osgoode Station about a five-minute walk away and the 501 Queen streetcar stopping nearby in both directions.`,
   },
   {
-    question: "Can I transfer my ticket if I can’t attend?",
-    answer: "We do not offer refunds or exchanges.",
-  },
-  {
-    question: "Is Cloud Summit a nonprofit event?",
+    question: 'Will food and drinks be available?',
     answer:
-      "Yes. Cloud Summit is community-led, and supporting the local community is a core part of the event. Event profits are directed towards the nominated charity and no one from the organizing group, is paid anything. That includes directors to volunteers.",
+      'Food and drinks will be available during the event with a food court lounge on the ground floor and a snack bar on the second floor.',
   },
   {
-    question: "Is there a code of conduct?",
-    answer:
-      "Yes. We want Cloud Summit to be welcoming, inclusive, and respectful for everyone attending. Attendees, speakers, volunteers, and sponsors are all expected to behave professionally and respectfully.",
+    question: 'Will sessions be recorded?',
+    answer: 'Some sessions or event content will be photographed or recorded.',
   },
   {
-    question: "How do I stay updated?",
+    question: 'Can I transfer my ticket if I can’t attend?',
+    answer: 'We do not offer refunds or exchanges.',
+  },
+  {
+    question: 'Is Cloud Summit a nonprofit event?',
     answer:
-      "The best way is to check CloudSummit.ca regularly and follow the event’s social channels for speaker announcements, schedule updates, and new event details.",
+      'Yes. Cloud Summit is community-led, and supporting the local community is a core part of the event. Event profits are directed towards the nominated charity and no one from the organizing group, is paid anything. That includes directors to volunteers.',
+  },
+  {
+    question: 'Is there a code of conduct?',
+    answer:
+      'Yes. We want Cloud Summit to be welcoming, inclusive, and respectful for everyone attending. Attendees, speakers, volunteers, and sponsors are all expected to behave professionally and respectfully.',
+  },
+  {
+    question: 'How do I stay updated?',
+    answer:
+      'The best way is to check CloudSummit.ca regularly and follow the event’s social channels for speaker announcements, schedule updates, and new event details.',
   },
 ];

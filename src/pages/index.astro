@@ -19,26 +19,7 @@ import Sponsors from "../components/Sponsors.astro";
 import CommunityPartners from "../components/CommunityPartners.astro";
 import LocalCharitySection from "../components/LocalCharitySection.astro";
 import FAQ from "../components/FAQ.astro";
-import Navigation from '../components/Navigation.astro';
-import Hero from '../components/Hero.astro';
-import CityModal from '../components/CityModal.astro';
-import AboutCPCA from '../components/AboutCPCA.astro';
-import WhatIsCloudSummit from '../components/WhatIsCloudSummit.astro';
-import EventLocations from '../components/EventLocations.astro';
-import EventMap from '../components/EventMap.astro';
-import CloudSummitActivities from '../components/CloudSummitActivities.astro';
-import SummitSummary from '../components/SummitSummary.astro';
-import HighlightReel from '../components/HighlightReel.astro';
-import Ticker from '../components/Ticker.astro';
-import PastSponsors from '../components/PastSponsors.astro';
-import Newsletter from '../components/Newsletter.astro';
-import Footer from '../components/Footer.astro';
-import SeeYouThere from '../components/SeeYouThere.astro';
-import ScrollAnimations from '../components/ScrollAnimations.astro';
-import Committee from '../components/Committee.astro';
-import Sponsors from '../components/Sponsors.astro';
-import CommunityPartners from '../components/CommunityPartners.astro';
-import LocalCharitySection from '../components/LocalCharitySection.astro';
+import Committee from "../components/Committee.astro";
 
 import VenueLogisticsSectionSecondVersion from "../components/VenueLogisticsSectionSecondVersion.astro";
 import {
@@ -56,28 +37,11 @@ import {
   defaultCity,
   venueLogisticsContentNewVersion,
   speakerContent,
+  committeeContent,
   faqContent,
 } from "../lib/content";
 import Schedule from "../components/Schedule.astro";
 import Speaker from "../components/Speaker.astro";
-	heroContent,
-	navigationContent,
-	aboutCPCAContent,
-	whatIsCloudSummitContent,
-	cloudSummitActivitiesContent,
-	eventHighlightsContent,
-	tickerContent,
-	eventMapContent,
-	pastSponsorsContent,
-	newsletterContent,
-	footerContent,
-	defaultCity,
-	venueLogisticsContentNewVersion,
-	speakerContent,
-	committeeContent,
-} from '../lib/content';
-import Schedule from '../components/Schedule.astro';
-import Speaker from '../components/Speaker.astro';
 
 // Use default city for venueLogisticsContentNewVersionSSR, will be updated client-side
 const content = heroContent[defaultCity];
@@ -166,7 +130,7 @@ const torontoDescription =
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Squada+One&family=Noto+Sans:wght@400;500;600;700&family=Doto:wght@100..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Squada+One&family=Noto+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link
@@ -194,6 +158,8 @@ const torontoDescription =
     <PastSponsors content={pastSponsorsContent} />
     <LocalCharitySection />
 
+    <Committee content={committeeContent} />
+
     <VenueLogisticsSectionSecondVersion
       content={venueLogisticsContentNewVersion}
     />
@@ -208,56 +174,6 @@ const torontoDescription =
     <script>
       import { getCityStore } from "../lib/cityStore";
       import type { City } from "../lib/content";
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<meta name="keywords" content={defaultSeoKeywords} data-seo-keywords />
-		<meta name="description" content={homepageDescription} data-seo-description />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link href="https://fonts.googleapis.com/css2?family=Squada+One&family=Noto+Sans:wght@400;500;600;700&family=Doto:wght@100..900&display=swap" rel="stylesheet" />
-		<link
-			rel="stylesheet"
-			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-			referrerpolicy="no-referrer"
-		/>
-		<title>{homepageTitle}</title>
-	</head>
-	<body>
-		<CityModal />
-		<Navigation content={navigationContent} />		
-		<Hero content={content} />
-		<WhatIsCloudSummit content={whatIsCloudSummitContent} />
-		<CloudSummitActivities content={cloudSummitActivitiesContent} />
-		<AboutCPCA content={aboutCPCAContent} />
-		<EventLocations />
-		<Schedule />
-		<Speaker content={speakerContent} />
-		<SummitSummary content={eventHighlightsContent} />
-		<HighlightReel content={eventHighlightsContent} />
-		<Ticker content={tickerContent} />
-		<CommunityPartners></CommunityPartners>
-		<Sponsors />		
-		<PastSponsors content={pastSponsorsContent} />
-		<LocalCharitySection />
-		 
-			
-		
-		<Committee content={committeeContent} />
-
-		<VenueLogisticsSectionSecondVersion content={venueLogisticsContentNewVersion} />
-
-		<EventMap content={eventMapContent} />
-		<Newsletter content={newsletterContent} />
-		<SeeYouThere />
-		<Footer content={footerContent} />
-		<ScrollAnimations />
-		<!-- <Hero content={content} splineUrl="https://prod.spline.design/WKCpgqTWJIavlH1L/scene.splinecode" /> -->
-		<script>
-			import { getCityStore } from '../lib/cityStore';
-			import type { City } from '../lib/content';
 
       const homepageKeywords = [
         "cloud summit canada",
@@ -397,18 +313,16 @@ const torontoDescription =
     box-sizing: border-box;
   }
 
+  /* Homepage typography: display vs body (single source of truth) */
+  :root {
+    --font-display: "Squada One", system-ui, sans-serif;
+    --font-body:
+      "Noto Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  }
+
   html {
-    font-family:
-      "Noto Sans",
-      system-ui,
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      Roboto,
-      Oxygen,
-      Ubuntu,
-      Cantarell,
-      sans-serif;
+    font-family: var(--font-body);
     line-height: 1.6;
     color: #1a1a1a;
   }
@@ -423,7 +337,7 @@ const torontoDescription =
   .hero-title,
   .modal-title,
   .city-name {
-    font-family: "Squada One", system-ui, sans-serif;
+    font-family: var(--font-display);
     font-weight: 400;
     letter-spacing: 0.02em;
   }
@@ -434,17 +348,7 @@ const torontoDescription =
   li,
   div,
   body {
-    font-family:
-      "Noto Sans",
-      system-ui,
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      Roboto,
-      Oxygen,
-      Ubuntu,
-      Cantarell,
-      sans-serif;
+    font-family: var(--font-body);
   }
 
   @media (prefers-color-scheme: dark) {
