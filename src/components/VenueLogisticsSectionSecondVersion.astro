@@ -101,11 +101,14 @@ function afterFooterLinks(item: VenueLogisticsBase) {
   );
 }
 
-const allCitiesLogistics = Object.values(content);
+const cityEntries = Object.entries(content) as [
+  City,
+  VenueLogisticsSectionNewVersion,
+][];
 ---
 
 {
-  allCitiesLogistics.map((cityData) => (
+  cityEntries.map(([cityKey, cityData]) => (
     <div
       data-city-box
       {...{ [`data-city-${cityData.CityTitle.toLowerCase()}-box`]: true }}
@@ -686,6 +689,7 @@ const allCitiesLogistics = Object.values(content);
 <script>
   import type { City } from "../lib/content";
   import { getCityStore } from "../lib/cityStore";
+  import type { City } from "../lib/content";
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initCityAwareNav);

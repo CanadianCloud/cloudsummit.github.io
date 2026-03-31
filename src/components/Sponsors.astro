@@ -1,0 +1,210 @@
+---
+import { sponsors } from "../lib/content"
+const platinumSponsors = sponsors.filter(sponsor => sponsor.ranking === 'Platinum');
+const diamondSponsors = sponsors.filter(sponsors => sponsors.ranking === 'Diamond');
+---
+
+<section class="sponsors">
+    <h2 class="sponsors-heading">
+        <span class="sponsors-prefix">Our </span>
+        Sponsors
+    </h2>
+    <div class="sponsors-cards">
+        <div class="sponsor-card">
+            <h3 id="sponsors-platinum" class="sponsor-card-title">Platinum</h3>
+            <div class="sponsor-divider" aria-hidden="true"></div>
+            <div class="sponsor-logos">
+                {platinumSponsors.map((sponsor) => {
+                    return (
+                        <figure class="sponsor-platinum">
+                            <img class="sponsor-logo" src={sponsor.logo}/>
+                            {sponsor.name !== 'AWS' && (
+                                <p class="sponsor-name">{sponsor.name}</p>
+                            )}
+                        </figure>
+                    );
+                })}
+            </div>
+        </div>
+
+        <div class="sponsor-card">
+            <h3 id="sponsors-diamond" class="sponsor-card-title">Diamond</h3>
+            <div class="sponsor-divider" aria-hidden="true"></div>
+            <div class="sponsor-logos">
+                {diamondSponsors.map((sponsor) => {
+                    return (
+                        <figure class="sponsor-diamond">
+                            {sponsor.name === 'Fortinet' ? (
+                                <div id="fortinet-bg">
+                                    <img class="sponsor-logo" id="fortinet" src={sponsor.logo}/>
+                                </div>
+                            ) : (
+                                <img class="sponsor-logo" src={sponsor.logo}/>
+                            )}
+                            {sponsor.name !== 'Fortinet' && (
+                                <p class="sponsor-name">{sponsor.name}</p>
+                            )}
+                        </figure>
+                    );
+                })}
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .sponsors {
+        text-align: center;
+    }
+    .sponsors-heading {
+        font-family: 'Squada One', system-ui, sans-serif;
+		font-size: 2.5rem;
+		font-weight: 400;
+		margin: 0 0 1rem 0;
+		line-height: 1.2;
+		letter-spacing: 0.02em;
+		color: rgb(168, 251, 90);
+    }
+
+    .sponsors-prefix {
+        color: white;
+        font-family: 'Squada One', system-ui, sans-serif;
+        font-size: 2.5rem;
+        font-weight: 400;
+        letter-spacing: 0.02em;
+    }
+
+    @media (min-width: 769px) {
+        .sponsors-heading {
+            font-size: 4rem;
+        }
+
+        .sponsors-prefix {
+            font-size: 4rem;
+        }
+    }
+
+    .sponsors-cards {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        padding: 0 1.5rem;
+    }
+
+    .sponsor-card {
+        flex: 1 1 calc(50% - 0.75rem);
+    }
+
+    @media (min-width: 769px) {
+        .sponsors-cards {
+            flex-direction: row;
+            flex-wrap: nowrap;
+            gap: 2.5rem;
+            padding: 0;
+        }
+
+        .sponsor-card {
+            flex: 1;
+        }
+    }
+
+    .sponsor-card {
+        background: rgba(61, 120, 171, 0.1);
+        border: 1px solid rgba(61, 120, 171, 0.2);
+        border-radius: 1rem;
+        padding: 3rem 1.5rem 3rem;
+        overflow: hidden;
+    }
+
+    @media (min-width: 769px) {
+        .sponsor-card {
+            padding: 1rem 2rem 4rem;
+        }
+    }
+
+    .sponsor-card-title {
+        font-family: 'Squada One', system-ui, sans-serif;
+        font-size: 1.5rem;
+        font-weight: 400;
+        margin: 0;
+        line-height: 1.1;
+    }
+
+    .sponsor-divider {
+        height: 0;
+        width: 100%;
+        margin: 0.75rem auto 2.25rem auto;
+        border-top: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        background: transparent;
+        border-radius: 0;
+        display: block;
+    }
+
+    .sponsor-logos {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .sponsor-platinum,
+    .sponsor-diamond {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .sponsor-logo {
+        max-width: 50%;
+    }
+    #sponsors-platinum {
+        color: #6ABAC3;
+    }
+    #sponsors-diamond {
+        color: #B367B3;
+    }
+    #fortinet-bg {
+        display: flex;
+        justify-content: center;
+        justify-self: center;
+    }
+    #fortinet {
+        display: flex;
+        justify-self: center;
+        align-self: center;
+        width: auto;
+        max-width: 55%;
+        max-height: 70px;
+        object-fit: contain;
+    }
+
+    .sponsor-name {
+        margin: 0;
+        font-size: 1.1rem;
+        color: white;
+        opacity: 0.95;
+        font-family: 'Noto Sans', system-ui, sans-serif;
+    }
+
+    @media (min-width: 769px) {
+        .sponsor-card-title {
+            font-size: 2.25rem;
+        }
+
+        .sponsor-logo {
+            max-width: 65%;
+        }
+
+        #fortinet {
+            max-width: 60%;
+            max-height: 90px;
+        }
+    }
+</style>

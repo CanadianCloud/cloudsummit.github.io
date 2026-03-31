@@ -41,7 +41,26 @@ export interface NavigationContent {
   // ctaHref: string; Disabled as part of Issue #3 (Header & Navigation update)
 }
 
-export type City = 'vancouver' | 'toronto';
+interface CommunityPartners {
+  name: string;
+  logo: string;
+}
+
+interface Sponsors {
+  ranking: "Gold" | "Platinum" | "Diamond";
+  name: string;
+  logo: string;
+}
+
+export interface Speaker {
+  speakername: string;
+  title: string;
+  company: string;
+  topic: string;
+  image: string;
+}
+
+export type City = "vancouver" | "toronto";
 
 export const defaultCity: City = 'vancouver';
 
@@ -49,6 +68,8 @@ export const defaultCity: City = 'vancouver';
 export const sharedHeroContent = {
   title: 'Cloud Summit 2026',
   subtitle: "Sponsor Canada's Largest Multi-Cloud Conference",
+  description:
+    "Cloud Summit 2026 is Canada's multi-cloud conference, bringing together cloud professionals, developers, architects, sponsors, and communities in Vancouver and Toronto.",
   primaryCta: {
     text: 'Become a Volunteer',
     href: 'https://tally.so/r/mBVZjA',
@@ -136,7 +157,7 @@ export function getNavigationContent(city: City): NavigationContent {
   return {
     links: [
       { text: 'Get Tickets', href: citySpecificContent[city].ticketUrl },
-      { text: 'Apply to Volunteer', href: sharedHeroContent.primaryCta.href },     
+      { text: 'Apply to Volunteer', href: sharedHeroContent.primaryCta.href },
     ]
   };
 }
@@ -348,19 +369,85 @@ export const eventMapContent = {
 
 export type EventMapContent = typeof eventMapContent;
 
+// Venue logistics (city-specific)
+export interface VenueLink {
+  url: string;
+  text: string;
+}
+
+export interface VenueLogisticsBase {
+  title: string;
+  bullets: string[];
+  externalLink?: VenueLink[];
+}
+
+export interface VenueLogisticsSectionNewVersion {
+  // Subtitle under "Venue Logistics" header (e.g. "Vancouver · Science World")
+  venueLabel: string;
+  section: VenueLogisticsBase[];
+}
+
+export const venueLogisticsContentNewVersion: Record<
+  City,
+  VenueLogisticsSectionNewVersion
+> = {
+  vancouver: {
+    venueLabel: "This is Intro Of Vancouver Venue",
+    section: [
+      {
+        title: "Getting Here",
+        bullets: [
+          "1455 Quebec Street",
+          "Vancouver, BC, V6A 3Z7",
+          "604.443.7440",
+          "Science World is located along the False Creek Seawall and is easily reached by transit and walking routes.",
+        ],
+      },
+      {
+        title: "Transit",
+        bullets: [
+          "Science World is near the Main Street-Science World Skytrain Station (Expo Line).",
+          "A short walk from bus stops at Main and Terminal.",
+        ],
+      },
+      {
+        title: "Parking",
+        bullets: [
+          "Limited pay parking spaces are available for visitors who drive.",
+          "Parking rates and details will be shared closer to the event date.",
+        ],
+      },
+    ],
+  },
+  toronto: {
+    venueLabel: "Toronto · Northeastern University",
+    section: [],
+  },
+};
+
+export type VenueLogisticsContent = typeof venueLogisticsContentNewVersion;
+
 // Helper function to get footer content with city-specific ticket URL
 export function getFooterContent(city: City) {
   return {
     copyright: 'Cloud Summit. All rights reserved.',
     links: [
-      { text: 'About Cloud Summit', href: '/about-cloud-summit' },
-      { text: 'Our Event Team', href: '/our-team' },
-      { text: 'Call for Speakers', href: '/our-speakers' },
-      { text: 'Sponsorship Info', href: '/our-sponsors' },
-      {
-        text: 'Get Earlybird Tickets',
-        href: citySpecificContent[city].ticketUrl,
-      },
+
+      { col: 1, text: 'Get a Ticket', href: citySpecificContent[city].ticketUrl },
+      { col: 1, text: 'Call for Speakers', href: '/our-speakers/' },
+      { col: 1, text: 'Become a Sponsor', href: 'https://tally.so/r/wLqXvO' },
+      { col: 1, text: 'Apply to Volunteer', href: 'https://tally.so/r/mBVZjA' },
+      { col: 1, text: 'Enter Hackathon', href: 'https://hackerrivals.com/' },
+
+      { col: 2, text: 'Press Release', href: '/archive/2025/index.html' },
+      { col: 2, text: 'About Cloud Summit', href: '/about-cloud-summit/' },
+      { col: 2, text: 'Subscribe to Newsletter', href: 'https://tally.so/r/mR6RBl' },
+      // { col: 2, text: 'Our Event Team', href: '/our-team' },
+      // { col: 2, text: 'Sponsorship Info', href: '/our-sponsors' },
+
+      { col: 3, text: '2025', href: '/archive/2025/index.html' },
+      { col: 3, text: '2024', href: '/archive/2024.html' },
+
     ],
     social: [
       {
@@ -371,14 +458,25 @@ export function getFooterContent(city: City) {
         name: 'LinkedIn',
         url: 'https://www.linkedin.com/showcase/vancouvercloudsummit',
       },
-    ],
-    pressReleases: [
-      { text: '2025 Press Release', href: 'https://cloudsummit.ca/press' },
-    ],
+    ],    
+    // pressReleases: [
+    //   { text: '2025 Press Release', href: '/archive/2025/index.html' },
+    // ],
     previousYears: [
-      { text: '2025', href: 'https://cloudsummit.ca/archive/2025/index.html' },
-      { text: '2024', href: 'https://cloudsummit.ca/archive/2024.html' },
+      { text: '2025', href: '/archive/2025/index.html' },
+      { text: '2024', href: '/archive/2024.html' },
     ],
+
+    newsletter: 
+      {
+        prefix: 'Stay',
+        heading: 'Connected',
+        description:
+          'Subscribe to our newsletter to receive the latest updates about Cloud Summit 2026, speaker announcements, and exclusive content.',
+        ctaText: 'Subscribe to Newsletter',
+        ctaHref: 'https://tally.so/r/mR6RBl',
+      }
+    ,
   };
 }
 
@@ -539,19 +637,84 @@ export const venueLogisticsContentNewVersion: Record<City, VenueLogisticsSection
 
     ],
 
+export const speakerContent: Speaker[] = [
+  {
+    speakername: "Matt Biilmann",
+    title: "CEO and Co-Founder",
+    company: "Netlify",
+    topic: "AX and Why It Matters",
+    image: "/images/previous-speakers/matt-biilmann.png",
   },
-  toronto: {
-    CityTitle: 'Toronto',
-    intro: 'Comming Soon',
-    section: [
-    ],
+  {
+    speakername: "Eric Johnson",
+    title: "Principal Developer Advocate",
+    company: "Amazon Web Services (AWS)",
+    topic: "Taking GenAI from Paper to Production with Serverless",
+    image: "/images/previous-speakers/eric-johnson.png",
   },
+  {
+    speakername: "Ahmad Awais",
+    title: "CEO",
+    company: "Langbase",
+    topic: "Why the Best AI Agents Are Built Without Frameworks",
+    image: "/images/previous-speakers/ahmad-awais.jpg",
+  },
+  {
+    speakername: "Luca Maraschi",
+    title: "Co-Founder & CEO",
+    company: "Platformatic",
+    topic: "Scaling Node.js in Kubernetes: Metrics, Memory, and Mastery",
+    image: "/images/previous-speakers/luca-maraschi.png",
+  },
+  {
+    speakername: "Denis Astahov",
+    title: "Solutions Architect",
+    company: "OpsGuru",
+    topic: "How to become Cloud/DevOps Engineer from Zero",
+    image: "/images/previous-speakers/denis-astahov.png",
+  },
+  {
+    speakername: "Aiman Parvaiz",
+    title: "Director of DevOps",
+    company: "NimbusStack",
+    topic: "Driving Cloud Cost Efficiency: Multi-Cloud Strategies",
+    image: "/images/previous-speakers/aiman-parvaiz.png",
+  },
+];
 
-}
+export const communityPartners: CommunityPartners[] = [
+  {
+    name: 'AWS',
+    logo: '../../public/images/community-partners/aws-day-logo.png'
+  },
+  {
+    name: 'Google Developer Group',
+    logo: '../../public/images/community-partners/gdg-logo.png'
+  },
+  {
+    name: 'ISACA',
+    logo: '../../public/images/community-partners/ISACA.png'
+  },
+  {
+    name: 'Hacker Rivals',
+    logo: '../../public/images/community-partners/Logo-Oct25-Black.png'
+  },
+  {
+    name: 'Microsoft',
+    logo: '../../public/images/community-partners/Microsoft_logo.png'
+  }
+]
 
-
-
-
-
-
+export const sponsors: Sponsors[] = [
+  {
+    ranking: 'Platinum',
+    name: 'AWS',
+    logo: '../../public/images/sponsors/aws-white.svg'
+  },
+  {
+    ranking: 'Diamond',
+    name: 'Fortinet',
+    logo: '../../public/images/sponsors/Fortinet_Logo.png'
+  }
+]
 
