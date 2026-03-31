@@ -68,8 +68,7 @@ export const defaultCity: City = 'vancouver';
 export const sharedHeroContent = {
   title: 'Cloud Summit 2026',
   subtitle: "Sponsor Canada's Largest Multi-Cloud Conference",
-  description:
-    "Cloud Summit 2026 is Canada's multi-cloud conference, bringing together cloud professionals, developers, architects, sponsors, and communities in Vancouver and Toronto.",
+  description: '',
   primaryCta: {
     text: 'Become a Volunteer',
     href: 'https://tally.so/r/mBVZjA',
