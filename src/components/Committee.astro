@@ -74,7 +74,7 @@ const { content } = Astro.props;
 
   .committee-image {
     width: 150px;
-    height: 150px;
+    /* height: 150px; */
     margin: 0 auto 1.5rem;
     border-radius: 20%;
     overflow: hidden;
@@ -98,7 +98,8 @@ const { content } = Astro.props;
     color: white;
   }
 
-  .committee-title {
+  .committee-title,
+  .committee-link {
     font-size: 1rem;
     margin: 0 0 0.25rem 0;
     font-weight: 600;
@@ -132,17 +133,27 @@ const { content } = Astro.props;
     }
 
     .committee-grid {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 1rem;
     }
 
     .committee-image {
-      width: 100%;
-      height: 180px;
+      width: 50%;
+      /* height: 100px; */
       border-radius: 1rem;
     }
+
+    .committee-info {
+      width: 70%;
+    }
+
     .committee-bio {
-      font-size: 0.75rem;
+      font-size: 0.8rem;
+    }
+    .committee-card {
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
     }
   }
 </style>
