@@ -41,12 +41,20 @@ export interface NavigationContent {
   // ctaHref: string; Disabled as part of Issue #3 (Header & Navigation update)
 }
 
-interface CommunityPartners {
+export interface Committee {
+  name: string;
+  title: string;
+  link: string;
+  bio: string;
+  image: string;
+}
+
+export interface CommunityPartner {
   name: string;
   logo: string;
 }
 
-interface Sponsors {
+export interface Sponsor {
   ranking: "Gold" | "Platinum" | "Diamond";
   name: string;
   logo: string;
@@ -643,7 +651,80 @@ export const speakerContent: Speaker[] = [
   },
 ];
 
-export const communityPartners: CommunityPartners[] = [
+export const committeeContent: Committee[] = [
+  {
+    name: "Matt Carolan",
+    title: "Event Director",
+    link: "https://www.linkedin.com/in/matthewcarolan/",
+    bio: "Matt Carolan is the founder of Cloud Summit and a cloud and security leader with deep experience in platform engineering, enterprise architecture, and cloud transformation. He helps organizations make clear, practical decisions across security, cost, resilience, and operational complexity, combining hands-on technical depth with a global perspective shaped by living and working across Australia, Dubai, Seattle, and Vancouver.",
+    image: "/images/committee/matt-black.png",
+  },
+  {
+    name: "Bibi Souza",
+    title: "Mentor",
+    link: "https://www.linkedin.com/in/bibschan/",
+    bio: "Bibi is a community builder and strategic leader with experience across software engineering, project management, and advocacy. She is passionate about bringing people together and helping them grow, with a strong track record of turning fragmented audiences into thriving communities. As an exited founder, she brings an experimental mindset, a bias toward action, and thoughtful risk-taking to everything she builds. At Cloud Summit, she helps shape community with intention, energy, and purpose.",
+    image: "/images/committee/bibi-black.png",
+  },
+  {
+    name: "Andrey Barkov",
+    title: "Emcee",
+    link: "https://www.linkedin.com/in/andreybarkov/",
+    bio: "Andrey is one of the emcees for Cloud Summit Vancouver. He is an experienced software engineer with a background in web applications, cloud infrastructure, and microservices, with expertise across Angular, React, C#, Node.js, Azure, and AWS. He brings strong technical knowledge and an agile mindset to the Cloud Summit community.",
+    image: "/images/committee/andrey-black.png",
+  },
+  {
+    name: "Warren Lyne",
+    title: "Emcee",
+    link: "https://www.linkedin.com/in/warrenlyne/",
+    bio: "Warren is one of the emcees for Cloud Summit Vancouver. He brings over 20 years of experience across cloud, technical sales, and business development, helping enterprise customers use technology to drive innovation and growth. With deep knowledge of cloud strategy, enterprise solutions, and digital transformation, he combines technical credibility with strong leadership and communication skills.",
+    image: "/images/committee/warren-black.png",
+  },
+  {
+    name: "Fabio Simka Coutinho",
+    title: "Venue and Logistics Co-Lead",
+    link: "https://www.linkedin.com/in/fabio-simka/",
+    bio: "Fabio is the Venue and Logistics Co-Lead for Cloud Summit Vancouver. After 10 years working in healthcare leadership, he transitioned into tech and is now focused on data engineering across AWS, Azure, and Databricks. With experience in high-pressure environments where communication, accountability, and clarity were essential, he brings a thoughtful, dependable approach to building systems and solving problems. His background gives him a strong focus on reliability, real-world impact, and the people behind the data.",
+    image: "/images/committee/fabio-black.png",
+  },
+  {
+    name: "Jhan (Shanky) Silva",
+    title: "Sponsorship Lead",
+    link: "https://www.linkedin.com/in/shankyjs/",
+    bio: "Shanky is the Sponsorship Lead for Cloud Summit Vancouver. With a strong background in DevOps, automation, and modern development and deployment practices, he brings a practical, goal-oriented approach to building and improving technical processes. A self-driven learner who enjoys creating agile products, Shanky is passionate about continuous improvement, innovation, and helping great ideas gain momentum.",
+    image: "/images/committee/shanky-black.png",
+  },
+  {
+    name: "Michael Carlos",
+    title: "Speaker and Community Lead",
+    link: "https://www.linkedin.com/in/mcarlos/",
+    bio: "Michael Carlos is the Speaker and Community Lead for Cloud Summit Vancouver. He brings over 30 years of software engineering experience, including two decades leading development teams, along with a deep interest in AI, robotics, game technology, physics, and evolutionary algorithms. His mix of technical depth and visionary thinking helps shape the ideas, conversations, and community that make Cloud Summit stand out.",
+    image: "/images/committee/michael-black.png",
+  },
+  {
+    name: "Nichanun Pong (Luck)",
+    title: "Developer Lead",
+    link: "https://www.linkedin.com/in/nichanun-pong/",
+    bio: "Luck is the Developer Lead for Cloud Summit Vancouver. A full-stack developer and product owner, she brings experience across e-commerce, gaming, insurance, and IT, with a focus on building user-centric, data-driven products that connect business goals with strong technical execution. His background includes JavaScript, React, Node.js, PHP, Laravel, SQL, Python, AWS, and Docker.",
+    image: "/images/committee/luck-black.png",
+  },
+  {
+    name: "Fernando Stoelting",
+    title: "Venue and Logistics Co-Lead",
+    link: "https://www.linkedin.com/in/fstoelting/",
+    bio: "Fernando is the Venue and Logistics Co-Lead for Cloud Summit Vancouver. He brings 8 years of tech leadership experience across Canada, the US, and Latin America, with a focus on delivering meaningful projects, aligning technology with business goals, and building collaborative, high-performing teams.",
+    image: "/images/committee/fernando-black.png",
+  },
+  {
+    name: "Philip Mak",
+    title: "Volunteer Lead",
+    link: "https://www.linkedin.com/in/philip-mak-b2b92823a/",
+    bio: "Philip is the Volunteer Lead for Cloud Summit Vancouver. He is a project management professional with experience leading data-driven technical projects across AI, education technology, and community-focused platforms. With a strong background in collaboration, analytics, and user-centered problem solving, he brings an organized and thoughtful approach to supporting volunteers and helping teams succeed.",
+    image: "/images/committee/philip-black.png",
+  },
+];
+
+export const communityPartners: CommunityPartner[] = [
   {
     name: "AWS",
     logo: "/images/community-partners/aws-day-logo.png",
@@ -666,7 +747,7 @@ export const communityPartners: CommunityPartners[] = [
   },
 ];
 
-export const sponsors: Sponsors[] = [
+export const sponsors: Sponsor[] = [
   {
     ranking: "Platinum",
     name: "AWS",
