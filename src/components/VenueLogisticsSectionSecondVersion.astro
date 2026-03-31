@@ -107,8 +107,9 @@ const cityEntries = Object.entries(content) as [
 ][];
 ---
 
-{
-  cityEntries.map(([cityKey, cityData]) => (
+<section class="venue-logistics-section" aria-label="Venue logistics">
+  {
+    cityEntries.map(([cityKey, cityData]) => (
     <div
       data-city-box
       {...{ [`data-city-${cityData.CityTitle.toLowerCase()}-box`]: true }}
@@ -325,9 +326,14 @@ const cityEntries = Object.entries(content) as [
       </div>
     </div>
   ))
-}
+  }
+</section>
 
 <style>
+  .venue-logistics-section.venue-logistics-section--hidden {
+    display: none !important;
+  }
+
   .hidden-city {
     display: none !important;
   }
@@ -689,7 +695,6 @@ const cityEntries = Object.entries(content) as [
 <script>
   import type { City } from "../lib/content";
   import { getCityStore } from "../lib/cityStore";
-  import type { City } from "../lib/content";
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initCityAwareNav);
@@ -697,9 +702,18 @@ const cityEntries = Object.entries(content) as [
     initCityAwareNav();
   }
 
+  function syncVenueLogisticsSectionVisibility(city: City) {
+    const section = document.querySelector(".venue-logistics-section");
+    if (!section) return;
+    const show = city === "vancouver";
+    section.classList.toggle("venue-logistics-section--hidden", !show);
+    section.setAttribute("aria-hidden", show ? "false" : "true");
+  }
+
   function toggleVenueLogistics() {
     const cityStore = getCityStore();
     const currentCity = cityStore.getCity();
+    syncVenueLogisticsSectionVisibility(currentCity);
     document.querySelectorAll("[data-city-box]").forEach((box) => {
       box.classList.add("hidden-city");
     });
