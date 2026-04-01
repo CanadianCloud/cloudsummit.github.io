@@ -2,145 +2,17 @@
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import ScrollAnimations from '../components/ScrollAnimations.astro';
-import { navigationContent, footerContent, citySpecificContent } from '../lib/content';
+import { navigationContent, footerContent, citySpecificContent, speakerContent } from '../lib/content';
 import GoogleAnalytics from '../components/GoogleAnalytics.astro';
 import SeoSocial from '../components/SeoSocial.astro';
 import { absoluteUrl, DEFAULT_OG_IMAGE_PATH, getCanonical } from '../lib/seo';
 
 const pageTitle = 'Call for Speakers - Cloud Summit 2026';
 const pageDescription =
-	"Meet past Cloud Summit speakers and submit your talk for Canada's premier multi-cloud conference in Vancouver and Toronto.";
+	"Meet Cloud Summit 2026 featured speakers and submit your talk for Canada's premier multi-cloud conference in Vancouver and Toronto.";
 const canonicalUrl = getCanonical(Astro);
 const ogImageUrl = absoluteUrl(DEFAULT_OG_IMAGE_PATH, Astro);
 
-const speakers = [
-	{
-		name: 'Matt Biilmann',
-		title: 'CEO and Co-Founder',
-		company: 'Netlify',
-		topic: 'AX and Why It Matters',
-		image: '/images/previous-speakers/matt-biilmann.png',
-	},
-	{
-		name: 'Eric Johnson',
-		title: 'Principal Developer Advocate',
-		company: 'Amazon Web Services (AWS)',
-		topic: 'Taking GenAI from Paper to Production with Serverless',
-		image: '/images/previous-speakers/eric-johnson.png',
-	},
-	{
-		name: 'Ahmad Awais',
-		title: 'CEO',
-		company: 'Langbase',
-		topic: 'Why the Best AI Agents Are Built Without Frameworks',
-		image: '/images/previous-speakers/ahmad-awais.jpg',
-	},
-	{
-		name: 'Luca Maraschi',
-		title: 'Co-Founder & CEO',
-		company: 'Platformatic',
-		topic: 'Scaling Node.js in Kubernetes: Metrics, Memory, and Mastery',
-		image: '/images/previous-speakers/luca-maraschi.png',
-	},
-	{
-		name: 'Denis Astahov',
-		title: 'Solutions Architect',
-		company: 'OpsGuru',
-		topic: 'How to become Cloud/DevOps Engineer from Zero',
-		image: '/images/previous-speakers/denis-astahov.png',
-	},
-	{
-		name: 'Aiman Parvaiz',
-		title: 'Director of DevOps',
-		company: 'NimbusStack',
-		topic: 'Driving Cloud Cost Efficiency: Multi-Cloud Strategies',
-		image: '/images/previous-speakers/aiman-parvaiz.png',
-	},
-	{
-		name: 'Brian Clendenin',
-		title: 'Enterprise Sales - Strategic',
-		company: 'Datadog',
-		topic: 'The Business Value of Observability in the Age of AI',
-		image: '/images/previous-speakers/brian-clendenin.png',
-	},
-	{
-		name: 'Farzad Khandan',
-		title: 'CTO & Co-Founder',
-		company: 'Innovimia Technologies',
-		topic: 'Building your Startups in the Cloud? Dos and Don\'ts',
-		image: '/images/previous-speakers/farzad khandan.jpeg',
-	},
-	{
-		name: 'Gabriel Caldwell',
-		title: 'CTO',
-		company: 'Tsunami Solutions',
-		topic: 'Cloud, AI & the Rise of the Next Billion-Dollar Idea',
-		image: '/images/previous-speakers/gabriel-caldwell.jpg',
-	},
-	{
-		name: 'Adetokunbo Ige',
-		title: 'Sr. DevOps Engineer',
-		company: 'Planview',
-		topic: 'Build and Deploy Dockerize Python Application to Azure',
-		image: '/images/previous-speakers/adetokunbo-ige.png',
-	},
-	{
-		name: 'Herman Chandi',
-		title: 'Cofounder & COO',
-		company: 'UrbanLogiq',
-		topic: 'Cloud, AI & the Rise of the Next Billion-Dollar Idea',
-		image: '/images/previous-speakers/herman-chandi.jpg',
-	},
-	{
-		name: 'Mark Gamble',
-		title: 'Director, Product and Solutions Marketing',
-		company: 'Couchbase',
-		topic: 'Modern Database Architecture',
-		image: '/images/previous-speakers/mark-gamble.jpg',
-	},
-	{
-		name: 'Matteo Collina',
-		title: 'Co-Founder & CTO',
-		company: 'Platformatic',
-		topic: 'Node.js Performance',
-		image: '/images/previous-speakers/matteo-collina.png',
-	},
-	{
-		name: 'Niti Jain',
-		title: 'Cloud Architect',
-		company: 'Microsoft',
-		topic: 'Azure Best Practices',
-		image: '/images/previous-speakers/niti-jain.png',
-	},
-	{
-		name: 'Noorain Panjwani',
-		title: 'Developer Advocate',
-		company: 'Tech Community',
-		topic: 'Community Building in Tech',
-		image: '/images/previous-speakers/noorain-panjwani.jpg',
-	},
-	{
-		name: 'Parice Brandies',
-		title: 'Cloud Engineer',
-		company: 'Tech Company',
-		topic: 'Cloud Infrastructure',
-		image: '/images/previous-speakers/parice brandies.jpg',
-	},
-	{
-		name: 'Sarang Gupta',
-		title: 'Solutions Architect',
-		company: 'Cloud Provider',
-		topic: 'Cloud Architecture Patterns',
-		image: '/images/previous-speakers/sarang-gupta.png',
-	},
-	{
-		name: 'Warren Lyne',
-		title: 'Tech Lead',
-		company: 'Enterprise Solutions',
-		topic: 'Enterprise Cloud Migration',
-		image: '/images/previous-speakers/warren-lyne.jpg',
-	},
-];
 ---
 
 <html lang="en">
@@ -188,35 +60,51 @@ const speakers = [
 				</div>
 				<div class="hero-container">
 					<h1 class="hero-title">Our Speakers</h1>
-					<p class="hero-subtitle">Learn from Industry-Leading Cloud Experts</p>
-					<p class="hero-description">
-						Cloud Summit 2026 brings together the brightest minds in cloud computing.
-						Hear from experts at AWS, Azure, Google Cloud, IBM Cloud, and leading tech companies
-						as they share insights, best practices, and the latest innovations.
-					</p>
 				</div>
 			</section>
 
 			<!-- Speakers Grid -->
 			<section class="speakers-section">
 				<div class="speakers-container">
-					<h2 class="section-heading">
-						<span class="heading-prefix">All </span>
-						Past Speakers
-					</h2>
-					<div class="speakers-grid">
-						{speakers.map((speaker) => (
-							<div class="speaker-card">
+					<div class="speakers-grid speakers-grid--detailed">
+						{speakerContent.map((speaker) => (
+							<article class="speaker-card speaker-card--detailed">
 								<div class="speaker-image">
-									<img src={speaker.image} alt={speaker.name} />
+									<img src={speaker.image} alt={speaker.speakername} loading="lazy" />
 								</div>
 								<div class="speaker-info">
-									<h3 class="speaker-name">{speaker.name}</h3>
-									<p class="speaker-title">{speaker.title}</p>
-									<p class="speaker-company">{speaker.company}</p>
-									<p class="speaker-topic">{speaker.topic}</p>
+									<h3 class="speaker-name">{speaker.speakername}</h3>
+									{speaker.linkedin && (
+										<p class="speaker-linkedin">
+											<a
+												href={speaker.linkedin}
+												target="_blank"
+												rel="noopener noreferrer"
+											>
+												LinkedIn
+											</a>
+										</p>
+									)}
+									{speaker.bio && (
+										<>
+											<h4 class="speaker-detail-heading">Bio</h4>
+											<p class="speaker-bio">{speaker.bio}</p>
+										</>
+									)}
+									{speaker.talkTitle && (
+										<>
+											<h4 class="speaker-detail-heading">Talk</h4>
+											<p class="speaker-talk-headline">{speaker.talkTitle}</p>
+											{speaker.talkLevel && (
+												<p class="speaker-talk-level-tag">{speaker.talkLevel}</p>
+											)}
+										</>
+									)}
+									{speaker.title && <p class="speaker-title">{speaker.title}</p>}
+									{speaker.company && <p class="speaker-company">{speaker.company}</p>}
+									{speaker.topic && <p class="speaker-topic">{speaker.topic}</p>}
 								</div>
-							</div>
+							</article>
 						))}
 					</div>
 				</div>
@@ -339,7 +227,7 @@ const speakers = [
 
 	/* Hero Section */
 	.speakers-hero {
-		padding: 6rem 1.5rem 4rem;
+		padding: 6rem 1.5rem 1.25rem;
 		background: black;
 		position: relative;
 		overflow: hidden;
@@ -400,7 +288,7 @@ const speakers = [
 	.hero-title {
 		font-family: 'Squada One', system-ui, sans-serif;
 		font-size: 3rem;
-		margin: 0 0 1rem 0;
+		margin: 0;
 		color: rgb(251, 113, 133);
 	}
 
@@ -431,7 +319,7 @@ const speakers = [
 
 	/* Speakers Section */
 	.speakers-section {
-		padding: 4rem 1.5rem;
+		padding: 1.25rem 1.5rem 4rem;
 	}
 
 	.speakers-container {
@@ -445,6 +333,10 @@ const speakers = [
 		gap: 2rem;
 	}
 
+	.speakers-grid--detailed {
+		gap: 2.5rem;
+	}
+
 	.speaker-card {
 		background: rgba(61, 120, 171, 0.1);
 		border: 1px solid rgba(61, 120, 171, 0.2);
@@ -454,28 +346,55 @@ const speakers = [
 		transition: transform 0.2s, border-color 0.2s;
 	}
 
+	.speaker-card--detailed {
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		gap: 1.5rem;
+		text-align: left;
+	}
+
 	.speaker-card:hover {
 		transform: translateY(-4px);
 		border-color: rgba(61, 120, 171, 0.4);
 	}
 
+	.speaker-card--detailed .speaker-image {
+		margin: 0 auto;
+		flex-shrink: 0;
+	}
+
 	.speaker-image {
-		width: 150px;
-		height: 150px;
-		margin: 0 auto 1.5rem;
-		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		max-width: 260px;
+		min-height: 200px;
+		margin: 0 auto 1.25rem;
+		border-radius: 1rem;
 		overflow: hidden;
-		border: 3px solid rgb(251, 113, 133);
+		border: 2px solid rgba(251, 113, 133, 0.6);
+		background: rgba(255, 255, 255, 0.04);
 	}
 
 	.speaker-image img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
+		width: auto;
+		max-width: 100%;
+		height: auto;
+		max-height: 240px;
+		object-fit: contain;
+		object-position: center center;
+		display: block;
 	}
 
 	.speaker-info {
 		text-align: center;
+	}
+
+	.speaker-card--detailed .speaker-info {
+		text-align: left;
+		min-width: 0;
 	}
 
 	.speaker-name {
@@ -503,6 +422,58 @@ const speakers = [
 		margin: 0;
 		opacity: 0.7;
 		font-style: italic;
+	}
+
+	.speaker-linkedin {
+		margin: 0.75rem 0 0 0;
+		font-size: 1rem;
+		font-weight: 600;
+	}
+
+	.speaker-linkedin a {
+		color: rgb(113, 198, 251);
+		text-decoration: none;
+	}
+
+	.speaker-linkedin a:hover {
+		text-decoration: underline;
+	}
+
+	.speaker-detail-heading {
+		font-family: 'Squada One', system-ui, sans-serif;
+		font-size: 1.125rem;
+		font-weight: 400;
+		margin: 1.25rem 0 0.5rem 0;
+		color: rgb(255, 193, 77);
+		letter-spacing: 0.02em;
+	}
+
+	.speaker-detail-heading:first-of-type {
+		margin-top: 0.75rem;
+	}
+
+	.speaker-bio {
+		margin: 0;
+		font-size: 1rem;
+		line-height: 1.65;
+		opacity: 0.92;
+	}
+
+	.speaker-talk-headline {
+		margin: 0 0 0.5rem 0;
+		font-size: 1.125rem;
+		font-weight: 600;
+		line-height: 1.4;
+		color: rgb(251, 113, 133);
+	}
+
+	.speaker-talk-level-tag {
+		margin: 0 0 0.25rem 0;
+		font-size: 0.8125rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		opacity: 0.85;
 	}
 
 	/* Call for Speakers */
@@ -661,7 +632,7 @@ const speakers = [
 	/* Desktop Styles */
 	@media (min-width: 769px) {
 		.speakers-hero {
-			padding: 8rem 2rem 6rem;
+			padding: 6rem 2rem 1.5rem;
 		}
 
 		.hero-title {
@@ -677,21 +648,41 @@ const speakers = [
 		}
 
 		.speakers-section {
-			padding: 6rem 2rem;
+			padding: 1.5rem 2rem 6rem;
 		}
 
 		.section-heading {
 			font-size: 4rem;
 		}
 
-		.speakers-grid {
-			grid-template-columns: repeat(3, 1fr);
+		.speakers-grid--detailed {
 			gap: 3rem;
 		}
 
+		.speaker-card--detailed {
+			flex-direction: row;
+			align-items: flex-start;
+			gap: 2.5rem;
+			padding: 2.25rem 2.5rem;
+		}
+
+		.speaker-card--detailed .speaker-image {
+			margin: 0;
+			max-width: 240px;
+			min-height: 220px;
+		}
+
+		.speaker-card--detailed .speaker-image img {
+			max-height: 260px;
+		}
+
 		.speaker-image {
-			width: 180px;
-			height: 180px;
+			max-width: 280px;
+			min-height: 260px;
+		}
+
+		.speaker-image img {
+			max-height: 280px;
 		}
 
 		.cfs-section {

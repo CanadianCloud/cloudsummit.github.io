@@ -115,18 +115,26 @@ const { content } = Astro.props;
   }
 
   .committee-image {
-    width: 150px;
-    /* height: 150px; */
-    margin: 0 auto 1.5rem;
-    border-radius: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 280px;
+    min-height: 200px;
+    margin: 0 auto 1.25rem;
+    border-radius: 1rem;
     overflow: hidden;
-    /* border: 3px solid rgb(113, 198, 251); */
+    background: rgba(255, 255, 255, 0.04);
   }
 
   .committee-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: min(52vw, 260px);
+    object-fit: contain;
+    object-position: center center;
+    display: block;
   }
 
   .committee-info {
@@ -181,13 +189,22 @@ const { content } = Astro.props;
     }
 
     .committee-image {
-      width: 50%;
-      /* height: 100px; */
-      border-radius: 1rem;
+      flex: 0 0 clamp(180px, 28vw, 240px);
+      width: clamp(180px, 28vw, 240px);
+      max-width: 240px;
+      min-height: 260px;
+      max-height: 320px;
+      margin: 0;
+      align-self: center;
+    }
+
+    .committee-image img {
+      max-height: 300px;
     }
 
     .committee-info {
-      width: 70%;
+      flex: 1 1 min(0, 100%);
+      min-width: 0;
       text-align: left;
     }
 
@@ -203,7 +220,9 @@ const { content } = Astro.props;
     .committee-card {
       display: flex;
       flex-direction: row;
-      gap: 1rem;
+      align-items: stretch;
+      gap: 1.25rem;
+      padding: 1.25rem 1.5rem;
     }
   }
 </style>

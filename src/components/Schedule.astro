@@ -20,11 +20,15 @@ import { cityContent } from "../lib/cityContent"
                     <p class="time">{event.startTime}</p>
                 )}
                 <div class="details">
-                    {event.activities.map((activity, idx) => (
-                        <p class:list={["activity", idx === 0 ? "activity-title" : "activity-meta"]}>
-                            {activity.trim()}
-                        </p>
-                    ))}
+                    {event.activities.map((activity, idx) => {
+                        const primaryLines = event.primaryLineCount ?? 1;
+                        const isPrimary = idx < primaryLines;
+                        return (
+                            <p class:list={["activity", isPrimary ? "activity-title" : "activity-meta"]}>
+                                {activity.trim()}
+                            </p>
+                        );
+                    })}
                 </div>
             </div>
         })}
@@ -160,8 +164,14 @@ import { cityContent } from "../lib/cityContent"
         }
     }
     @media (max-width: 768px) {
+        .time {
+            font-size: 0.875rem;
+        }
         .activity-title {
-            font-size: 1.25rem;
+            font-size: 1rem;
+        }
+        .activity-meta {
+            font-size: 0.8125rem;
         }
     }
 </style>

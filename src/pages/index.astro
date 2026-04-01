@@ -19,8 +19,6 @@ import Sponsors from "../components/Sponsors.astro";
 import CommunityPartners from "../components/CommunityPartners.astro";
 import LocalCharitySection from "../components/LocalCharitySection.astro";
 import FAQ from "../components/FAQ.astro";
-import Committee from "../components/Committee.astro";
-
 import VenueLogisticsSectionSecondVersion from "../components/VenueLogisticsSectionSecondVersion.astro";
 import {
   heroContent,
@@ -37,7 +35,6 @@ import {
   defaultCity,
   venueLogisticsContentNewVersion,
   speakerContent,
-  committeeContent,
   faqContent,
 } from "../lib/content";
 import Schedule from "../components/Schedule.astro";
@@ -48,6 +45,8 @@ import { absoluteUrl, DEFAULT_OG_IMAGE_PATH, getCanonical } from "../lib/seo";
 
 // Use default city for venueLogisticsContentNewVersionSSR, will be updated client-side
 const content = heroContent[defaultCity];
+
+const homepageSpeakers = speakerContent.slice(0, 3);
 
 const homepageKeywords = [
   "cloud summit canada",
@@ -143,7 +142,7 @@ const ogImageUrl = absoluteUrl(DEFAULT_OG_IMAGE_PATH, Astro);
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Squada+One&family=Noto+Sans:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&family=Squada+One&family=Noto+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link
@@ -163,7 +162,7 @@ const ogImageUrl = absoluteUrl(DEFAULT_OG_IMAGE_PATH, Astro);
     <AboutCPCA content={aboutCPCAContent} />
     <EventLocations />
     <Schedule />
-    <Speaker content={speakerContent} />
+    <Speaker content={homepageSpeakers} />
     <SummitSummary content={eventHighlightsContent} />
     <HighlightReel content={eventHighlightsContent} />
     <Ticker content={tickerContent} />
@@ -171,8 +170,6 @@ const ogImageUrl = absoluteUrl(DEFAULT_OG_IMAGE_PATH, Astro);
     <Sponsors />
     <PastSponsors content={pastSponsorsContent} />
     <LocalCharitySection />
-
-    <Committee content={committeeContent} />
 
     <VenueLogisticsSectionSecondVersion
       content={venueLogisticsContentNewVersion}

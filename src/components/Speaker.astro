@@ -12,7 +12,7 @@ const { content } = Astro.props;
 <section id="homepage-speakers" class="speakers-section">
   <div class="speakers-container">
     <h2 class="section-heading speakers-heading">
-      <span class="heading-prefix">All </span>
+      <span class="heading-prefix">Our </span>
       Speakers
     </h2>
     <div class="speakers-grid">
@@ -24,13 +24,37 @@ const { content } = Astro.props;
             </div>
             <div class="speaker-info">
               <h3 class="speaker-name">{speaker.speakername}</h3>
-              <p class="speaker-title">{speaker.title}</p>
-              <p class="speaker-company">{speaker.company}</p>
-              <p class="speaker-topic">{speaker.topic}</p>
+              {speaker.title && <p class="speaker-title">{speaker.title}</p>}
+              {speaker.company && <p class="speaker-company">{speaker.company}</p>}
+              {speaker.topic && <p class="speaker-topic">{speaker.topic}</p>}
+              {speaker.linkedin && (
+                <p class="speaker-linkedin">
+                  <a
+                    href={speaker.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    LinkedIn
+                  </a>
+                </p>
+              )}
+              {speaker.talkTitle && (
+                <p class="speaker-talk-title">{speaker.talkTitle}</p>
+              )}
             </div>
           </div>
         ))
       }
+    </div>
+    <div class="speakers-cta">
+      <a
+        href="/our-speakers/"
+        class="speakers-all-btn"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        All Speakers
+      </a>
     </div>
   </div>
 </section>
@@ -97,8 +121,9 @@ const { content } = Astro.props;
 
   .speakers-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
     gap: 2rem;
+    margin: 0 auto;
   }
 
   .speaker-card {
@@ -118,18 +143,27 @@ const { content } = Astro.props;
   }
 
   .speaker-image {
-    width: 150px;
-    height: 150px;
-    margin: 0 auto 1.5rem;
-    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 260px;
+    min-height: 200px;
+    margin: 0 auto 1.25rem;
+    border-radius: 1rem;
     overflow: hidden;
-    border: 3px solid rgb(255, 193, 77);
+    border: 2px solid rgba(255, 193, 77, 0.5);
+    background: rgba(255, 255, 255, 0.04);
   }
 
   .speaker-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 240px;
+    object-fit: contain;
+    object-position: center center;
+    display: block;
   }
 
   .speaker-info {
@@ -162,6 +196,101 @@ const { content } = Astro.props;
     opacity: 0.7;
     font-style: italic;
   }
+
+  .speaker-linkedin {
+    margin: 0.75rem 0 0 0;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .speaker-linkedin a {
+    color: rgb(113, 198, 251);
+    text-decoration: none;
+  }
+
+  .speaker-linkedin a:hover {
+    text-decoration: underline;
+  }
+
+  .speaker-talk-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 1rem 0 0 0;
+    color: rgb(255, 193, 77);
+    line-height: 1.35;
+  }
+
+  .speakers-cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 2.5rem;
+  }
+
+  .speakers-all-btn {
+    display: inline-block;
+    padding: 1rem 3rem;
+    background: rgb(61, 120, 171);
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    font-size: 1.125rem;
+    transition:
+      transform 0.2s,
+      opacity 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .speakers-all-btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+  }
+
+  @media (max-width: 768px) {
+    .speaker-card {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.25rem 1rem;
+      text-align: left;
+    }
+
+    .speaker-image {
+      flex-shrink: 0;
+      width: 42%;
+      max-width: 140px;
+      min-height: 0;
+      min-width: 0;
+      margin: 0;
+    }
+
+    .speaker-image img {
+      max-height: 160px;
+    }
+
+    .speaker-info {
+      flex: 1;
+      min-width: 0;
+      text-align: left;
+    }
+
+    .speaker-name {
+      font-size: 1.25rem;
+      line-height: 1.2;
+    }
+
+    .speaker-linkedin {
+      margin-top: 0.5rem;
+    }
+
+    .speaker-talk-title {
+      margin-top: 0.65rem;
+      font-size: 0.9375rem;
+    }
+  }
+
   /* Desktop Styles */
   @media (min-width: 769px) {
     .speakers-hero {
@@ -189,13 +318,18 @@ const { content } = Astro.props;
     }
 
     .speakers-grid {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
     }
 
     .speaker-image {
-      width: 180px;
-      height: 180px;
+      max-width: 280px;
+      min-height: 260px;
+    }
+
+    .speaker-image img {
+      max-height: 280px;
     }
 
     .cfs-section {

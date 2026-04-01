@@ -3,7 +3,9 @@ export type City = 'vancouver' | 'toronto';
 export interface CitySchedule {
 	startTime: string;
 	endTime?: string;
-	activities: string[]
+	activities: string[];
+	/** Lines 0..primaryLineCount-1 use the same prominent style (no sub-line bullet). Default 1. */
+	primaryLineCount?: number;
 }
 
 export interface CityContent {
@@ -22,7 +24,7 @@ export const cityContent: Record<City, CityContent> = {
 		name: 'vancouver',
 		displayName: 'Vancouver',
 		title: 'Cloud Summit 2026 - Vancouver',
-		subtitle: 'Sponsor Canada\'s Largest Multi-Cloud Conference',
+		subtitle: 'Canada\'s Largest Multi-Cloud Conference',
 		description: 'Connect with over 1,000 cloud professionals and decision-makers. Showcase your brand at this premier gathering of AWS, Azure, Google Cloud, and IBM Cloud experts.',
 		venue: 'Science World',
 		date: 'Friday, May 1st, 2026 • 2pm-9pm',
@@ -33,7 +35,7 @@ export const cityContent: Record<City, CityContent> = {
 		},
 		{
 			startTime: "2:50 PM",
-			activities: ["Doors Open to full venue", "Community Experience sponsored by AWS opens"]
+			activities: ["Doors Open to full venue", "Experience areas open - sponsored by AWS"]
 		},
 		{
 			startTime: "3:00 PM",
@@ -43,32 +45,41 @@ export const cityContent: Record<City, CityContent> = {
 		{
 			startTime: "3:20 PM",
 			endTime: "3:50 PM",
-			activities: ["Main Stage Session 1", "Community Stage Session 1"]
+			activities: ["Main Stage Session 1", "Community Stage Session 1"],
+			primaryLineCount: 2
 		},
 		{
 			startTime: "3:50 PM",
 			endTime: "4:20 PM",
-			activities: ["Main Stage Session 2", "Community Stage Session 2"]
+			activities: ["Main Stage Session 2", "Community Stage Session 2"],
+			primaryLineCount: 2
 		},
 		{
 			startTime: "4:20 PM",
 			endTime: "4:50 PM",
-			activities: ["Main Stage Session 3", "Community Stage HackerRivals Round 1"]
+			activities: ["Main Stage Session 3", "Community Stage Session 3"],
+			primaryLineCount: 2
 		},
 		{
 			startTime: "4:50 PM",
 			endTime: "5:30 PM",
-			activities: ["Main Stage Session 4 - 10min break after 25min talk", "Community Stage Session 3 - 40min PANEL"]
+			activities: [
+				"Main Stage Session 4 - 10 min break after",
+				"Community Stage Session 3 - Panel (Women Shaping the Future of Cloud & AI)"
+			],
+			primaryLineCount: 2
 		},
 		{
 			startTime: "5:30 PM",
 			endTime: "6:00 PM",
-			activities: ["Main Stage Session 5", "Community Stage HackerRivals Elimination Round"]
+			activities: ["Main Stage Session 5", "Community Stage HackerRivals Elimination Round"],
+			primaryLineCount: 2
 		},
 		{
 			startTime: "6:00 PM",
 			endTime: "6:30 PM",
-			activities: ["Main Stage Session 6", "Community Stage Session 4"]
+			activities: ["Main Stage Session 6", "Community Stage Session 4"],
+			primaryLineCount: 2
 		},
 		{
 			startTime: "6:30 PM",
@@ -78,7 +89,12 @@ export const cityContent: Record<City, CityContent> = {
 		{
 			startTime: "7:00 PM",
 			endTime: "7:30 PM",
-			activities: ["HackerRivals Awards", "Live on the Community Stage, streamed to the Main Stage", "Closing Remarks", "Live on the Community Stage, streamed to the Main Stage"]
+			activities: ["HackerRivals Awards", "Closing Remarks"]
+		},
+		{
+			startTime: "7:30 PM",
+			endTime: "9:00 PM",
+			activities: ["After Party (invite only)"]
 		}
 		]
 	},
@@ -86,7 +102,7 @@ export const cityContent: Record<City, CityContent> = {
 		name: 'toronto',
 		displayName: 'Toronto',
 		title: 'Cloud Summit 2026 - Toronto',
-		subtitle: 'Sponsor Canada\'s Largest Multi-Cloud Conference',
+		subtitle: 'Canada\'s Largest Multi-Cloud Conference',
 		description: 'Connect with over 1,500 cloud professionals and decision-makers. Showcase your brand at this premier gathering of AWS, Azure, Google Cloud, and IBM Cloud experts.',
 		venue: 'NEU 375 Queen Street West',
 		date: 'Saturday, August 29th, 2026 • 12pm-6pm',
