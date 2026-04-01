@@ -62,10 +62,15 @@ export interface Sponsor {
 
 export interface Speaker {
   speakername: string;
-  title: string;
-  company: string;
-  topic: string;
+  title?: string;
+  company?: string;
+  topic?: string;
   image: string;
+  linkedin?: string;
+  bio?: string;
+  talkTitle?: string;
+  talkLevel?: string;
+  talkSummary?: string;
 }
 
 export interface FAQ {
@@ -80,7 +85,7 @@ export const defaultCity: City = 'vancouver';
 // Shared content across all cities
 export const sharedHeroContent = {
   title: 'Cloud Summit 2026',
-  subtitle: "Sponsor Canada's Largest Multi-Cloud Conference",
+  subtitle: "Canada's Largest Multi-Cloud Conference",
   description: '',
   primaryCta: {
     text: 'Become a Volunteer',
@@ -187,7 +192,7 @@ export const aboutCPCAContent = {
 export const whatIsCloudSummitContent = {
   heading: 'Cloud Summit?',
   description:
-    "Canada's premier multi-cloud conference bringing together 1,000+ cloud professionals, industry leaders, and decision-makers from AWS, Azure, Google Cloud, and IBM Cloud ecosystems. Connect, learn, and shape the future of cloud computing.",
+    "Canada's premier multi-cloud conference bringing together hundreds of cloud professionals, industry leaders, and decision-makers from AWS, Azure, Google Cloud, and IBM Cloud ecosystems. Connect, learn, and shape the future of cloud computing.",
 };
 
 export const cloudSummitActivitiesContent = {
@@ -398,6 +403,26 @@ export interface VenueLogisticsSectionNewVersion {
   section: VenueLogisticsBase[];
 }
 
+/** Footer line: Website by … — optional LinkedIn per name (same pattern as aws-community-day). */
+export const websiteCredits: Array<{ name: string; link: string | null }> = [
+  {
+    name: 'Nichanun (Luck)',
+    link: 'https://www.linkedin.com/in/nichanun-pong/',
+  },
+  {
+    name: 'Zack',
+    link: 'https://www.linkedin.com/in/viet-anh-hoang-a504911b1/',
+  },
+  {
+    name: 'Ahmad',
+    link: 'https://www.linkedin.com/in/ahmad-salempoor/',
+  },
+  {
+    name: 'Laurie',
+    link: 'https://www.linkedin.com/in/laurieyeh1/',
+  },
+];
+
 // Helper function to get footer content with city-specific ticket URL
 export function getFooterContent(city: City) {
   return {
@@ -415,12 +440,12 @@ export function getFooterContent(city: City) {
 
       { col: 2, text: 'Press Release', href: '/archive/2025/index.html' },
       { col: 2, text: 'About Cloud Summit', href: '/about-cloud-summit/' },
+      { col: 2, text: 'Meet the Team', href: '/our-team/' },
       {
         col: 2,
         text: 'Subscribe to Newsletter',
         href: 'https://tally.so/r/mR6RBl',
       },
-      // { col: 2, text: 'Our Event Team', href: '/our-team' },
       // { col: 2, text: 'Sponsorship Info', href: '/our-sponsors' },
 
       { col: 3, text: '2025', href: '/archive/2025/index.html' },
@@ -575,7 +600,6 @@ export const venueLogisticsContentNewVersion: Record<
           'Credit card',
           'Notes',
           'Rates may change during special events',
-          'Pay inside admissions to get regular rates during events',
         ],
         externalLink: [],
       },
@@ -587,7 +611,7 @@ export const venueLogisticsContentNewVersion: Record<
           'Automated Entry and Exit Doors',
           'Science World has button-operated automated entry doors and exit doors.',
           'Ramps and Elevators',
-          'Science World has ramps that allow access to the first- and second-floor galleries. There are also two elevators which run between the first and second floors. We recommend using the elevator in the Connection Zone (near the lobby) to access the Wonder gallery.',
+          'Science World has ramps that allow access to the first- and second-floor galleries. There are also two elevators which run between the first and second floors.',
           'Service Animals',
           'Service dogs must be on a leash and in the company of their owner at all times. For the safety and comfort of all guests, service dogs must be well-behaved during their visit. Staff reserve the right to ask non-compliant owners and their dogs to leave the premises.',
           'Washrooms',
@@ -608,46 +632,44 @@ export type VenueLogisticsContent = typeof venueLogisticsContentNewVersion;
 
 export const speakerContent: Speaker[] = [
   {
-    speakername: 'Matt Biilmann',
-    title: 'CEO and Co-Founder',
-    company: 'Netlify',
-    topic: 'AX and Why It Matters',
-    image: '/images/previous-speakers/matt-biilmann.png',
-  },
-  {
-    speakername: 'Eric Johnson',
-    title: 'Principal Developer Advocate',
-    company: 'Amazon Web Services (AWS)',
-    topic: 'Taking GenAI from Paper to Production with Serverless',
-    image: '/images/previous-speakers/eric-johnson.png',
+    speakername: 'Gabriel Velazquez Lopez',
+    image: '/images/speakers/Gabriel-trans.png',
+    linkedin: 'https://www.linkedin.com/in/gvlz/',
+    bio: "Gabriel Velazquez is the founder of Antfluent, a Canadian consultancy focused exclusively on Anthropic's Claude. He spent nearly two decades in cloud technology, and was Anthropic's first Applied AI Solutions Architect at AWS, where he led the business relationship that helped scale Anthropic into one of the platform's largest AI partners. After working with organizations around the world, he left to bring that expertise home to Canada.",
+    talkTitle: 'The One Certification That Works on Every Cloud',
+    talkLevel: 'L100 (Beginner)',
+    talkSummary:
+      "Every cloud certification you can earn today locks you into a single provider. AWS certs make you an AWS practitioner. Azure certs make you a Microsoft practitioner. But the technology reshaping every cloud platform, AI, now has a certification that travels with you everywhere. In this talk, Gabriel Velazquez shares why he left a global role at AWS to bet his career on Anthropic's Claude ecosystem, why Claude being the only frontier AI model available across AWS, Azure, and Google Cloud changes the certification calculus for cloud practitioners, and what he learned earning the Claude Certified Architect credential. Whether you're choosing your first certification or your next one, this session offers a framework for thinking about where to invest when the industry is moving faster than any single vendor's roadmap.",
   },
   {
     speakername: 'Ahmad Awais',
-    title: 'CEO',
-    company: 'Langbase',
-    topic: 'Why the Best AI Agents Are Built Without Frameworks',
-    image: '/images/previous-speakers/ahmad-awais.jpg',
+    image: '/images/speakers/Ahmad-trans.png',
+    linkedin: 'https://www.linkedin.com/in/MrAhmadAwais/',
+    bio: 'Ahmad Awais is an award-winning open-source engineering leader, founder & CEO of Command Code (frontier coding agent with taste) f/k/a Langbase (Serverless AI Developer Platform powering 350K+ AI agents). NASA Mars Ingenuity Helicopter mission code-contributor. Angel investor. Ex-VP DX, Google Developers Advisory Board founding member and Board Member Linux Foundation & OpenAPI Initiative. Ahmad has authored various open-source software tools used by millions of developers worldwide, like his Shades of Purple code theme (4M Dev Users), corona-cli (10+ Billion Requests), and now Langbase (1.2Billion/mo agent runs). He’s a Google Devs Expert and 5x recipient of the 8th GitHub Stars Gold award.',
+    talkTitle: 'Agentic Engineering & Developing Taste in Coding Agents',
+    talkLevel: 'L100 (Beginner)',
+    talkSummary:
+      "Your coding agent writes code like an LLM bot. Mine writes code like me.  Every developer has a coding agent now. What if your coding agent actually had taste? What if it understood not just what you're building, but how you like to build it? Your weird naming conventions. Your obsession with early returns. That thing you do where you always extract utilities before they get messy. Your coding taste.  I've been building coding agents since Greg Brockman gave me GPT-3 access in 2020. Started as a CLI tool I used every day. Five years later, we've deployed over 350K agents through Langbase, and I've learned something crucial: the best agents don't just write code, they develop taste.  In this talk, I'll share what we've learned about building agents that actually feel like they know you. We'll dive into the architecture patterns that make this possible: contextual memory systems, preference learning loops, and what I call \"engineering intuition\" going way beyond the typical \"agents.md\" approach.  It's about building agents that evolve with you, remember your decisions, and start making choices that feel like your own. By the end, you'll understand how to build coding agents that can develop taste. It's battle-tested insights from one of the largest deployment of AI agents in production today.",
   },
   {
-    speakername: 'Luca Maraschi',
-    title: 'Co-Founder & CEO',
-    company: 'Platformatic',
-    topic: 'Scaling Node.js in Kubernetes: Metrics, Memory, and Mastery',
-    image: '/images/previous-speakers/luca-maraschi.png',
+    speakername: 'Jason Mayes',
+    image: '/images/speakers/Jason-trans.png',
+    linkedin: 'https://www.linkedin.com/in/webai',
+    bio: "Web AI Lead, Google (15 years)  Jason is Google's Web AI lead, representing teams such as LiteRT.js, DeepMind (Gemma web models), Chrome, TensorFlow.js, and MediaPipe, helping developers globally apply machine learning in JavaScript to the industries that they work within. Jason is the author of the first Web AI courses on Google Developers and EdX, that have enabled over 100,000 developers start their journey with Machine Learning in the browser and is also the creator of the world's first Web AI Summit bringing together top minds in the field. Jason combines his knowledge of the technical and creative worlds to develop innovative prototypes for Google's largest customers and internal teams with 20+ years experience working at the intersection of web engineering and emerging technologies.  He holds an MEng in Computer Science, is a member of the British Computing Society, and is a certified information privacy technologist. Jason loves sharing knowledge online which has attracted a global following.",
+    talkTitle: 'Vibing with Antigravity for custom Web AI solutions',
+    talkLevel: 'L200 (Intermediate)',
+    talkSummary:
+      "Google's Gemini 3 offers a significant leap forward in its ability to create technically complex solutions when used in conjunction with traditional web engineering workflows. Join Jason Mayes, Web AI Lead at Google, as he shows you how you can maximize your potential using Antigravity with Gemini 3 when combined with your existing knowledge as a seasoned engineer to get the best of both worlds. Save time and turn 10x engineers into 100x. Jason will cover how he's able to create fully functional Web AI examples powered by LiteRT.js, to produce technically complex and functional demos powered by client side AI with minimal effort, while maintaining control, allowing him to focus on the problem he actually wants to solve without needing prior experience with a new library you may not have learnt yet.",
   },
   {
-    speakername: 'Denis Astahov',
-    title: 'Solutions Architect',
-    company: 'OpsGuru',
-    topic: 'How to become Cloud/DevOps Engineer from Zero',
-    image: '/images/previous-speakers/denis-astahov.png',
-  },
-  {
-    speakername: 'Aiman Parvaiz',
-    title: 'Director of DevOps',
-    company: 'NimbusStack',
-    topic: 'Driving Cloud Cost Efficiency: Multi-Cloud Strategies',
-    image: '/images/previous-speakers/aiman-parvaiz.png',
+    speakername: 'Morgan Foster',
+    image: '/images/speakers/Mogan-trans.png',
+    linkedin: 'https://www.linkedin.com/in/morgan-f-3151a7170/',
+    bio: "Morgan Foster is a Senior Principal Software Engineer in Red Hat's Emerging Technologies group, where she works on making AI agents first-class citizens on Kubernetes. She co-chairs the Kubernetes AI Gateway Working Group under the CNCF and is a core contributor to the Kagenti project. Before Red Hat, Morgan spent a decade in site reliability engineering at Google, Twitter, and Box, and cut her teeth on SpiderMonkey at Mozilla. She lives not far south in Bellingham, WA with her husband and daughter.",
+    talkTitle: 'The Illustrated Primer to GenAI Networking',
+    talkLevel: 'L200 (Intermediate)',
+    talkSummary:
+      'AI Gateways are popping up like weeds in the world of distributed computing, but what are they? Why do they exist? Didn\'t we already have API Gateways? From GuardRails to Semantic Caching, in this talk I\'ll use my work co-chairing a working group tasked with designing an "AI Gateway" specification for the Kubernetes ecosystem as a way of demonstrating why this new type of network application is necessary, why they\'re hard to build, and how you might put them to use in your own clusters.',
   },
 ];
 
@@ -657,70 +679,70 @@ export const committeeContent: Committee[] = [
     title: 'Event Director',
     link: 'https://www.linkedin.com/in/matthewcarolan/',
     bio: 'Matt Carolan is the founder of Cloud Summit and a cloud and security leader with deep experience in platform engineering, enterprise architecture, and cloud transformation. He helps organizations make clear, practical decisions across security, cost, resilience, and operational complexity, combining hands-on technical depth with a global perspective shaped by living and working across Australia, Dubai, Seattle, and Vancouver.',
-    image: '/images/committee/matt-black.png',
+    image: '/images/committee/matt-trans.png',
   },
   {
     name: 'Bibi Souza',
     title: 'Mentor',
     link: 'https://www.linkedin.com/in/bibschan/',
     bio: 'Bibi is a community builder and strategic leader with experience across software engineering, project management, and advocacy. She is passionate about bringing people together and helping them grow, with a strong track record of turning fragmented audiences into thriving communities. As an exited founder, she brings an experimental mindset, a bias toward action, and thoughtful risk-taking to everything she builds. At Cloud Summit, she helps shape community with intention, energy, and purpose.',
-    image: '/images/committee/bibi-black.png',
+    image: '/images/committee/bibi-trans.png',
   },
   {
     name: 'Andrey Barkov',
     title: 'Emcee',
     link: 'https://www.linkedin.com/in/andreybarkov/',
     bio: 'Andrey is one of the emcees for Cloud Summit Vancouver. He is an experienced software engineer with a background in web applications, cloud infrastructure, and microservices, with expertise across Angular, React, C#, Node.js, Azure, and AWS. He brings strong technical knowledge and an agile mindset to the Cloud Summit community.',
-    image: '/images/committee/andrey-black.png',
+    image: '/images/committee/andrey-trans.png',
   },
   {
     name: 'Warren Lyne',
     title: 'Emcee',
     link: 'https://www.linkedin.com/in/warrenlyne/',
     bio: 'Warren is one of the emcees for Cloud Summit Vancouver. He brings over 20 years of experience across cloud, technical sales, and business development, helping enterprise customers use technology to drive innovation and growth. With deep knowledge of cloud strategy, enterprise solutions, and digital transformation, he combines technical credibility with strong leadership and communication skills.',
-    image: '/images/committee/warren-black.png',
+    image: '/images/committee/warren-trans.png',
   },
   {
     name: 'Fabio Simka Coutinho',
     title: 'Venue and Logistics Co-Lead',
     link: 'https://www.linkedin.com/in/fabio-simka/',
     bio: 'Fabio is the Venue and Logistics Co-Lead for Cloud Summit Vancouver. After 10 years working in healthcare leadership, he transitioned into tech and is now focused on data engineering across AWS, Azure, and Databricks. With experience in high-pressure environments where communication, accountability, and clarity were essential, he brings a thoughtful, dependable approach to building systems and solving problems. His background gives him a strong focus on reliability, real-world impact, and the people behind the data.',
-    image: '/images/committee/fabio-black.png',
+    image: '/images/committee/fabio-trans.png',
   },
   {
     name: 'Jhan (Shanky) Silva',
     title: 'Sponsorship Lead',
     link: 'https://www.linkedin.com/in/shankyjs/',
     bio: 'Shanky is the Sponsorship Lead for Cloud Summit Vancouver. With a strong background in DevOps, automation, and modern development and deployment practices, he brings a practical, goal-oriented approach to building and improving technical processes. A self-driven learner who enjoys creating agile products, Shanky is passionate about continuous improvement, innovation, and helping great ideas gain momentum.',
-    image: '/images/committee/shanky-black.png',
+    image: '/images/committee/shanky-trans.png',
   },
   {
     name: 'Michael Carlos',
     title: 'Speaker and Community Lead',
     link: 'https://www.linkedin.com/in/mcarlos/',
     bio: 'Michael Carlos is the Speaker and Community Lead for Cloud Summit Vancouver. He brings over 30 years of software engineering experience, including two decades leading development teams, along with a deep interest in AI, robotics, game technology, physics, and evolutionary algorithms. His mix of technical depth and visionary thinking helps shape the ideas, conversations, and community that make Cloud Summit stand out.',
-    image: '/images/committee/michael-black.png',
+    image: '/images/committee/michael-trans.png',
   },
   {
     name: 'Nichanun Pong (Luck)',
     title: 'Developer Lead',
     link: 'https://www.linkedin.com/in/nichanun-pong/',
     bio: 'Luck is the Developer Lead for Cloud Summit Vancouver. A full-stack developer and product owner, she brings experience across e-commerce, gaming, insurance, and IT, with a focus on building user-centric, data-driven products that connect business goals with strong technical execution. His background includes JavaScript, React, Node.js, PHP, Laravel, SQL, Python, AWS, and Docker.',
-    image: '/images/committee/luck-black.png',
+    image: '/images/committee/luck-trans.png',
   },
   {
     name: 'Fernando Stoelting',
     title: 'Venue and Logistics Co-Lead',
     link: 'https://www.linkedin.com/in/fstoelting/',
     bio: 'Fernando is the Venue and Logistics Co-Lead for Cloud Summit Vancouver. He brings 8 years of tech leadership experience across Canada, the US, and Latin America, with a focus on delivering meaningful projects, aligning technology with business goals, and building collaborative, high-performing teams.',
-    image: '/images/committee/fernando-black.png',
+    image: '/images/committee/fernando-trans.png',
   },
   {
     name: 'Philip Mak',
     title: 'Volunteer Lead',
     link: 'https://www.linkedin.com/in/philip-mak-b2b92823a/',
     bio: 'Philip is the Volunteer Lead for Cloud Summit Vancouver. He is a project management professional with experience leading data-driven technical projects across AI, education technology, and community-focused platforms. With a strong background in collaboration, analytics, and user-centered problem solving, he brings an organized and thoughtful approach to supporting volunteers and helping teams succeed.',
-    image: '/images/committee/philip-black.png',
+    image: '/images/committee/philip-trans.png',
   },
 ];
 
@@ -730,20 +752,20 @@ export const communityPartners: CommunityPartner[] = [
     logo: '/images/community-partners/aws-day-logo.png',
   },
   {
-    name: 'Google Developer Group',
-    logo: '/images/community-partners/gdg-logo.png',
+    name: 'Hacker Rivals',
+    logo: '/images/community-partners/Logo-Oct25-Black.png',
   },
   {
     name: 'ISACA',
     logo: '/images/community-partners/ISACA.png',
   },
   {
-    name: 'Hacker Rivals',
-    logo: '/images/community-partners/Logo-Oct25-Black.png',
-  },
-  {
     name: 'Microsoft',
     logo: '/images/community-partners/Microsoft_logo.png',
+  },
+  {
+    name: 'Google Developer Group',
+    logo: '/images/community-partners/gdg-logo.png',
   },
 ];
 

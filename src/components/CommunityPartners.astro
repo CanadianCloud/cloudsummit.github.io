@@ -9,10 +9,12 @@ import { communityPartners } from "../lib/content"
     </h2>
     <div class="community-partners-card">
         <div id="partners-container">
-            {communityPartners.map((partner, index) => {
-                return <figure class="partner" id={`partner-${index + 1}`}>
-                    <img class="partner-logo" src={partner.logo}/>
-                </figure>
+            {communityPartners.map((partner) => {
+                return (
+                    <figure class="partner">
+                        <img class="partner-logo" src={partner.logo} alt={partner.name} />
+                    </figure>
+                );
             })}
         </div>
     </div>
@@ -69,61 +71,80 @@ import { communityPartners } from "../lib/content"
         }
     }
     .partner {
+        flex: 0 0 auto;
         display: flex;
-        flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 1.25rem;
+        margin: 0;
     }
     .partner-logo {
-        max-width: 100%;
-        height: 60px;
+        max-width: min(280px, 42vw);
+        height: 140px;
         width: auto;
         object-fit: contain;
         display: block;
     }
-    
-    /* Mobile: show 3 logos per row */
+
+    /* Single row on desktop; horizontal scroll if needed at medium widths */
     #partners-container {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        justify-items: center;
-        row-gap: 2.25rem;
-        column-gap: 1.25rem;
-    }
-    @media (min-width: 640px) {
-        #partners-container {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            grid-template-rows: repeat(2, 1fr);
-            row-gap: 2.25rem;
-            column-gap: 1.5rem;
-        }
-        #partner-1 {
-            grid-column-start: 1;
-            grid-column-end: 3;
-        }
-        #partner-2 {
-            grid-column-start: 3;
-            grid-column-end: 5;
-        }
-        #partner-3 {
-            grid-column-start: 5;
-            grid-column-end: 7;
-        }
-        #partner-4 {
-            grid-column-start: 2;
-            grid-column-end: 4;
-        }
-        #partner-5 {
-            grid-column-start: 4;
-            grid-column-end: 6;
-        }
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
+        gap: clamp(2.25rem, 7vw, 5rem);
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        padding: 0.5rem 0;
     }
 
-    @media (min-width: 769px) {
+    /* Mobile: 2-column grid, no sideways scroll; last partner centered on its own row */
+    @media (max-width: 768px) {
+        .community-partners {
+            padding: 0 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .community-partners-card {
+            padding: 1.5rem 1rem 2rem;
+        }
+
+        .community-partners-heading,
+        .community-partners-prefix {
+            font-size: 2rem;
+        }
+
+        #partners-container {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.5rem 1rem;
+            overflow-x: visible;
+            overflow-y: visible;
+            justify-content: stretch;
+            align-items: center;
+            padding: 0.35rem 0 0.15rem;
+        }
+
+        .partner {
+            width: 100%;
+            min-height: 4.5rem;
+        }
+
+        .partner:nth-child(5) {
+            grid-column: 1 / -1;
+            justify-self: center;
+            max-width: 11rem;
+            min-height: 0;
+        }
+
         .partner-logo {
-            height: 80px;
+            max-width: 100%;
+            max-height: 72px;
+            height: auto;
+            width: auto;
+            margin-inline: auto;
         }
     }
 </style>

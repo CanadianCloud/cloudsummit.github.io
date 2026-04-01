@@ -1,0 +1,76 @@
+---
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import ScrollAnimations from '../components/ScrollAnimations.astro';
+import Committee from '../components/Committee.astro';
+import { navigationContent, footerContent, committeeContent } from '../lib/content';
+import GoogleAnalytics from '../components/GoogleAnalytics.astro';
+import SeoSocial from '../components/SeoSocial.astro';
+import { absoluteUrl, DEFAULT_OG_IMAGE_PATH, getCanonical } from '../lib/seo';
+
+const pageTitle = 'Meet the Team - Cloud Summit 2026';
+const pageDescription =
+	"Meet the organizers and committee behind Cloud Summit — Canada's premier multi-cloud conference in Vancouver and Toronto.";
+const canonicalUrl = getCanonical(Astro);
+const ogImageUrl = absoluteUrl(DEFAULT_OG_IMAGE_PATH, Astro);
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="canonical" href={canonicalUrl} />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={pageDescription} />
+		<SeoSocial
+			title={pageTitle}
+			description={pageDescription}
+			canonicalUrl={canonicalUrl}
+			ogImageUrl={ogImageUrl}
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Squada+One&family=Noto+Sans:wght@400;500;600;700&family=Doto:wght@100..900&display=swap"
+			rel="stylesheet"
+		/>
+		<title>{pageTitle}</title>
+		<GoogleAnalytics />
+	</head>
+	<body>
+		<Navigation content={navigationContent} />
+
+		<main class="meet-team-page">
+			<Committee content={committeeContent} />
+		</main>
+
+		<Footer content={footerContent} />
+		<ScrollAnimations />
+	</body>
+</html>
+
+<style is:global>
+	html {
+		font-family:
+			'Noto Sans',
+			system-ui,
+			-apple-system,
+			BlinkMacSystemFont,
+			'Segoe UI',
+			Roboto,
+			sans-serif;
+	}
+	body {
+		margin: 0;
+		min-height: 100vh;
+		background: #000;
+		color: #fff;
+	}
+</style>
+
+<style>
+	.meet-team-page {
+		min-height: 40vh;
+	}
+</style>

@@ -21,7 +21,11 @@ const { content } = Astro.props;
 			</div>
 			<div class="text-column">
 				<h2 class="about-description">{content.description}</h2>
-				<a href={content.ctaHref} class="cpca-cta">{content.ctaText}</a>
+				<a
+					href={content.ctaHref}
+					class="cpca-cta"
+					target="_blank"
+					rel="noopener noreferrer">{content.ctaText}</a>
 			</div>
 		</div>
 	</div>

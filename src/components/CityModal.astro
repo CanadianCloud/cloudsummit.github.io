@@ -240,11 +240,18 @@
 		transform: translateY(0);
 	}
 
+	/* Theme blue (matches hover border / site accent) */
 	.city-name {
 		font-size: 1.25rem;
 		font-weight: 600;
-		color: inherit;
+		color: rgb(61, 120, 171);
 		margin-bottom: 0.25rem;
+	}
+
+	@media (prefers-color-scheme: dark) {
+		.city-name {
+			color: rgb(120, 175, 220);
+		}
 	}
 
 	.city-details {
