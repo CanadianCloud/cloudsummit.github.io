@@ -3,6 +3,15 @@ import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import ScrollAnimations from '../components/ScrollAnimations.astro';
 import { navigationContent, footerContent, citySpecificContent } from '../lib/content';
+import GoogleAnalytics from '../components/GoogleAnalytics.astro';
+import SeoSocial from '../components/SeoSocial.astro';
+import { absoluteUrl, DEFAULT_OG_IMAGE_PATH, getCanonical } from '../lib/seo';
+
+const pageTitle = 'Call for Speakers - Cloud Summit 2026';
+const pageDescription =
+	"Meet past Cloud Summit speakers and submit your talk for Canada's premier multi-cloud conference in Vancouver and Toronto.";
+const canonicalUrl = getCanonical(Astro);
+const ogImageUrl = absoluteUrl(DEFAULT_OG_IMAGE_PATH, Astro);
 
 const speakers = [
 	{
@@ -137,13 +146,22 @@ const speakers = [
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
+		<link rel="canonical" href={canonicalUrl} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={pageDescription} />
+		<SeoSocial
+			title={pageTitle}
+			description={pageDescription}
+			canonicalUrl={canonicalUrl}
+			ogImageUrl={ogImageUrl}
+		/>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link href="https://fonts.googleapis.com/css2?family=Squada+One&family=Noto+Sans:wght@400;500;600;700&family=Doto:wght@100..900&display=swap" rel="stylesheet" />
-		<title>Call for Speakers - Cloud Summit 2026</title>
+		<title>{pageTitle}</title>
+		<GoogleAnalytics />
 	</head>
 	<body>
 		<Navigation content={navigationContent} />

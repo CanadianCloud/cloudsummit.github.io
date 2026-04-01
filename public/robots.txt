@@ -1,0 +1,5 @@
+# https://cloudsummit.ca
+User-agent: *
+Allow: /
+
+Sitemap: https://cloudsummit.ca/sitemap-index.xml

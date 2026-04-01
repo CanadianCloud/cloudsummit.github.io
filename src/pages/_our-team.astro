@@ -3,6 +3,7 @@ import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import ScrollAnimations from '../components/ScrollAnimations.astro';
 import { navigationContent, footerContent } from '../lib/content';
+import { getCanonical } from '../lib/seo';
 
 const teamMembers = [
 	{
@@ -41,6 +42,7 @@ const teamMembers = [
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
+		<link rel="canonical" href={getCanonical(Astro)} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />

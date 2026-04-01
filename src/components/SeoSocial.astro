@@ -1,0 +1,33 @@
+---
+/**
+ * Open Graph + Twitter Card tags. Pass the same title/description you use for <title> and meta description.
+ */
+interface Props {
+  title: string;
+  description: string;
+  canonicalUrl: string;
+  ogImageUrl: string;
+  ogType?: "website" | "article";
+}
+
+const {
+  title,
+  description,
+  canonicalUrl,
+  ogImageUrl,
+  ogType = "website",
+} = Astro.props;
+---
+
+<meta property="og:type" content={ogType} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:image" content={ogImageUrl} />
+<meta property="og:site_name" content="Cloud Summit" />
+<meta property="og:locale" content="en_CA" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImageUrl} />

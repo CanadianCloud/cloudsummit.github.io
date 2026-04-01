@@ -42,6 +42,9 @@ import {
 } from "../lib/content";
 import Schedule from "../components/Schedule.astro";
 import Speaker from "../components/Speaker.astro";
+import GoogleAnalytics from "../components/GoogleAnalytics.astro";
+import SeoSocial from "../components/SeoSocial.astro";
+import { absoluteUrl, DEFAULT_OG_IMAGE_PATH, getCanonical } from "../lib/seo";
 
 // Use default city for venueLogisticsContentNewVersionSSR, will be updated client-side
 const content = heroContent[defaultCity];
@@ -113,11 +116,15 @@ const vancouverDescription =
   "Join Cloud Summit Vancouver on May 1, 2026 at Science World for cloud talks, workshops, networking, sponsors, and community events.";
 const torontoDescription =
   "Join Cloud Summit Toronto on August 29, 2026 for a multi-cloud conference featuring speakers, sponsors, workshops, and community networking.";
+
+const canonicalUrl = getCanonical(Astro);
+const ogImageUrl = absoluteUrl(DEFAULT_OG_IMAGE_PATH, Astro);
 ---
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
@@ -126,6 +133,12 @@ const torontoDescription =
       name="description"
       content={homepageDescription}
       data-seo-description
+    />
+    <SeoSocial
+      title={homepageTitle}
+      description={homepageDescription}
+      canonicalUrl={canonicalUrl}
+      ogImageUrl={ogImageUrl}
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -139,6 +152,7 @@ const torontoDescription =
       referrerpolicy="no-referrer"
     />
     <title>{homepageTitle}</title>
+    <GoogleAnalytics />
   </head>
   <body>
     <CityModal />
