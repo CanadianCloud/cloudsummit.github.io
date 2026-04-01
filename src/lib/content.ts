@@ -435,7 +435,7 @@ export function getFooterContent(city: City) {
         name: 'LinkedIn',
         url: 'https://www.linkedin.com/showcase/vancouvercloudsummit',
       },
-    ],
+    ],    
     // pressReleases: [
     //   { text: '2025 Press Release', href: '/archive/2025/index.html' },
     // ],
@@ -445,12 +445,12 @@ export function getFooterContent(city: City) {
     ],
 
     newsletter: {
-      prefix: 'Stay',
-      heading: 'Connected',
-      description:
-        'Subscribe to our newsletter to receive the latest updates about Cloud Summit 2026, speaker announcements, and exclusive content.',
-      ctaText: 'Subscribe to Newsletter',
-      ctaHref: 'https://tally.so/r/mR6RBl',
+        prefix: 'Stay',
+        heading: 'Connected',
+        description:
+          'Subscribe to our newsletter to receive the latest updates about Cloud Summit 2026, speaker announcements, and exclusive content.',
+        ctaText: 'Subscribe to Newsletter',
+        ctaHref: 'https://tally.so/r/mR6RBl',
     },
   };
 }
