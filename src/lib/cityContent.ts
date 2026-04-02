@@ -4,8 +4,10 @@ export interface CitySchedule {
   startTime: string;
   endTime?: string;
   activities: string[];
-  /** Lines 0..primaryLineCount-1 use the same prominent style (no sub-line bullet). Default 1. */
+  /** Lines 0..primaryLineCount-1 use the same prominent style (no sub-line bullet). Default 1. Ignored when activityRoles is set. */
   primaryLineCount?: number;
+  /** Per-line style when order matters (e.g. a meta line between two titles). Length must match activities. */
+  activityRoles?: ('title' | 'meta')[];
 }
 
 export interface CityContent {
@@ -49,49 +51,54 @@ export const cityContent: Record<City, CityContent> = {
         endTime: '3:20 PM',
         activities: [
           'Opening Welcome Remarks',
-          'Community Stage, streamed to Main Stage',
+          'Community Stage: streamed to Main Stage',
         ],
       },
       {
         startTime: '3:20 PM',
         endTime: '3:50 PM',
-        activities: ['Main Stage Session 1', 'Community Stage Session 1'],
+        activities: ['Main Stage: Session 1', 'Community Stage: Session 1'],
         primaryLineCount: 2,
       },
       {
         startTime: '3:50 PM',
         endTime: '4:20 PM',
-        activities: ['Main Stage Session 2', 'Community Stage Session 2'],
+        activities: ['Main Stage: Session 2', 'Community Stage: Session 2'],
         primaryLineCount: 2,
       },
       {
         startTime: '4:20 PM',
         endTime: '4:50 PM',
-        activities: ['Main Stage Session 3', 'Community Stage Session 3'],
+        activities: [
+          'Main Stage: Session 3',
+          'Community Stage: HackerRivals Round 1',
+        ],
         primaryLineCount: 2,
       },
       {
         startTime: '4:50 PM',
         endTime: '5:30 PM',
         activities: [
-          'Main Stage Session 4 - 10 min break after',
-          'Community Stage Session 3 - Panel (Women Shaping the Future of Cloud & AI)',
+          'Main Stage: Session 4',
+          '10 min break after',
+          'Community Stage: Session 3',
+          'Panel (Women Shaping the Future of Cloud & AI)',
         ],
-        primaryLineCount: 2,
+        activityRoles: ['title', 'meta', 'title', 'meta'],
       },
       {
         startTime: '5:30 PM',
         endTime: '6:00 PM',
         activities: [
-          'Main Stage Session 5',
-          'Community Stage HackerRivals Elimination Round',
+          'Main Stage: Session 5',
+          'Community Stage: HackerRivals Round 2 Elimination Round',
         ],
         primaryLineCount: 2,
       },
       {
         startTime: '6:00 PM',
         endTime: '6:30 PM',
-        activities: ['Main Stage Session 6', 'Community Stage Session 4'],
+        activities: ['Main Stage: Session 6', 'Community Stage: Session 4'],
         primaryLineCount: 2,
       },
       {
@@ -99,13 +106,14 @@ export const cityContent: Record<City, CityContent> = {
         endTime: '7:00 PM',
         activities: [
           'HackerRivals Final',
-          'Live on the Community Stage, streamed to the Main Stage',
+          'Live on the Community Stage: streamed to the Main Stage',
         ],
       },
       {
         startTime: '7:00 PM',
         endTime: '7:30 PM',
         activities: ['HackerRivals Awards', 'Closing Remarks'],
+        primaryLineCount: 1,
       },
       {
         startTime: '7:30 PM',

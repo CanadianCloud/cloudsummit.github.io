@@ -443,6 +443,11 @@ export function getFooterContent(city: City) {
       { col: 2, text: 'Meet the Team', href: '/our-team/' },
       {
         col: 2,
+        text: 'Community Booth Application',
+        href: 'https://tally.so/r/obOE0O',
+      },
+      {
+        col: 2,
         text: 'Subscribe to Newsletter',
         href: 'https://tally.so/r/mR6RBl',
       },
