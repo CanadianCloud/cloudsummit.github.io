@@ -438,7 +438,7 @@ export function getFooterContent(city: City) {
       { col: 1, text: 'Apply to Volunteer', href: 'https://tally.so/r/mBVZjA' },
       { col: 1, text: 'Enter Hackathon', href: 'https://hackerrivals.com/' },
 
-      { col: 2, text: 'Press Release', href: '/archive/2025/index.html' },
+      { col: 2, text: 'Press Release', href: '/press-release/' },
       { col: 2, text: 'About Cloud Summit', href: '/about-cloud-summit/' },
       { col: 2, text: 'Meet the Team', href: '/our-team/' },
       {
@@ -460,7 +460,7 @@ export function getFooterContent(city: City) {
         name: 'LinkedIn',
         url: 'https://www.linkedin.com/showcase/vancouvercloudsummit',
       },
-    ],    
+    ],
     // pressReleases: [
     //   { text: '2025 Press Release', href: '/archive/2025/index.html' },
     // ],
@@ -470,12 +470,12 @@ export function getFooterContent(city: City) {
     ],
 
     newsletter: {
-        prefix: 'Stay',
-        heading: 'Connected',
-        description:
-          'Subscribe to our newsletter to receive the latest updates about Cloud Summit 2026, speaker announcements, and exclusive content.',
-        ctaText: 'Subscribe to Newsletter',
-        ctaHref: 'https://tally.so/r/mR6RBl',
+      prefix: 'Stay',
+      heading: 'Connected',
+      description:
+        'Subscribe to our newsletter to receive the latest updates about Cloud Summit 2026, speaker announcements, and exclusive content.',
+      ctaText: 'Subscribe to Newsletter',
+      ctaHref: 'https://tally.so/r/mR6RBl',
     },
   };
 }
@@ -669,7 +669,7 @@ export const speakerContent: Speaker[] = [
     talkTitle: 'The Illustrated Primer to GenAI Networking',
     talkLevel: 'L200 (Intermediate)',
     talkSummary:
-      'AI Gateways are popping up like weeds in the world of distributed computing, but what are they? Why do they exist? Didn\'t we already have API Gateways? From GuardRails to Semantic Caching, in this talk I\'ll use my work co-chairing a working group tasked with designing an "AI Gateway" specification for the Kubernetes ecosystem as a way of demonstrating why this new type of network application is necessary, why they\'re hard to build, and how you might put them to use in your own clusters.',
+      "AI Gateways are popping up like weeds in the world of distributed computing, but what are they? Why do they exist? Didn't we already have API Gateways? From GuardRails to Semantic Caching, in this talk I'll use my work co-chairing a working group tasked with designing an \"AI Gateway\" specification for the Kubernetes ecosystem as a way of demonstrating why this new type of network application is necessary, why they're hard to build, and how you might put them to use in your own clusters.",
   },
 ];
 

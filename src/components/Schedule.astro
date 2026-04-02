@@ -21,8 +21,12 @@ import { cityContent } from "../lib/cityContent"
                 )}
                 <div class="details">
                     {event.activities.map((activity, idx) => {
-                        const primaryLines = event.primaryLineCount ?? 1;
-                        const isPrimary = idx < primaryLines;
+                        const roles = event.activityRoles;
+                        const useRoles =
+                            roles && roles.length === event.activities.length;
+                        const isPrimary = useRoles
+                            ? roles[idx] === 'title'
+                            : idx < (event.primaryLineCount ?? 1);
                         return (
                             <p class:list={["activity", isPrimary ? "activity-title" : "activity-meta"]}>
                                 {activity.trim()}
