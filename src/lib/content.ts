@@ -727,7 +727,7 @@ export const committeeContent: Committee[] = [
     name: 'Nichanun Pong (Luck)',
     title: 'Developer Lead',
     link: 'https://www.linkedin.com/in/nichanun-pong/',
-    bio: 'Luck is the Developer Lead for Cloud Summit Vancouver. A full-stack developer and product owner, she brings experience across e-commerce, gaming, insurance, and IT, with a focus on building user-centric, data-driven products that connect business goals with strong technical execution. His background includes JavaScript, React, Node.js, PHP, Laravel, SQL, Python, AWS, and Docker.',
+    bio: 'Luck is the Developer Lead for Cloud Summit Vancouver. A full-stack developer and product owner, she brings experience across e-commerce, gaming, insurance, and IT, with a focus on building user-centric, data-driven products that connect business goals with strong technical execution. Her background includes JavaScript, React, Node.js, PHP, Laravel, SQL, Python, AWS, and Docker.',
     image: '/images/committee/luck-trans.png',
   },
   {
