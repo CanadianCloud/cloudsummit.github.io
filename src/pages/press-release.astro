@@ -74,10 +74,12 @@ const ogImageUrl = absoluteUrl(DEFAULT_OG_IMAGE_PATH, Astro);
 			<section class="press-content" aria-label="Press release body">
 				<div class="press-container">
 					<p>
-						<strong>VANCOUVER, BC, April 1, 2026</strong> — Cloud Summit Vancouver 2026 will take place on{' '}
-						<strong>Friday, May 1, 2026</strong> at <strong>Science World</strong> in Vancouver, bringing together
-						cloud professionals, technology leaders, sponsors, startups, and community groups for a major day of
-						learning, networking, and innovation. Official event information says the conference will welcome{' '}
+						<strong>
+							VANCOUVER, BC, April 1, 2026 — Cloud Summit Vancouver 2026 will take place on Friday, May 1, 2026
+						</strong>{' '}
+						at <strong>Science World</strong> in Vancouver, bringing together cloud professionals, technology leaders,
+						sponsors, startups, and community groups for a major day of learning, networking, and innovation. Official
+						event information says the conference will welcome{' '}
 						<strong>hundreds of cloud professionals and decision-makers</strong> from across the cloud ecosystem.{' '}
 						<a
 							href="https://cloudsummit.ca/"
@@ -90,7 +92,7 @@ const ogImageUrl = absoluteUrl(DEFAULT_OG_IMAGE_PATH, Astro);
 						Organized under the <strong>Canadian Public Cloud Association (CPCA)</strong>, Cloud Summit is part of
 						a broader nonprofit mission to educate the local tech community, bring people together, and support the
 						community through charitable giving. Cloud Summit’s official materials say the event has already helped
-						raise <strong>more than $10,000 for charity to date.</strong>{' '}
+						raise <strong>more than $10,000 for charity to date</strong>.{' '}
 						<a
 							href="https://canadiancloud.org/"
 							class="press-cite"
@@ -115,8 +117,8 @@ const ogImageUrl = absoluteUrl(DEFAULT_OG_IMAGE_PATH, Astro);
 						<p>
 							“Cloud Summit is about bringing the local tech community together in a way that feels accessible,
 							high-value, and genuinely community-driven,” said{' '}
-							<strong>Jhan Silva, Sr DevOps Engineer and Cloud Summit Sponsorship Committee Lead.</strong>{' '}
-							“We’re creating a
+							<strong>Jhan Silva, Sr DevOps Engineer and Cloud Summit Sponsorship Committee Lead</strong>. “We’re
+							creating a
 							space where builders, leaders, students, startups, and enterprise teams can connect, learn from each
 							other, and help strengthen the local cloud ecosystem.”
 						</p>
@@ -125,7 +127,7 @@ const ogImageUrl = absoluteUrl(DEFAULT_OG_IMAGE_PATH, Astro);
 						Event highlights promoted by organizers include expert-led presentations, hands-on workshops, networking
 						opportunities, sponsor and community showcase areas, and high-energy live cloud build competitions. The
 						official site also lists past event metrics including{' '}
-						<strong>800+ in-person attendees, 19 speakers, and 12+ sponsors and communities.</strong>{' '}
+						<strong>800+ in-person attendees, 19 speakers, and 12+ sponsors and communities</strong>.{' '}
 						<a
 							href="https://cloudsummit.ca/"
 							class="press-cite"
@@ -152,12 +154,14 @@ const ogImageUrl = absoluteUrl(DEFAULT_OG_IMAGE_PATH, Astro);
 							<a href="mailto:connect@canadiancloud.org" class="press-inline-email">connect@canadiancloud.org</a>
 						</strong>{' '}
 						for inquiries.{' '}
-						<a
-							href="https://canadiancloud.org/"
-							class="press-cite"
-							target="_blank"
-							rel="noopener noreferrer"
-							>(Canadian Cloud)</a>
+						<strong>
+							<a
+								href="https://canadiancloud.org/"
+								class="press-cite press-cite--bold"
+								target="_blank"
+								rel="noopener noreferrer"
+								>(Canadian Cloud)</a>
+						</strong>
 					</p>
 
 					<h2 class="press-section-title">About Cloud Summit</h2>
@@ -404,6 +408,11 @@ const ogImageUrl = absoluteUrl(DEFAULT_OG_IMAGE_PATH, Astro);
 	.press-container a.press-cite {
 		text-decoration: underline;
 		text-underline-offset: 2px;
+	}
+
+	strong .press-cite--bold {
+		font-weight: 700;
+		opacity: 0.92;
 	}
 
 	.press-inline-email {
