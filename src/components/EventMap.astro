@@ -326,6 +326,18 @@ const hasPdf = Boolean(content.pdfHref);
 		pointer-events: none;
 	}
 
+	/* Match LocalCharitySection .charity-button on mobile */
+	@media (max-width: 768px) {
+		.event-map-download,
+		.event-map-download--disabled {
+			padding: 0.65rem 1.25rem;
+			font-size: 0.8125rem;
+			letter-spacing: 0.04em;
+			max-width: 100%;
+			box-sizing: border-box;
+		}
+	}
+
 	.event-map-panels {
 		background: #fff;
 		min-height: 220px;

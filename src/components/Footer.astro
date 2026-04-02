@@ -26,7 +26,11 @@ const showFooterNewsletter = false;
 
 function linkOpensInNewTab(href: string): boolean {
 	const h = href.trim();
-	return h.startsWith('http://') || h.startsWith('https://') || h.startsWith('//');
+	if (h.startsWith('http://') || h.startsWith('https://') || h.startsWith('//')) {
+		return true;
+	}
+	// Meet the Team (same-tab internal links otherwise)
+	return h.startsWith('/our-team');
 }
 ---
 
