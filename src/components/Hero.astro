@@ -7,6 +7,8 @@ interface Props {
 }
 
 const { content, splineUrl = '' } = Astro.props;
+ 
+
 ---
 
 <section class="hero">
@@ -27,15 +29,49 @@ const { content, splineUrl = '' } = Astro.props;
 			<p class="hero-time">{content.time}</p>
 		</div>
 		<div class="hero-actions">
-			<a href={content.primaryCta.href} class="btn btn-primary">{content.primaryCta.text}</a>
-			<a href={content.secondaryCta.href} class="btn btn-secondary">{content.secondaryCta.text}</a>
+			<a href={content.primaryCta.href} class="btn btn-primary" data-hero-primary-Cta>{content.primaryCta.text}</a>
+			<!-- <a href={content.secondaryCta.href} class="btn btn-secondary">{content.secondaryCta.text}</a> -->
+	
+
 		</div>
 	</div>
 	</section>
 
-<script is:inline type="module" src="https://unpkg.com/@splinetool/viewer@1.9.48/build/spline-viewer.js"></script>
+<script is:inline>
+	(function () {
+		// Defer Spline web component load to improve first paint.
+		function loadSpline() {
+			try {
+				if (document.querySelector('script[data-spline-viewer]')) return;
+				var s = document.createElement('script');
+				s.type = 'module';
+				s.src = 'https://unpkg.com/@splinetool/viewer@1.9.48/build/spline-viewer.js';
+				s.setAttribute('data-spline-viewer', '1');
+				document.head.appendChild(s);
+			} catch (e) {}
+		}
+
+		function schedule() {
+			// Prefer idle time; fallback to a short timeout.
+			// @ts-ignore
+			if (typeof requestIdleCallback === 'function') {
+				// @ts-ignore
+				requestIdleCallback(loadSpline, { timeout: 2500 });
+			} else {
+				setTimeout(loadSpline, 800);
+			}
+		}
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', schedule);
+		} else {
+			schedule();
+		}
+	})();
+</script>
 
 <script>
+
 	import { getCityStore } from '../lib/cityStore';
 	import { heroContent } from '../lib/content';
 
@@ -47,10 +83,13 @@ const { content, splineUrl = '' } = Astro.props;
 	const subtitleEl = document.querySelector('[data-city-subtitle]');
 	const descriptionEl = document.querySelector('[data-city-description]');
 	const metaEl = document.querySelector('[data-city-meta]');
+	const ctaButton = document.querySelector('[data-hero-primary-Cta]');
 
+	
 	function updateContent(city: 'vancouver' | 'toronto') {
 		const content = heroContent[city];
-
+      
+		
 		if (titleEl) titleEl.textContent = content.title;
 		if (cityNameEl) cityNameEl.textContent = content.cityName;
 		if (subtitleEl) subtitleEl.textContent = content.subtitle;
@@ -68,8 +107,16 @@ const { content, splineUrl = '' } = Astro.props;
 			if (timeEl) timeEl.textContent = content.time;
 		}
 
+
+
+if (ctaButton) {
+  ctaButton.href = content.primaryCta.href;
+  ctaButton.textContent = content.primaryCta.text;
+}
+
 		// Update page title
 		document.title = `${content.title} - ${content.cityName}`;
+
 	}
 
 	// Initial update
@@ -97,6 +144,7 @@ const { content, splineUrl = '' } = Astro.props;
 		});
 	}
 	*/
+
 </script>
 
 <style>
@@ -176,6 +224,10 @@ const { content, splineUrl = '' } = Astro.props;
 		max-width: 600px;
 		margin-left: auto;
 		margin-right: auto;
+	}
+
+	.hero-description:empty {
+		display: none;
 	}
 
 	.hero-meta {

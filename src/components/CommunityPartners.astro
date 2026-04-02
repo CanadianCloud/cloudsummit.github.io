@@ -1,0 +1,150 @@
+---
+import { communityPartners } from "../lib/content"
+---
+
+<section class="community-partners">
+    <h2 class="community-partners-heading">
+        <span class="community-partners-prefix">Community </span>
+        Partners
+    </h2>
+    <div class="community-partners-card">
+        <div id="partners-container">
+            {communityPartners.map((partner) => {
+                return (
+                    <figure class="partner">
+                        <img class="partner-logo" src={partner.logo} alt={partner.name} />
+                    </figure>
+                );
+            })}
+        </div>
+    </div>
+</section>
+
+<style>
+    .community-partners {
+        text-align: center;
+        max-width: 1200px;
+        margin: 0 auto 2.5rem;
+        padding: 0;
+    }
+
+    .community-partners-card {
+        background: rgba(61, 120, 171, 0.1);
+        border: 1px solid rgba(61, 120, 171, 0.2);
+        border-radius: 1rem;
+        overflow: hidden;
+        padding: 2rem 1.5rem 3rem;
+    }
+    .community-partners-heading {
+        font-family: 'Squada One', system-ui, sans-serif;
+		font-size: 2.5rem;
+		font-weight: 400;
+		margin: 0 0 1rem 0;
+		line-height: 1.2;
+		letter-spacing: 0.02em;
+		color: rgb(251, 113, 133);
+    }
+
+    .community-partners-prefix {
+        color: white;
+        font-family: 'Squada One', system-ui, sans-serif;
+        font-size: 2.5rem;
+        font-weight: 400;
+        letter-spacing: 0.02em;
+    }
+
+    @media (min-width: 769px) {
+        .community-partners {
+            margin-bottom: 4rem;
+        }
+
+        .community-partners-card {
+            padding: 4.5rem 2rem 4rem;
+        }
+
+        .community-partners-heading {
+            font-size: 4rem;
+        }
+
+        .community-partners-prefix {
+            font-size: 4rem;
+        }
+    }
+    .partner {
+        flex: 0 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+    }
+    .partner-logo {
+        max-width: min(280px, 42vw);
+        height: 140px;
+        width: auto;
+        object-fit: contain;
+        display: block;
+    }
+
+    /* Single row on desktop; horizontal scroll if needed at medium widths */
+    #partners-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
+        gap: clamp(2.25rem, 7vw, 5rem);
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        padding: 0.5rem 0;
+    }
+
+    /* Mobile: 2-column grid, no sideways scroll; last partner centered on its own row */
+    @media (max-width: 768px) {
+        .community-partners {
+            padding: 0 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .community-partners-card {
+            padding: 1.5rem 1rem 2rem;
+        }
+
+        .community-partners-heading,
+        .community-partners-prefix {
+            font-size: 2rem;
+        }
+
+        #partners-container {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.5rem 1rem;
+            overflow-x: visible;
+            overflow-y: visible;
+            justify-content: stretch;
+            align-items: center;
+            padding: 0.35rem 0 0.15rem;
+        }
+
+        .partner {
+            width: 100%;
+            min-height: 4.5rem;
+        }
+
+        .partner:nth-child(5) {
+            grid-column: 1 / -1;
+            justify-self: center;
+            max-width: 11rem;
+            min-height: 0;
+        }
+
+        .partner-logo {
+            max-width: 100%;
+            max-height: 72px;
+            height: auto;
+            width: auto;
+            margin-inline: auto;
+        }
+    }
+</style>

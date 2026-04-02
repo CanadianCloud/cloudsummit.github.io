@@ -2,150 +2,53 @@
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import ScrollAnimations from '../components/ScrollAnimations.astro';
-import { navigationContent, footerContent, citySpecificContent } from '../lib/content';
+import { navigationContent, footerContent, speakerContent } from '../lib/content';
+import GoogleAnalytics from '../components/GoogleAnalytics.astro';
+import SeoSocial from '../components/SeoSocial.astro';
+import { absoluteUrl, DEFAULT_OG_IMAGE_PATH, getCanonical } from '../lib/seo';
 
-const speakers = [
-	{
-		name: 'Matt Biilmann',
-		title: 'CEO and Co-Founder',
-		company: 'Netlify',
-		topic: 'AX and Why It Matters',
-		image: '/images/previous-speakers/matt-biilmann.png',
-	},
-	{
-		name: 'Eric Johnson',
-		title: 'Principal Developer Advocate',
-		company: 'Amazon Web Services (AWS)',
-		topic: 'Taking GenAI from Paper to Production with Serverless',
-		image: '/images/previous-speakers/eric-johnson.png',
-	},
-	{
-		name: 'Ahmad Awais',
-		title: 'CEO',
-		company: 'Langbase',
-		topic: 'Why the Best AI Agents Are Built Without Frameworks',
-		image: '/images/previous-speakers/ahmad-awais.jpg',
-	},
-	{
-		name: 'Luca Maraschi',
-		title: 'Co-Founder & CEO',
-		company: 'Platformatic',
-		topic: 'Scaling Node.js in Kubernetes: Metrics, Memory, and Mastery',
-		image: '/images/previous-speakers/luca-maraschi.png',
-	},
-	{
-		name: 'Denis Astahov',
-		title: 'Solutions Architect',
-		company: 'OpsGuru',
-		topic: 'How to become Cloud/DevOps Engineer from Zero',
-		image: '/images/previous-speakers/denis-astahov.png',
-	},
-	{
-		name: 'Aiman Parvaiz',
-		title: 'Director of DevOps',
-		company: 'NimbusStack',
-		topic: 'Driving Cloud Cost Efficiency: Multi-Cloud Strategies',
-		image: '/images/previous-speakers/aiman-parvaiz.png',
-	},
-	{
-		name: 'Brian Clendenin',
-		title: 'Enterprise Sales - Strategic',
-		company: 'Datadog',
-		topic: 'The Business Value of Observability in the Age of AI',
-		image: '/images/previous-speakers/brian-clendenin.png',
-	},
-	{
-		name: 'Farzad Khandan',
-		title: 'CTO & Co-Founder',
-		company: 'Innovimia Technologies',
-		topic: 'Building your Startups in the Cloud? Dos and Don\'ts',
-		image: '/images/previous-speakers/farzad khandan.jpeg',
-	},
-	{
-		name: 'Gabriel Caldwell',
-		title: 'CTO',
-		company: 'Tsunami Solutions',
-		topic: 'Cloud, AI & the Rise of the Next Billion-Dollar Idea',
-		image: '/images/previous-speakers/gabriel-caldwell.jpg',
-	},
-	{
-		name: 'Adetokunbo Ige',
-		title: 'Sr. DevOps Engineer',
-		company: 'Planview',
-		topic: 'Build and Deploy Dockerize Python Application to Azure',
-		image: '/images/previous-speakers/adetokunbo-ige.png',
-	},
-	{
-		name: 'Herman Chandi',
-		title: 'Cofounder & COO',
-		company: 'UrbanLogiq',
-		topic: 'Cloud, AI & the Rise of the Next Billion-Dollar Idea',
-		image: '/images/previous-speakers/herman-chandi.jpg',
-	},
-	{
-		name: 'Mark Gamble',
-		title: 'Director, Product and Solutions Marketing',
-		company: 'Couchbase',
-		topic: 'Modern Database Architecture',
-		image: '/images/previous-speakers/mark-gamble.jpg',
-	},
-	{
-		name: 'Matteo Collina',
-		title: 'Co-Founder & CTO',
-		company: 'Platformatic',
-		topic: 'Node.js Performance',
-		image: '/images/previous-speakers/matteo-collina.png',
-	},
-	{
-		name: 'Niti Jain',
-		title: 'Cloud Architect',
-		company: 'Microsoft',
-		topic: 'Azure Best Practices',
-		image: '/images/previous-speakers/niti-jain.png',
-	},
-	{
-		name: 'Noorain Panjwani',
-		title: 'Developer Advocate',
-		company: 'Tech Community',
-		topic: 'Community Building in Tech',
-		image: '/images/previous-speakers/noorain-panjwani.jpg',
-	},
-	{
-		name: 'Parice Brandies',
-		title: 'Cloud Engineer',
-		company: 'Tech Company',
-		topic: 'Cloud Infrastructure',
-		image: '/images/previous-speakers/parice brandies.jpg',
-	},
-	{
-		name: 'Sarang Gupta',
-		title: 'Solutions Architect',
-		company: 'Cloud Provider',
-		topic: 'Cloud Architecture Patterns',
-		image: '/images/previous-speakers/sarang-gupta.png',
-	},
-	{
-		name: 'Warren Lyne',
-		title: 'Tech Lead',
-		company: 'Enterprise Solutions',
-		topic: 'Enterprise Cloud Migration',
-		image: '/images/previous-speakers/warren-lyne.jpg',
-	},
-];
+const pageTitle = 'Our Speakers - Cloud Summit 2026';
+const pageDescription =
+	"Meet Cloud Summit 2026 featured speakers at Canada's premier multi-cloud conference in Vancouver and Toronto.";
+const canonicalUrl = getCanonical(Astro);
+const ogImageUrl = absoluteUrl(DEFAULT_OG_IMAGE_PATH, Astro);
+
 ---
 
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
+		<link rel="canonical" href={canonicalUrl} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={pageDescription} />
+		<SeoSocial
+			title={pageTitle}
+			description={pageDescription}
+			canonicalUrl={canonicalUrl}
+			ogImageUrl={ogImageUrl}
+		/>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link href="https://fonts.googleapis.com/css2?family=Squada+One&family=Noto+Sans:wght@400;500;600;700&family=Doto:wght@100..900&display=swap" rel="stylesheet" />
-		<title>Call for Speakers - Cloud Summit 2026</title>
+		<title>{pageTitle}</title>
+		<GoogleAnalytics />
 	</head>
 	<body>
+		<script is:inline>
+			(function () {
+				try {
+					var c = new URLSearchParams(window.location.search).get('city');
+					document.body.setAttribute(
+						'data-speakers-city',
+						c === 'toronto' ? 'toronto' : 'vancouver',
+					);
+				} catch (e) {
+					document.body.setAttribute('data-speakers-city', 'vancouver');
+				}
+			})();
+		</script>
 		<Navigation content={navigationContent} />
 
 		<main class="speakers-page">
@@ -170,113 +73,103 @@ const speakers = [
 				</div>
 				<div class="hero-container">
 					<h1 class="hero-title">Our Speakers</h1>
-					<p class="hero-subtitle">Learn from Industry-Leading Cloud Experts</p>
-					<p class="hero-description">
-						Cloud Summit 2026 brings together the brightest minds in cloud computing.
-						Hear from experts at AWS, Azure, Google Cloud, IBM Cloud, and leading tech companies
-						as they share insights, best practices, and the latest innovations.
-					</p>
 				</div>
 			</section>
 
-			<!-- Speakers Grid -->
+			<!-- Speakers: Vancouver lineup vs Toronto coming soon (synced with navbar city) -->
 			<section class="speakers-section">
 				<div class="speakers-container">
-					<h2 class="section-heading">
-						<span class="heading-prefix">All </span>
-						Past Speakers
-					</h2>
-					<div class="speakers-grid">
-						{speakers.map((speaker) => (
-							<div class="speaker-card">
-								<div class="speaker-image">
-									<img src={speaker.image} alt={speaker.name} />
-								</div>
-								<div class="speaker-info">
-									<h3 class="speaker-name">{speaker.name}</h3>
-									<p class="speaker-title">{speaker.title}</p>
-									<p class="speaker-company">{speaker.company}</p>
-									<p class="speaker-topic">{speaker.topic}</p>
-								</div>
-							</div>
-						))}
+					<div class="speakers-city-content speakers-city-content--toronto" aria-live="polite">
+						<p class="speakers-coming-soon">Coming soon..</p>
 					</div>
-				</div>
-			</section>
-
-			<!-- Call for Speakers -->
-			<section class="cfs-section" id="speakers">
-				<div class="cfs-container">
-					<h2 class="section-heading">
-						<span class="heading-prefix">Become a </span>
-						Speaker
-					</h2>
-					<p class="cfs-description">
-						Are you a cloud expert with insights to share? We're looking for passionate speakers
-						to present at Cloud Summit 2026. Share your knowledge with hundreds of cloud professionals
-						and help shape the future of cloud computing in Canada.
-					</p>
-					<div class="cfs-dates">
-						<div class="cfs-date-card">
-							<h3>Vancouver</h3>
-							<p class="date-label">Call for Speakers Opens</p>
-							<p class="date-value">{citySpecificContent.vancouver.callForSpeakers}</p>
-						</div>
-						<div class="cfs-date-card">
-							<h3>Toronto</h3>
-							<p class="date-label">Call for Speakers Opens</p>
-							<p class="date-value">{citySpecificContent.toronto.callForSpeakers}</p>
-						</div>
+					<div class="speakers-city-content speakers-city-content--vancouver">
+					<div class="speakers-grid speakers-grid--detailed">
+						{speakerContent.map((speaker, index) => {
+							const bioDialogId = `speaker-bio-dialog-${index}`;
+							const bioTitleId = `${bioDialogId}-title`;
+							return (
+								<article class="speaker-card speaker-card--detailed">
+									<div class="speaker-image">
+										<img src={speaker.image} alt={speaker.speakername} loading="lazy" />
+									</div>
+									<div class="speaker-info">
+										<h3 class="speaker-name">{speaker.speakername}</h3>
+										{speaker.linkedin && (
+											<p class="speaker-linkedin">
+												<a
+													href={speaker.linkedin}
+													target="_blank"
+													rel="noopener noreferrer"
+												>
+													LinkedIn
+												</a>
+											</p>
+										)}
+										{(speaker.talkTitle || speaker.talkLevel) && (
+											<div class="speaker-talk-block">
+												{speaker.talkTitle && (
+													<p class="speaker-talk-headline">{speaker.talkTitle}</p>
+												)}
+												{speaker.talkLevel && (
+													<p class="speaker-talk-level-tag">{speaker.talkLevel}</p>
+												)}
+											</div>
+										)}
+										{speaker.title && <p class="speaker-title">{speaker.title}</p>}
+										{speaker.company && <p class="speaker-company">{speaker.company}</p>}
+										{speaker.topic && <p class="speaker-topic">{speaker.topic}</p>}
+										{(speaker.bio || speaker.talkSummary) && (
+											<>
+												<button
+													type="button"
+													class="speaker-see-more-btn"
+													data-speaker-dialog={bioDialogId}
+												>
+													See more
+												</button>
+												<dialog
+													id={bioDialogId}
+													class="speaker-bio-dialog"
+													aria-labelledby={bioTitleId}
+												>
+													<div class="speaker-bio-dialog__panel">
+														<header class="speaker-bio-dialog__header">
+															<h2 id={bioTitleId} class="speaker-bio-dialog__title">
+																{speaker.speakername}
+															</h2>
+															<button
+																type="button"
+																class="speaker-bio-dialog__close"
+																aria-label="Close dialog"
+															>
+																×
+															</button>
+														</header>
+														<div class="speaker-bio-dialog__body">
+															{speaker.bio && (
+																<div class="speaker-bio-dialog__block">
+																	<h3 class="speaker-bio-dialog__section-label">Bio</h3>
+																	<p class="speaker-bio-dialog__text">{speaker.bio}</p>
+																</div>
+															)}
+															{speaker.talkSummary && (
+																<div class="speaker-bio-dialog__block">
+																	<h3 class="speaker-bio-dialog__section-label">
+																		Talk summary
+																	</h3>
+																	<p class="speaker-bio-dialog__text">{speaker.talkSummary}</p>
+																</div>
+															)}
+														</div>
+													</div>
+												</dialog>
+											</>
+										)}
+									</div>
+								</article>
+							);
+						})}
 					</div>
-					<div class="cfs-benefits">
-						<div class="benefit-item">
-							<h3>Share Your Expertise</h3>
-							<p>Present your knowledge to 1,000+ cloud professionals</p>
-						</div>
-						<div class="benefit-item">
-							<h3>Build Your Brand</h3>
-							<p>Establish yourself as a thought leader in the cloud community</p>
-						</div>
-						<div class="benefit-item">
-							<h3>Network & Connect</h3>
-							<p>Meet fellow experts and expand your professional network</p>
-						</div>
-						<div class="benefit-item">
-							<h3>Get Recorded</h3>
-							<p>Main stage talks are professionally recorded and published</p>
-						</div>
-					</div>
-				</div>
-			</section>
-
-			<!-- Speaking Opportunities -->
-			<section class="opportunities-section">
-				<div class="opportunities-container">
-					<h2 class="section-heading">
-						<span class="heading-prefix">Speaking </span>
-						Formats
-					</h2>
-					<div class="opportunities-grid">
-						<div class="opportunity-card">
-							<h3>Keynote</h3>
-							<p class="duration">45 minutes</p>
-							<p>Main stage presentation for industry leaders and major announcements</p>
-						</div>
-						<div class="opportunity-card">
-							<h3>Workshop</h3>
-							<p class="duration">90 minutes</p>
-							<p>Hands-on, interactive sessions for deep-dive technical training</p>
-						</div>
-						<div class="opportunity-card">
-							<h3>Technical Talk</h3>
-							<p class="duration">30 minutes</p>
-							<p>In-depth presentations on specific cloud technologies and practices</p>
-						</div>
-						<div class="opportunity-card">
-							<h3>Lightning Talk</h3>
-							<p class="duration">10 minutes</p>
-							<p>Quick, focused presentations on specific topics or use cases</p>
-						</div>
 					</div>
 				</div>
 			</section>
@@ -284,6 +177,53 @@ const speakers = [
 
 		<Footer content={footerContent} />
 		<ScrollAnimations />
+
+		<script>
+			import { getCityStore } from '../lib/cityStore';
+			import type { City } from '../lib/content';
+
+			function syncSpeakersPageCity(city: City) {
+				document.body.setAttribute('data-speakers-city', city);
+			}
+
+			function initSpeakersPageCity() {
+				const cityStore = getCityStore();
+				cityStore.init();
+				syncSpeakersPageCity(cityStore.getCity());
+				cityStore.subscribe(syncSpeakersPageCity);
+			}
+
+			if (document.readyState === 'loading') {
+				document.addEventListener('DOMContentLoaded', initSpeakersPageCity);
+			} else {
+				initSpeakersPageCity();
+			}
+
+			function initSpeakerBioDialogs() {
+				document.querySelectorAll('.speaker-see-more-btn').forEach((btn) => {
+					btn.addEventListener('click', () => {
+						const id = btn.getAttribute('data-speaker-dialog');
+						const el = id ? document.getElementById(id) : null;
+						if (el instanceof HTMLDialogElement) el.showModal();
+					});
+				});
+				document.querySelectorAll('dialog.speaker-bio-dialog').forEach((node) => {
+					if (!(node instanceof HTMLDialogElement)) return;
+					node.addEventListener('click', (e) => {
+						if (e.target === node) node.close();
+					});
+					node.querySelectorAll('.speaker-bio-dialog__close').forEach((closeBtn) => {
+						closeBtn.addEventListener('click', () => node.close());
+					});
+				});
+			}
+
+			if (document.readyState === 'loading') {
+				document.addEventListener('DOMContentLoaded', initSpeakerBioDialogs);
+			} else {
+				initSpeakerBioDialogs();
+			}
+		</script>
 	</body>
 </html>
 
@@ -321,7 +261,7 @@ const speakers = [
 
 	/* Hero Section */
 	.speakers-hero {
-		padding: 6rem 1.5rem 4rem;
+		padding: 6rem 1.5rem 1.25rem;
 		background: black;
 		position: relative;
 		overflow: hidden;
@@ -382,7 +322,7 @@ const speakers = [
 	.hero-title {
 		font-family: 'Squada One', system-ui, sans-serif;
 		font-size: 3rem;
-		margin: 0 0 1rem 0;
+		margin: 0;
 		color: rgb(251, 113, 133);
 	}
 
@@ -398,22 +338,9 @@ const speakers = [
 		opacity: 0.9;
 	}
 
-	/* Section Headings */
-	.section-heading {
-		font-family: 'Squada One', system-ui, sans-serif;
-		font-size: 2.5rem;
-		text-align: center;
-		margin: 0 0 3rem 0;
-		color: rgb(251, 113, 133);
-	}
-
-	.heading-prefix {
-		color: white;
-	}
-
 	/* Speakers Section */
 	.speakers-section {
-		padding: 4rem 1.5rem;
+		padding: 1.25rem 1.5rem 4rem;
 	}
 
 	.speakers-container {
@@ -421,10 +348,39 @@ const speakers = [
 		margin: 0 auto;
 	}
 
+	/* Toronto: show “Coming soon..” (white); Vancouver: show speaker grid */
+	.speakers-city-content--toronto {
+		display: none;
+		padding: 2rem 0 3rem;
+		text-align: center;
+	}
+
+	body[data-speakers-city='toronto'] .speakers-city-content--vancouver {
+		display: none;
+	}
+
+	body[data-speakers-city='toronto'] .speakers-city-content--toronto {
+		display: block;
+	}
+
+	.speakers-coming-soon {
+		font-family: 'Squada One', system-ui, sans-serif;
+		font-size: 2.25rem;
+		font-weight: 400;
+		letter-spacing: 0.02em;
+		color: #ffffff;
+		margin: 0;
+		line-height: 1.3;
+	}
+
 	.speakers-grid {
 		display: grid;
 		grid-template-columns: 1fr;
 		gap: 2rem;
+	}
+
+	.speakers-grid--detailed {
+		gap: 2.5rem;
 	}
 
 	.speaker-card {
@@ -436,28 +392,55 @@ const speakers = [
 		transition: transform 0.2s, border-color 0.2s;
 	}
 
+	.speaker-card--detailed {
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		gap: 1.5rem;
+		text-align: left;
+	}
+
 	.speaker-card:hover {
 		transform: translateY(-4px);
 		border-color: rgba(61, 120, 171, 0.4);
 	}
 
+	.speaker-card--detailed .speaker-image {
+		margin: 0 auto;
+		flex-shrink: 0;
+	}
+
 	.speaker-image {
-		width: 150px;
-		height: 150px;
-		margin: 0 auto 1.5rem;
-		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		max-width: 260px;
+		min-height: 200px;
+		margin: 0 auto 1.25rem;
+		border-radius: 1rem;
 		overflow: hidden;
-		border: 3px solid rgb(251, 113, 133);
+		border: 2px solid rgba(251, 113, 133, 0.6);
+		background: rgba(255, 255, 255, 0.04);
 	}
 
 	.speaker-image img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
+		width: auto;
+		max-width: 100%;
+		height: auto;
+		max-height: 240px;
+		object-fit: contain;
+		object-position: center center;
+		display: block;
 	}
 
 	.speaker-info {
 		text-align: center;
+	}
+
+	.speaker-card--detailed .speaker-info {
+		text-align: left;
+		min-width: 0;
 	}
 
 	.speaker-name {
@@ -487,163 +470,162 @@ const speakers = [
 		font-style: italic;
 	}
 
-	/* Call for Speakers */
-	.cfs-section {
-		padding: 4rem 1.5rem;
-		background: rgba(61, 120, 171, 0.05);
+	.speaker-talk-block {
+		margin: 1rem 0 0 0;
 	}
 
-	.cfs-container {
-		max-width: 1200px;
-		margin: 0 auto;
-		text-align: center;
+	.speaker-linkedin {
+		margin: 0.75rem 0 0 0;
+		font-size: 1rem;
+		font-weight: 600;
 	}
 
-	.cfs-description {
-		font-size: 1.125rem;
-		margin: 0 auto 3rem;
-		max-width: 800px;
-		opacity: 0.9;
-		line-height: 1.8;
-	}
-
-	.cfs-dates {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: 1.5rem;
-		margin-bottom: 3rem;
-		max-width: 600px;
-		margin-left: auto;
-		margin-right: auto;
-	}
-
-	.cfs-date-card {
-		background: rgba(251, 113, 133, 0.1);
-		border: 1px solid rgba(251, 113, 133, 0.3);
-		border-radius: 1rem;
-		padding: 1.5rem;
-		text-align: center;
-	}
-
-	.cfs-date-card h3 {
-		font-family: 'Squada One', system-ui, sans-serif;
-		font-size: 1.5rem;
-		margin: 0 0 0.5rem 0;
-		color: white;
-	}
-
-	.date-label {
-		font-size: 0.875rem;
-		margin: 0;
-		opacity: 0.7;
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-	}
-
-	.date-value {
-		font-size: 1.5rem;
-		font-weight: 700;
-		margin: 0.5rem 0 0 0;
-		color: rgb(251, 113, 133);
-	}
-
-	.cfs-benefits {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: 2rem;
-		margin-bottom: 3rem;
-	}
-
-	.benefit-item {
-		background: rgba(61, 120, 171, 0.1);
-		border: 1px solid rgba(61, 120, 171, 0.2);
-		border-radius: 1rem;
-		padding: 2rem;
-		text-align: left;
-	}
-
-	.benefit-item h3 {
-		font-family: 'Squada One', system-ui, sans-serif;
-		font-size: 1.5rem;
-		margin: 0 0 0.75rem 0;
-		color: rgb(251, 113, 133);
-	}
-
-	.benefit-item p {
-		margin: 0;
-		opacity: 0.9;
-		line-height: 1.6;
-	}
-
-	.cfs-button {
-		display: inline-block;
-		padding: 1rem 3rem;
-		background: rgb(251, 113, 133);
-		color: white;
+	.speaker-linkedin a {
+		color: rgb(113, 198, 251);
 		text-decoration: none;
-		font-weight: 600;
-		border-radius: 0.5rem;
-		font-size: 1.125rem;
-		transition: transform 0.2s, opacity 0.2s;
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
 	}
 
-	.cfs-button:hover {
-		transform: translateY(-2px);
-		opacity: 0.9;
+	.speaker-linkedin a:hover {
+		text-decoration: underline;
 	}
 
-	/* Opportunities Section */
-	.opportunities-section {
-		padding: 4rem 1.5rem;
-	}
-
-	.opportunities-container {
-		max-width: 1200px;
-		margin: 0 auto;
-	}
-
-	.opportunities-grid {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: 2rem;
-	}
-
-	.opportunity-card {
-		background: rgba(61, 120, 171, 0.1);
-		border: 1px solid rgba(61, 120, 171, 0.2);
-		border-radius: 1rem;
-		padding: 2rem;
-		text-align: center;
-	}
-
-	.opportunity-card h3 {
-		font-family: 'Squada One', system-ui, sans-serif;
-		font-size: 1.75rem;
+	.speaker-talk-headline {
 		margin: 0 0 0.5rem 0;
+		font-size: 1.125rem;
+		font-weight: 600;
+		line-height: 1.4;
 		color: rgb(251, 113, 133);
 	}
 
-	.duration {
-		font-size: 0.875rem;
+	.speaker-talk-level-tag {
+		margin: 0;
+		font-size: 0.8125rem;
 		font-weight: 600;
-		margin: 0 0 1rem 0;
-		color: rgb(255, 193, 77);
 		text-transform: uppercase;
-		letter-spacing: 0.05em;
+		letter-spacing: 0.06em;
+		opacity: 0.85;
 	}
 
-	.opportunity-card p:not(.duration) {
+	.speaker-see-more-btn {
+		margin-top: 1.25rem;
+		padding: 0.6rem 1.25rem;
+		font-family: 'Noto Sans', system-ui, sans-serif;
+		font-size: 0.9375rem;
+		font-weight: 600;
+		color: #fff;
+		background: rgba(61, 120, 171, 0.35);
+		border: 1px solid rgba(61, 120, 171, 0.55);
+		border-radius: 0.5rem;
+		cursor: pointer;
+		transition: background 0.2s, border-color 0.2s, transform 0.15s;
+	}
+
+	.speaker-see-more-btn:hover {
+		background: rgba(61, 120, 171, 0.55);
+		border-color: rgba(251, 113, 133, 0.5);
+	}
+
+	.speaker-see-more-btn:focus {
+		outline: none;
+		box-shadow: 0 0 0 3px rgba(251, 113, 133, 0.35);
+	}
+
+	.speaker-bio-dialog {
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
 		margin: 0;
-		opacity: 0.9;
-		line-height: 1.6;
+		width: min(36rem, calc(100vw - 2rem));
+		max-width: min(36rem, calc(100vw - 2rem));
+		max-height: min(85vh, 40rem);
+		padding: 0;
+		border: 1px solid rgba(61, 120, 171, 0.45);
+		border-radius: 1rem;
+		background: #0a0a0a;
+		color: #fff;
+		box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.55);
+	}
+
+	.speaker-bio-dialog::backdrop {
+		background: rgba(0, 0, 0, 0.72);
+		backdrop-filter: blur(4px);
+	}
+
+	.speaker-bio-dialog__header {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: 1rem;
+		padding: 1.25rem 1.25rem 0.75rem;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+	}
+
+	.speaker-bio-dialog__title {
+		font-family: 'Squada One', system-ui, sans-serif;
+		font-size: 1.5rem;
+		font-weight: 400;
+		margin: 0;
+		line-height: 1.2;
+		color: rgb(251, 113, 133);
+		letter-spacing: 0.02em;
+	}
+
+	.speaker-bio-dialog__close {
+		flex-shrink: 0;
+		width: 2.25rem;
+		height: 2.25rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0;
+		font-size: 1.5rem;
+		line-height: 1;
+		color: rgba(255, 255, 255, 0.85);
+		background: rgba(255, 255, 255, 0.08);
+		border: none;
+		border-radius: 0.375rem;
+		cursor: pointer;
+		transition: background 0.2s, color 0.2s;
+	}
+
+	.speaker-bio-dialog__close:hover {
+		background: rgba(255, 255, 255, 0.14);
+		color: #fff;
+	}
+
+	.speaker-bio-dialog__body {
+		padding: 1rem 1.25rem 1.5rem;
+		max-height: min(60vh, 28rem);
+		overflow-y: auto;
+	}
+
+	.speaker-bio-dialog__block + .speaker-bio-dialog__block {
+		margin-top: 1.5rem;
+		padding-top: 1.25rem;
+		border-top: 1px solid rgba(255, 255, 255, 0.1);
+	}
+
+	.speaker-bio-dialog__section-label {
+		font-family: 'Squada One', system-ui, sans-serif;
+		font-size: 1.125rem;
+		font-weight: 400;
+		margin: 0 0 0.5rem 0;
+		color: rgb(255, 193, 77);
+		letter-spacing: 0.02em;
+	}
+
+	.speaker-bio-dialog__text {
+		margin: 0;
+		font-size: 1rem;
+		line-height: 1.65;
+		opacity: 0.92;
 	}
 
 	/* Desktop Styles */
 	@media (min-width: 769px) {
 		.speakers-hero {
-			padding: 8rem 2rem 6rem;
+			padding: 6rem 2rem 1.5rem;
 		}
 
 		.hero-title {
@@ -659,44 +641,41 @@ const speakers = [
 		}
 
 		.speakers-section {
-			padding: 6rem 2rem;
+			padding: 1.5rem 2rem 6rem;
 		}
 
-		.section-heading {
-			font-size: 4rem;
+		.speakers-coming-soon {
+			font-size: 3rem;
 		}
 
-		.speakers-grid {
-			grid-template-columns: repeat(3, 1fr);
+		.speakers-grid--detailed {
 			gap: 3rem;
+		}
+
+		.speaker-card--detailed {
+			flex-direction: row;
+			align-items: flex-start;
+			gap: 2.5rem;
+			padding: 2.25rem 2.5rem;
+		}
+
+		.speaker-card--detailed .speaker-image {
+			margin: 0;
+			max-width: 240px;
+			min-height: 220px;
+		}
+
+		.speaker-card--detailed .speaker-image img {
+			max-height: 260px;
 		}
 
 		.speaker-image {
-			width: 180px;
-			height: 180px;
+			max-width: 280px;
+			min-height: 260px;
 		}
 
-		.cfs-section {
-			padding: 6rem 2rem;
-		}
-
-		.cfs-dates {
-			grid-template-columns: repeat(2, 1fr);
-			max-width: 700px;
-		}
-
-		.cfs-benefits {
-			grid-template-columns: repeat(2, 1fr);
-			gap: 3rem;
-		}
-
-		.opportunities-section {
-			padding: 6rem 2rem;
-		}
-
-		.opportunities-grid {
-			grid-template-columns: repeat(2, 1fr);
-			gap: 3rem;
+		.speaker-image img {
+			max-height: 280px;
 		}
 	}
 </style>

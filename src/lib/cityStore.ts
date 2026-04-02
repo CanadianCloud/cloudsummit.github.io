@@ -1,7 +1,15 @@
 import type { City } from './cityContent';
 import { getCityFromUrl, setCityInUrl, defaultCity } from './cityContent';
 
-class CityStore {
+/** Public API (used for SSR stubs that are not full `CityStore` instances). */
+export interface CityStoreApi {
+	getCity(): City;
+	setCity(city: City, updateUrl?: boolean, forceUpdate?: boolean): void;
+	subscribe(listener: (city: City) => void): () => void;
+	init(): void;
+}
+
+class CityStore implements CityStoreApi {
 	private currentCity: City = defaultCity;
 	private listeners: Set<(city: City) => void> = new Set();
 	private initialized: boolean = false;
@@ -33,15 +41,36 @@ class CityStore {
 		// Only skip if city is the same AND we're not forcing an update
 		// This allows updating the URL even if the city value is the same
 		if (this.currentCity === city && !forceUpdate) return;
-		
+
+		const previousCity = this.currentCity;
 		this.currentCity = city;
-		
+
 		if (updateUrl && typeof window !== 'undefined') {
 			setCityInUrl(city);
 		}
-		
-		// Notify all listeners
-		this.listeners.forEach(listener => listener(city));
+
+		// Explicit city switch (dropdown/modal): jump to top. Skip for popstate (updateUrl false).
+		if (
+			typeof window !== 'undefined' &&
+			updateUrl &&
+			previousCity !== city
+		) {
+			window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+		}
+
+		this.listeners.forEach((listener) => listener(city));
+
+		// Toronto hides large sections (schedule, speakers, event map). Layout changes
+		// after listeners run; GSAP ScrollTrigger must refresh or sections can stay opacity: 0.
+		if (typeof window !== 'undefined') {
+			void import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
+				requestAnimationFrame(() => {
+					requestAnimationFrame(() => {
+						ScrollTrigger.refresh();
+					});
+				});
+			});
+		}
 	}
 
 	subscribe(listener: (city: City) => void): () => void {
@@ -57,14 +86,14 @@ class CityStore {
 // Create singleton instance
 let storeInstance: CityStore | null = null;
 
-export function getCityStore(): CityStore {
+export function getCityStore(): CityStoreApi {
 	if (typeof window === 'undefined') {
 		return {
 			getCity: () => defaultCity,
 			setCity: () => {},
 			subscribe: () => () => {},
 			init: () => {},
-		} as CityStore;
+		};
 	}
 	
 	if (!storeInstance) {
@@ -74,7 +103,13 @@ export function getCityStore(): CityStore {
 	return storeInstance;
 }
 
-export const cityStore = typeof window !== 'undefined' 
-	? getCityStore()
-	: { getCity: () => defaultCity, setCity: () => {}, subscribe: () => () => {}, init: () => {} } as CityStore;
+export const cityStore: CityStoreApi =
+	typeof window !== 'undefined'
+		? getCityStore()
+		: {
+				getCity: () => defaultCity,
+				setCity: () => {},
+				subscribe: () => () => {},
+				init: () => {},
+			};
 

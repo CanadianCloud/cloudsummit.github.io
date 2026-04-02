@@ -1,0 +1,273 @@
+---
+import type { FAQ } from "../lib/content";
+
+interface Props {
+  content: FAQ[];
+}
+
+const { content } = Astro.props;
+---
+
+<section class="faq-section" id="faq" aria-labelledby="faq-heading">
+  <div class="faq-outer">
+    <div class="faq-header">
+      <h2 id="faq-heading" class="section-heading">
+        <span class="heading-prefix">Frequently Asked </span>
+        Questions
+      </h2>
+    </div>
+
+    <div class="faq-list">
+    {
+      content.map((faq) => (
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span class="faq-question">{faq.question}</span>
+            <div class="faq-icon">
+              <div class="line-vertical" />
+              <div class="line-horizontal" />
+            </div>
+          </button>
+
+          <div class="faq-content">
+            <div class="faq-inner">
+              <p>{faq.answer}</p>
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+  </div>
+</section>
+
+<script>
+  const items = document.querySelectorAll(".faq-item");
+
+  items.forEach((item) => {
+    const trigger = item.querySelector(".faq-trigger");
+    const content = item.querySelector(".faq-content");
+
+    trigger.addEventListener("click", () => {
+      const isOpen = item.classList.contains("active");
+
+      // Close all other items first
+      items.forEach((i) => {
+        i.classList.remove("active");
+        i.querySelector(".faq-content").style.maxHeight = "0px";
+        i.querySelector(".faq-trigger").setAttribute("aria-expanded", "false");
+      });
+
+      // Toggle current item
+      if (!isOpen) {
+        item.classList.add("active");
+        content.style.maxHeight = content.scrollHeight + "px";
+        trigger.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
+</script>
+
+<style>
+  /* Match Event Map section + heading */
+  .faq-section {
+    background: #0a0a0a;
+    color: #fff;
+    padding: 2.25rem 1rem;
+  }
+
+  .faq-outer {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .faq-header {
+    margin-bottom: 2rem;
+  }
+
+  .faq-section .section-heading {
+    font-family: "Squada One", system-ui, sans-serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin: 0 0 0.5rem 0;
+    color: rgb(255, 193, 77);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+  }
+
+  .faq-section .heading-prefix {
+    color: white;
+    font-family: "Squada One", system-ui, sans-serif;
+  }
+
+  @media (min-width: 769px) {
+    .faq-section {
+      padding: 4.5rem 2rem;
+    }
+
+    .faq-header {
+      margin-bottom: 3rem;
+    }
+
+    .faq-section .section-heading {
+      font-size: 4rem;
+    }
+  }
+
+  /* List + cards: align with Venue Logistics / Event Map dark cards */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+  }
+
+  @media (min-width: 769px) {
+    .faq-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: start;
+      gap: 1.25rem;
+    }
+  }
+
+  .faq-item {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(61, 120, 171, 0.2);
+    border-radius: 12px;
+    overflow: hidden;
+    transition:
+      border-color 0.2s ease,
+      background 0.2s ease;
+  }
+
+  .faq-item:hover {
+    border-color: rgba(61, 120, 171, 0.4);
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .faq-item.active {
+    border-color: rgba(61, 120, 171, 0.45);
+  }
+
+  /* Trigger Button */
+  .faq-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.85rem 0.875rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-family:
+      "Noto Sans",
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      sans-serif;
+  }
+
+  @media (min-width: 769px) {
+    .faq-trigger {
+      gap: 1rem;
+      padding: 1.15rem 1.25rem;
+    }
+  }
+
+  .faq-question {
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.95);
+    line-height: 1.45;
+  }
+
+  @media (min-width: 769px) {
+    .faq-question {
+      font-size: 1.0625rem;
+    }
+  }
+
+  /* Plus/Minus Icon Animation */
+  .faq-icon {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+
+  .line-vertical,
+  .line-horizontal {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.75);
+    border-radius: 2px;
+    transition:
+      transform 0.3s ease,
+      opacity 0.3s ease;
+  }
+
+  .line-vertical {
+    width: 2px;
+    height: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .line-horizontal {
+    width: 100%;
+    height: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  /* Icon State Change */
+  .faq-item.active .line-vertical {
+    transform: translateX(-50%) rotate(90deg);
+    opacity: 0;
+  }
+
+  /* Content Animation */
+  .faq-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .faq-inner {
+    padding: 0 0.875rem 0.85rem 0.875rem;
+    font-family:
+      "Noto Sans",
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      sans-serif;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .faq-inner p {
+    margin: 0;
+    white-space: pre-line;
+  }
+
+  @media (min-width: 769px) {
+    .faq-inner {
+      padding: 0 1.25rem 1.15rem 1.25rem;
+      font-size: 1rem;
+    }
+  }
+</style>

@@ -16,7 +16,7 @@ const { content } = Astro.props;
 			<div class="bento-grid">
 				<!-- Row 1-3, Col 1: Photo (1x3) -->
 				<div class="bento-item bento-photo bento-1x3">
-					<img src="/images/event-photos/_DSC5343.png" alt="Cloud Summit Event" />
+					<img src="/images/event-photos/_DSC5343.png" alt="Cloud Summit attendees networking during the event" />
 				</div>
 
 				<!-- Row 1-2, Col 2-4: Green Charity (3x2) -->
@@ -27,7 +27,7 @@ const { content } = Astro.props;
 
 				<!-- Row 1-2, Col 5-6: Photo (2x2) -->
 				<div class="bento-item bento-photo bento-2x2">
-					<img src="/images/event-photos/_DSC5450.png" alt="Cloud Summit Event" />
+					<img src="/images/event-photos/_DSC5450.png" alt="Audience listening to a Cloud Summit speaker session" />
 				</div>
 
 				<!-- Row 3, Col 2: Yellow (1x1) -->
@@ -52,12 +52,12 @@ const { content } = Astro.props;
 
 				<!-- Row 5-7, Col 5-6: Photo (2x3) -->
 				<div class="bento-item bento-photo bento-2x3">
-					<img src="/images/event-photos/_DSC5457.png" alt="Cloud Summit Event" />
+					<img src="/images/event-photos/_DSC5457.png" alt="Cloud Summit community members connecting the stage" />
 				</div>
 
 				<!-- Row 6-7, Col 1-2: Photo (2x2) -->
 				<div class="bento-item bento-photo bento-2x2">
-					<img src="/images/event-photos/_DSC5559.png" alt="Cloud Summit Event" />
+					<img src="/images/event-photos/_DSC5559.png" alt="Live cloud talk in progress at Cloud Summit" />
 				</div>
 
 				<!-- Row 6-7, Col 3-4: Red Sponsors (2x2) -->
@@ -87,17 +87,19 @@ const { content } = Astro.props;
 	}
 
 	.vertical-text {
-		font-family: 'Doto', sans-serif;
-		font-size: 1.5rem;
-		font-weight: 700;
-		color: white;
-		opacity: 0.7;
+		font-family: "Doto", ui-monospace, monospace;
+		font-size: 2.5rem;
+		font-weight: 500;
+		color: #ffffff;
+		opacity: 1;
 		writing-mode: horizontal-tb;
 		transform: none;
 		white-space: nowrap;
-		letter-spacing: 0.1em;
-		line-height: 0.8;
+		letter-spacing: 0.14em;
+		line-height: 0.95;
 		margin-bottom: 2rem;
+		text-transform: uppercase;
+		-webkit-font-smoothing: antialiased;
 	}
 
 	.content-column {
@@ -136,7 +138,7 @@ const { content } = Astro.props;
 	}
 
 	.bento-item h3 {
-		font-family: 'Squada One', system-ui, sans-serif;
+		font-family: "Squada One", system-ui, sans-serif;
 		font-size: 2rem;
 		margin: 0 0 0.5rem 0;
 		color: white;
@@ -145,6 +147,17 @@ const { content } = Astro.props;
 
 	.bento-item p {
 		margin: 0;
+		font-family:
+			"Noto Sans",
+			system-ui,
+			-apple-system,
+			BlinkMacSystemFont,
+			"Segoe UI",
+			Roboto,
+			Oxygen,
+			Ubuntu,
+			Cantarell,
+			sans-serif;
 		font-size: 1rem;
 		color: white;
 		line-height: 1.3;
@@ -250,23 +263,110 @@ const { content } = Astro.props;
 		grid-row: span 3;
 	}
 
+	/* Mobile: force a clean 2-column grid (no big spans) */
+	@media (max-width: 768px) {
+		.bento-item p {
+			font-size: 0.9rem;
+		}
+
+		.bento-grid {
+			grid-template-columns: 60% 40%;
+			grid-auto-flow: row dense;
+			grid-auto-rows: minmax(120px, auto);
+			gap: 0.75rem;
+		}
+
+		.bento-1x3,
+		.bento-3x2,
+		.bento-2x2,
+		.bento-2x3 {
+			grid-column: span 1;
+			grid-row: span 1;
+		}
+
+		/* Keep photos in the 60% column, cards in the 40% column */
+		.bento-item {
+			grid-column: 2;
+		}
+
+		.bento-item.bento-photo {
+			grid-column: 1;
+		}
+
+		/* Put the Cloud Summit logo card in the 60% column */
+		.bento-item.bento-dark {
+			grid-column: 1;
+		}
+
+		.bento-item {
+			min-height: 120px;
+		}
+
+		.bento-item.bento-photo {
+			aspect-ratio: 4 / 3;
+		}
+
+		.bento-photo img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+
+		/* Title on top, bento grid below */
+		.summary-container {
+			display: flex;
+			flex-direction: column;
+			align-items: stretch;
+			gap: 0;
+			padding: 0 1rem;
+		}
+
+		.vertical-text {
+			writing-mode: horizontal-tb;
+			transform: none;
+			margin-bottom: 1.25rem;
+			width: 100%;
+			text-align: center;
+			font-size: clamp(1.5rem, 5vw, 2.25rem);
+			letter-spacing: 0.14em;
+			line-height: 1.05;
+			padding: 0;
+			white-space: normal;
+		}
+
+		.content-column {
+			width: 100%;
+			min-width: 0;
+		}
+
+		.bento-grid {
+			margin-top: 0;
+		}
+	}
+
 	@media (min-width: 769px) {
 		.summit-summary {
-			padding: 4rem 2rem;
+			padding: 4.5rem 2rem;
 		}
 
 		.summary-container {
 			padding: 0 2rem;
+			display: block;
 		}
 
 		.vertical-text {
+			font-family: "Doto", ui-monospace, monospace;
 			font-size: 6rem;
+			font-weight: 500;
 			writing-mode: vertical-rl;
 			transform: rotate(180deg);
 			position: absolute;
 			left: -10rem;
 			bottom: 0;
 			margin-bottom: 0;
+			letter-spacing: 0.14em;
+			opacity: 1;
+			color: #ffffff;
 		}
 
 		.content-column {

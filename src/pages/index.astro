@@ -1,92 +1,376 @@
 ---
-import Navigation from '../components/Navigation.astro';
-import Hero from '../components/Hero.astro';
-import CityModal from '../components/CityModal.astro';
-import AboutCPCA from '../components/AboutCPCA.astro';
-import WhatIsCloudSummit from '../components/WhatIsCloudSummit.astro';
-import EventLocations from '../components/EventLocations.astro';
-import CloudSummitActivities from '../components/CloudSummitActivities.astro';
-import SummitSummary from '../components/SummitSummary.astro';
-import HighlightReel from '../components/HighlightReel.astro';
-import Ticker from '../components/Ticker.astro';
-import PastSponsors from '../components/PastSponsors.astro';
-import Newsletter from '../components/Newsletter.astro';
-import Footer from '../components/Footer.astro';
-import SeeYouThere from '../components/SeeYouThere.astro';
-import ScrollAnimations from '../components/ScrollAnimations.astro';
-import { heroContent, navigationContent, aboutCPCAContent, whatIsCloudSummitContent, cloudSummitActivitiesContent, eventHighlightsContent, tickerContent, pastSponsorsContent, newsletterContent, footerContent, defaultCity } from '../lib/content';
+import Navigation from "../components/Navigation.astro";
+import Hero from "../components/Hero.astro";
+import CityModal from "../components/CityModal.astro";
+import AboutCPCA from "../components/AboutCPCA.astro";
+import WhatIsCloudSummit from "../components/WhatIsCloudSummit.astro";
+import EventLocations from "../components/EventLocations.astro";
+import EventMap from "../components/EventMap.astro";
+import CloudSummitActivities from "../components/CloudSummitActivities.astro";
+import SummitSummary from "../components/SummitSummary.astro";
+import HighlightReel from "../components/HighlightReel.astro";
+import Ticker from "../components/Ticker.astro";
+import PastSponsors from "../components/PastSponsors.astro";
+import Newsletter from "../components/Newsletter.astro";
+import Footer from "../components/Footer.astro";
+import SeeYouThere from "../components/SeeYouThere.astro";
+import ScrollAnimations from "../components/ScrollAnimations.astro";
+import Sponsors from "../components/Sponsors.astro";
+import CommunityPartners from "../components/CommunityPartners.astro";
+import LocalCharitySection from "../components/LocalCharitySection.astro";
+import FAQ from "../components/FAQ.astro";
+import VenueLogisticsSectionSecondVersion from "../components/VenueLogisticsSectionSecondVersion.astro";
+import {
+  heroContent,
+  navigationContent,
+  aboutCPCAContent,
+  whatIsCloudSummitContent,
+  cloudSummitActivitiesContent,
+  eventHighlightsContent,
+  tickerContent,
+  eventMapContent,
+  pastSponsorsContent,
+  newsletterContent,
+  footerContent,
+  defaultCity,
+  venueLogisticsContentNewVersion,
+  speakerContent,
+  faqContent,
+} from "../lib/content";
+import Schedule from "../components/Schedule.astro";
+import Speaker from "../components/Speaker.astro";
+import GoogleAnalytics from "../components/GoogleAnalytics.astro";
+import SeoSocial from "../components/SeoSocial.astro";
+import { absoluteUrl, DEFAULT_OG_IMAGE_PATH, getCanonical } from "../lib/seo";
 
-// Use default city for SSR, will be updated client-side
+// Use default city for venueLogisticsContentNewVersionSSR, will be updated client-side
 const content = heroContent[defaultCity];
+
+const homepageSpeakers = speakerContent.slice(0, 3);
+
+const homepageKeywords = [
+  "cloud summit canada",
+  "cloud summit 2026",
+  "canada cloud conference",
+  "multi-cloud conference canada",
+  "cloud computing conference canada",
+];
+
+const vancouverKeywords = [
+  "cloud summit vancouver",
+  "cloud conference vancouver",
+  "vancouver cloud event",
+  "tech conference vancouver 2026",
+  "science world conference vancouver",
+  "multi-cloud conference vancouver",
+];
+
+const torontoKeywords = [
+  "cloud summit toronto",
+  "cloud conference toronto",
+  "toronto cloud event",
+  "tech conference toronto 2026",
+  "multi-cloud conference toronto",
+];
+
+const generalKeywords = [
+  "sponsor cloud conference canada",
+  "cloud event sponsorship canada",
+  "sponsor tech conference vancouver",
+  "sponsor tech conference toronto",
+  "exhibit at cloud conference canada",
+  "cloud conference call for speakers",
+  "speak at cloud summit",
+  "tech conference call for speakers canada",
+  "cloud speaker application canada",
+  "what is cloud summit",
+  "cloud summit canada",
+  "multi-cloud event canada",
+  "cloud community event canada",
+  "cloud summit vancouver faq",
+  "cloud summit toronto faq",
+  "science world event parking",
+  "tech conference vancouver tickets",
+  "cloud summit venue information",
+];
+
+const defaultCityKeywords =
+  defaultCity === "toronto" ? torontoKeywords : vancouverKeywords;
+const defaultSeoKeywords = [
+  ...homepageKeywords,
+  ...defaultCityKeywords,
+  ...generalKeywords,
+].join(", ");
+
+const homepageTitle =
+  "Cloud Summit Canada 2026 | Multi-Cloud Conference in Vancouver & Toronto";
+const vancouverTitle =
+  "Cloud Summit Vancouver 2026 | Science World Cloud Conference";
+const torontoTitle =
+  "Cloud Summit Toronto 2026 | Toronto Multi-Cloud Conference";
+
+const homepageDescription =
+  "Cloud Summit 2026 is Canada's multi-cloud conference, bringing together cloud professionals, developers, architects, sponsors, and communities in Vancouver and Toronto.";
+const vancouverDescription =
+  "Join Cloud Summit Vancouver on May 1, 2026 at Science World for cloud talks, workshops, networking, sponsors, and community events.";
+const torontoDescription =
+  "Join Cloud Summit Toronto on August 29, 2026 for a multi-cloud conference featuring speakers, sponsors, workshops, and community networking.";
+
+const canonicalUrl = getCanonical(Astro);
+const ogImageUrl = absoluteUrl(DEFAULT_OG_IMAGE_PATH, Astro);
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link href="https://fonts.googleapis.com/css2?family=Squada+One&family=Noto+Sans:wght@400;500;600;700&family=Doto:wght@100..900&display=swap" rel="stylesheet" />
-		<title>Cloud Summit 2026</title>
-	</head>
-	<body>
-		<CityModal />
-		<Navigation content={navigationContent} />
-		<Hero content={content} />
-		<AboutCPCA content={aboutCPCAContent} />
-		<WhatIsCloudSummit content={whatIsCloudSummitContent} />
-		<CloudSummitActivities content={cloudSummitActivitiesContent} />
-		<EventLocations />
-		<SummitSummary content={eventHighlightsContent} />
-		<HighlightReel content={eventHighlightsContent} />
-		<Ticker content={tickerContent} />
-		<PastSponsors content={pastSponsorsContent} />
-		<Newsletter content={newsletterContent} />
-		<SeeYouThere />
-		<Footer content={footerContent} />
-		<ScrollAnimations />
-		<!-- <Hero content={content} splineUrl="https://prod.spline.design/WKCpgqTWJIavlH1L/scene.splinecode" /> -->
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="keywords" content={defaultSeoKeywords} data-seo-keywords />
+    <meta
+      name="description"
+      content={homepageDescription}
+      data-seo-description
+    />
+    <SeoSocial
+      title={homepageTitle}
+      description={homepageDescription}
+      canonicalUrl={canonicalUrl}
+      ogImageUrl={ogImageUrl}
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&family=Squada+One&family=Noto+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      referrerpolicy="no-referrer"
+    />
+    <title>{homepageTitle}</title>
+    <GoogleAnalytics />
+  </head>
+  <body>
+    <CityModal />
+    <Navigation content={navigationContent} />
+    <Hero content={content} />
+    <WhatIsCloudSummit content={whatIsCloudSummitContent} />
+    <CloudSummitActivities content={cloudSummitActivitiesContent} />
+    <AboutCPCA content={aboutCPCAContent} />
+    <EventLocations />
+    <Schedule />
+    <Speaker content={homepageSpeakers} />
+    <SummitSummary content={eventHighlightsContent} />
+    <HighlightReel content={eventHighlightsContent} />
+    <Ticker content={tickerContent} />
+    <CommunityPartners />
+    <Sponsors />
+    <PastSponsors content={pastSponsorsContent} />
+    <LocalCharitySection />
+
+    <VenueLogisticsSectionSecondVersion
+      content={venueLogisticsContentNewVersion}
+    />
+
+    <EventMap content={eventMapContent} />
+    <FAQ content={faqContent} />
+    <Newsletter content={newsletterContent} />
+    <SeeYouThere />
+    <Footer content={footerContent} />
+    <ScrollAnimations />
+    <!-- <Hero content={content} splineUrl="https://prod.spline.design/WKCpgqTWJIavlH1L/scene.splinecode" /> -->
+    <script>
+      import { getCityStore } from "../lib/cityStore";
+      import type { City } from "../lib/content";
+
+      const homepageKeywords = [
+        "cloud summit canada",
+        "cloud summit 2026",
+        "canada cloud conference",
+        "multi-cloud conference canada",
+        "cloud computing conference canada",
+      ];
+
+      const vancouverKeywords = [
+        "cloud summit vancouver",
+        "cloud conference vancouver",
+        "vancouver cloud event",
+        "tech conference vancouver 2026",
+        "science world conference vancouver",
+        "multi-cloud conference vancouver",
+      ];
+
+      const torontoKeywords = [
+        "cloud summit toronto",
+        "cloud conference toronto",
+        "toronto cloud event",
+        "tech conference toronto 2026",
+        "multi-cloud conference toronto",
+      ];
+
+      const generalKeywords = [
+        "sponsor cloud conference canada",
+        "cloud event sponsorship canada",
+        "sponsor tech conference vancouver",
+        "sponsor tech conference toronto",
+        "exhibit at cloud conference canada",
+        "cloud conference call for speakers",
+        "speak at cloud summit",
+        "tech conference call for speakers canada",
+        "cloud speaker application canada",
+        "what is cloud summit",
+        "cloud summit canada",
+        "multi-cloud event canada",
+        "cloud community event canada",
+        "cloud summit vancouver faq",
+        "cloud summit toronto faq",
+        "science world event parking",
+        "tech conference vancouver tickets",
+        "cloud summit venue information",
+      ];
+
+      function buildKeywords(city: City): string {
+        const cityKeywords =
+          city === "toronto" ? torontoKeywords : vancouverKeywords;
+        return [...homepageKeywords, ...cityKeywords, ...generalKeywords].join(
+          ", ",
+        );
+      }
+
+      function updateSeoKeywords(city: City) {
+        const keywordsMeta = document.querySelector("meta[data-seo-keywords]");
+        if (!keywordsMeta) return;
+        keywordsMeta.setAttribute("content", buildKeywords(city));
+      }
+
+      function updatePageTitle(city: City) {
+        if (city === "toronto") {
+          document.title =
+            "Cloud Summit Toronto 2026 | Toronto Multi-Cloud Conference";
+          return;
+        }
+        if (city === "vancouver") {
+          document.title =
+            "Cloud Summit Vancouver 2026 | Science World Cloud Conference";
+          return;
+        }
+        document.title =
+          "Cloud Summit Canada 2026 | Multi-Cloud Conference in Vancouver & Toronto";
+      }
+
+      function updateMetaDescription(city: City) {
+        const descriptionMeta = document.querySelector(
+          "meta[data-seo-description]",
+        );
+        if (!descriptionMeta) return;
+        if (city === "toronto") {
+          descriptionMeta.setAttribute(
+            "content",
+            "Join Cloud Summit Toronto on August 29, 2026 for a multi-cloud conference featuring speakers, sponsors, workshops, and community networking.",
+          );
+          return;
+        }
+        if (city === "vancouver") {
+          descriptionMeta.setAttribute(
+            "content",
+            "Join Cloud Summit Vancouver on May 1, 2026 at Science World for cloud talks, workshops, networking, sponsors, and community events.",
+          );
+          return;
+        }
+        descriptionMeta.setAttribute(
+          "content",
+          "Cloud Summit 2026 is Canada's multi-cloud conference, bringing together cloud professionals, developers, architects, sponsors, and communities in Vancouver and Toronto.",
+        );
+      }
+
+      const cityStore = getCityStore();
+      cityStore.init();
+      const cityParam = new URLSearchParams(window.location.search).get("city");
+      const hasSelectedCity =
+        cityParam === "vancouver" || cityParam === "toronto";
+      if (hasSelectedCity) {
+        updatePageTitle(cityStore.getCity());
+        updateMetaDescription(cityStore.getCity());
+      } else {
+        document.title =
+          "Cloud Summit Canada 2026 | Multi-Cloud Conference in Vancouver & Toronto";
+        const descriptionMeta = document.querySelector(
+          "meta[data-seo-description]",
+        );
+        if (descriptionMeta) {
+          descriptionMeta.setAttribute(
+            "content",
+            "Cloud Summit 2026 is Canada's multi-cloud conference, bringing together cloud professionals, developers, architects, sponsors, and communities in Vancouver and Toronto.",
+          );
+        }
+      }
+      updateSeoKeywords(cityStore.getCity());
+      cityStore.subscribe((city: City) => {
+        updatePageTitle(city);
+        updateMetaDescription(city);
+        updateSeoKeywords(city);
+      });
+    </script>
+  </body>
 </html>
 
 <style is:global>
-	* {
-		margin: 0;
-		padding: 0;
-		box-sizing: border-box;
-	}
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-	html {
-		font-family: 'Noto Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-		line-height: 1.6;
-		color: #1a1a1a;
-	}
+  /* Homepage typography: display vs body (single source of truth) */
+  :root {
+    --font-display: "Squada One", system-ui, sans-serif;
+    --font-body:
+      "Noto Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  }
 
-	h1, h2, h3, h4, h5, h6,
-	.nav-logo,
-	.hero-title,
-	.modal-title,
-	.city-name {
-		font-family: 'Squada One', system-ui, sans-serif;
-		font-weight: 400;
-		letter-spacing: 0.02em;
-	}
+  html {
+    font-family: var(--font-body);
+    line-height: 1.6;
+    color: #1a1a1a;
+  }
 
-	p, span, a, li, div, body {
-		font-family: 'Noto Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-	}
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .nav-logo,
+  .hero-title,
+  .modal-title,
+  .city-name {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
 
-	@media (prefers-color-scheme: dark) {
-		html {
-			color: #e0e0e0;
-			background: #0a0a0a;
-		}
-	}
+  p,
+  span,
+  a,
+  li,
+  div,
+  body {
+    font-family: var(--font-body);
+  }
 
-	body {
-		min-height: 100vh;
-		background: black;
-	}
+  @media (prefers-color-scheme: dark) {
+    html {
+      color: #e0e0e0;
+      background: #0a0a0a;
+    }
+  }
+
+  body {
+    min-height: 100vh;
+    background: black;
+  }
 </style>

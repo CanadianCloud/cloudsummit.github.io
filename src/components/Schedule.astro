@@ -1,0 +1,181 @@
+---
+// import type { CitySchedule } from "../lib/cityContent"
+
+// interface Props {
+//     props: CitySchedule[]
+// }
+
+// const { props } = Astro.props;
+import { cityContent } from "../lib/cityContent"
+---
+
+<section class="schedule">
+    <h2 class="section-heading">Schedule</h2>
+    <div id="wrapper">
+        {cityContent.vancouver.schedule.map((event) => {
+            return <div class="item">
+                {event.endTime ? (
+                    <p class="time">{event.startTime} - {event.endTime}</p>
+                ) : (
+                    <p class="time">{event.startTime}</p>
+                )}
+                <div class="details">
+                    {event.activities.map((activity, idx) => {
+                        const roles = event.activityRoles;
+                        const useRoles =
+                            roles && roles.length === event.activities.length;
+                        const isPrimary = useRoles
+                            ? roles[idx] === 'title'
+                            : idx < (event.primaryLineCount ?? 1);
+                        return (
+                            <p class:list={["activity", isPrimary ? "activity-title" : "activity-meta"]}>
+                                {activity.trim()}
+                            </p>
+                        );
+                    })}
+                </div>
+            </div>
+        })}
+    </div>
+</section>
+
+<script>
+    import { getCityStore } from '../lib/cityStore';
+    import type { City } from '../lib/content';
+
+    function syncScheduleVisibility(city: City) {
+        const el = document.querySelector('.schedule') as HTMLElement | null;
+        if (!el) return;
+        const show = city === 'vancouver';
+        el.classList.toggle('schedule--hidden', !show);
+        el.setAttribute('aria-hidden', show ? 'false' : 'true');
+    }
+
+    function initCityAwareSchedule() {
+        const cityStore = getCityStore();
+        cityStore.init();
+        syncScheduleVisibility(cityStore.getCity());
+        cityStore.subscribe(syncScheduleVisibility);
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initCityAwareSchedule);
+    } else {
+        initCityAwareSchedule();
+    }
+</script>
+
+<style>
+    .schedule.schedule--hidden {
+        display: none !important;
+    }
+
+    .schedule {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 3rem 1.5rem;
+        background: black;
+    }
+    .section-heading {
+        font-family: 'Squada One', system-ui, sans-serif;
+        font-size: 2.5rem;
+        text-align: center;
+        margin: 0 0 3rem 0;
+        color: rgb(255, 193, 77);
+    }
+    #wrapper {
+        width: 100%;
+        max-width: 1200px;
+        display: flex;
+        flex-direction: column;
+        background: rgba(61, 120, 171, 0.08);
+        border: 1px solid rgba(61, 120, 171, 0.2);
+        border-radius: 1rem;
+        overflow: hidden;
+    }
+    .item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.45rem;
+        padding: 0.65rem 0.75rem;
+    }
+
+    .item:not(:last-child) {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+    }
+    .time {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.88);
+        font-size: 1rem;
+        line-height: 1.4;
+        white-space: nowrap;
+        padding-left: 0.25rem;
+        text-align: left;
+    }
+    .details {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+    }
+    .activity {
+        margin: 0;
+        color: white;
+        line-height: 1.3;
+    }
+    .activity-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: white;
+    }
+    .activity-meta {
+        font-size: 0.875rem;
+        color: white;
+        opacity: 0.7;
+    }
+    .activity-meta::before {
+        content: "◉";
+        display: inline-block;
+        margin-right: 0.35rem;
+        font-size: 0.75em;
+        vertical-align: middle;
+    }
+    @media (min-width: 769px) {
+        .schedule {
+            padding: 4.5rem 2rem;
+        }
+        .section-heading {
+            font-size: 4rem;
+        }
+        .item {
+            display: grid;
+            grid-template-columns: 30% 70%;
+            align-items: start;
+            gap: 1rem;
+            padding: 0.85rem 1rem;
+        }
+        .time {
+            font-size: 1.125rem;
+            font-weight: 500;
+            padding-left: 1.5rem;
+            text-align: center;
+        }
+        .activity-title {
+            font-size: 1.25rem;
+        }
+        .activity-meta {
+            font-size: 0.875rem;
+        }
+    }
+    @media (max-width: 768px) {
+        .time {
+            font-size: 0.875rem;
+        }
+        .activity-title {
+            font-size: 1rem;
+        }
+        .activity-meta {
+            font-size: 0.8125rem;
+        }
+    }
+</style>

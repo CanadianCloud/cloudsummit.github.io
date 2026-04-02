@@ -1,0 +1,358 @@
+---
+import type { Speaker } from "../lib/content";
+
+interface Props {
+  content: Speaker[];
+}
+
+const { content } = Astro.props;
+---
+
+<!-- Homepage: shown for Vancouver only (see script) -->
+<section id="homepage-speakers" class="speakers-section">
+  <div class="speakers-container">
+    <h2 class="section-heading speakers-heading">
+      <span class="heading-prefix">Our </span>
+      Speakers
+    </h2>
+    <div class="speakers-grid">
+      {
+        content.map((speaker) => (
+          <div class="speaker-card">
+            <div class="speaker-image">
+              <img src={speaker.image} alt={speaker.speakername} />
+            </div>
+            <div class="speaker-info">
+              <h3 class="speaker-name">{speaker.speakername}</h3>
+              {speaker.title && <p class="speaker-title">{speaker.title}</p>}
+              {speaker.company && <p class="speaker-company">{speaker.company}</p>}
+              {speaker.topic && <p class="speaker-topic">{speaker.topic}</p>}
+              {speaker.linkedin && (
+                <p class="speaker-linkedin">
+                  <a
+                    href={speaker.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    LinkedIn
+                  </a>
+                </p>
+              )}
+              {speaker.talkTitle && (
+                <p class="speaker-talk-title">{speaker.talkTitle}</p>
+              )}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+    <div class="speakers-cta">
+      <a
+        href="/our-speakers/"
+        class="speakers-all-btn"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        All Speakers
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { getCityStore } from "../lib/cityStore";
+  import type { City } from "../lib/content";
+
+  function syncHomeSpeakersVisibility(city: City) {
+    const el = document.getElementById("homepage-speakers");
+    if (!el) return;
+    const show = city === "vancouver";
+    el.classList.toggle("speakers-section--hidden", !show);
+    el.setAttribute("aria-hidden", show ? "false" : "true");
+  }
+
+  function initHomeSpeakersCity() {
+    const cityStore = getCityStore();
+    cityStore.init();
+    syncHomeSpeakersVisibility(cityStore.getCity());
+    cityStore.subscribe(syncHomeSpeakersVisibility);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initHomeSpeakersCity);
+  } else {
+    initHomeSpeakersCity();
+  }
+</script>
+
+<style>
+  .speakers-section.speakers-section--hidden {
+    display: none !important;
+  }
+
+  .speakers-section {
+    padding: 3rem 1.5rem;
+    background: #000;
+    color: #fff;
+  }
+
+  .speakers-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .speakers-heading.section-heading {
+    font-family: "Squada One", system-ui, sans-serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin: 0 0 3rem 0;
+    color: rgb(255, 193, 77);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+  }
+
+  .heading-prefix {
+    color: white;
+    font-family: "Squada One", system-ui, sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+
+  .speakers-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin: 0 auto;
+  }
+
+  .speaker-card {
+    background: rgba(61, 120, 171, 0.1);
+    border: 1px solid rgba(61, 120, 171, 0.2);
+    border-radius: 1rem;
+    padding: 2rem;
+    text-align: center;
+    transition:
+      transform 0.2s,
+      border-color 0.2s;
+  }
+
+  .speaker-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(61, 120, 171, 0.4);
+  }
+
+  .speaker-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 260px;
+    min-height: 200px;
+    margin: 0 auto 1.25rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    border: 2px solid rgba(255, 193, 77, 0.5);
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .speaker-image img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 240px;
+    object-fit: contain;
+    object-position: center center;
+    display: block;
+  }
+
+  .speaker-info {
+    text-align: center;
+  }
+
+  .speaker-name {
+    font-family: "Squada One", system-ui, sans-serif;
+    font-size: 1.5rem;
+    margin: 0 0 0.5rem 0;
+    color: white;
+  }
+
+  .speaker-title {
+    font-size: 1rem;
+    margin: 0 0 0.25rem 0;
+    font-weight: 600;
+    color: rgb(255, 193, 77);
+  }
+
+  .speaker-company {
+    font-size: 0.875rem;
+    margin: 0 0 0.75rem 0;
+    opacity: 0.8;
+  }
+
+  .speaker-topic {
+    font-size: 0.875rem;
+    margin: 0;
+    opacity: 0.7;
+    font-style: italic;
+  }
+
+  .speaker-linkedin {
+    margin: 0.75rem 0 0 0;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .speaker-linkedin a {
+    color: rgb(113, 198, 251);
+    text-decoration: none;
+  }
+
+  .speaker-linkedin a:hover {
+    text-decoration: underline;
+  }
+
+  .speaker-talk-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 1rem 0 0 0;
+    color: rgb(255, 193, 77);
+    line-height: 1.35;
+  }
+
+  .speakers-cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 2.5rem;
+  }
+
+  .speakers-all-btn {
+    display: inline-block;
+    padding: 1rem 3rem;
+    background: rgb(61, 120, 171);
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    font-size: 1.125rem;
+    transition:
+      transform 0.2s,
+      opacity 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .speakers-all-btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+  }
+
+  @media (max-width: 768px) {
+    .speaker-card {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.25rem 1rem;
+      text-align: left;
+    }
+
+    .speaker-image {
+      flex-shrink: 0;
+      width: 42%;
+      max-width: 140px;
+      min-height: 0;
+      min-width: 0;
+      margin: 0;
+    }
+
+    .speaker-image img {
+      max-height: 160px;
+    }
+
+    .speaker-info {
+      flex: 1;
+      min-width: 0;
+      text-align: left;
+    }
+
+    .speaker-name {
+      font-size: 1.25rem;
+      line-height: 1.2;
+    }
+
+    .speaker-linkedin {
+      margin-top: 0.5rem;
+    }
+
+    .speaker-talk-title {
+      margin-top: 0.65rem;
+      font-size: 0.9375rem;
+    }
+  }
+
+  /* Desktop Styles */
+  @media (min-width: 769px) {
+    .speakers-hero {
+      padding: 8rem 2rem 6rem;
+    }
+
+    .hero-title {
+      font-size: 4.5rem;
+    }
+
+    .hero-subtitle {
+      font-size: 2rem;
+    }
+
+    .hero-description {
+      font-size: 1.25rem;
+    }
+
+    .speakers-section {
+      padding: 4.5rem 2rem;
+    }
+
+    .speakers-heading.section-heading {
+      font-size: 4rem;
+    }
+
+    .speakers-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+    }
+
+    .speaker-image {
+      max-width: 280px;
+      min-height: 260px;
+    }
+
+    .speaker-image img {
+      max-height: 280px;
+    }
+
+    .cfs-section {
+      padding: 4.5rem 2rem;
+    }
+
+    .cfs-dates {
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 700px;
+    }
+
+    .cfs-benefits {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem;
+    }
+
+    .opportunities-section {
+      padding: 4.5rem 2rem;
+    }
+
+    .opportunities-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem;
+    }
+  }
+</style>

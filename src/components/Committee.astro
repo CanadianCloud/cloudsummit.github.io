@@ -1,0 +1,228 @@
+---
+import type { Committee } from "../lib/content";
+
+interface Props {
+  content: Committee[];
+}
+
+const { content } = Astro.props;
+---
+
+<!-- Committee Grid -->
+<section class="committee-section">
+  <div class="committee-container">
+    <div class="committee-title-box">
+      <div class="committee-header">
+        <h2 class="section-heading committee-heading">
+          <span class="heading-prefix">Meet the </span>
+          Team!
+        </h2>
+      </div>
+    </div>
+    <div class="committee-grid">
+      {
+        content.map((committee) => (
+          <div class="committee-card">
+            <div class="committee-image">
+              <img src={committee.image} alt={committee.name} />
+            </div>
+            <div class="committee-info">
+              <h3 class="committee-name">{committee.name}</h3>
+              <p class="committee-title">{committee.title}</p>
+              <p class="committee-link">
+                <a href={committee.link} target="_blank" rel="noopener noreferrer">
+                  Linkedin
+                </a>
+              </p>
+              <p class="committee-bio">{committee.bio}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .committee-section {
+    padding: 4rem 1.5rem;
+  }
+
+  .committee-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* Match Venue Logistics: `.Box` + `.venue-logistics-title-box` spacing above the grid */
+  .committee-title-box {
+    width: 80%;
+    margin: 0 auto 5px;
+    padding: 10px;
+    box-sizing: border-box;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  .committee-header {
+    text-align: center;
+  }
+
+  .committee-heading.section-heading {
+    font-family: "Squada One", system-ui, sans-serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin: 0 0 0.5rem 0;
+    color: rgb(255, 193, 77);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+  }
+
+  .committee-heading .heading-prefix {
+    color: white;
+    font-family: "Squada One", system-ui, sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+
+  .committee-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .committee-card {
+    background: rgba(61, 120, 171, 0.1);
+    border: 1px solid rgba(61, 120, 171, 0.2);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    text-align: center;
+    transition:
+      transform 0.2s,
+      border-color 0.2s;
+  }
+
+  .committee-link {
+    a:link,
+    a:visited {
+      color: rgb(113, 198, 251);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .committee-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 280px;
+    min-height: 200px;
+    margin: 0 auto 1.25rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .committee-image img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: min(52vw, 260px);
+    object-fit: contain;
+    object-position: center center;
+    display: block;
+  }
+
+  .committee-info {
+    text-align: left;
+  }
+
+  .committee-name {
+    font-family: "Squada One", system-ui, sans-serif;
+    font-size: 1.5rem;
+    margin: 0 0 0.5rem 0;
+    color: white;
+    text-align: center;
+  }
+
+  .committee-title,
+  .committee-link {
+    font-size: 1rem;
+    margin: 0 0 0.25rem 0;
+    font-weight: 600;
+    color: rgb(251, 113, 133);
+    text-align: center;
+  }
+  /* Desktop Styles */
+  @media (min-width: 769px) {
+    .committee-hero {
+      padding: 8rem 2rem 6rem;
+    }
+
+    .hero-title {
+      font-size: 4.5rem;
+    }
+
+    .hero-subtitle {
+      font-size: 2rem;
+    }
+
+    .hero-description {
+      font-size: 1.25rem;
+    }
+
+    .committee-section {
+      padding: 6rem 2rem;
+    }
+
+    .committee-heading.section-heading {
+      font-size: 4rem;
+    }
+
+    .committee-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .committee-image {
+      flex: 0 0 clamp(180px, 28vw, 240px);
+      width: clamp(180px, 28vw, 240px);
+      max-width: 240px;
+      min-height: 260px;
+      max-height: 320px;
+      margin: 0;
+      align-self: center;
+    }
+
+    .committee-image img {
+      max-height: 300px;
+    }
+
+    .committee-info {
+      flex: 1 1 min(0, 100%);
+      min-width: 0;
+      text-align: left;
+    }
+
+    .committee-name,
+    .committee-title,
+    .committee-link {
+      text-align: left;
+    }
+
+    .committee-bio {
+      font-size: 0.8rem;
+    }
+    .committee-card {
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      gap: 1.25rem;
+      padding: 1.25rem 1.5rem;
+    }
+  }
+</style>
