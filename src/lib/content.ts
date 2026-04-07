@@ -776,6 +776,11 @@ export const communityPartners: CommunityPartner[] = [
 
 export const sponsors: Sponsor[] = [
   {
+    ranking: 'Gold',
+    name: 'Habilelabs',
+    logo: '/images/sponsors/habilelabs%20logo.svg',
+  },
+  {
     ranking: 'Platinum',
     name: 'AWS',
     logo: '/images/sponsors/aws-white.svg',
