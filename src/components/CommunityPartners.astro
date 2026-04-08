@@ -12,7 +12,15 @@ import { communityPartners } from "../lib/content"
             {communityPartners.map((partner) => {
                 return (
                     <figure class="partner">
-                        <img class="partner-logo" src={partner.logo} alt={partner.name} />
+                        <a
+                            class="partner-link"
+                            href={partner.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`Visit ${partner.name} website`}
+                        >
+                            <img class="partner-logo" src={partner.logo} alt={partner.name} />
+                        </a>
                     </figure>
                 );
             })}
@@ -83,6 +91,17 @@ import { communityPartners } from "../lib/content"
         width: auto;
         object-fit: contain;
         display: block;
+    }
+    .partner-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.5rem;
+        outline: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+    .partner-link:focus-visible {
+        box-shadow: 0 0 0 3px rgba(168, 251, 90, 0.45);
     }
 
     /* Single row on desktop; horizontal scroll if needed at medium widths */
