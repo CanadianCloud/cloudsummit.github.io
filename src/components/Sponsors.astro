@@ -28,12 +28,12 @@ const withBase = (path: string) => {
                             {sponsor.name === 'Fortinet' ? (
                                 <div id="fortinet-bg">
                                     <a class="sponsor-link" href={sponsor.url} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${sponsor.name} website`}>
-                                        <img class="sponsor-logo" id="fortinet" src={withBase(sponsor.logo)} alt={sponsor.name} loading="lazy" decoding="async" />
+                                        <img class="sponsor-logo" id="fortinet" src={withBase(sponsor.logo)} alt={sponsor.name} />
                                     </a>
                                 </div>
                             ) : (
                                 <a class="sponsor-link" href={sponsor.url} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${sponsor.name} website`}>
-                                    <img class="sponsor-logo" src={withBase(sponsor.logo)} alt={sponsor.name} loading="lazy" decoding="async" />
+                                    <img class="sponsor-logo" src={withBase(sponsor.logo)} alt={sponsor.name} />
                                 </a>
                             )}
                             {sponsor.name !== 'Fortinet' && (
@@ -53,7 +53,7 @@ const withBase = (path: string) => {
                     return (
                         <figure class="sponsor-platinum">
                             <a class="sponsor-link" href={sponsor.url} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${sponsor.name} website`}>
-                                <img class="sponsor-logo" src={withBase(sponsor.logo)} alt={sponsor.name} loading="lazy" decoding="async" />
+                                <img class="sponsor-logo" src={withBase(sponsor.logo)} alt={sponsor.name} />
                             </a>
                             {sponsor.name !== 'AWS' && (
                                 <p class="sponsor-name">{sponsor.name}</p>
@@ -72,7 +72,7 @@ const withBase = (path: string) => {
                     return (
                         <figure class="sponsor-gold">
                             <a class="sponsor-link" href={sponsor.url} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${sponsor.name} website`}>
-                                <img class="sponsor-logo sponsor-logo--gold" src={withBase(sponsor.logo)} alt={sponsor.name} loading="lazy" decoding="async" />
+                                <img class="sponsor-logo sponsor-logo--gold" src={withBase(sponsor.logo)} alt={sponsor.name} />
                             </a>
                         </figure>
                     );
