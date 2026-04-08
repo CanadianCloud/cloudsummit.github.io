@@ -20,10 +20,14 @@ const diamondSponsors = sponsors.filter(sponsor => sponsor.ranking === 'Diamond'
                         <figure class="sponsor-diamond">
                             {sponsor.name === 'Fortinet' ? (
                                 <div id="fortinet-bg">
-                                    <img class="sponsor-logo" id="fortinet" src={sponsor.logo} alt={sponsor.name} loading="lazy" decoding="async" />
+                                    <a class="sponsor-link" href={sponsor.url} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${sponsor.name} website`}>
+                                        <img class="sponsor-logo" id="fortinet" src={sponsor.logo} alt={sponsor.name} loading="lazy" decoding="async" />
+                                    </a>
                                 </div>
                             ) : (
-                                <img class="sponsor-logo" src={sponsor.logo} alt={sponsor.name} loading="lazy" decoding="async" />
+                                <a class="sponsor-link" href={sponsor.url} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${sponsor.name} website`}>
+                                    <img class="sponsor-logo" src={sponsor.logo} alt={sponsor.name} loading="lazy" decoding="async" />
+                                </a>
                             )}
                             {sponsor.name !== 'Fortinet' && (
                                 <p class="sponsor-name">{sponsor.name}</p>
@@ -41,7 +45,9 @@ const diamondSponsors = sponsors.filter(sponsor => sponsor.ranking === 'Diamond'
                 {platinumSponsors.map((sponsor) => {
                     return (
                         <figure class="sponsor-platinum">
-                            <img class="sponsor-logo" src={sponsor.logo} alt={sponsor.name} loading="lazy" decoding="async" />
+                            <a class="sponsor-link" href={sponsor.url} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${sponsor.name} website`}>
+                                <img class="sponsor-logo" src={sponsor.logo} alt={sponsor.name} loading="lazy" decoding="async" />
+                            </a>
                             {sponsor.name !== 'AWS' && (
                                 <p class="sponsor-name">{sponsor.name}</p>
                             )}
@@ -58,7 +64,9 @@ const diamondSponsors = sponsors.filter(sponsor => sponsor.ranking === 'Diamond'
                 {goldSponsors.map((sponsor) => {
                     return (
                         <figure class="sponsor-gold">
-                            <img class="sponsor-logo sponsor-logo--gold" src={sponsor.logo} alt={sponsor.name} loading="lazy" decoding="async" />
+                            <a class="sponsor-link" href={sponsor.url} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${sponsor.name} website`}>
+                                <img class="sponsor-logo sponsor-logo--gold" src={sponsor.logo} alt={sponsor.name} loading="lazy" decoding="async" />
+                            </a>
                         </figure>
                     );
                 })}
@@ -194,6 +202,20 @@ const diamondSponsors = sponsors.filter(sponsor => sponsor.ranking === 'Diamond'
 
     .sponsor-logo {
         max-width: 100%;
+    }
+
+    .sponsor-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        border-radius: 0.5rem;
+        outline: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .sponsor-link:focus-visible {
+        box-shadow: 0 0 0 3px rgba(168, 251, 90, 0.45);
     }
 
     .sponsor-logo--gold {
