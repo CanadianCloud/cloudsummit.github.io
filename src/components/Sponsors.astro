@@ -2,7 +2,7 @@
 import { sponsors } from "../lib/content"
 const goldSponsors = sponsors.filter(sponsor => sponsor.ranking === 'Gold');
 const platinumSponsors = sponsors.filter(sponsor => sponsor.ranking === 'Platinum');
-const diamondSponsors = sponsors.filter(sponsors => sponsors.ranking === 'Diamond');
+const diamondSponsors = sponsors.filter(sponsor => sponsor.ranking === 'Diamond');
 ---
 
 <section class="sponsors">
@@ -11,14 +11,23 @@ const diamondSponsors = sponsors.filter(sponsors => sponsors.ranking === 'Diamon
         Sponsors
     </h2>
     <div class="sponsors-cards">
-        <div class="sponsor-card sponsor-card--gold">
-            <h3 id="sponsors-gold" class="sponsor-card-title">Gold</h3>
+        <div class="sponsor-card">
+            <h3 id="sponsors-diamond" class="sponsor-card-title">Diamond</h3>
             <div class="sponsor-divider" aria-hidden="true"></div>
             <div class="sponsor-logos">
-                {goldSponsors.map((sponsor) => {
+                {diamondSponsors.map((sponsor) => {
                     return (
-                        <figure class="sponsor-gold">
-                            <img class="sponsor-logo sponsor-logo--gold" src={sponsor.logo} alt={sponsor.name} loading="lazy" decoding="async" />
+                        <figure class="sponsor-diamond">
+                            {sponsor.name === 'Fortinet' ? (
+                                <div id="fortinet-bg">
+                                    <img class="sponsor-logo" id="fortinet" src={sponsor.logo} alt={sponsor.name} loading="lazy" decoding="async" />
+                                </div>
+                            ) : (
+                                <img class="sponsor-logo" src={sponsor.logo} alt={sponsor.name} loading="lazy" decoding="async" />
+                            )}
+                            {sponsor.name !== 'Fortinet' && (
+                                <p class="sponsor-name">{sponsor.name}</p>
+                            )}
                         </figure>
                     );
                 })}
@@ -42,23 +51,14 @@ const diamondSponsors = sponsors.filter(sponsors => sponsors.ranking === 'Diamon
             </div>
         </div>
 
-        <div class="sponsor-card">
-            <h3 id="sponsors-diamond" class="sponsor-card-title">Diamond</h3>
+        <div class="sponsor-card sponsor-card--gold">
+            <h3 id="sponsors-gold" class="sponsor-card-title">Gold</h3>
             <div class="sponsor-divider" aria-hidden="true"></div>
             <div class="sponsor-logos">
-                {diamondSponsors.map((sponsor) => {
+                {goldSponsors.map((sponsor) => {
                     return (
-                        <figure class="sponsor-diamond">
-                            {sponsor.name === 'Fortinet' ? (
-                                <div id="fortinet-bg">
-                                    <img class="sponsor-logo" id="fortinet" src={sponsor.logo} alt={sponsor.name} loading="lazy" decoding="async" />
-                                </div>
-                            ) : (
-                                <img class="sponsor-logo" src={sponsor.logo} alt={sponsor.name} loading="lazy" decoding="async" />
-                            )}
-                            {sponsor.name !== 'Fortinet' && (
-                                <p class="sponsor-name">{sponsor.name}</p>
-                            )}
+                        <figure class="sponsor-gold">
+                            <img class="sponsor-logo sponsor-logo--gold" src={sponsor.logo} alt={sponsor.name} loading="lazy" decoding="async" />
                         </figure>
                     );
                 })}
@@ -129,10 +129,13 @@ const diamondSponsors = sponsors.filter(sponsors => sponsors.ranking === 'Diamon
             flex-wrap: wrap;
             gap: 2.5rem;
             padding: 0;
+            justify-content: center;
         }
 
         .sponsor-card {
-            flex: 1 1 calc((100% - 2 * 2.5rem) / 3);
+            flex: 0 1 calc((100% - 2.5rem) / 2);
+            max-width: calc((100% - 2.5rem) / 2);
+            min-height: 260px;
         }
     }
 
@@ -140,6 +143,8 @@ const diamondSponsors = sponsors.filter(sponsors => sponsors.ranking === 'Diamon
         background: rgba(61, 120, 171, 0.1);
         border: 1px solid rgba(61, 120, 171, 0.2);
         border-radius: 1rem;
+        display: flex;
+        flex-direction: column;
         padding: 3rem 1.5rem 3rem;
         overflow: hidden;
     }
