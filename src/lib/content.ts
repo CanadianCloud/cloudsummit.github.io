@@ -791,7 +791,7 @@ export const sponsors: Sponsor[] = [
   {
     ranking: 'Platinum',
     name: 'AWS',
-    logo: '/images/sponsors/aws-white.svg',
+    logo: '/images/sponsors/aws-white.png',
     url: 'https://aws.amazon.com/',
   },
   {
