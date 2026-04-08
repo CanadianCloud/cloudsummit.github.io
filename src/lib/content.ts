@@ -52,12 +52,14 @@ export interface Committee {
 export interface CommunityPartner {
   name: string;
   logo: string;
+  url: string;
 }
 
 export interface Sponsor {
   ranking: 'Gold' | 'Platinum' | 'Diamond';
   name: string;
   logo: string;
+  url: string;
 }
 
 export interface Speaker {
@@ -753,24 +755,29 @@ export const committeeContent: Committee[] = [
 
 export const communityPartners: CommunityPartner[] = [
   {
-    name: 'AWS',
+    name: 'AWS Day',
     logo: '/images/community-partners/aws-day-logo.png',
+    url: 'https://www.awsday.ca/',
   },
   {
     name: 'Hacker Rivals',
     logo: '/images/community-partners/Logo-Oct25-Black.png',
+    url: 'https://hackerrivals.com/',
   },
   {
     name: 'ISACA',
     logo: '/images/community-partners/ISACA.png',
+    url: 'https://engage.isaca.org/vancouverchapter/home',
   },
   {
     name: 'Microsoft',
     logo: '/images/community-partners/Microsoft_logo.png',
+    url: 'https://microsoft.com/',
   },
   {
     name: 'Google Developer Group',
     logo: '/images/community-partners/gdg-logo.png',
+    url: 'https://gdg.community.dev/',
   },
 ];
 
@@ -779,16 +786,19 @@ export const sponsors: Sponsor[] = [
     ranking: 'Gold',
     name: 'Habilelabs',
     logo: '/images/sponsors/habilelabs%20logo.svg',
+    url: 'https://www.habilelabs.io/',
   },
   {
     ranking: 'Platinum',
     name: 'AWS',
-    logo: '/images/sponsors/aws-white.svg',
+    logo: '/images/sponsors/aws-white.png',
+    url: 'https://aws.amazon.com/',
   },
   {
     ranking: 'Diamond',
     name: 'Fortinet',
     logo: '/images/sponsors/Fortinet_Logo.png',
+    url: 'https://www.fortinet.com/',
   },
 ];
 

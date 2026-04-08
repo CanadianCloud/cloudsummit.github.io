@@ -3,6 +3,13 @@ import { sponsors } from "../lib/content"
 const goldSponsors = sponsors.filter(sponsor => sponsor.ranking === 'Gold');
 const platinumSponsors = sponsors.filter(sponsor => sponsor.ranking === 'Platinum');
 const diamondSponsors = sponsors.filter(sponsor => sponsor.ranking === 'Diamond');
+
+const withBase = (path: string) => {
+    const base = import.meta.env.BASE_URL ?? '/';
+    const normalizedBase = base.endsWith('/') ? base : `${base}/`;
+    const normalizedPath = path.startsWith('/') ? path.slice(1) : path;
+    return `${normalizedBase}${normalizedPath}`;
+};
 ---
 
 <section class="sponsors">
@@ -20,10 +27,14 @@ const diamondSponsors = sponsors.filter(sponsor => sponsor.ranking === 'Diamond'
                         <figure class="sponsor-diamond">
                             {sponsor.name === 'Fortinet' ? (
                                 <div id="fortinet-bg">
-                                    <img class="sponsor-logo" id="fortinet" src={sponsor.logo} alt={sponsor.name} loading="lazy" decoding="async" />
+                                    <a class="sponsor-link" href={sponsor.url} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${sponsor.name} website`}>
+                                        <img class="sponsor-logo" id="fortinet" src={withBase(sponsor.logo)} alt={sponsor.name} />
+                                    </a>
                                 </div>
                             ) : (
-                                <img class="sponsor-logo" src={sponsor.logo} alt={sponsor.name} loading="lazy" decoding="async" />
+                                <a class="sponsor-link" href={sponsor.url} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${sponsor.name} website`}>
+                                    <img class="sponsor-logo" src={withBase(sponsor.logo)} alt={sponsor.name} />
+                                </a>
                             )}
                             {sponsor.name !== 'Fortinet' && (
                                 <p class="sponsor-name">{sponsor.name}</p>
@@ -41,7 +52,9 @@ const diamondSponsors = sponsors.filter(sponsor => sponsor.ranking === 'Diamond'
                 {platinumSponsors.map((sponsor) => {
                     return (
                         <figure class="sponsor-platinum">
-                            <img class="sponsor-logo" src={sponsor.logo} alt={sponsor.name} loading="lazy" decoding="async" />
+                            <a class="sponsor-link" href={sponsor.url} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${sponsor.name} website`}>
+                                <img class="sponsor-logo" src={withBase(sponsor.logo)} alt={sponsor.name} />
+                            </a>
                             {sponsor.name !== 'AWS' && (
                                 <p class="sponsor-name">{sponsor.name}</p>
                             )}
@@ -58,7 +71,9 @@ const diamondSponsors = sponsors.filter(sponsor => sponsor.ranking === 'Diamond'
                 {goldSponsors.map((sponsor) => {
                     return (
                         <figure class="sponsor-gold">
-                            <img class="sponsor-logo sponsor-logo--gold" src={sponsor.logo} alt={sponsor.name} loading="lazy" decoding="async" />
+                            <a class="sponsor-link" href={sponsor.url} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${sponsor.name} website`}>
+                                <img class="sponsor-logo sponsor-logo--gold" src={withBase(sponsor.logo)} alt={sponsor.name} />
+                            </a>
                         </figure>
                     );
                 })}
@@ -70,6 +85,7 @@ const diamondSponsors = sponsors.filter(sponsor => sponsor.ranking === 'Diamond'
 <style>
     .sponsors {
         text-align: center;
+        margin-top: 2.5rem;
     }
     .sponsors-heading {
         font-family: 'Squada One', system-ui, sans-serif;
@@ -90,6 +106,10 @@ const diamondSponsors = sponsors.filter(sponsor => sponsor.ranking === 'Diamond'
     }
 
     @media (min-width: 769px) {
+        .sponsors {
+            margin-top: 4rem;
+        }
+
         .sponsors-heading {
             font-size: 4rem;
         }
@@ -194,6 +214,20 @@ const diamondSponsors = sponsors.filter(sponsor => sponsor.ranking === 'Diamond'
 
     .sponsor-logo {
         max-width: 100%;
+    }
+
+    .sponsor-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        border-radius: 0.5rem;
+        outline: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .sponsor-link:focus-visible {
+        box-shadow: 0 0 0 3px rgba(168, 251, 90, 0.45);
     }
 
     .sponsor-logo--gold {
