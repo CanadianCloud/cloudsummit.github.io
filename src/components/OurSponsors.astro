@@ -1,0 +1,176 @@
+---
+import { sponsors } from "../lib/content";
+
+const withBase = (path: string) => {
+  const base = import.meta.env.BASE_URL ?? "/";
+  const normalizedBase = base.endsWith("/") ? base : `${base}/`;
+  const normalizedPath = path.startsWith("/") ? path.slice(1) : path;
+  return `${normalizedBase}${normalizedPath}`;
+};
+---
+
+<section class="our-sponsors">
+  <h2 class="our-sponsors-heading">
+    <span class="our-sponsors-prefix">Our </span>
+    Sponsors
+  </h2>
+  <div class="our-sponsors-card">
+    <div id="sponsors-container">
+      {
+        sponsors.map((sponsor) => (
+          <figure class="sponsor">
+            <a
+              class="sponsor-link"
+              href={sponsor.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Visit ${sponsor.name} website`}
+            >
+              <img
+                class="sponsor-logo"
+                src={withBase(sponsor.logo)}
+                alt={sponsor.name}
+                loading="lazy"
+              />
+            </a>
+          </figure>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .our-sponsors {
+    text-align: center;
+    max-width: 1200px;
+    margin: 2.5rem auto 2.5rem;
+    padding: 0;
+  }
+
+  .our-sponsors-card {
+    background: rgba(61, 120, 171, 0.1);
+    border: 1px solid rgba(61, 120, 171, 0.2);
+    border-radius: 1rem;
+    overflow: hidden;
+    padding: 2rem 1.5rem 3rem;
+  }
+
+  .our-sponsors-heading {
+    font-family: "Squada One", system-ui, sans-serif;
+    font-size: 2.5rem;
+    font-weight: 400;
+    margin: 0 0 1rem 0;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    color: rgb(251, 113, 133);
+  }
+
+  .our-sponsors-prefix {
+    color: white;
+    font-family: "Squada One", system-ui, sans-serif;
+    font-size: 2.5rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+
+  @media (min-width: 769px) {
+    .our-sponsors {
+      margin: 4rem auto;
+    }
+
+    .our-sponsors-card {
+      padding: 4.5rem 2rem 4rem;
+    }
+
+    .our-sponsors-heading {
+      font-size: 4rem;
+    }
+
+    .our-sponsors-prefix {
+      font-size: 4rem;
+    }
+  }
+
+  .sponsor {
+    flex: 0 0 calc(20% - 1.6rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    min-width: 160px;
+    max-width: 220px;
+  }
+
+  .sponsor-logo {
+    max-width: 100%;
+    height: 90px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  .sponsor-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .sponsor-link:focus-visible {
+    box-shadow: 0 0 0 3px rgba(168, 251, 90, 0.45);
+  }
+
+  /* Desktop: centered rows (including last row) */
+  #sponsors-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2.25rem 2rem;
+    padding: 0.5rem 0;
+  }
+
+  @media (max-width: 768px) {
+    .our-sponsors {
+      padding: 0 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .our-sponsors-card {
+      padding: 1.5rem 1rem 2rem;
+    }
+
+    .our-sponsors-heading,
+    .our-sponsors-prefix {
+      font-size: 2rem;
+    }
+
+    #sponsors-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem 1rem;
+      padding: 0.35rem 0 0.15rem;
+    }
+
+    .sponsor {
+      flex: 0 0 calc(33.333% - 0.75rem);
+      min-height: 4.5rem;
+      min-width: 0;
+      max-width: 180px;
+    }
+
+    .sponsor-logo {
+      max-width: 100%;
+      max-height: 72px;
+      height: auto;
+      width: auto;
+      margin-inline: auto;
+    }
+  }
+</style>
+
