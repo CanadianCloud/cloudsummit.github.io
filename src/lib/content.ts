@@ -829,12 +829,6 @@ export const partners: Sponsor[] = [
     url: 'https://www.habilelabs.io/',
   },
   {
-    ranking: 'Gold',
-    name: 'AWS Day',
-    logo: '/images/community-partners/aws-day-logo.png',
-    url: 'https://www.awsday.ca/',
-  },
-  {
     ranking: 'Platinum',
     name: 'AWS',
     logo: '/images/partners/aws-white.svg',
@@ -843,7 +837,7 @@ export const partners: Sponsor[] = [
   {
     ranking: 'Diamond',
     name: 'Fortinet',
-    logo: '/images/partners/fortinet.svg',
+    logo: '/images/partners/Fortinet_Logo.png',
     url: 'https://www.fortinet.com/',
   },
 ];
