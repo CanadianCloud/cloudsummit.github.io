@@ -678,6 +678,36 @@ export const speakerContent: Speaker[] = [
     talkSummary:
       "AI Gateways are popping up like weeds in the world of distributed computing, but what are they? Why do they exist? Didn't we already have API Gateways? From GuardRails to Semantic Caching, in this talk I'll use my work co-chairing a working group tasked with designing an \"AI Gateway\" specification for the Kubernetes ecosystem as a way of demonstrating why this new type of network application is necessary, why they're hard to build, and how you might put them to use in your own clusters.",
   },
+  {
+    speakername: 'Adina Gray',
+    image: '/images/speakers/Adina-trans.png',
+    linkedin: 'https://www.linkedin.com/in/adinagray/',
+    bio: 'Adina Gray is the founder of PurpleOwl AI and an international speaker on artificial intelligence, education, and the future of work. Drawing on 20 years of experience in higher education and leadership, she helps organizations build AI literacy and respond strategically to the opportunities and challenges of AI adoption. She has led institutional AI initiatives, organized major AI events, and delivered speaking and training engagements across Canada and internationally. Adina is also the founder of the AI in Education Network of British Columbia, a province wide initiative advancing practical and responsible AI use.',
+    talkTitle: 'Who Adopts AI First and Who Struggles to Keep Up',
+    talkLevel: 'L100 (Beginner)',
+    talkSummary:
+      'AI is spreading quickly, but adoption is uneven across industries, organizations, and groups. This session looks at why some people and institutions are able to integrate AI into their work while others struggle to keep up, and what this may mean for the future workforce.',
+  },
+  {
+    speakername: 'Egina Malaj',
+    image: '/images/speakers/Egina-trans.png',
+    linkedin: 'https://www.linkedin.com/in/eginamalaj/',
+    bio: "Based in Vancouver, Egina is an AI Architect and a Microsoft AI MVP. She holds a PhD at the intersection of engineering and statistics and brings a strong foundation in machine learning and AI system design.\n\nShe focuses on building scalable, production-ready AI solutions, including agentic architectures, and works closely with organizations to turn complex problems into practical AI applications. Egina is also actively involved in the AI community across Vancouver, contributing through events, mentoring, and knowledge sharing.",
+    talkTitle: 'Simplifying the design and deployment of Agentic AI systems at scale',
+    talkLevel: 'L200 (Intermediate)',
+    talkSummary:
+      "As AI systems evolve from single-model applications to agentic architectures, managing orchestration, state, and workflows becomes increasingly complex. Cloud-based agentic frameworks such as Azure’s Agent Framework for multi-agent handoff orchestration and agentic retrieval capabilities for search systems extend traditional RAG with dynamic, context-aware retrieval and structured coordination between components.\n\nThis talk will walk you through how these frameworks simplify building and deploying agentic systems in the cloud. It will show how built-in orchestration, tool execution, and state management reduce custom infrastructure, making solutions easier to scale, maintain, and move to production.",
+  },
+  {
+    speakername: 'Niko Smeds',
+    image: '/images/speakers/Niko-trans.png',
+    linkedin: 'https://www.linkedin.com/in/nikosmeds/',
+    bio: 'Niko is a staff software engineer at Grafana Labs, where he helps build and monitor the Kubernetes and cloud platforms. From OpenStack to K8s, he has experience with both private and public cloud infrastructure.',
+    talkTitle: 'The Cloud Bill Nobody Could Explain',
+    talkLevel: 'L200 (Intermediate)',
+    talkSummary:
+      "At Grafana Labs, our finance team noticed cloud costs steadily increasing in ways our cost metrics couldn't explain. We declared an incident and started digging. Billing consoles told us NAT gateways and audit logs were expensive, but not why. This talk walks through how we made the invisible visible across AWS and GCP, systematically identifying traffic patterns we didn't need to be paying for. By the end, we'd significantly improved our cloud margin and could finally explain where the money was going.",
+  },
 ];
 
 export const committeeContent: Committee[] = [
@@ -760,6 +790,11 @@ export const communityPartners: CommunityPartner[] = [
     url: 'https://www.awsday.ca/',
   },
   {
+    name: 'VanLUG',
+    logo: '/images/community-partners/vanlug.png',
+    url: 'https://vanlug.ca/',
+  },
+  {
     name: 'Hacker Rivals',
     logo: '/images/community-partners/Logo-Oct25-Black.png',
     url: 'https://hackerrivals.com/',
@@ -768,6 +803,11 @@ export const communityPartners: CommunityPartner[] = [
     name: 'ISACA',
     logo: '/images/community-partners/ISACA.png',
     url: 'https://engage.isaca.org/vancouverchapter/home',
+  },
+  {
+    name: 'Women in Cyber',
+    logo: '/images/community-partners/womenincyber.png',
+    url: 'https://www.wicys.org/',
   },
   {
     name: 'Microsoft',
@@ -781,23 +821,23 @@ export const communityPartners: CommunityPartner[] = [
   },
 ];
 
-export const sponsors: Sponsor[] = [
+export const partners: Sponsor[] = [
   {
     ranking: 'Gold',
     name: 'Habilelabs',
-    logo: '/images/sponsors/habilelabs%20logo.svg',
+    logo: '/images/partners/habilelabs%20logo.svg',
     url: 'https://www.habilelabs.io/',
   },
   {
     ranking: 'Platinum',
     name: 'AWS',
-    logo: '/images/sponsors/aws-white.svg',
+    logo: '/images/partners/aws-white.svg',
     url: 'https://aws.amazon.com/',
   },
   {
     ranking: 'Diamond',
     name: 'Fortinet',
-    logo: '/images/sponsors/Fortinet_Logo.png',
+    logo: '/images/partners/Fortinet_Logo.png',
     url: 'https://www.fortinet.com/',
   },
 ];
