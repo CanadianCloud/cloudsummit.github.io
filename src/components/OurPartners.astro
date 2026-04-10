@@ -1,5 +1,5 @@
 ---
-import { sponsors } from "../lib/content";
+import { partners } from "../lib/content";
 
 const withBase = (path: string) => {
   const base = import.meta.env.BASE_URL ?? "/";
@@ -9,27 +9,27 @@ const withBase = (path: string) => {
 };
 ---
 
-<section class="our-sponsors">
-  <h2 class="our-sponsors-heading">
-    <span class="our-sponsors-prefix">Our </span>
-    Sponsors
+<section class="our-partners">
+  <h2 class="our-partners-heading">
+    <span class="our-partners-prefix">Our </span>
+    Partners
   </h2>
-  <div class="our-sponsors-card">
-    <div id="sponsors-container">
+  <div class="our-partners-card">
+    <div id="partners-container">
       {
-        sponsors.map((sponsor) => (
-          <figure class="sponsor">
+        partners.map((partner) => (
+          <figure class="partner">
             <a
-              class="sponsor-link"
-              href={sponsor.url}
+              class="partner-link"
+              href={partner.url}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`Visit ${sponsor.name} website`}
+              aria-label={`Visit ${partner.name} website`}
             >
               <img
-                class="sponsor-logo"
-                src={withBase(sponsor.logo)}
-                alt={sponsor.name}
+                class="partner-logo"
+                src={withBase(partner.logo)}
+                alt={partner.name}
                 loading="lazy"
               />
             </a>
@@ -41,14 +41,14 @@ const withBase = (path: string) => {
 </section>
 
 <style>
-  .our-sponsors {
+  .our-partners {
     text-align: center;
     max-width: 1200px;
     margin: 2.5rem auto 2.5rem;
     padding: 0;
   }
 
-  .our-sponsors-card {
+  .our-partners-card {
     background: rgba(61, 120, 171, 0.1);
     border: 1px solid rgba(61, 120, 171, 0.2);
     border-radius: 1rem;
@@ -56,7 +56,7 @@ const withBase = (path: string) => {
     padding: 2rem 1.5rem 3rem;
   }
 
-  .our-sponsors-heading {
+  .our-partners-heading {
     font-family: "Squada One", system-ui, sans-serif;
     font-size: 2.5rem;
     font-weight: 400;
@@ -66,7 +66,7 @@ const withBase = (path: string) => {
     color: rgb(251, 113, 133);
   }
 
-  .our-sponsors-prefix {
+  .our-partners-prefix {
     color: white;
     font-family: "Squada One", system-ui, sans-serif;
     font-size: 2.5rem;
@@ -75,24 +75,24 @@ const withBase = (path: string) => {
   }
 
   @media (min-width: 769px) {
-    .our-sponsors {
+    .our-partners {
       margin: 4rem auto;
     }
 
-    .our-sponsors-card {
+    .our-partners-card {
       padding: 4.5rem 2rem 4rem;
     }
 
-    .our-sponsors-heading {
+    .our-partners-heading {
       font-size: 4rem;
     }
 
-    .our-sponsors-prefix {
+    .our-partners-prefix {
       font-size: 4rem;
     }
   }
 
-  .sponsor {
+  .partner {
     flex: 0 0 calc(20% - 1.6rem);
     display: flex;
     align-items: center;
@@ -102,7 +102,7 @@ const withBase = (path: string) => {
     max-width: 220px;
   }
 
-  .sponsor-logo {
+  .partner-logo {
     max-width: 100%;
     height: 90px;
     width: auto;
@@ -110,7 +110,7 @@ const withBase = (path: string) => {
     display: block;
   }
 
-  .sponsor-link {
+  .partner-link {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -119,12 +119,12 @@ const withBase = (path: string) => {
     -webkit-tap-highlight-color: transparent;
   }
 
-  .sponsor-link:focus-visible {
+  .partner-link:focus-visible {
     box-shadow: 0 0 0 3px rgba(168, 251, 90, 0.45);
   }
 
   /* Desktop: centered rows (including last row) */
-  #sponsors-container {
+  #partners-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -134,21 +134,21 @@ const withBase = (path: string) => {
   }
 
   @media (max-width: 768px) {
-    .our-sponsors {
+    .our-partners {
       padding: 0 1rem;
       margin-bottom: 2rem;
     }
 
-    .our-sponsors-card {
+    .our-partners-card {
       padding: 1.5rem 1rem 2rem;
     }
 
-    .our-sponsors-heading,
-    .our-sponsors-prefix {
+    .our-partners-heading,
+    .our-partners-prefix {
       font-size: 2rem;
     }
 
-    #sponsors-container {
+    #partners-container {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -157,14 +157,14 @@ const withBase = (path: string) => {
       padding: 0.35rem 0 0.15rem;
     }
 
-    .sponsor {
+    .partner {
       flex: 0 0 calc(33.333% - 0.75rem);
       min-height: 4.5rem;
       min-width: 0;
       max-width: 180px;
     }
 
-    .sponsor-logo {
+    .partner-logo {
       max-width: 100%;
       max-height: 72px;
       height: auto;
