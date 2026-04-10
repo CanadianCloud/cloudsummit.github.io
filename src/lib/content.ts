@@ -821,11 +821,11 @@ export const communityPartners: CommunityPartner[] = [
   },
 ];
 
-export const sponsors: Sponsor[] = [
+export const partners: Sponsor[] = [
   {
     ranking: 'Gold',
     name: 'Habilelabs',
-    logo: '/images/sponsors/habilelabs%20logo.svg',
+    logo: '/images/partners/habilelabs%20logo.svg',
     url: 'https://www.habilelabs.io/',
   },
   {
@@ -837,13 +837,13 @@ export const sponsors: Sponsor[] = [
   {
     ranking: 'Platinum',
     name: 'AWS',
-    logo: '/images/sponsors/aws-white.png',
+    logo: '/images/partners/aws-white.svg',
     url: 'https://aws.amazon.com/',
   },
   {
     ranking: 'Diamond',
     name: 'Fortinet',
-    logo: '/images/sponsors/Fortinet_Logo.png',
+    logo: '/images/partners/fortinet.svg',
     url: 'https://www.fortinet.com/',
   },
 ];
