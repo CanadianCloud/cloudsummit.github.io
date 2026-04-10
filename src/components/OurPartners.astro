@@ -7,36 +7,54 @@ const withBase = (path: string) => {
   const normalizedPath = path.startsWith("/") ? path.slice(1) : path;
   return `${normalizedBase}${normalizedPath}`;
 };
+
+const byRank = (rank: "Diamond" | "Platinum" | "Gold") =>
+  partners.filter((p) => p.ranking === rank);
+
+const tiers = [
+  { id: "diamond", label: "Diamond", color: "rgb(230, 148, 255)" },
+  { id: "platinum", label: "Platinum", color: "rgb(61, 120, 171)" },
+  { id: "gold", label: "Gold", color: "rgb(255, 193, 77)" },
+] as const;
 ---
 
 <section class="our-partners">
   <h2 class="our-partners-heading">
-    <span class="our-partners-prefix">Our </span>
-    Partners
+    <span class="our-partners-heading__our">Our </span>
+    <span class="our-partners-heading__partners">Sponsors</span>
   </h2>
-  <div class="our-partners-card">
-    <div id="partners-container">
-      {
-        partners.map((partner) => (
-          <figure class="partner">
-            <a
-              class="partner-link"
-              href={partner.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`Visit ${partner.name} website`}
-            >
-              <img
-                class="partner-logo"
-                src={withBase(partner.logo)}
-                alt={partner.name}
-                loading="lazy"
-              />
-            </a>
-          </figure>
-        ))
-      }
-    </div>
+
+  <div class="tiers">
+    {tiers.map((tier) => {
+      const items = byRank(tier.label);
+      if (!items.length) return null;
+      return (
+        <section class={`tier tier--${tier.id}`} aria-label={`${tier.label} tier partners`}>
+          <h3 class="tier-title" style={`--tier-color: ${tier.color};`}>
+            {tier.label}
+          </h3>
+          <div class="tier-divider" aria-hidden="true"></div>
+          <div class="tier-logos">
+            {items.map((partner) => (
+              <a
+                class="logo-link"
+                href={partner.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Visit ${partner.name} website`}
+              >
+                <img
+                  class="logo"
+                  src={withBase(partner.logo)}
+                  alt={partner.name}
+                  loading="lazy"
+                />
+              </a>
+            ))}
+          </div>
+        </section>
+      );
+    })}
   </div>
 </section>
 
@@ -44,132 +62,129 @@ const withBase = (path: string) => {
   .our-partners {
     text-align: center;
     max-width: 1200px;
-    margin: 2.5rem auto 2.5rem;
-    padding: 0;
-  }
-
-  .our-partners-card {
-    background: rgba(61, 120, 171, 0.1);
-    border: 1px solid rgba(61, 120, 171, 0.2);
-    border-radius: 1rem;
-    overflow: hidden;
-    padding: 2rem 1.5rem 3rem;
+    margin: 3rem auto 3rem;
+    padding: 0 1.25rem;
   }
 
   .our-partners-heading {
     font-family: "Squada One", system-ui, sans-serif;
-    font-size: 2.5rem;
+    font-size: 2.75rem;
     font-weight: 400;
-    margin: 0 0 1rem 0;
+    margin: 0 0 1.75rem 0;
     line-height: 1.2;
     letter-spacing: 0.02em;
-    color: rgb(251, 113, 133);
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.35);
   }
 
-  .our-partners-prefix {
-    color: white;
+  .our-partners-heading__our {
+    color: #ffffff;
     font-family: "Squada One", system-ui, sans-serif;
-    font-size: 2.5rem;
+    font-size: inherit;
     font-weight: 400;
     letter-spacing: 0.02em;
+  }
+
+  .our-partners-heading__partners {
+    color: rgb(168, 251, 90);
+    font-family: "Squada One", system-ui, sans-serif;
+    font-size: inherit;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+
+  .tiers {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    justify-items: center;
+  }
+
+  .tier {
+    width: min(44rem, 100%);
+    background: rgba(10, 16, 24, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1rem;
+    padding: 1.25rem 1.25rem 1.5rem;
+    box-shadow:
+      0 12px 28px rgba(0, 0, 0, 0.45),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+
+  .tier-title {
+    margin: 0;
+    font-family: "Squada One", system-ui, sans-serif;
+    font-size: 1.75rem;
+    font-weight: 400;
+    color: var(--tier-color);
+    letter-spacing: 0.02em;
+  }
+
+  .tier-divider {
+    margin: 0.9rem auto 1.1rem;
+    height: 1px;
+    width: 100%;
+    max-width: 28rem;
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .tier-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1.25rem 1.5rem;
+    padding: 0.25rem 0 0;
+  }
+
+  .logo-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .logo-link:focus-visible {
+    box-shadow: 0 0 0 3px rgba(168, 251, 90, 0.45);
+  }
+
+  .logo {
+    height: 52px;
+    width: auto;
+    max-width: min(22rem, 80vw);
+    object-fit: contain;
+    display: block;
   }
 
   @media (min-width: 769px) {
     .our-partners {
-      margin: 4rem auto;
-    }
-
-    .our-partners-card {
-      padding: 4.5rem 2rem 4rem;
+      margin: 4.5rem auto;
+      padding: 0 2rem;
     }
 
     .our-partners-heading {
       font-size: 4rem;
     }
-
-    .our-partners-prefix {
-      font-size: 4rem;
-    }
   }
 
-  .partner {
-    flex: 0 0 calc(20% - 1.6rem);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0;
-    min-width: 160px;
-    max-width: 220px;
-  }
-
-  .partner-logo {
-    max-width: 100%;
-    height: 90px;
-    width: auto;
-    object-fit: contain;
-    display: block;
-  }
-
-  .partner-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 0.5rem;
-    outline: none;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  .partner-link:focus-visible {
-    box-shadow: 0 0 0 3px rgba(168, 251, 90, 0.45);
-  }
-
-  /* Desktop: centered rows (including last row) */
-  #partners-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 2.25rem 2rem;
-    padding: 0.5rem 0;
-  }
-
-  @media (max-width: 768px) {
-    .our-partners {
-      padding: 0 1rem;
-      margin-bottom: 2rem;
+  @media (min-width: 900px) {
+    .tiers {
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+      gap: 1.5rem 2rem;
     }
 
-    .our-partners-card {
-      padding: 1.5rem 1rem 2rem;
+    /* Center Gold card under first row when we have 3 tiers */
+    .tier--gold {
+      grid-column: 1 / -1;
+      width: min(44rem, 100%);
     }
 
-    .our-partners-heading,
-    .our-partners-prefix {
-      font-size: 2rem;
-    }
-
-    #partners-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 1.5rem 1rem;
-      padding: 0.35rem 0 0.15rem;
-    }
-
-    .partner {
-      flex: 0 0 calc(33.333% - 0.75rem);
-      min-height: 4.5rem;
-      min-width: 0;
-      max-width: 180px;
-    }
-
-    .partner-logo {
-      max-width: 100%;
-      max-height: 72px;
-      height: auto;
-      width: auto;
-      margin-inline: auto;
+    .logo {
+      height: 60px;
     }
   }
 </style>
