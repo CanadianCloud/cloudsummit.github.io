@@ -379,6 +379,13 @@ const ogImageUrl = absoluteUrl(DEFAULT_OG_IMAGE_PATH, Astro);
 		gap: 2rem;
 	}
 
+	@media (min-width: 900px) {
+		.speakers-grid--detailed {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			align-items: start;
+		}
+	}
+
 	.speakers-grid--detailed {
 		gap: 2.5rem;
 	}
@@ -441,6 +448,51 @@ const ogImageUrl = absoluteUrl(DEFAULT_OG_IMAGE_PATH, Astro);
 	.speaker-card--detailed .speaker-info {
 		text-align: left;
 		min-width: 0;
+	}
+
+	/* Mobile: photo left, text right */
+	@media (max-width: 768px) {
+		.speaker-card--detailed {
+			flex-direction: row;
+			align-items: flex-start;
+			gap: 1rem;
+			padding: 1.25rem 1rem;
+		}
+
+		.speaker-card--detailed .speaker-image {
+			margin: 0;
+			width: 42%;
+			max-width: 140px;
+			min-height: 0;
+			min-width: 0;
+			flex-shrink: 0;
+		}
+
+		.speaker-card--detailed .speaker-image img {
+			max-height: 160px;
+		}
+
+		.speaker-card--detailed .speaker-info {
+			text-align: left;
+			flex: 1;
+		}
+
+		.speaker-name {
+			font-size: 1.25rem;
+			line-height: 1.2;
+		}
+
+		.speaker-linkedin {
+			margin-top: 0.5rem;
+		}
+
+		.speaker-talk-headline {
+			font-size: 1rem;
+		}
+
+		.speaker-talk-headline[data-astro-cid-k3qul66j] {
+			font-size: 1rem;
+		}
 	}
 
 	.speaker-name {
