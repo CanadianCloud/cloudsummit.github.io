@@ -829,6 +829,12 @@ export const sponsors: Sponsor[] = [
     url: 'https://www.habilelabs.io/',
   },
   {
+    ranking: 'Gold',
+    name: 'AWS Day',
+    logo: '/images/community-partners/aws-day-logo.png',
+    url: 'https://www.awsday.ca/',
+  },
+  {
     ranking: 'Platinum',
     name: 'AWS',
     logo: '/images/sponsors/aws-white.png',
