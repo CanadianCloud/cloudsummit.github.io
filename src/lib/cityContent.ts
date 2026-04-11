@@ -30,22 +30,8 @@ export const cityContent: Record<City, CityContent> = {
     description:
       'Connect with over 1,000 cloud professionals and decision-makers. Showcase your brand at this premier gathering of AWS, Azure, Google Cloud, and IBM Cloud experts.',
     venue: 'Science World',
-    date: 'Friday, May 1st, 2026 • 2pm-9pm',
+    date: 'Friday, May 1st, 2026 • 3 pm - 9 pm',
     schedule: [
-      {
-        startTime: '2:10 PM',
-        activities: [
-          'Registration Opens',
-          'Networking space (full venue isn’t open yet)',
-        ],
-      },
-      {
-        startTime: '2:50 PM',
-        activities: [
-          'Doors Open to full venue',
-          'Experience areas open - sponsored by AWS',
-        ],
-      },
       {
         startTime: '3:00 PM',
         endTime: '3:20 PM',

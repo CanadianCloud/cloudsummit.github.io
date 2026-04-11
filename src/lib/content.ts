@@ -107,7 +107,7 @@ export const citySpecificContent: Record<City, CitySpecificContent> = {
     address: '1455 Quebec St, Vancouver, BC V6A 3Z7',
     addressUrl: 'https://maps.app.goo.gl/DQbdiQLYB1qe1iZn7',
     date: 'Friday, May 1st, 2026',
-    time: '2pm - 9pm',
+    time: '3 pm - 9 pm',
     callForSpeakers: 'February 2026',
     ticketUrl: 'https://luma.com/cloudsummit26',
   },
