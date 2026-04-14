@@ -829,6 +829,12 @@ export const partners: Sponsor[] = [
     url: 'https://www.habilelabs.io/',
   },
   {
+    ranking: 'Gold',
+    name: 'Defang',
+    logo: '/images/partners/defang.svg',
+    url: 'https://www.defang.io/',
+  },
+  {
     ranking: 'Platinum',
     name: 'AWS',
     logo: '/images/partners/aws-white.svg',
