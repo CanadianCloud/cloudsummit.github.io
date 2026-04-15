@@ -84,7 +84,7 @@ const ogImageUrl = absoluteUrl(DEFAULT_OG_IMAGE_PATH, Astro);
 					</div>
 					<div class="speakers-city-content speakers-city-content--vancouver">
 					<div class="speakers-grid speakers-grid--detailed">
-						{speakerContent.map((speaker, index) => {
+						{speakerContent.filter((speaker) => !speaker.hidden).map((speaker, index) => {
 							const bioDialogId = `speaker-bio-dialog-${index}`;
 							const bioTitleId = `${bioDialogId}-title`;
 							return (
