@@ -46,7 +46,7 @@ import { absoluteUrl, DEFAULT_OG_IMAGE_PATH, getCanonical } from "../lib/seo";
 // Use default city for venueLogisticsContentNewVersionSSR, will be updated client-side
 const content = heroContent[defaultCity];
 
-const homepageSpeakers = speakerContent.slice(0, 3);
+const homepageSpeakers = speakerContent.filter((speaker) => !speaker.hidden).slice(0, 3);
 
 const homepageKeywords = [
   "cloud summit canada",

@@ -73,6 +73,7 @@ export interface Speaker {
   talkTitle?: string;
   talkLevel?: string;
   talkSummary?: string;
+  hidden?: boolean;
 }
 
 export interface FAQ {
@@ -652,6 +653,7 @@ export const speakerContent: Speaker[] = [
     speakername: 'Ahmad Awais',
     image: '/images/speakers/Ahmad-trans.png',
     linkedin: 'https://www.linkedin.com/in/MrAhmadAwais/',
+    hidden: true,
     bio: 'Ahmad Awais is an award-winning open-source engineering leader, founder & CEO of Command Code (frontier coding agent with taste) f/k/a Langbase (Serverless AI Developer Platform powering 350K+ AI agents). NASA Mars Ingenuity Helicopter mission code-contributor. Angel investor. Ex-VP DX, Google Developers Advisory Board founding member and Board Member Linux Foundation & OpenAPI Initiative. Ahmad has authored various open-source software tools used by millions of developers worldwide, like his Shades of Purple code theme (4M Dev Users), corona-cli (10+ Billion Requests), and now Langbase (1.2Billion/mo agent runs). He’s a Google Devs Expert and 5x recipient of the 8th GitHub Stars Gold award.',
     talkTitle: 'Agentic Engineering & Developing Taste in Coding Agents',
     talkLevel: 'L100 (Beginner)',
@@ -692,11 +694,12 @@ export const speakerContent: Speaker[] = [
     speakername: 'Egina Malaj',
     image: '/images/speakers/Egina-trans.png',
     linkedin: 'https://www.linkedin.com/in/eginamalaj/',
-    bio: "Based in Vancouver, Egina is an AI Architect and a Microsoft AI MVP. She holds a PhD at the intersection of engineering and statistics and brings a strong foundation in machine learning and AI system design.\n\nShe focuses on building scalable, production-ready AI solutions, including agentic architectures, and works closely with organizations to turn complex problems into practical AI applications. Egina is also actively involved in the AI community across Vancouver, contributing through events, mentoring, and knowledge sharing.",
-    talkTitle: 'Simplifying the design and deployment of Agentic AI systems at scale',
+    bio: 'Based in Vancouver, Egina is an AI Architect and a Microsoft AI MVP. She holds a PhD at the intersection of engineering and statistics and brings a strong foundation in machine learning and AI system design.\n\nShe focuses on building scalable, production-ready AI solutions, including agentic architectures, and works closely with organizations to turn complex problems into practical AI applications. Egina is also actively involved in the AI community across Vancouver, contributing through events, mentoring, and knowledge sharing.',
+    talkTitle:
+      'Simplifying the design and deployment of Agentic AI systems at scale',
     talkLevel: 'L200 (Intermediate)',
     talkSummary:
-      "As AI systems evolve from single-model applications to agentic architectures, managing orchestration, state, and workflows becomes increasingly complex. Cloud-based agentic frameworks such as Azure’s Agent Framework for multi-agent handoff orchestration and agentic retrieval capabilities for search systems extend traditional RAG with dynamic, context-aware retrieval and structured coordination between components.\n\nThis talk will walk you through how these frameworks simplify building and deploying agentic systems in the cloud. It will show how built-in orchestration, tool execution, and state management reduce custom infrastructure, making solutions easier to scale, maintain, and move to production.",
+      'As AI systems evolve from single-model applications to agentic architectures, managing orchestration, state, and workflows becomes increasingly complex. Cloud-based agentic frameworks such as Azure’s Agent Framework for multi-agent handoff orchestration and agentic retrieval capabilities for search systems extend traditional RAG with dynamic, context-aware retrieval and structured coordination between components.\n\nThis talk will walk you through how these frameworks simplify building and deploying agentic systems in the cloud. It will show how built-in orchestration, tool execution, and state management reduce custom infrastructure, making solutions easier to scale, maintain, and move to production.',
   },
   {
     speakername: 'Niko Smeds',
@@ -790,6 +793,11 @@ export const communityPartners: CommunityPartner[] = [
     url: 'https://www.awsday.ca/',
   },
   {
+    name: 'OpenBao',
+    logo: '/images/partners/OpenBao-black.png',
+    url: 'https://www.openbao.org/',
+  },
+  {
     name: 'VanLUG',
     logo: '/images/community-partners/vanlug.png',
     url: 'https://vanlug.ca/',
@@ -803,6 +811,11 @@ export const communityPartners: CommunityPartner[] = [
     name: 'ISACA',
     logo: '/images/community-partners/ISACA.png',
     url: 'https://engage.isaca.org/vancouverchapter/home',
+  },
+  {
+    name: 'Northeastern University',
+    logo: '/images/partners/northeastern.png',
+    url: 'https://www.northeastern.edu/',
   },
   {
     name: 'Women in Cyber',
