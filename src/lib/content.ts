@@ -848,6 +848,12 @@ export const partners: Sponsor[] = [
     url: 'https://www.defang.io/',
   },
   {
+    ranking: 'Gold',
+    name: 'Elastic',
+    logo: '/images/sponsors/elastic-white.svg',
+    url: 'https://www.elastic.co/',
+  },
+  {
     ranking: 'Platinum',
     name: 'AWS',
     logo: '/images/partners/aws-white.svg',
