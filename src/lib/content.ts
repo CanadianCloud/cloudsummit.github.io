@@ -108,7 +108,7 @@ export const citySpecificContent: Record<City, CitySpecificContent> = {
     address: '1455 Quebec St, Vancouver, BC V6A 3Z7',
     addressUrl: 'https://maps.app.goo.gl/DQbdiQLYB1qe1iZn7',
     date: 'Friday, May 1st, 2026',
-    time: '3 pm - 9 pm',
+    time: '2:15 pm - 9 pm',
     callForSpeakers: 'February 2026',
     ticketUrl: 'https://luma.com/cloudsummit26',
   },
@@ -641,6 +641,7 @@ export type VenueLogisticsContent = typeof venueLogisticsContentNewVersion;
 export const speakerContent: Speaker[] = [
   {
     speakername: 'Gabriel Velazquez Lopez',
+    title: 'Ex-AWS Anthropic Lead (Currently in Stealth Startup)',
     image: '/images/speakers/Gabriel-trans.png',
     linkedin: 'https://www.linkedin.com/in/gvlz/',
     bio: "Gabriel Velazquez is the founder of Antfluent, a Canadian consultancy focused exclusively on Anthropic's Claude. He spent nearly two decades in cloud technology, and was Anthropic's first Applied AI Solutions Architect at AWS, where he led the business relationship that helped scale Anthropic into one of the platform's largest AI partners. After working with organizations around the world, he left to bring that expertise home to Canada.",
@@ -662,6 +663,7 @@ export const speakerContent: Speaker[] = [
   },
   {
     speakername: 'Jason Mayes',
+    title: 'Web AI Lead at Google',
     image: '/images/speakers/Jason-trans.png',
     linkedin: 'https://www.linkedin.com/in/webai',
     bio: "Web AI Lead, Google (15 years)  Jason is Google's Web AI lead, representing teams such as LiteRT.js, DeepMind (Gemma web models), Chrome, TensorFlow.js, and MediaPipe, helping developers globally apply machine learning in JavaScript to the industries that they work within. Jason is the author of the first Web AI courses on Google Developers and EdX, that have enabled over 100,000 developers start their journey with Machine Learning in the browser and is also the creator of the world's first Web AI Summit bringing together top minds in the field. Jason combines his knowledge of the technical and creative worlds to develop innovative prototypes for Google's largest customers and internal teams with 20+ years experience working at the intersection of web engineering and emerging technologies.  He holds an MEng in Computer Science, is a member of the British Computing Society, and is a certified information privacy technologist. Jason loves sharing knowledge online which has attracted a global following.",
@@ -672,6 +674,7 @@ export const speakerContent: Speaker[] = [
   },
   {
     speakername: 'Morgan Foster',
+    title: 'Snr Principal Engineer',
     image: '/images/speakers/Mogan-trans.png',
     linkedin: 'https://www.linkedin.com/in/morgan-f-3151a7170/',
     bio: "Morgan Foster is a Senior Principal Software Engineer in Red Hat's Emerging Technologies group, where she works on making AI agents first-class citizens on Kubernetes. She co-chairs the Kubernetes AI Gateway Working Group under the CNCF and is a core contributor to the Kagenti project. Before Red Hat, Morgan spent a decade in site reliability engineering at Google, Twitter, and Box, and cut her teeth on SpiderMonkey at Mozilla. She lives not far south in Bellingham, WA with her husband and daughter.",
@@ -682,6 +685,7 @@ export const speakerContent: Speaker[] = [
   },
   {
     speakername: 'Adina Gray',
+    title: 'Founder',
     image: '/images/speakers/Adina-trans.png',
     linkedin: 'https://www.linkedin.com/in/adinagray/',
     bio: 'Adina Gray is the founder of PurpleOwl AI and an international speaker on artificial intelligence, education, and the future of work. Drawing on 20 years of experience in higher education and leadership, she helps organizations build AI literacy and respond strategically to the opportunities and challenges of AI adoption. She has led institutional AI initiatives, organized major AI events, and delivered speaking and training engagements across Canada and internationally. Adina is also the founder of the AI in Education Network of British Columbia, a province wide initiative advancing practical and responsible AI use.',
@@ -692,6 +696,7 @@ export const speakerContent: Speaker[] = [
   },
   {
     speakername: 'Egina Malaj',
+    title: 'AI Lead',
     image: '/images/speakers/Egina-trans.png',
     linkedin: 'https://www.linkedin.com/in/eginamalaj/',
     bio: 'Based in Vancouver, Egina is an AI Architect and a Microsoft AI MVP. She holds a PhD at the intersection of engineering and statistics and brings a strong foundation in machine learning and AI system design.\n\nShe focuses on building scalable, production-ready AI solutions, including agentic architectures, and works closely with organizations to turn complex problems into practical AI applications. Egina is also actively involved in the AI community across Vancouver, contributing through events, mentoring, and knowledge sharing.',
@@ -703,6 +708,7 @@ export const speakerContent: Speaker[] = [
   },
   {
     speakername: 'Niko Smeds',
+    title: 'Staff Software Engineer',
     image: '/images/speakers/Niko-trans.png',
     linkedin: 'https://www.linkedin.com/in/nikosmeds/',
     bio: 'Niko is a staff software engineer at Grafana Labs, where he helps build and monitor the Kubernetes and cloud platforms. From OpenStack to K8s, he has experience with both private and public cloud infrastructure.',
@@ -710,6 +716,104 @@ export const speakerContent: Speaker[] = [
     talkLevel: 'L200 (Intermediate)',
     talkSummary:
       "At Grafana Labs, our finance team noticed cloud costs steadily increasing in ways our cost metrics couldn't explain. We declared an incident and started digging. Billing consoles told us NAT gateways and audit logs were expensive, but not why. This talk walks through how we made the invisible visible across AWS and GCP, systematically identifying traffic patterns we didn't need to be paying for. By the end, we'd significantly improved our cloud margin and could finally explain where the money was going.",
+  },
+  {
+    speakername: 'Kerrie Murray',
+    title: 'AWS Enterprise Sales Leader',
+    image: '/images/speakers/kerrie-trans.png',
+    linkedin: 'https://www.linkedin.com/in/kerrie-murray-b3257731/',
+    bio: 'Accomplished, passionate and highly effective business development and sales professional with 23+ years of experience in global account management, professional services, consulting and achieving market leadership with enterprise customers. I have a results based track record for creating revenue growth through strategic and well developed customer relationships, sharp negotiation skills and driving overall sales excellence through focus, discipline and execution. I have a specific passion for bringing customers the most relevant and experienced professionals to support their most complex business opportunities facing them today.',
+    talkTitle: 'Panel: Women Shaping the Future of Cloud & AI',
+    talkLevel: 'L100 (Beginner)',
+    talkSummary:
+      'Join us for an exciting panel on Shaping the Future of Cloud & AI, featuring an exceptional group of women in senior leadership roles at some of the industry’s most impressive companies. This conversation will explore how cloud and AI are reshaping technology, business, and leadership itself, including how leadership is changing today compared with five years ago as AI transforms decision-making, team structures, speed of execution, and the skills organizations value most. Expect a thoughtful, forward-looking discussion with candid insights from leaders who are not just responding to change, but helping define what comes next.',
+  },
+  {
+    speakername: 'Mency Woo',
+    title: 'Practice CTO',
+    image: '/images/speakers/mency-trans.png',
+    linkedin: 'https://www.linkedin.com/in/mencywoo/',
+    bio: 'As a hands-on Practice CTO certified in AWS, Microsoft Azure and Google Cloud, I build the products and delivery models that turn technical expertise into client success. My passion lies in creating scalable and profitable service offerings by embedding the principles of trustworthy, ethical AI and equitable data into the core of their design.',
+    talkTitle: 'Panel: Women Shaping the Future of Cloud & AI',
+    talkLevel: 'L100 (Beginner)',
+    talkSummary:
+      'Join us for an exciting panel on Shaping the Future of Cloud & AI, featuring an exceptional group of women in senior leadership roles at some of the industry’s most impressive companies. This conversation will explore how cloud and AI are reshaping technology, business, and leadership itself, including how leadership is changing today compared with five years ago as AI transforms decision-making, team structures, speed of execution, and the skills organizations value most. Expect a thoughtful, forward-looking discussion with candid insights from leaders who are not just responding to change, but helping define what comes next.',
+  },
+  {
+    speakername: 'Inga Seelemann',
+    title: 'Principal Director, Tech Strategy & Advisory Lead',
+    image: '/images/speakers/inga-trans.png',
+    linkedin: 'https://www.linkedin.com/in/ingaseelemann/',
+    bio: 'Inga is the Principal Director, Tech Strategy & Advisory at Accenture, with more than 28 years of experience leading technology programs across energy, mining, pharmaceuticals, and the public sector. She specializes in helping organizations turn digital transformation from strategy into real-world execution, with a focus on building scalable, governed, production-ready outcomes. Her work spans GenAI at scale, cloud governance and FinOps, and IT/OT integration in complex industrial environments where data is critical not just for business value, but for safety and operational resilience. Having worked on both the client side and the vendor side, she brings a practical operator mindset to every engagement, focused on building solutions that are effective, well-governed, and built to last.',
+    talkTitle: 'Panel: Women Shaping the Future of Cloud & AI',
+    talkLevel: 'L100 (Beginner)',
+    talkSummary:
+      'Join us for an exciting panel on Shaping the Future of Cloud & AI, featuring an exceptional group of women in senior leadership roles at some of the industry’s most impressive companies. This conversation will explore how cloud and AI are reshaping technology, business, and leadership itself, including how leadership is changing today compared with five years ago as AI transforms decision-making, team structures, speed of execution, and the skills organizations value most. Expect a thoughtful, forward-looking discussion with candid insights from leaders who are not just responding to change, but helping define what comes next.',
+  },
+  {
+    speakername: 'Devon Dander',
+    title: 'Technology Director at Lululemon',
+    image: '/images/speakers/devon-trans.png',
+    linkedin: 'https://www.linkedin.com/in/devondander/',
+    bio: 'Dynamic leader with experience in operational analysis and implementing creative strategies. Proven record of quickly understanding and adapting to business and technology problems, and collaborating cross functionally to achieve timely results. Frequently represents senior leaders to recommend, prioritize, and achieve effective solutions.',
+    talkTitle: 'Panel: Women Shaping the Future of Cloud & AI',
+    talkLevel: 'L100 (Beginner)',
+    talkSummary:
+      'Join us for an exciting panel on Shaping the Future of Cloud & AI, featuring an exceptional group of women in senior leadership roles at some of the industry’s most impressive companies. This conversation will explore how cloud and AI are reshaping technology, business, and leadership itself, including how leadership is changing today compared with five years ago as AI transforms decision-making, team structures, speed of execution, and the skills organizations value most. Expect a thoughtful, forward-looking discussion with candid insights from leaders who are not just responding to change, but helping define what comes next.',
+  },
+  {
+    speakername: 'Warren Lyne',
+    title: 'Cloud Business Development Manager',
+    image: '/images/speakers/warren-trans.png',
+    linkedin: 'https://www.linkedin.com/in/warrenlyne/',
+    bio: 'Warren brings more than 20 years of experience across enterprise technology, technical sales, and business strategy. He has built and led high-performing teams serving Fortune 500 customers, helping organizations adopt cloud and digital solutions that drive innovation, efficiency, and long-term growth. With expertise spanning cloud, AI, enterprise architecture, and digital transformation, Warren is skilled at turning complex business challenges into practical technology strategies. His background across engineering, pre-sales, account management, and leadership gives him a well-rounded perspective on how to deliver solutions that create real value at scale.',
+    talkTitle: 'Emcee (Main Stage)',
+    talkLevel: 'L100 (Beginner)',
+  },
+  {
+    speakername: 'Ntokozo Yende',
+    title: 'Enterprise Solutions Manager',
+    image: '/images/speakers/ntokozo-trans.png',
+    linkedin: 'https://www.linkedin.com/in/ntokozo-y-09b928114/',
+    bio: 'Ntokozo is an Enterprise Solutions Manager at KPMG with deep experience in cloud strategy, application modernization, and digital transformation. Prior to relocating to Vancouver, she spent five years at Microsoft in Belgium as a Cloud Solutions Architect, helping organizations adopt and scale modern cloud solutions. She is especially passionate about GenAI, Copilot, app modernization, and cloud economics, and brings a practical perspective on how enterprises can turn emerging technology into meaningful business outcomes. With experience across both Microsoft and KPMG, she offers a strong mix of technical insight, strategic thinking, and real-world execution.',
+    talkTitle: 'Emcee (Community Stage)',
+    talkLevel: 'L100 (Beginner)',
+  },
+  {
+    speakername: 'Andrey Barkov',
+    title: 'Senior Software Engineer',
+    image: '/images/speakers/andrey-trans.png',
+    linkedin: 'https://www.linkedin.com/in/andreybarkov/',
+    bio: 'Andrey is an experienced software engineer with a background in building modern web applications and cloud solutions. Skilled in Angular, React, C#, Node.js, Azure, AWS, and microservices, He brings a practical, hands-on perspective to developing scalable and reliable software. A certified Scrum Master and Azure Developer, Andrey combines strong technical expertise with a focus on modern engineering practices and cloud innovation.',
+    talkTitle: 'Emcee (HackerRivals)',
+    talkLevel: 'L100 (Beginner)',
+  },
+  {
+    speakername: 'Gillian Cai',
+    title: 'Enterprise Account Executive',
+    image: '/images/speakers/gillian-trans.png',
+    linkedin: 'https://www.linkedin.com/in/gilliancai/',
+    bio: 'Complex transformations stall when vision, people, and execution drift apart. My work closes that gap. At AWS, I partner with enterprise leaders to map strategy to action: build an adoption plan, align governance and security, and sequence wins that prove value early. My background blends BD, PR, and program leadership—I’ve led large CSR initiatives, delivered white-paper campaigns, and built industry partnerships—so I’m comfortable navigating stakeholders from the boardroom to delivery teams. I’m also passionate about inclusive culture (co-founder of Asians@Amazon ERG initiative) because sustainable change is a team sport. If you’re modernizing workloads, rethinking data foundations, or moving from pilots to scale, I’m happy to share playbooks that work in the real world.',
+    talkTitle: 'Panel Moderator',
+    talkLevel: 'L100 (Beginner)',
+  },
+  {
+    speakername: 'Derek Liu',
+    title: 'AWS Senior Solution Architect',
+    image: '/images/speakers/derek-trans.png',
+    linkedin: 'https://www.linkedin.com/in/derek-liu-winghin/',
+    bio: 'Derek is a Senior Solutions Architect at AWS with expertise in big data, analytics, and agentic AI. He helps organizations design efficient, resilient, and scalable cloud solutions that deliver strong performance while staying cost-conscious. His background includes supporting AWS enterprise customers across services such as Amazon EMR, Glue, Athena, DynamoDB, Lake Formation, and MWAA, with a focus on data lakes, data warehouses, and large-scale analytics workloads. Prior to AWS, he also worked as an SAP HANA database specialist, giving him deep experience in performance, high availability, and enterprise data platforms.',
+    talkTitle: 'Workshop Facilitator',
+    talkLevel: 'L100 (Beginner)',
+  },
+  {
+    speakername: 'Daniel Kwok',
+    title: 'AWS Senior Solution Architect',
+    image: '/images/speakers/daniel-trans.png',
+    linkedin: 'https://www.linkedin.com/in/dkwok604/',
+    bio: 'Daniel is a Senior Cloud Solutions Architect at AWS, partnering with customers and cross-functional teams across account management, business development, engineering, and product to design scalable, flexible, and resilient cloud architectures. His work focuses on helping organizations solve complex business problems and accelerate cloud adoption with solutions that are practical, effective, and built to last. He brings a strong mix of technical depth and customer focus, with a passion for helping businesses turn cloud strategy into real-world outcomes.',
+    talkTitle: 'Workshop Facilitator',
+    talkLevel: 'L100 (Beginner)',
   },
 ];
 
@@ -832,6 +936,16 @@ export const communityPartners: CommunityPartner[] = [
     logo: '/images/community-partners/gdg-logo.png',
     url: 'https://gdg.community.dev/',
   },
+  {
+    name: 'VanRuby',
+    logo: '/images/community-partners/vanruby-black.png',
+    url: 'https://vanruby.ca',
+  },
+  {
+    name: 'ASIS International',
+    logo: '/images/community-partners/asis-trans.png',
+    url: 'https://www.asisonline.org/',
+  },
 ];
 
 export const partners: Sponsor[] = [
@@ -846,6 +960,12 @@ export const partners: Sponsor[] = [
     name: 'Defang',
     logo: '/images/partners/defang.svg',
     url: 'https://www.defang.io/',
+  },
+  {
+    ranking: 'Gold',
+    name: 'Elastic',
+    logo: '/images/partners/logo-elastic-horizontal-color-reverse.png',
+    url: 'https://www.elastic.co/',
   },
   {
     ranking: 'Platinum',

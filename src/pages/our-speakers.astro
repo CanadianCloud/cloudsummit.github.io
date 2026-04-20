@@ -94,6 +94,7 @@ const ogImageUrl = absoluteUrl(DEFAULT_OG_IMAGE_PATH, Astro);
 									</div>
 									<div class="speaker-info">
 										<h3 class="speaker-name">{speaker.speakername}</h3>
+										{speaker.title && <p class="speaker-title">{speaker.title}</p>}
 										{speaker.linkedin && (
 											<p class="speaker-linkedin">
 												<a
@@ -115,7 +116,6 @@ const ogImageUrl = absoluteUrl(DEFAULT_OG_IMAGE_PATH, Astro);
 												)}
 											</div>
 										)}
-										{speaker.title && <p class="speaker-title">{speaker.title}</p>}
 										{speaker.company && <p class="speaker-company">{speaker.company}</p>}
 										{speaker.topic && <p class="speaker-topic">{speaker.topic}</p>}
 										{(speaker.bio || speaker.talkSummary) && (
@@ -382,12 +382,13 @@ const ogImageUrl = absoluteUrl(DEFAULT_OG_IMAGE_PATH, Astro);
 	@media (min-width: 900px) {
 		.speakers-grid--detailed {
 			grid-template-columns: repeat(2, minmax(0, 1fr));
-			align-items: start;
+			align-items: stretch;
 		}
 	}
 
 	.speakers-grid--detailed {
 		gap: 2.5rem;
+		align-items: stretch;
 	}
 
 	.speaker-card {
@@ -405,6 +406,8 @@ const ogImageUrl = absoluteUrl(DEFAULT_OG_IMAGE_PATH, Astro);
 		align-items: stretch;
 		gap: 1.5rem;
 		text-align: left;
+		height: 100%;
+		min-height: 380px;
 	}
 
 	.speaker-card:hover {
@@ -457,6 +460,7 @@ const ogImageUrl = absoluteUrl(DEFAULT_OG_IMAGE_PATH, Astro);
 			align-items: flex-start;
 			gap: 1rem;
 			padding: 1.25rem 1rem;
+			min-height: 220px;
 		}
 
 		.speaker-card--detailed .speaker-image {
@@ -546,7 +550,7 @@ const ogImageUrl = absoluteUrl(DEFAULT_OG_IMAGE_PATH, Astro);
 		font-size: 1.125rem;
 		font-weight: 600;
 		line-height: 1.4;
-		color: rgb(251, 113, 133);
+		color: white;
 	}
 
 	.speaker-talk-level-tag {
@@ -709,6 +713,7 @@ const ogImageUrl = absoluteUrl(DEFAULT_OG_IMAGE_PATH, Astro);
 			align-items: flex-start;
 			gap: 2.5rem;
 			padding: 2.25rem 2.5rem;
+			min-height: 420px;
 		}
 
 		.speaker-card--detailed .speaker-image {
