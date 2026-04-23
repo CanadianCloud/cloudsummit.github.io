@@ -68,7 +68,7 @@ export const cityContent: Record<City, CityContent> = {
         endTime: '4:20 PM',
         activities: [
           'Main Stage: Panel, Sponsored by Fortinet',
-          'Community Stage: Niko Smeds',
+          'Community Stage: Nitin Gandhi',
         ],
         primaryLineCount: 2,
       },
@@ -96,7 +96,7 @@ export const cityContent: Record<City, CityContent> = {
         startTime: '5:30 PM',
         endTime: '6:00 PM',
         activities: [
-          'Main Stage: Session 5',
+          'Main Stage: Niko Smeds',
           'Community Stage: HackerRivals Round 2 Elimination Round',
         ],
         primaryLineCount: 2,
