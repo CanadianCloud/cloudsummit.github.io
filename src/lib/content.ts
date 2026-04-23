@@ -176,7 +176,7 @@ export function getNavigationContent(city: City): NavigationContent {
   return {
     links: [
       { text: 'Get Tickets', href: citySpecificContent[city].ticketUrl },
-      { text: 'Apply to Volunteer', href: sharedHeroContent.primaryCta.href },
+      { text: 'Schedule', href: '/#schedule' },
     ],
   };
 }
@@ -716,6 +716,17 @@ export const speakerContent: Speaker[] = [
     talkLevel: 'L200 (Intermediate)',
     talkSummary:
       "At Grafana Labs, our finance team noticed cloud costs steadily increasing in ways our cost metrics couldn't explain. We declared an incident and started digging. Billing consoles told us NAT gateways and audit logs were expensive, but not why. This talk walks through how we made the invisible visible across AWS and GCP, systematically identifying traffic patterns we didn't need to be paying for. By the end, we'd significantly improved our cloud margin and could finally explain where the money was going.",
+  },
+  {
+    speakername: 'Nitin Gandhi',
+    title: 'Cloud & FinOps Consultant',
+    image: '/images/speakers/nitin-trans.png',
+    linkedin: 'https://www.linkedin.com/in/nlgandhi/',
+    bio: "Experienced technology leader with 25 years experience focused on cloud FinOps and technology strategy. I have completed all FinOps certifications and have 3+ years of hands-on experience improving workload efficiency and reducing cloud spend. I also organize the FinOps Vancouver meetup and regularly create and deliver FinOps talks and content to help engineering and finance teams operationalize cloud financial management.",
+    talkTitle: 'Maximizing Cloud Value: Cost Engineering Playbooks',
+    talkLevel: 'L200 (Intermediate)',
+    talkSummary:
+      "Public cloud end-user spending is forecast to reach $880 billion in 2026 and several reports estimate more than 30% will be wasted ($264 Billion wasted). 84% of organizations say cloud spend management is their top cloud challenge.\n\nThis session introduces a series of practical Cost Engineering Playbooks targeting the biggest drivers of cloud waste. From egress and compute to AI token usage and infrastructure defaults, we break down complex billing areas into simple, high-impact strategies that engineers can apply immediately.\n\nThe focus is on design decisions that engineers actually own: moving less data, right-sizing compute and eliminating wasteful data scans. Small adjustments at these points yield massive results—like using materialized views to instantly cut dashboard query costs by 90%.",
   },
   {
     speakername: 'Kerrie Murray',

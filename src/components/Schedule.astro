@@ -9,7 +9,7 @@
 import { cityContent } from "../lib/cityContent"
 ---
 
-<section class="schedule">
+<section class="schedule" id="schedule">
     <h2 class="section-heading">Schedule</h2>
     <div id="wrapper">
         {cityContent.vancouver.schedule.map((event) => {
@@ -76,6 +76,7 @@ import { cityContent } from "../lib/cityContent"
         align-items: center;
         padding: 3rem 1.5rem;
         background: black;
+        scroll-margin-top: 5rem;
     }
     .section-heading {
         font-family: 'Squada One', system-ui, sans-serif;
