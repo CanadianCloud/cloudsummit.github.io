@@ -1,12 +1,8 @@
 ---
-// import type { CitySchedule } from "../lib/cityContent"
+import { cityContent } from '../lib/cityContent';
 
-// interface Props {
-//     props: CitySchedule[]
-// }
-
-// const { props } = Astro.props;
-import { cityContent } from "../lib/cityContent"
+// Regex to find URLs in a string
+const urlRegex = /(https?:\/\/[^\s]+|www\.[^\s]+)/g;
 ---
 
 <section class="schedule" id="schedule">
@@ -27,9 +23,16 @@ import { cityContent } from "../lib/cityContent"
                         const isPrimary = useRoles
                             ? roles[idx] === 'title'
                             : idx < (event.primaryLineCount ?? 1);
+                        const activityText = activity.trim();
                         return (
                             <p class:list={["activity", isPrimary ? "activity-title" : "activity-meta"]}>
-                                {activity.trim()}
+                                {activityText.split(urlRegex).map(part => {
+                                    if (part.match(urlRegex)) {
+                                        const url = part.startsWith('www.') ? `http://${part}` : part;
+                                        return <a href={url} target="_blank" rel="noopener noreferrer">{part}</a>;
+                                    }
+                                    return part;
+                                })}
                             </p>
                         );
                     })}
@@ -140,6 +143,10 @@ import { cityContent } from "../lib/cityContent"
         margin-right: 0.35rem;
         font-size: 0.75em;
         vertical-align: middle;
+    }
+    .activity-meta a {
+        color: inherit;
+        text-decoration: underline;
     }
     @media (min-width: 769px) {
         .schedule {
