@@ -722,11 +722,11 @@ export const speakerContent: Speaker[] = [
     title: 'Cloud & FinOps Consultant',
     image: '/images/speakers/nitin-trans.png',
     linkedin: 'https://www.linkedin.com/in/nlgandhi/',
-    bio: "Experienced technology leader with 25 years experience focused on cloud FinOps and technology strategy. I have completed all FinOps certifications and have 3+ years of hands-on experience improving workload efficiency and reducing cloud spend. I also organize the FinOps Vancouver meetup and regularly create and deliver FinOps talks and content to help engineering and finance teams operationalize cloud financial management.",
+    bio: 'Experienced technology leader with 25 years experience focused on cloud FinOps and technology strategy. I have completed all FinOps certifications and have 3+ years of hands-on experience improving workload efficiency and reducing cloud spend. I also organize the FinOps Vancouver meetup and regularly create and deliver FinOps talks and content to help engineering and finance teams operationalize cloud financial management.',
     talkTitle: 'Maximizing Cloud Value: Cost Engineering Playbooks',
     talkLevel: 'L200 (Intermediate)',
     talkSummary:
-      "Public cloud end-user spending is forecast to reach $880 billion in 2026 and several reports estimate more than 30% will be wasted ($264 Billion wasted). 84% of organizations say cloud spend management is their top cloud challenge.\n\nThis session introduces a series of practical Cost Engineering Playbooks targeting the biggest drivers of cloud waste. From egress and compute to AI token usage and infrastructure defaults, we break down complex billing areas into simple, high-impact strategies that engineers can apply immediately.\n\nThe focus is on design decisions that engineers actually own: moving less data, right-sizing compute and eliminating wasteful data scans. Small adjustments at these points yield massive results—like using materialized views to instantly cut dashboard query costs by 90%.",
+      'Public cloud end-user spending is forecast to reach $880 billion in 2026 and several reports estimate more than 30% will be wasted ($264 Billion wasted). 84% of organizations say cloud spend management is their top cloud challenge.\n\nThis session introduces a series of practical Cost Engineering Playbooks targeting the biggest drivers of cloud waste. From egress and compute to AI token usage and infrastructure defaults, we break down complex billing areas into simple, high-impact strategies that engineers can apply immediately.\n\nThe focus is on design decisions that engineers actually own: moving less data, right-sizing compute and eliminating wasteful data scans. Small adjustments at these points yield massive results—like using materialized views to instantly cut dashboard query costs by 90%.',
   },
   {
     speakername: 'Kerrie Murray',
@@ -825,6 +825,30 @@ export const speakerContent: Speaker[] = [
     bio: 'Daniel is a Senior Cloud Solutions Architect at AWS, partnering with customers and cross-functional teams across account management, business development, engineering, and product to design scalable, flexible, and resilient cloud architectures. His work focuses on helping organizations solve complex business problems and accelerate cloud adoption with solutions that are practical, effective, and built to last. He brings a strong mix of technical depth and customer focus, with a passion for helping businesses turn cloud strategy into real-world outcomes.',
     talkTitle: 'Workshop Facilitator',
     talkLevel: 'L100 (Beginner)',
+  },
+  {
+    speakername: 'Neumann Lim',
+    title: 'Manager, Infrastructure and Cybersecurity',
+    image: '/images/speakers/neumann-trans.png', // Placeholder
+    linkedin: 'https://www.linkedin.com/in/neumannlim/',
+    bio: 'Cybersecurity Professional with 15 years of security experience in information security and incident response. Forever learner, emergency responder, servant leader, vCISO, pentester, forensic examiner, crypto-investigator, mentor.',
+    talkTitle:
+      'Panel: AI Beyond the Buzz: Real Use Cases, Real Concerns, Real Conversations',
+    talkLevel: 'LX00 (Everyone)',
+    talkSummary:
+      'AI is everywhere in the headlines, but what does it actually mean for teams building, securing, and operating modern technology? This panel cuts through the hype to explore practical AI use cases, the risks organizations need to take seriously, and the hard questions leaders should be asking before rushing into adoption. Expect a grounded conversation on where AI is creating real value today, where caution is needed, and how businesses can move forward responsibly.',
+  },
+  {
+    speakername: 'Lakshmi VP',
+    title: 'Cloud Solutions Architect',
+    image: '/images/speakers/lakshmi-trans.png', // Placeholder
+    linkedin: 'https://www.linkedin.com/in/lakshmivp/',
+    bio: 'Lakshmi has overall 16+ years of working experience in pre-sales technical roles influencing technology adoption to create impactful solutions across global customers. She holds SA professional, AWS Security Speciality and AWS AI Practitioner certifications along with GIAC industry certification in cybersecurity. Lakshmi leads with customer first consultative approach and as a subject matter expert drives outcomes that align with organizational goals. With her core values as Integrity, collaboration, and continuous learning she aims to translate technology into meaningful business value.',
+    talkTitle:
+      'Panel: AI Beyond the Buzz: Real Use Cases, Real Concerns, Real Conversations',
+    talkLevel: 'LX00 (Everyone)',
+    talkSummary:
+      'AI is everywhere in the headlines, but what does it actually mean for teams building, securing, and operating modern technology? This panel cuts through the hype to explore practical AI use cases, the risks organizations need to take seriously, and the hard questions leaders should be asking before rushing into adoption. Expect a grounded conversation on where AI is creating real value today, where caution is needed, and how businesses can move forward responsibly.',
   },
 ];
 
@@ -971,6 +995,12 @@ export const partners: Sponsor[] = [
     name: 'Defang',
     logo: '/images/partners/defang.svg',
     url: 'https://www.defang.io/',
+  },
+  {
+    ranking: 'Gold',
+    name: 'Secretz',
+    logo: '/images/partners/secretz.png',
+    url: 'https://www.secretz.io/',
   },
   {
     ranking: 'Gold',
