@@ -999,7 +999,7 @@ export const partners: Sponsor[] = [
   {
     ranking: 'Gold',
     name: 'Secretz',
-    logo: '/images/partners/secretz.png',
+    logo: '/images/partners/secretz.svg',
     url: 'https://www.secretz.io/',
   },
   {
