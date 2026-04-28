@@ -72,9 +72,18 @@ export const cityContent: Record<City, CityContent> = {
           'Main Stage: Panel, Sponsored by Fortinet',
           'Panel (AI Beyond the Buzz: Real Use Cases, Real Concerns, Real Conversations)',
           'Community Stage: HackerRivals Round 1',
-          'Maximizing Cloud Value: Cost Engineering Playbooks',
+          'Fast Paced Hackathon learn more at www.HackerRivals.com',
         ],
         activityRoles: ['title', 'meta', 'title', 'meta'],
+      },
+      {
+        startTime: '4:00 PM',
+        endTime: '6.30 PM',
+        activities: [
+          'AWS Workshop: Introduction to Claude Code on AWS',
+          'Join waitlist here https://luma.com/awsworkshop',
+        ],
+        activityRoles: ['title', 'meta'],
       },
       {
         startTime: '4:20 PM',
@@ -83,7 +92,7 @@ export const cityContent: Record<City, CityContent> = {
           'Main Stage: Jason Mayes',
           'Vibing with Antigravity for custom Web AI solutions',
           'Community Stage: Nitin Gandhi',
-          'Fast Paced Hackathon learn more at www.HackerRivals.com',
+          'Maximizing Cloud Value: Cost Engineering Playbooks',
         ],
         activityRoles: ['title', 'meta', 'title', 'meta'],
       },
@@ -145,7 +154,7 @@ export const cityContent: Record<City, CityContent> = {
         endTime: '9:00 PM',
         activities: [
           'After Party (limited space)',
-          'Join Waitlist Here (https://luma.com/csparty)',
+          'Join Waitlist Here https://luma.com/csparty',
         ],
         activityRoles: ['title', 'meta'],
       },

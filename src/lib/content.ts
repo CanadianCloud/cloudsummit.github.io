@@ -998,6 +998,12 @@ export const partners: Sponsor[] = [
   },
   {
     ranking: 'Gold',
+    name: 'Secretz',
+    logo: '/images/partners/secretz.png',
+    url: 'https://www.secretz.io/',
+  },
+  {
+    ranking: 'Gold',
     name: 'Elastic',
     logo: '/images/partners/logo-elastic-horizontal-color-reverse.png',
     url: 'https://www.elastic.co/',
