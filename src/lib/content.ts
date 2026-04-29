@@ -177,6 +177,7 @@ export function getNavigationContent(city: City): NavigationContent {
     links: [
       { text: 'Get Tickets', href: citySpecificContent[city].ticketUrl },
       { text: 'Schedule', href: '/#schedule' },
+      { text: 'Nomination', href: '/nomination' }
     ],
   };
 }
