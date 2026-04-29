@@ -21,8 +21,8 @@ export const POST: APIRoute = async ({ request, redirect }) => {
   console.log("SUPABASE RESULT:", { data, error });
 
   if (error) {
-    return new Response(JSON.stringify(error), { status: 500 });
+    return redirect("/nomination?success=false");
   }
 
-  return redirect("/nominate?success=true");
+  return redirect("/nomination?succes=true");
 };
