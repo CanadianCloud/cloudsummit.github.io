@@ -382,6 +382,10 @@ export const eventMapContent = {
           iconSrc: '/images/event-map/icons/cloud-chamber.png',
           title: 'Cloud chamber',
         },
+        {
+          iconSrc: '/images/event-map/icons/Workshop.png',
+          title: 'Workshop',
+        },
       ],
     },
   ],
