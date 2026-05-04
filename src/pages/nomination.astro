@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Nominate</title>
+</head>
+<body>
+ <header>
+   <hgroup>
+       <h1>2026 Canadian Cloud Award</h1>
+       <p>Vote for oustanding Canadian tech companies that drive community impact, foster growth and showcase innovation through cloud technology. Professional services are excluded</p>
+       <p>The winning company will be recognized at the Cloud Summit 2026 event!</p>
+   </hgroup>
+ </header>
+ <main>
+   <section>
+     <form method="post" action="/api/nomination">
+       <hgroup>
+         <h2>Nominate a Local Canadian Tech Company</h2>
+         <p>Know a great local company that deserves recognition? Let us know!</p>
+       </hgroup>
+       <div>
+         <label for="company">Company Name</label>
+         <input type="text" name="company" id="company" placeholder="e.g Cloudflare" required>
+       </div>
+       <div>
+         <label for="website">Company Website</label>
+         <input type="text" name="website" id="website" placeholder="e.g https://cloudflare.com" required>
+       </div>
+       <div>
+         <label for="justification">Why should this company be included?</label>
+         <textarea name="justification" id="justification" placeholder="Tell us why this company would be a valuable addition..."></textarea>
+       </div>
+       <button type="submit">Submit Nomination</button>
+   </form>
+   </section>
+   <section>
+    <form method="post" action="/api/votes">
+      <hgroup>
+        <h2>Vote for Your Favourite Local Tech Company</h2>
+        <p>Cast your vote for your favourite company</p>
+      </hgroup>
+      <div>
+        <label for="company">Choose a company:</label>
+        <select name="company" id="company">
+          <option value="Company A">Company A</option>
+          <option value="Company B">Company A</option>
+          <option value="Company B">Company A</option>
+        </select>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+   </section>
+ </main>
+</body>
+</html>
