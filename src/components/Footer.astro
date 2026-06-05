@@ -211,16 +211,31 @@ function linkOpensInNewTab(href: string): boolean {
 	import { citySpecificContent } from "../lib/content";
 	import type { City } from "../lib/content";
 
-	// Update ticket URL when city changes
-	function updateTicketUrl() {
+	// Update city-dependent footer links when the selected city changes
+	function updateFooterLinks() {
 		const cityStore = getCityStore();
 		const currentCity = cityStore.getCity();
+
 		const ticketLinks = document.querySelectorAll(
 			'.footer-nav a[href*="luma.com"]',
 		) as NodeListOf<HTMLAnchorElement>;
 
 		ticketLinks.forEach((link) => {
 			link.href = citySpecificContent[currentCity].ticketUrl;
+		});
+
+		const callForSpeakersLinks = Array.from(
+			document.querySelectorAll('.footer-nav a'),
+		).filter((link) => {
+			try {
+				return new URL(link.href).pathname === '/our-speakers/';
+			} catch {
+				return false;
+			}
+		});
+
+		callForSpeakersLinks.forEach((link) => {
+			link.href = citySpecificContent[currentCity].callForSpeakersFooterUrl;
 		});
 	}
 
@@ -229,12 +244,12 @@ function linkOpensInNewTab(href: string): boolean {
 		const cityStore = getCityStore();
 		cityStore.init();
 
-		// Update ticket URL on initial load
-		updateTicketUrl();
+		// Update city-specific footer links on initial load
+		updateFooterLinks();
 
 		// Subscribe to city changes
 		cityStore.subscribe((city: City) => {
-			updateTicketUrl();
+			updateFooterLinks();
 		});
 	}
 

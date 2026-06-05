@@ -77,7 +77,7 @@ export const cityContent: Record<City, CityContent> = {
         activityRoles: ['title', 'meta', 'title', 'meta'],
       },
       {
-        startTime: '4:00 PM',
+        startTime: '3:50 PM',
         endTime: '6.30 PM',
         activities: [
           'AWS Workshop: Introduction to Claude Code on AWS',

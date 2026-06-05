@@ -7,6 +7,7 @@ export interface CitySpecificContent {
   time: string;
   callForSpeakers: string;
   ticketUrl: string;
+  callForSpeakersFooterUrl: string;
 }
 
 export interface HeroContent {
@@ -111,6 +112,7 @@ export const citySpecificContent: Record<City, CitySpecificContent> = {
     time: '2:15 pm - 9 pm',
     callForSpeakers: 'February 2026',
     ticketUrl: 'https://luma.com/cloudsummit26',
+    callForSpeakersFooterUrl: '/our-speakers/',
   },
   toronto: {
     cityName: 'Toronto',
@@ -121,6 +123,7 @@ export const citySpecificContent: Record<City, CitySpecificContent> = {
     time: '12pm - 6pm',
     callForSpeakers: 'April 2026',
     ticketUrl: 'https://luma.com/0xpa2rxj',
+    callForSpeakersFooterUrl: 'https://tally.so/r/rjBeN5',
   },
 };
 
@@ -381,6 +384,10 @@ export const eventMapContent = {
           iconSrc: '/images/event-map/icons/cloud-chamber.png',
           title: 'Cloud chamber',
         },
+        {
+          iconSrc: '/images/event-map/icons/Workshop.png',
+          title: 'Workshop',
+        },
       ],
     },
   ],
@@ -436,7 +443,11 @@ export function getFooterContent(city: City) {
         text: 'Get a Ticket',
         href: citySpecificContent[city].ticketUrl,
       },
-      { col: 1, text: 'Call for Speakers', href: '/our-speakers/' },
+      { 
+        col: 1, 
+        text: 'Call for Speakers', 
+        href: citySpecificContent[city].callForSpeakersFooterUrl 
+      },
       { col: 1, text: 'Become a Sponsor', href: 'https://tally.so/r/wLqXvO' },
       { col: 1, text: 'Apply to Volunteer', href: 'https://tally.so/r/mBVZjA' },
       { col: 1, text: 'Enter Hackathon', href: 'https://hackerrivals.com/' },
