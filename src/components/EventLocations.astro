@@ -8,24 +8,10 @@ const toronto = citySpecificContent.toronto;
 <section class="event-locations">
 	<div class="locations-container">
 		<h2 class="section-heading">
-			<span class="heading-prefix">Two </span>
+			<span class="heading-prefix"></span>
 			Event Locations
 		</h2>
 		<div class="locations-grid">
-			<div class="location-card" data-city="vancouver">
-				<div class="location-image">
-					<img src="/images/locations/science-world-vancouver.jpg" alt="Science World Vancouver" />
-				</div>
-				<div class="location-info">
-					<h3 class="location-city">{vancouver.cityName}</h3>
-					<p class="location-venue">{vancouver.venue}</p>
-					<a href={vancouver.addressUrl} target="_blank" rel="noopener noreferrer" class="location-address">{vancouver.address}</a>
-					<div class="location-datetime">
-						<p class="location-date">{vancouver.date}</p>
-						<p class="location-time">{vancouver.time}</p>
-					</div>
-				</div>
-			</div>
 			<div class="location-card" data-city="toronto">
 				<div class="location-image">
 					<img src="/images/locations/northeastern-university-toronto.png" alt="Northeastern University Toronto" />
@@ -81,6 +67,7 @@ const toronto = citySpecificContent.toronto;
 		border-radius: 1rem;
 		overflow: hidden;
 		transition: transform 0.2s, border-color 0.2s;
+		width:100% ;
 	}
 
 	.location-card:hover {
@@ -162,7 +149,7 @@ const toronto = citySpecificContent.toronto;
 		}
 
 		.locations-grid {
-			grid-template-columns: repeat(2, 1fr);
+			/* grid-template-columns: repeat(2, 1fr); */
 			gap: 3rem;
 		}
 

@@ -83,7 +83,7 @@ const { content, splineUrl = '' } = Astro.props;
 	const subtitleEl = document.querySelector('[data-city-subtitle]');
 	const descriptionEl = document.querySelector('[data-city-description]');
 	const metaEl = document.querySelector('[data-city-meta]');
-	const ctaButton = document.querySelector('[data-hero-primary-Cta]');
+	const ctaButton = document.querySelector('[data-hero-primary-Cta]') as HTMLAnchorElement;;
 
 	
 	function updateContent(city: 'vancouver' | 'toronto') {
