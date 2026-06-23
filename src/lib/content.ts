@@ -466,7 +466,7 @@ export function getFooterContent(city: City) {
         href: "https://tally.so/r/mR6RBl",
       },
       // { col: 2, text: 'Sponsorship Info', href: '/our-sponsors' },
-      { col: 3, text: "2026", href: "/archive/2026/index.html" },
+      { col: 3, text: "Vancouver - 2026", href: "/archive/2026/index.html" },
       { col: 3, text: "2025", href: "/archive/2025/index.html" },
       { col: 3, text: "2024", href: "/archive/2024.html" },
     ],
@@ -484,7 +484,7 @@ export function getFooterContent(city: City) {
     //   { text: '2025 Press Release', href: '/archive/2025/index.html' },
     // ],
     previousYears: [
-      { text: "2026", href: "/archive/2026/index.html" },
+      { text: "Vancouver - 2026", href: "/archive/2026/index.html" },
       { text: "2025", href: "/archive/2025/index.html" },
       { text: "2024", href: "/archive/2024.html" },
     ],
