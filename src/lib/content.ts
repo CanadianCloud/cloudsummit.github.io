@@ -443,10 +443,10 @@ export function getFooterContent(city: City) {
         text: 'Get a Ticket',
         href: citySpecificContent[city].ticketUrl,
       },
-      { 
-        col: 1, 
-        text: 'Call for Speakers', 
-        href: citySpecificContent[city].callForSpeakersFooterUrl 
+      {
+        col: 1,
+        text: 'Call for Speakers',
+        href: citySpecificContent[city].callForSpeakersFooterUrl
       },
       { col: 1, text: 'Become a Sponsor', href: 'https://tally.so/r/wLqXvO' },
       { col: 1, text: 'Apply to Volunteer', href: 'https://tally.so/r/mBVZjA' },
@@ -477,7 +477,7 @@ export function getFooterContent(city: City) {
       },
       {
         name: 'LinkedIn',
-        url: 'https://www.linkedin.com/showcase/vancouvercloudsummit',
+        url: 'https://www.linkedin.com/company/canadiancloud/',
       },
     ],
     // pressReleases: [
