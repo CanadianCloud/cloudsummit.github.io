@@ -1,7 +1,7 @@
 ---
 import Navigation from "../components/Navigation.astro";
 import Hero from "../components/Hero.astro";
-import CityModal from "../components/CityModal.astro";
+// CityModal import removed to align with the requirements of Issue #130
 import AboutCPCA from "../components/AboutCPCA.astro";
 import WhatIsCloudSummit from "../components/WhatIsCloudSummit.astro";
 import EventLocations from "../components/EventLocations.astro";
@@ -44,7 +44,7 @@ import SeoSocial from "../components/SeoSocial.astro";
 import { absoluteUrl, DEFAULT_OG_IMAGE_PATH, getCanonical } from "../lib/seo";
 
 // Use default city for venueLogisticsContentNewVersionSSR, will be updated client-side
-const content = heroContent[defaultCity];
+const content = heroContent['toronto'];
 
 const homepageSpeakers = speakerContent.filter((speaker) => !speaker.hidden).slice(0, 3);
 
@@ -154,7 +154,6 @@ const ogImageUrl = absoluteUrl(DEFAULT_OG_IMAGE_PATH, Astro);
     <GoogleAnalytics />
   </head>
   <body>
-    <CityModal />
     <Navigation content={navigationContent} />
     <Hero content={content} />
     <WhatIsCloudSummit content={whatIsCloudSummitContent} />
@@ -176,13 +175,12 @@ const ogImageUrl = absoluteUrl(DEFAULT_OG_IMAGE_PATH, Astro);
       content={venueLogisticsContentNewVersion}
     />
 
-   
+    
     <FAQ content={faqContent} />
     <Newsletter content={newsletterContent} />
     <SeeYouThere />
     <Footer content={footerContent} />
     <ScrollAnimations />
-    <!-- <Hero content={content} splineUrl="https://prod.spline.design/WKCpgqTWJIavlH1L/scene.splinecode" /> -->
     <script>
       import { getCityStore } from "../lib/cityStore";
       import type { City } from "../lib/content";
