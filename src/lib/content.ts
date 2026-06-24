@@ -476,8 +476,8 @@ export function getFooterContent(city: City) {
         url: "https://www.instagram.com/canadiancloudninja/",
       },
       {
-        name: 'LinkedIn',
-        url: 'https://www.linkedin.com/company/canadiancloud/',
+        name: "LinkedIn",
+        url: "https://www.linkedin.com/company/canadiancloud/",
       },
     ],
     // pressReleases: [
@@ -869,7 +869,7 @@ export const committeeContent: Committee[] = [
     title: "Event Director",
     link: "https://www.linkedin.com/in/matthewcarolan/",
     bio: "Matt Carolan is the founder of Cloud Summit and a cloud and security leader with deep experience in platform engineering, enterprise architecture, and cloud transformation. He helps organizations make clear, practical decisions across security, cost, resilience, and operational complexity, combining hands-on technical depth with a global perspective shaped by living and working across Australia, Dubai, Seattle, and Vancouver.",
-    image: "/images/committee/matt-trans.png",
+    image: "/images/committee/matt-trans-toronto-2026.png",
   },
   {
     name: "Bibi Souza",
@@ -878,6 +878,15 @@ export const committeeContent: Committee[] = [
     bio: "Bibi is a community builder and strategic leader with experience across software engineering, project management, and advocacy. She is passionate about bringing people together and helping them grow, with a strong track record of turning fragmented audiences into thriving communities. As an exited founder, she brings an experimental mindset, a bias toward action, and thoughtful risk-taking to everything she builds. At Cloud Summit, she helps shape community with intention, energy, and purpose.",
     image: "/images/committee/bibi-trans.png",
   },
+
+  {
+    name: "Jhan (Shanky) Silva",
+    title: "Sponsorship Lead",
+    link: "https://www.linkedin.com/in/shankyjs/",
+    bio: "Shanky is the Sponsorship Lead for Cloud Summit Vancouver. With a strong background in DevOps, automation, and modern development and deployment practices, he brings a practical, goal-oriented approach to building and improving technical processes. A self-driven learner who enjoys creating agile products, Shanky is passionate about continuous improvement, innovation, and helping great ideas gain momentum.",
+    image: "/images/committee/shanky-trans.png",
+  },
+
   {
     name: "Andrey Barkov",
     title: "Emcee",
@@ -899,13 +908,7 @@ export const committeeContent: Committee[] = [
     bio: "Fabio is the Venue and Logistics Co-Lead for Cloud Summit Vancouver. After 10 years working in healthcare leadership, he transitioned into tech and is now focused on data engineering across AWS, Azure, and Databricks. With experience in high-pressure environments where communication, accountability, and clarity were essential, he brings a thoughtful, dependable approach to building systems and solving problems. His background gives him a strong focus on reliability, real-world impact, and the people behind the data.",
     image: "/images/committee/fabio-trans.png",
   },
-  {
-    name: "Jhan (Shanky) Silva",
-    title: "Sponsorship Lead",
-    link: "https://www.linkedin.com/in/shankyjs/",
-    bio: "Shanky is the Sponsorship Lead for Cloud Summit Vancouver. With a strong background in DevOps, automation, and modern development and deployment practices, he brings a practical, goal-oriented approach to building and improving technical processes. A self-driven learner who enjoys creating agile products, Shanky is passionate about continuous improvement, innovation, and helping great ideas gain momentum.",
-    image: "/images/committee/shanky-trans.png",
-  },
+
   {
     name: "Michael Carlos",
     title: "Speaker and Community Lead",
