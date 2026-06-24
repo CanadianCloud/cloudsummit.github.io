@@ -476,8 +476,8 @@ export function getFooterContent(city: City) {
         url: "https://www.instagram.com/canadiancloudninja/",
       },
       {
-        name: "LinkedIn",
-        url: "https://www.linkedin.com/showcase/vancouvercloudsummit",
+        name: 'LinkedIn',
+        url: 'https://www.linkedin.com/company/canadiancloud/',
       },
     ],
     // pressReleases: [
