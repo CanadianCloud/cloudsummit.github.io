@@ -1041,13 +1041,12 @@ export const faqContent: FAQ[] = [
   },
   {
     question: "When is Cloud Summit?",
-    answer:
-      "For Cloud Summit Vancouver it takes place on May 1, 2026.\nFor Cloud Summit Toronto it takes place on August 29, 2026.",
+    answer: "The Cloud Summit Toronto takes place on August 29, 2026.",
   },
   {
     question: "Where is the event being held?",
     answer:
-      "For Vancouver the event is being held at Science World in Vancouver, BC.\nFor Toronto the event is being held at Northeastern University in Toronto, ON.",
+      "The event is being held at Northeastern University in Toronto, ON.",
   },
   {
     question: "Who should attend?",
@@ -1124,18 +1123,17 @@ Whether you're deeply technical or just looking to better understand where cloud
   {
     question: "Is the venue accessible?",
     answer:
-      "Both venues in Vancouver and Toronto were selected due to their accessibility. If you have a particular accessibility need, please contact the team in advance.",
+      " The venue was selected due to their accessibility. If you have a particular accessibility need, please contact the team in advance.",
   },
   {
     question: "Is there parking at the venue?",
     answer:
-      "There are parking options near very close to both venues, but availability and pricing may vary. Public transit is also a convenient option for many attendees.",
+      "There are parking options near very close to the venue, but availability and pricing may vary. Public transit is also a convenient option for many attendees.",
   },
   {
     question: "What is the best way to get there?",
-    answer: `For Vancouver, Cloud Summit is held at Science World, 1455 Quebec Street. The venue is easy to reach by car, rideshare, public transit, or on foot. The scenic False Creek seawall runs right by Science World, the Main Street–Science World SkyTrain station is directly across the road, and there are two paid parking lots immediately outside the building off Quebec Street.
-
-For Toronto, Cloud Summit is held at Northeastern University, 375 Queen Street West in downtown Toronto. The venue is easy to reach by public transit or on foot, with Osgoode Station about a five-minute walk away and the 501 Queen streetcar stopping nearby in both directions.`,
+    answer: `The Toronto Cloud Summit is held at Northeastern University, 375 Queen Street West in downtown Toronto. 
+    The venue is easy to reach by public transit or on foot, with Osgoode Station about a five-minute walk away and the 501 Queen streetcar stopping nearby in both directions.`,
   },
   {
     question: "Will food and drinks be available?",
