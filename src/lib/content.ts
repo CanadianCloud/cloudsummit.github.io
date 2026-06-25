@@ -476,8 +476,8 @@ export function getFooterContent(city: City) {
         url: "https://www.instagram.com/canadiancloudninja/",
       },
       {
-        name: 'LinkedIn',
-        url: 'https://www.linkedin.com/company/canadiancloud/',
+        name: "LinkedIn",
+        url: "https://www.linkedin.com/company/canadiancloud/",
       },
     ],
     // pressReleases: [
@@ -1162,5 +1162,33 @@ Whether you're deeply technical or just looking to better understand where cloud
     question: "How do I stay updated?",
     answer:
       "The best way is to check CloudSummit.ca regularly and follow the event’s social channels for speaker announcements, schedule updates, and new event details.",
+  },
+];
+
+export interface CTAButton {
+  label: string;
+  href: string;
+  testid: string;
+  styleClass: string;
+}
+
+export const topPageCTAs: CTAButton[] = [
+  {
+    label: "Call for Sponsor",
+    href: "https://tally.so/r/wLqXvO",
+    testid: "cta-sponsor",
+    styleClass: "bg-blue-600 hover:bg-blue-700",
+  },
+  {
+    label: "Call for Speakers",
+    href: "https://tally.so/r/rjBeN5",
+    testid: "cta-speakers",
+    styleClass: "bg-green-600 hover:bg-green-700",
+  },
+  {
+    label: "Call for Volunteers",
+    href: "https://tally.so/r/mBVZjA",
+    testid: "cta-volunteers",
+    styleClass: "bg-purple-600 hover:bg-purple-700",
   },
 ];

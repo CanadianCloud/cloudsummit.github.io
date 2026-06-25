@@ -19,6 +19,7 @@ import LocalCharitySection from "../components/LocalCharitySection.astro";
 import FAQ from "../components/FAQ.astro";
 import VenueLogisticsSectionSecondVersion from "../components/VenueLogisticsSectionSecondVersion.astro";
 import OurPartners from "../components/OurPartners.astro";
+import CallToActions from "../components/CallToActions.astro";
 import {
   heroContent,
   navigationContent,
@@ -154,6 +155,7 @@ const ogImageUrl = absoluteUrl(DEFAULT_OG_IMAGE_PATH, Astro);
   </head>
   <body>
     <Navigation content={navigationContent} />
+    <CallToActions />
     <Hero content={content} />
     <WhatIsCloudSummit content={whatIsCloudSummitContent} />
     <CloudSummitActivities content={cloudSummitActivitiesContent} />
