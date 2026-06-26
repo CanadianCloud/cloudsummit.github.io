@@ -866,16 +866,16 @@ export const speakerContent: Speaker[] = [
 export const committeeContent: Committee[] = [
   {
     name: "Matt Carolan",
-    title: "Event Director",
+    title: "",
     link: "https://www.linkedin.com/in/matthewcarolan/",
-    bio: "Matt Carolan is the founder of Cloud Summit and a cloud and security leader with deep experience in platform engineering, enterprise architecture, and cloud transformation. He helps organizations make clear, practical decisions across security, cost, resilience, and operational complexity, combining hands-on technical depth with a global perspective shaped by living and working across Australia, Dubai, Seattle, and Vancouver.",
-    image: "/images/committee/matt-trans-toronto-2026.png",
+    bio: "",
+    image: "/images/committee/matt-trans-toronto-2026.jpg",
   },
   {
     name: "Bibi Souza",
-    title: "Mentor",
+    title: "",
     link: "https://www.linkedin.com/in/bibschan/",
-    bio: "Bibi is a community builder and strategic leader with experience across software engineering, project management, and advocacy. She is passionate about bringing people together and helping them grow, with a strong track record of turning fragmented audiences into thriving communities. As an exited founder, she brings an experimental mindset, a bias toward action, and thoughtful risk-taking to everything she builds. At Cloud Summit, she helps shape community with intention, energy, and purpose.",
+    bio: "",
     image: "/images/committee/Bibi_Souza.jpg",
   },
   {
