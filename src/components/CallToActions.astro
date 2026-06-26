@@ -3,19 +3,19 @@
 import { topPageCTAs } from "../lib/content";
 
 // Import lightweight dynamic icons from lucide-astro for each CTA button
-import { Handshake, Mic, UserPlus } from "lucide-astro";
+import { Award, Mic, HelpingHand } from "lucide-astro";
 
 // Helper function to map each button's testid to its respective icon component
 const getIcon = (testid: string) => {
   switch (testid) {
     case "cta-sponsor":
-      return Handshake;
+      return Award;
     case "cta-speakers":
       return Mic;
     case "cta-volunteers":
-      return UserPlus;
+      return HelpingHand;
     default:
-      return Handshake;
+      return Award;
   }
 };
 
@@ -33,11 +33,11 @@ const getClass = (testid: string) => {
 };
 ---
 
-<!-- White center-aligned divider line with 25% width -->
-<!-- <hr class="cta-divider" /> -->
+<!-- White center-aligned divider line with 80% width -->
+<hr class="cta-divider" />
 
 <!-- Status sub-heading text below the line and above the buttons -->
-<!-- <p class="cta-subtitle">Not attending as a guest?</p> -->
+<p class="cta-subtitle">Not attending as a guest?</p>
 
 <div class="cta-container">
   {topPageCTAs.map((cta) => {
@@ -60,9 +60,9 @@ const getClass = (testid: string) => {
 </div>
 
 <style>
-  /* Added: White divider line style with 25% width, centered on the page */
+  /* Added: White divider line style with 80% width, centered on the page */
   .cta-divider {
-    width: 25%;
+    width: 80%;
     border: none;
     border-top: 1px solid #ffffff;
     margin: 40px auto 24px auto; /* Centers the line and handles vertical spacing */
@@ -89,6 +89,7 @@ const getClass = (testid: string) => {
     margin-bottom: 48px;
     padding-left: 16px;
     padding-right: 16px;
+    pointer-events: auto;
   }
 
   /* Transparent / Outline button style matching the uploaded design requirements */

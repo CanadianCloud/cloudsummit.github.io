@@ -1174,19 +1174,19 @@ export interface CTAButton {
 
 export const topPageCTAs: CTAButton[] = [
   {
-    label: "Call for Sponsor",
+    label: "Sponsors",
     href: "https://tally.so/r/wLqXvO",
     testid: "cta-sponsor",
     styleClass: "bg-blue-600 hover:bg-blue-700",
   },
   {
-    label: "Call for Speakers",
+    label: "Speakers",
     href: "https://tally.so/r/rjBeN5",
     testid: "cta-speakers",
     styleClass: "bg-green-600 hover:bg-green-700",
   },
   {
-    label: "Call for Volunteers",
+    label: "Volunteers",
     href: "https://tally.so/r/mBVZjA",
     testid: "cta-volunteers",
     styleClass: "bg-purple-600 hover:bg-purple-700",
