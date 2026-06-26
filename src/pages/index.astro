@@ -41,6 +41,7 @@ import Speaker from "../components/Speaker.astro";
 import GoogleAnalytics from "../components/GoogleAnalytics.astro";
 import SeoSocial from "../components/SeoSocial.astro";
 import { absoluteUrl, DEFAULT_OG_IMAGE_PATH, getCanonical } from "../lib/seo";
+import CallToActions from "../components/CallToActions.astro";
 
 // Use default city for venueLogisticsContentNewVersionSSR, will be updated client-side
 const content = heroContent['toronto'];
@@ -155,6 +156,8 @@ const ogImageUrl = absoluteUrl(DEFAULT_OG_IMAGE_PATH, Astro);
   <body>
     <Navigation content={navigationContent} />
     <Hero content={content} />
+    <CallToActions />
+
     <WhatIsCloudSummit content={whatIsCloudSummitContent} />
     <CloudSummitActivities content={cloudSummitActivitiesContent} />
     <AboutCPCA content={aboutCPCAContent} />
