@@ -1,6 +1,36 @@
 ---
 import type { HeroContent } from '../lib/content';
+import { topPageCTAs } from "../lib/content";
 
+
+import { Handshake, Mic, UserPlus } from "lucide-astro";
+
+// Helper function to map each button's testid to its respective icon component
+const getIcon = (testid: string) => {
+  switch (testid) {
+    case "cta-sponsor":
+      return Handshake;
+    case "cta-speakers":
+      return Mic;
+    case "cta-volunteers":
+      return UserPlus;
+    default:
+      return Handshake;
+  }
+};
+
+const getClass = (testid: string) => {
+  switch (testid) {
+    case "cta-sponsor":
+      return "cta-sponsor";
+    case "cta-speakers":
+      return "cta-speakers";
+    case "cta-volunteers":
+      return "cta-volunteers";
+    default:
+      return "";
+  }
+};
 interface Props {
 	content: HeroContent;
 	splineUrl?: string;
@@ -28,12 +58,35 @@ const { content, splineUrl = '' } = Astro.props;
 			<p class="hero-date">{content.date}</p>
 			<p class="hero-time">{content.time}</p>
 		</div>
+		
 		<div class="hero-actions">
-			<a target="_blank" rel="noopener noreferrer" href={content.primaryCta.href} class="btn btn-primary" data-hero-primary-Cta>{content.primaryCta.text}</a>
 			<!-- <a href={content.secondaryCta.href} class="btn btn-secondary">{content.secondaryCta.text}</a> -->
-	
-
+  			<a target="_blank" rel="noopener noreferrer" href={content.primaryCta.href} class="btn btn-primary ctr-primary" data-hero-primary-Cta>{content.primaryCta.text}</a>
 		</div>
+		
+		<span  class="hero-venue">
+		{topPageCTAs.map((cta) => {
+    const IconComponent = getIcon(cta.testid);
+    const specificClass = getClass(cta.testid);
+    return (
+      <a 
+        href={cta.href} 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        data-testid={cta.testid}
+        class={`event-cta-button ${specificClass}`}
+      >
+        {/* The icon now inherits the text color dynamically */}
+        <IconComponent class="cta-icon" size={20} />
+        <span>{cta.label}</span>
+      </a>
+    );
+  })}
+  </span>
+		
+
+		
+		
 	</div>
 	</section>
 
@@ -148,6 +201,8 @@ if (ctaButton) {
 </script>
 
 <style>
+
+
 	.hero {
 		background: transparent;
 		color: white;
@@ -327,5 +382,106 @@ if (ctaButton) {
 			font-size: 0.9rem;
 		}
 	}
+
+
+  /* Added: White divider line style with 25% width, centered on the page */
+  .cta-divider {
+    width: 25%;
+    border: none;
+    border-top: 1px solid #ffffff;
+    margin: 40px auto 24px auto; /* Centers the line and handles vertical spacing */
+    opacity: 0.8;
+  }
+
+  /* Added: Subtitle text styling below the divider line */
+  .cta-subtitle {
+    text-align: center;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 24px;
+    letter-spacing: 0.5px;
+    
+  }
+
+  /* Main container layout and spacing below the Hero section */
+  .cta-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 48px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  /* Transparent / Outline button style matching the uploaded design requirements */
+  .event-cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* Precise gap between the icon and the text */
+    
+    /* Transparent background as requested */
+    background-color: transparent; 
+    
+    /* Border and text elements share the exact same orange branding color */
+    color: #f1f0ee;
+    border: 2px solid #FF9900; 
+    
+    font-weight: bold;
+    font-size: 16px;
+    padding: 14px 32px;
+    border-radius: 12px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.25s ease-in-out;
+    min-width: 240px; /* Ensures sufficient space for text and icons without wrapping */
+    
+    /* Subtle glowing shadow setup for dark mode environment */
+    box-shadow: 0 0 15px rgba(255, 153, 0, 0.1);
+  }
+
+  /* Icon styles to ensure perfect vertical alignment with the text */
+  .cta-icon {
+    display: inline-block;
+    flex-shrink: 0;
+  }
+
+  /* Smooth interactive hover effect: flips to solid color and expands slightly */
+  .event-cta-button:hover {
+    /* background-color: #FF9900; */
+    color: #ffffff; /* Changes text and icon color to white for optimal contrast */
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(255, 153, 0, 0.4);
+  }
+
+  /* Click/Active micro-interaction */
+  .event-cta-button:active {
+    transform: scale(0.98);
+  }
+
+  /* Responsive optimizations for tablet and desktop viewports */
+  @media (min-width: 768px) {
+    .event-cta-button {
+      font-size: 18px;
+      padding: 18px 40px;
+    }
+    .cta-subtitle {
+      font-size: 18px;
+    }
+  }
+
+  .cta-sponsor {
+    border: 2px solid #FF9900;
+  }
+
+  .cta-speakers {
+    border: 2px solid #10B981;
+  }
+
+  .cta-volunteers {
+    border: 2px solid #8B5CF6;
+  }
 </style>
 

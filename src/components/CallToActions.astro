@@ -33,10 +33,16 @@ const getClass = (testid: string) => {
 };
 ---
 
+<!-- White center-aligned divider line with 25% width -->
+<!-- <hr class="cta-divider" /> -->
+
+<!-- Status sub-heading text below the line and above the buttons -->
+<!-- <p class="cta-subtitle">Not attending as a guest?</p> -->
+
 <div class="cta-container">
   {topPageCTAs.map((cta) => {
     const IconComponent = getIcon(cta.testid);
-    const  specificClass = getClass(cta.testid);
+    const specificClass = getClass(cta.testid);
     return (
       <a 
         href={cta.href} 
@@ -54,13 +60,32 @@ const getClass = (testid: string) => {
 </div>
 
 <style>
+  /* Added: White divider line style with 25% width, centered on the page */
+  .cta-divider {
+    width: 25%;
+    border: none;
+    border-top: 1px solid #ffffff;
+    margin: 40px auto 24px auto; /* Centers the line and handles vertical spacing */
+    opacity: 0.8;
+  }
+
+  /* Added: Subtitle text styling below the divider line */
+  .cta-subtitle {
+    text-align: center;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 24px;
+    letter-spacing: 0.5px;
+    
+  }
+
   /* Main container layout and spacing below the Hero section */
   .cta-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 16px;
-    margin-top: 32px;
     margin-bottom: 48px;
     padding-left: 16px;
     padding-right: 16px;
@@ -118,17 +143,20 @@ const getClass = (testid: string) => {
       font-size: 18px;
       padding: 18px 40px;
     }
+    .cta-subtitle {
+      font-size: 18px;
+    }
   }
 
   .cta-sponsor {
-border:2px solid  #FF9900;
+    border: 2px solid #FF9900;
   }
 
   .cta-speakers {
-border:2px solid  #10B981;
+    border: 2px solid #10B981;
   }
 
   .cta-volunteers {
-border:2px solid  #8B5CF6;
+    border: 2px solid #8B5CF6;
   }
 </style>
