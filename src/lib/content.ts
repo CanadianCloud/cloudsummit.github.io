@@ -414,7 +414,10 @@ export interface VenueLogisticsSectionNewVersion {
 }
 
 /** Footer line: Website by … — optional LinkedIn per name (same pattern as aws-community-day). */
-export const websiteCredits: Array<{ name: string; link: string | null }> = [
+export const websiteCredits2026_Vancouver: Array<{
+  name: string;
+  link: string | null;
+}> = [
   {
     name: "Nichanun (Luck)",
     link: "https://www.linkedin.com/in/nichanun-pong/",
@@ -430,6 +433,17 @@ export const websiteCredits: Array<{ name: string; link: string | null }> = [
   {
     name: "Laurie",
     link: "https://www.linkedin.com/in/laurieyeh1/",
+  },
+];
+
+export const websiteCredits: Array<{ name: string; link: string | null }> = [
+  {
+    name: "Ahmad",
+    link: "https://www.linkedin.com/in/ahmad-salempoor/",
+  },
+  {
+    name: "Vincent",
+    link: "https://www.linkedin.com/in/vincent-vincent-360b71104/",
   },
 ];
 
