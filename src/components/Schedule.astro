@@ -55,16 +55,9 @@ const timelineGroups = groupByStartTime(timelineEntries);
             style={`grid-column: ${venueIndex + 2}; grid-row: ${rowIndex + 2} / span ${session.slots};`}
           >
             <p class="session-title">{session.title}</p>
-            {session.badges.map((badge) => (
-              <span
-                class:list={[
-                  'session-badge',
-                  badge.startsWith('LIVE') ? 'session-badge--live' : '',
-                ]}
-              >
-                {badge}
-              </span>
-            ))}
+            {session.badges
+              .filter((badge) => !badge.startsWith('LIVE'))
+              .map((badge) => <span class="session-badge">{badge}</span>)}
           </div>
         );
       })}
@@ -398,11 +391,6 @@ const timelineGroups = groupByStartTime(timelineEntries);
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.15);
     color: white;
-  }
-
-  .session-badge--live {
-    background: #d43d1a;
-    background: oklch(0.68 0.19 25);
   }
 
   .session--main {
