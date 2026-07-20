@@ -1,189 +1,605 @@
 ---
-import { cityContent } from '../lib/cityContent';
+import {
+  venues,
+  slots,
+  sessions,
+  fullWidthRows,
+  legend,
+  filterTracks,
+  venueKeyText,
+  dateLine,
+} from '../lib/torontoSchedule';
+import { timelineEntries, groupByStartTime } from '../lib/scheduleFilter';
 
-// Regex to find URLs in a string
-const urlRegex = /(https?:\/\/[^\s]+|www\.[^\s]+)/g;
+const rowStyle = `grid-template-rows: auto repeat(${slots.length}, minmax(2.75rem, auto));`;
+const venueLabel = (id: string) => venues.find((v) => v.id === id)?.label ?? '';
+const timelineGroups = groupByStartTime(timelineEntries);
 ---
 
 <section class="schedule" id="schedule">
-    <h2 class="section-heading">Schedule</h2>
-    <div id="wrapper">
-        {cityContent.vancouver.schedule.map((event) => {
-            return <div class="item">
-                {event.endTime ? (
-                    <p class="time">{event.startTime} - {event.endTime}</p>
-                ) : (
-                    <p class="time">{event.startTime}</p>
-                )}
-                <div class="details">
-                    {event.activities.map((activity, idx) => {
-                        const roles = event.activityRoles;
-                        const useRoles =
-                            roles && roles.length === event.activities.length;
-                        const isPrimary = useRoles
-                            ? roles[idx] === 'title'
-                            : idx < (event.primaryLineCount ?? 1);
-                        const activityText = activity.trim();
-                        return (
-                            <p class:list={["activity", isPrimary ? "activity-title" : "activity-meta"]}>
-                                {activityText.split(urlRegex).map(part => {
-                                    if (part.match(urlRegex)) {
-                                        const url = part.startsWith('www.') ? `http://${part}` : part;
-                                        return <a href={url} target="_blank" rel="noopener noreferrer">{part}</a>;
-                                    }
-                                    return part;
-                                })}
-                            </p>
-                        );
-                    })}
-                </div>
-            </div>
-        })}
+  <div class="schedule-header">
+    <h2 class="section-heading">Event Schedule</h2>
+    <p class="date-line">{dateLine}</p>
+    <ul class="legend" role="list">
+      {legend.map((entry) => (
+        <li class:list={['legend-chip', `legend-chip--${entry.track}`]}>
+          <span class="legend-swatch" aria-hidden="true"></span>
+          {entry.label}
+        </li>
+      ))}
+    </ul>
+    <p class="venue-key">{venueKeyText}</p>
+  </div>
+
+  <div class="grid-scroll">
+    <div class="grid" style={rowStyle}>
+      <div class="corner-cell" style="grid-column: 1; grid-row: 1;"></div>
+      {venues.map((venue, vi) => (
+        <div class="venue-header" style={`grid-column: ${vi + 2}; grid-row: 1;`}>
+          {venue.label}
+        </div>
+      ))}
+
+      {slots.map((slot, si) => (
+        <div class="time-cell" style={`grid-column: 1; grid-row: ${si + 2};`}>
+          {slot}
+        </div>
+      ))}
+
+      {sessions.map((session) => {
+        const venueIndex = venues.findIndex((v) => v.id === session.venue);
+        const rowIndex = slots.indexOf(session.start);
+        return (
+          <div
+            class:list={['session', `session--${session.track}`]}
+            style={`grid-column: ${venueIndex + 2}; grid-row: ${rowIndex + 2} / span ${session.slots};`}
+          >
+            <p class="session-title">{session.title}</p>
+            {session.badges.map((badge) => (
+              <span
+                class:list={[
+                  'session-badge',
+                  badge.startsWith('LIVE') ? 'session-badge--live' : '',
+                ]}
+              >
+                {badge}
+              </span>
+            ))}
+          </div>
+        );
+      })}
+
+      {fullWidthRows.map((row) => {
+        const rowIndex = slots.indexOf(row.start);
+        // Column 1 is the time column; venue columns start at 2 and follow
+        // `venues` order, so a row's span ends right after its last covered
+        // venue (leaving any trailing venues, e.g. Workshops, to keep
+        // rendering their own session cell in that row).
+        const endColumn = row.venues.length + 2;
+        return (
+          <div
+            class:list={['full-width-row', row.id === 'food-break' ? 'full-width-row--food' : '']}
+            style={`grid-column: 1 / ${endColumn}; grid-row: ${rowIndex + 2};`}
+          >
+            {row.title} &middot; {row.start}
+          </div>
+        );
+      })}
+
+      <div class="now-line" id="schedule-now-line" hidden></div>
     </div>
+  </div>
+
+  <div class="timeline">
+    <ul class="filter-chips" role="list">
+      {filterTracks.map((track) => (
+        <li>
+          <button
+            type="button"
+            class="filter-chip"
+            data-track={track.id}
+            aria-pressed={track.id === 'all' ? 'true' : 'false'}
+          >
+            {track.label}
+          </button>
+        </li>
+      ))}
+    </ul>
+
+    {timelineGroups.map((group) => (
+      <div class="timeline-group" data-start={group.startMinutes}>
+        <p class="timeline-time">{group.start}</p>
+        <div class="timeline-entries">
+          {group.entries.map((entry) => (
+            <div
+              class="timeline-entry"
+              data-venue={entry.venue ?? ''}
+              data-always-visible={entry.alwaysVisible ? 'true' : 'false'}
+            >
+              <div class="timeline-entry-main">
+                <p class="timeline-entry-title">{entry.title}</p>
+                {entry.venue && (
+                  <p class="timeline-entry-venue">{venueLabel(entry.venue)}</p>
+                )}
+              </div>
+              <span class="timeline-duration">{entry.durationLabel}</span>
+              {entry.badges.map((badge) => (
+                <span
+                  class:list={[
+                    'timeline-badge',
+                    badge.startsWith('LIVE') ? 'timeline-badge--live' : '',
+                  ]}
+                >
+                  {badge}
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
 </section>
 
 <script>
-    import { getCityStore } from '../lib/cityStore';
-    import type { City } from '../lib/content';
+  function initScheduleFilterChips() {
+    const chips = document.querySelectorAll<HTMLButtonElement>('.filter-chip');
+    const entries = document.querySelectorAll<HTMLElement>('.timeline-entry');
+    const groups = document.querySelectorAll<HTMLElement>('.timeline-group');
 
-    function syncScheduleVisibility(city: City) {
-        const el = document.querySelector('.schedule') as HTMLElement | null;
-        if (!el) return;
-        const show = city === 'vancouver';
-        el.classList.toggle('schedule--hidden', !show);
-        el.setAttribute('aria-hidden', show ? 'false' : 'true');
+    function applyFilter(track: string) {
+      entries.forEach((entry) => {
+        const venue = entry.dataset.venue;
+        const alwaysVisible = entry.dataset.alwaysVisible === 'true';
+        const show = track === 'all' || alwaysVisible || venue === track;
+        entry.classList.toggle('is-hidden', !show);
+      });
+      groups.forEach((group) => {
+        const hasVisible = group.querySelector('.timeline-entry:not(.is-hidden)');
+        group.classList.toggle('is-hidden', !hasVisible);
+      });
     }
 
-    function initCityAwareSchedule() {
-        const cityStore = getCityStore();
-        cityStore.init();
-        syncScheduleVisibility(cityStore.getCity());
-        cityStore.subscribe(syncScheduleVisibility);
+    chips.forEach((chip) => {
+      chip.addEventListener('click', () => {
+        chips.forEach((c) => c.setAttribute('aria-pressed', 'false'));
+        chip.setAttribute('aria-pressed', 'true');
+        applyFilter(chip.dataset.track ?? 'all');
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initScheduleFilterChips);
+  } else {
+    initScheduleFilterChips();
+  }
+</script>
+
+<script>
+  import { getNowLinePosition } from '../lib/scheduleNow';
+
+  function positionNowLine() {
+    const line = document.getElementById('schedule-now-line');
+    const grid = document.querySelector<HTMLElement>('.grid');
+    if (!line || !grid) return;
+
+    const position = getNowLinePosition(new Date());
+    if (position === null) {
+      line.hidden = true;
+      return;
     }
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initCityAwareSchedule);
-    } else {
-        initCityAwareSchedule();
-    }
+    const timeCells = Array.from(
+      grid.querySelectorAll<HTMLElement>('.time-cell'),
+    );
+    const lowerIndex = Math.floor(position);
+    const upperIndex = Math.min(lowerIndex + 1, timeCells.length - 1);
+    const lowerCell = timeCells[lowerIndex];
+    const upperCell = timeCells[upperIndex];
+    if (!lowerCell || !upperCell) return;
+
+    const fraction = position - lowerIndex;
+    const gridTop = grid.getBoundingClientRect().top;
+    const lowerTop = lowerCell.getBoundingClientRect().top - gridTop;
+    const upperTop = upperCell.getBoundingClientRect().top - gridTop;
+
+    line.style.top = `${lowerTop + (upperTop - lowerTop) * fraction}px`;
+    line.hidden = false;
+  }
+
+  function initScheduleNowLine() {
+    positionNowLine();
+    window.setInterval(positionNowLine, 60_000);
+    window.addEventListener('resize', positionNowLine);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initScheduleNowLine);
+  } else {
+    initScheduleNowLine();
+  }
 </script>
 
 <style>
-    .schedule.schedule--hidden {
-        display: none !important;
-    }
+  .schedule {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 3rem 1.5rem;
+    background: #0b0e14;
+    scroll-margin-top: 5rem;
+  }
 
+  .schedule-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    text-align: center;
+  }
+
+  .section-heading {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    margin: 0;
+    color: rgb(255, 193, 77);
+  }
+
+  .date-line {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.75);
+    font-family: var(--font-body);
+  }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .legend-chip {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.85);
+    font-family: var(--font-body);
+  }
+
+  .legend-swatch {
+    width: 0.65rem;
+    height: 0.65rem;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .legend-chip--main .legend-swatch { background: #5b8def; background: oklch(0.75 0.11 255); }
+  .legend-chip--community .legend-swatch { background: #3dc9b0; background: oklch(0.75 0.11 185); }
+  .legend-chip--aws .legend-swatch { background: #e8a33d; background: oklch(0.78 0.11 65); }
+  .legend-chip--hackathon .legend-swatch { background: #c86adb; background: oklch(0.76 0.12 310); }
+  .legend-chip--workshops .legend-swatch { background: #4fc97a; background: oklch(0.75 0.11 150); }
+  .legend-chip--food .legend-swatch { background: #e0c24f; background: oklch(0.8 0.1 95); }
+
+  .venue-key {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.875rem;
+    font-family: var(--font-body);
+  }
+
+  .grid-scroll {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    overflow-x: auto;
+    border: 1px solid #1e2534;
+    border-radius: 0.75rem;
+  }
+
+  .grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: max-content repeat(6, minmax(150px, 1fr));
+    min-width: 900px;
+  }
+
+  .now-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #d43d1a;
+    background: oklch(0.68 0.19 25);
+    z-index: 5;
+    pointer-events: none;
+  }
+
+  .now-line::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: inherit;
+  }
+
+  @media (max-width: 768px) {
+    .now-line {
+      display: none !important;
+    }
+  }
+
+  .corner-cell,
+  .venue-header,
+  .time-cell {
+    background: #10141d;
+    border-bottom: 1px solid #1e2534;
+    border-right: 1px solid #1e2534;
+  }
+
+  .venue-header {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    padding: 0.75rem 0.5rem;
+    font-family: var(--font-display);
+    font-size: 0.8125rem;
+    letter-spacing: 0.02em;
+    color: rgba(255, 255, 255, 0.92);
+    text-align: center;
+  }
+
+  .corner-cell {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 4;
+  }
+
+  .time-cell {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    padding: 0.5rem 0.75rem;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+    white-space: nowrap;
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .session {
+    margin: 2px;
+    padding: 0.5rem 0.6rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    overflow: hidden;
+  }
+
+  .session-title {
+    margin: 0;
+    font-size: 0.8125rem;
+    line-height: 1.3;
+    color: white;
+    font-family: var(--font-body);
+  }
+
+  .session-badge {
+    align-self: flex-start;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    padding: 0.1rem 0.4rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+  }
+
+  .session-badge--live {
+    background: #d43d1a;
+    background: oklch(0.68 0.19 25);
+  }
+
+  .session--main {
+    background: rgba(91, 141, 239, 0.15);
+    background: oklch(0.75 0.11 255 / 0.15);
+    border-color: #5b8def;
+    border-color: oklch(0.75 0.11 255);
+  }
+
+  .session--community {
+    background: rgba(61, 201, 176, 0.15);
+    background: oklch(0.75 0.11 185 / 0.15);
+    border-color: #3dc9b0;
+    border-color: oklch(0.75 0.11 185);
+  }
+
+  .session--aws {
+    background: rgba(232, 163, 61, 0.15);
+    background: oklch(0.78 0.11 65 / 0.15);
+    border-color: #e8a33d;
+    border-color: oklch(0.78 0.11 65);
+  }
+
+  .session--hackathon {
+    background: rgba(200, 106, 219, 0.15);
+    background: oklch(0.76 0.12 310 / 0.15);
+    border-color: #c86adb;
+    border-color: oklch(0.76 0.12 310);
+  }
+
+  .session--workshops {
+    background: rgba(79, 201, 122, 0.15);
+    background: oklch(0.75 0.11 150 / 0.15);
+    border-color: #4fc97a;
+    border-color: oklch(0.75 0.11 150);
+  }
+
+  .session--showcase {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .full-width-row {
+    margin: 2px;
+    padding: 0.6rem 1rem;
+    border-radius: 0.5rem;
+    background: rgba(224, 194, 79, 0.12);
+    background: oklch(0.8 0.1 95 / 0.12);
+    border: 1px dashed #e0c24f;
+    border: 1px dashed oklch(0.8 0.1 95);
+    color: white;
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  .full-width-row--food {
+    background: rgba(224, 194, 79, 0.18);
+    background: oklch(0.8 0.1 95 / 0.18);
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .filter-chips {
+    display: flex;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0.25rem 0;
+    overflow-x: auto;
+  }
+
+  .filter-chip {
+    flex: 0 0 auto;
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid #1e2534;
+    background: #10141d;
+    color: rgba(255, 255, 255, 0.75);
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    cursor: pointer;
+  }
+
+  .filter-chip[aria-pressed="true"] {
+    background: rgba(255, 193, 77, 0.15);
+    border-color: rgb(255, 193, 77);
+    color: white;
+  }
+
+  .timeline-group.is-hidden {
+    display: none;
+  }
+
+  .timeline-time {
+    margin: 0 0 0.5rem 0;
+    color: rgba(255, 255, 255, 0.6);
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+  }
+
+  .timeline-entries {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .timeline-entry {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.75rem 0.9rem;
+    border-radius: 0.6rem;
+    border: 1px solid #1e2534;
+    background: #10141d;
+  }
+
+  .timeline-entry.is-hidden {
+    display: none;
+  }
+
+  .timeline-entry-main {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .timeline-entry-title {
+    margin: 0;
+    color: white;
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+  }
+
+  .timeline-entry-venue {
+    margin: 0.15rem 0 0 0;
+    color: rgba(255, 255, 255, 0.6);
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+  }
+
+  .timeline-duration {
+    flex: 0 0 auto;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.08);
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+  }
+
+  .timeline-badge {
+    flex: 0 0 auto;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    padding: 0.1rem 0.4rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+  }
+
+  .timeline-badge--live {
+    background: #d43d1a;
+    background: oklch(0.68 0.19 25);
+  }
+
+  @media (min-width: 769px) {
     .schedule {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 3rem 1.5rem;
-        background: black;
-        scroll-margin-top: 5rem;
-    }
-    .section-heading {
-        font-family: 'Squada One', system-ui, sans-serif;
-        font-size: 2.5rem;
-        text-align: center;
-        margin: 0 0 3rem 0;
-        color: rgb(255, 193, 77);
-    }
-    #wrapper {
-        width: 100%;
-        max-width: 1200px;
-        display: flex;
-        flex-direction: column;
-        background: rgba(61, 120, 171, 0.08);
-        border: 1px solid rgba(61, 120, 171, 0.2);
-        border-radius: 1rem;
-        overflow: hidden;
-    }
-    .item {
-        display: flex;
-        flex-direction: column;
-        gap: 0.45rem;
-        padding: 0.65rem 0.75rem;
+      padding: 4.5rem 2rem;
     }
 
-    .item:not(:last-child) {
-        border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+    .section-heading {
+      font-size: 4rem;
     }
-    .time {
-        margin: 0;
-        color: rgba(255, 255, 255, 0.88);
-        font-size: 1rem;
-        line-height: 1.4;
-        white-space: nowrap;
-        padding-left: 0.25rem;
-        text-align: left;
+
+    .timeline {
+      display: none;
     }
-    .details {
-        display: flex;
-        flex-direction: column;
-        gap: 0.2rem;
+  }
+
+  @media (max-width: 768px) {
+    .grid-scroll {
+      display: none;
     }
-    .activity {
-        margin: 0;
-        color: white;
-        line-height: 1.3;
-    }
-    .activity-title {
-        font-size: 1.25rem;
-        font-weight: 600;
-        color: white;
-    }
-    .activity-meta {
-        font-size: 0.875rem;
-        color: white;
-        opacity: 0.7;
-    }
-    .activity-meta::before {
-        content: "◉";
-        display: inline-block;
-        margin-right: 0.35rem;
-        font-size: 0.75em;
-        vertical-align: middle;
-    }
-    .activity-meta a {
-        color: inherit;
-        text-decoration: underline;
-    }
-    @media (min-width: 769px) {
-        .schedule {
-            padding: 4.5rem 2rem;
-        }
-        .section-heading {
-            font-size: 4rem;
-        }
-        .item {
-            display: grid;
-            grid-template-columns: 30% 70%;
-            align-items: start;
-            gap: 1rem;
-            padding: 0.85rem 1rem;
-        }
-        .time {
-            font-size: 1.125rem;
-            font-weight: 500;
-            padding-left: 1.5rem;
-            text-align: center;
-        }
-        .activity-title {
-            font-size: 1.25rem;
-        }
-        .activity-meta {
-            font-size: 0.875rem;
-        }
-    }
-    @media (max-width: 768px) {
-        .time {
-            font-size: 0.875rem;
-        }
-        .activity-title {
-            font-size: 1rem;
-        }
-        .activity-meta {
-            font-size: 0.8125rem;
-        }
-    }
+  }
 </style>
