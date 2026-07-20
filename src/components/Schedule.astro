@@ -123,16 +123,9 @@ const timelineGroups = groupByStartTime(timelineEntries);
                 )}
               </div>
               <span class="timeline-duration">{entry.durationLabel}</span>
-              {entry.badges.map((badge) => (
-                <span
-                  class:list={[
-                    'timeline-badge',
-                    badge.startsWith('LIVE') ? 'timeline-badge--live' : '',
-                  ]}
-                >
-                  {badge}
-                </span>
-              ))}
+              {entry.badges
+                .filter((badge) => !badge.startsWith('LIVE'))
+                .map((badge) => <span class="timeline-badge">{badge}</span>)}
             </div>
           ))}
         </div>
@@ -576,11 +569,6 @@ const timelineGroups = groupByStartTime(timelineEntries);
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.15);
     color: white;
-  }
-
-  .timeline-badge--live {
-    background: #d43d1a;
-    background: oklch(0.68 0.19 25);
   }
 
   @media (min-width: 769px) {
