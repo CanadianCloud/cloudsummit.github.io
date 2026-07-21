@@ -16,7 +16,7 @@ describe("Newsletter Target Buttons Unit Tests (#138)", () => {
 
   // 2. Testing the presence of hardcoded target="_blank" within the component
   it("should ensure the HTML link inside Newsletter.astro has target='_blank' and safe rel attributes", () => {
-    // خواندن فایل کامپوننت از روی دیسک
+    // Reading the component file from disk
     const componentPath = path.resolve(
       process.cwd(),
       "src/components/Newsletter.astro",
