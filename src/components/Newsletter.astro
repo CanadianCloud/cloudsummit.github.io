@@ -19,7 +19,7 @@ const { content } = Astro.props;
 			{content.heading}
 		</h2>
 		<p class="newsletter-description">{content.description}</p>
-		<a href={content.ctaHref} class="newsletter-button">
+		<a target="_blank" rel="noopener noreferrer" href={content.ctaHref} class="newsletter-button">
 			{content.ctaText}
 		</a>
 	</div>
