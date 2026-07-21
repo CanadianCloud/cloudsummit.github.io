@@ -478,6 +478,7 @@ export function getFooterContent(city: City) {
         col: 2,
         text: "Subscribe to Newsletter",
         href: "https://tally.so/r/mR6RBl",
+        target: "_blank",
       },
       // { col: 2, text: 'Sponsorship Info', href: '/our-sponsors' },
 
