@@ -10,13 +10,12 @@ describe("Newsletter Target Buttons Unit Tests (#138)", () => {
   // 1. Testing data structure integrity (Content Data)
   it("should verify the content structure for Newsletter is correctly configured", () => {
     expect(newsletterContent).toBeDefined();
-    expect(newsletterContent.ctaText).toBe("Subscribe to Newsletter"); // اصلاح شده بر اساس دیتای واقعی فایل شما
+    expect(newsletterContent.ctaText).toBe("Subscribe to Newsletter");
     expect(newsletterContent.ctaHref).toBe("https://tally.so/r/mR6RBl");
   });
 
   // 2. Testing the presence of hardcoded target="_blank" within the component
   it("should ensure the HTML link inside Newsletter.astro has target='_blank' and safe rel attributes", () => {
-    // Reading the component file from disk
     const componentPath = path.resolve(
       process.cwd(),
       "src/components/Newsletter.astro",
