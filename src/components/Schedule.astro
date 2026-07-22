@@ -4,16 +4,43 @@ import {
   slots,
   sessions,
   fullWidthRows,
+  gridHeaders,
   legend,
   filterTracks,
   venueKeyText,
   dateLine,
+  shortDateLine,
+  type SessionKind,
 } from '../lib/torontoSchedule';
 import { timelineEntries, groupByStartTime } from '../lib/scheduleFilter';
 
-const rowStyle = `grid-template-rows: auto repeat(${slots.length}, minmax(2.75rem, auto));`;
-const venueLabel = (id: string) => venues.find((v) => v.id === id)?.label ?? '';
+const rowStyle = `grid-template-rows: auto repeat(${slots.length}, minmax(2.875rem, auto));`;
+const columnByVenue = new Map(venues.map((v, i) => [v.id, i + 2]));
 const timelineGroups = groupByStartTime(timelineEntries);
+
+let headerColumn = 2;
+const gridHeaderCells = gridHeaders.map((header) => {
+  const start = headerColumn;
+  headerColumn += header.span;
+  return { ...header, start, end: headerColumn };
+});
+
+const FEATURED_KINDS = new Set<SessionKind>([
+  'keynote',
+  'panel',
+  'hackathon-round',
+  'hackathon-final',
+]);
+const DASHED_KINDS = new Set<SessionKind>(['doors-open', 'break']);
+const MUTED_KINDS = new Set<SessionKind>(['stream', 'hackathon-transition']);
+
+function sessionWeightClass(kind: SessionKind): string {
+  if (kind === 'showcase') return 'session--neutral';
+  if (FEATURED_KINDS.has(kind)) return 'session--featured';
+  if (DASHED_KINDS.has(kind)) return 'session--ops-dashed';
+  if (MUTED_KINDS.has(kind)) return 'session--ops-muted';
+  return 'session--plain';
+}
 ---
 
 <section class="schedule" id="schedule">
@@ -34,9 +61,17 @@ const timelineGroups = groupByStartTime(timelineEntries);
   <div class="grid-scroll">
     <div class="grid" style={rowStyle}>
       <div class="corner-cell" style="grid-column: 1; grid-row: 1;"></div>
-      {venues.map((venue, vi) => (
-        <div class="venue-header" style={`grid-column: ${vi + 2}; grid-row: 1;`}>
-          {venue.label}
+      {gridHeaderCells.map((header) => (
+        <div
+          class="grid-header-cell"
+          style={`grid-column: ${header.start} / ${header.end}; grid-row: 1;`}
+        >
+          <span
+            class="grid-header-dot"
+            aria-hidden="true"
+            style={`background:${header.fallback}; background:${header.color};`}
+          ></span>
+          {header.label}
         </div>
       ))}
 
@@ -47,17 +82,17 @@ const timelineGroups = groupByStartTime(timelineEntries);
       ))}
 
       {sessions.map((session) => {
-        const venueIndex = venues.findIndex((v) => v.id === session.venue);
+        const column = columnByVenue.get(session.venue) ?? 2;
         const rowIndex = slots.indexOf(session.start);
+        const weightClass = sessionWeightClass(session.kind);
         return (
           <div
-            class:list={['session', `session--${session.track}`]}
-            style={`grid-column: ${venueIndex + 2}; grid-row: ${rowIndex + 2} / span ${session.slots};`}
+            class:list={['session', `session--${session.track}`, weightClass]}
+            style={`grid-column: ${column}; grid-row: ${rowIndex + 2} / span ${session.slots};`}
           >
+            {session.eyebrow && <p class="session-eyebrow">{session.eyebrow}</p>}
             <p class="session-title">{session.title}</p>
-            {session.badges
-              .filter((badge) => !badge.startsWith('LIVE'))
-              .map((badge) => <span class="session-badge">{badge}</span>)}
+            {session.subtext && <p class="session-subtext">{session.subtext}</p>}
           </div>
         );
       })}
@@ -66,15 +101,15 @@ const timelineGroups = groupByStartTime(timelineEntries);
         const rowIndex = slots.indexOf(row.start);
         // Column 1 is the time column; venue columns start at 2 and follow
         // `venues` order, so a row's span ends right after its last covered
-        // venue (leaving any trailing venues, e.g. Workshops, to keep
-        // rendering their own session cell in that row).
+        // venue, leaving the time label visible.
         const endColumn = row.venues.length + 2;
         return (
           <div
-            class:list={['full-width-row', row.id === 'food-break' ? 'full-width-row--food' : '']}
-            style={`grid-column: 1 / ${endColumn}; grid-row: ${rowIndex + 2};`}
+            class:list={['full-width-row', `full-width-row--${row.variant}`]}
+            style={`grid-column: 2 / ${endColumn}; grid-row: ${rowIndex + 2};`}
           >
-            {row.title} &middot; {row.start}
+            <p class="full-width-title">{row.title} &middot; {row.start}</p>
+            {row.subtext && <p class="full-width-subtext">{row.subtext}</p>}
           </div>
         );
       })}
@@ -84,6 +119,11 @@ const timelineGroups = groupByStartTime(timelineEntries);
   </div>
 
   <div class="timeline">
+    <div class="timeline-header">
+      <h3 class="timeline-heading">Schedule</h3>
+      <p class="timeline-date">{shortDateLine}</p>
+    </div>
+
     <ul class="filter-chips" role="list">
       {filterTracks.map((track) => (
         <li>
@@ -105,20 +145,17 @@ const timelineGroups = groupByStartTime(timelineEntries);
         <div class="timeline-entries">
           {group.entries.map((entry) => (
             <div
-              class="timeline-entry"
-              data-venue={entry.venue ?? ''}
+              class:list={['timeline-entry', `timeline-entry--${entry.styleClass}`]}
+              data-track={entry.track ?? ''}
               data-always-visible={entry.alwaysVisible ? 'true' : 'false'}
             >
-              <div class="timeline-entry-main">
-                <p class="timeline-entry-title">{entry.title}</p>
-                {entry.venue && (
-                  <p class="timeline-entry-venue">{venueLabel(entry.venue)}</p>
+              <div class="timeline-entry-top">
+                <span class="timeline-entry-tag">{entry.tag}</span>
+                {entry.durationLabel && (
+                  <span class="timeline-duration">{entry.durationLabel}</span>
                 )}
               </div>
-              <span class="timeline-duration">{entry.durationLabel}</span>
-              {entry.badges
-                .filter((badge) => !badge.startsWith('LIVE'))
-                .map((badge) => <span class="timeline-badge">{badge}</span>)}
+              <p class="timeline-entry-title">{entry.title}</p>
             </div>
           ))}
         </div>
@@ -135,9 +172,9 @@ const timelineGroups = groupByStartTime(timelineEntries);
 
     function applyFilter(track: string) {
       entries.forEach((entry) => {
-        const venue = entry.dataset.venue;
+        const entryTrack = entry.dataset.track;
         const alwaysVisible = entry.dataset.alwaysVisible === 'true';
-        const show = track === 'all' || alwaysVisible || venue === track;
+        const show = track === 'all' || alwaysVisible || entryTrack === track;
         entry.classList.toggle('is-hidden', !show);
       });
       groups.forEach((group) => {
@@ -252,14 +289,14 @@ const timelineGroups = groupByStartTime(timelineEntries);
     display: flex;
     align-items: center;
     gap: 0.4rem;
-    font-size: 0.8125rem;
-    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.6875rem;
+    color: #8b93a5;
     font-family: var(--font-body);
   }
 
   .legend-swatch {
-    width: 0.65rem;
-    height: 0.65rem;
+    width: 0.5rem;
+    height: 0.5rem;
     border-radius: 50%;
     display: inline-block;
   }
@@ -283,6 +320,7 @@ const timelineGroups = groupByStartTime(timelineEntries);
     max-width: 1400px;
     margin: 0 auto;
     overflow-x: auto;
+    background: #10141d;
     border: 1px solid #1e2534;
     border-radius: 0.75rem;
   }
@@ -290,8 +328,10 @@ const timelineGroups = groupByStartTime(timelineEntries);
   .grid {
     position: relative;
     display: grid;
-    grid-template-columns: max-content repeat(6, minmax(150px, 1fr));
-    min-width: 900px;
+    grid-template-columns: 64px repeat(5, minmax(150px, 1fr)) 132px 132px;
+    grid-auto-rows: minmax(2.875rem, auto);
+    gap: 4px;
+    min-width: 1100px;
   }
 
   .now-line {
@@ -324,23 +364,34 @@ const timelineGroups = groupByStartTime(timelineEntries);
   }
 
   .corner-cell,
-  .venue-header,
+  .grid-header-cell,
   .time-cell {
     background: #10141d;
-    border-bottom: 1px solid #1e2534;
-    border-right: 1px solid #1e2534;
   }
 
-  .venue-header {
+  .grid-header-cell {
     position: sticky;
     top: 0;
     z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
     padding: 0.75rem 0.5rem;
-    font-family: var(--font-display);
-    font-size: 0.8125rem;
-    letter-spacing: 0.02em;
-    color: rgba(255, 255, 255, 0.92);
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #c9d0dd;
     text-align: center;
+  }
+
+  .grid-header-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex: 0 0 auto;
   }
 
   .corner-cell {
@@ -356,22 +407,30 @@ const timelineGroups = groupByStartTime(timelineEntries);
     z-index: 2;
     padding: 0.5rem 0.75rem;
     font-family: var(--font-body);
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.6875rem;
+    color: #8b93a5;
     white-space: nowrap;
     display: flex;
     align-items: flex-start;
+    justify-content: flex-end;
+    font-variant-numeric: tabular-nums;
   }
 
   .session {
-    margin: 2px;
     padding: 0.5rem 0.6rem;
     border-radius: 0.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.15);
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
+    gap: 0.25rem;
     overflow: hidden;
+  }
+
+  .session-eyebrow {
+    margin: 0;
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
   }
 
   .session-title {
@@ -382,74 +441,100 @@ const timelineGroups = groupByStartTime(timelineEntries);
     font-family: var(--font-body);
   }
 
-  .session-badge {
-    align-self: flex-start;
+  .session-subtext {
+    margin: 0;
     font-size: 0.6875rem;
-    font-weight: 600;
-    letter-spacing: 0.03em;
-    padding: 0.1rem 0.4rem;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.15);
-    color: white;
+    color: #8b93a5;
   }
 
-  .session--main {
-    background: rgba(91, 141, 239, 0.15);
-    background: oklch(0.75 0.11 255 / 0.15);
-    border-color: #5b8def;
-    border-color: oklch(0.75 0.11 255);
+  /* Plain weight — flat 15% tint, no border. */
+  .session--plain.session--main { background: rgba(91, 141, 239, 0.15); background: oklch(0.75 0.11 255 / 0.15); }
+  .session--plain.session--community { background: rgba(61, 201, 176, 0.15); background: oklch(0.75 0.11 185 / 0.15); }
+  .session--plain.session--aws { background: rgba(232, 163, 61, 0.15); background: oklch(0.78 0.11 65 / 0.15); }
+  .session--plain.session--hackathon { background: rgba(200, 106, 219, 0.15); background: oklch(0.76 0.12 310 / 0.15); }
+  .session--plain.session--workshops { background: rgba(79, 201, 122, 0.15); background: oklch(0.75 0.11 150 / 0.15); }
+
+  /* Featured weight — stronger tint + colored border, used with an eyebrow. */
+  .session--featured {
+    border: 1px solid transparent;
+  }
+  .session--featured.session--main { background: rgba(91, 141, 239, 0.24); background: oklch(0.75 0.11 255 / 0.24); border-color: rgba(91, 141, 239, 0.4); border-color: oklch(0.75 0.11 255 / 0.4); }
+  .session--featured.session--community { background: rgba(61, 201, 176, 0.24); background: oklch(0.75 0.11 185 / 0.24); border-color: rgba(61, 201, 176, 0.4); border-color: oklch(0.75 0.11 185 / 0.4); }
+  .session--featured.session--aws { background: rgba(232, 163, 61, 0.24); background: oklch(0.78 0.11 65 / 0.24); border-color: rgba(232, 163, 61, 0.4); border-color: oklch(0.78 0.11 65 / 0.4); }
+  .session--featured.session--hackathon { background: rgba(200, 106, 219, 0.24); background: oklch(0.76 0.12 310 / 0.24); border-color: rgba(200, 106, 219, 0.4); border-color: oklch(0.76 0.12 310 / 0.4); }
+  .session--featured.session--workshops { background: rgba(79, 201, 122, 0.24); background: oklch(0.75 0.11 150 / 0.24); border-color: rgba(79, 201, 122, 0.4); border-color: oklch(0.75 0.11 150 / 0.4); }
+
+  /* Eyebrow colors follow the track, except Hackathon which uses the design's red. */
+  .session--main .session-eyebrow { color: #5b8def; color: oklch(0.75 0.11 255); }
+  .session--community .session-eyebrow { color: #3dc9b0; color: oklch(0.75 0.11 185); }
+  .session--aws .session-eyebrow { color: #e8a33d; color: oklch(0.78 0.11 65); }
+  .session--workshops .session-eyebrow { color: #4fc97a; color: oklch(0.75 0.11 150); }
+  .session--hackathon .session-eyebrow { color: #d43d1a; color: oklch(0.68 0.19 25); }
+
+  /* Ops weight — dashed (doors/breaks) or muted italic (streams/transitions). */
+  .session--ops-dashed {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px dashed #29303f;
+    color: #7d8698;
+  }
+  .session--ops-dashed .session-title {
+    color: #7d8698;
   }
 
-  .session--community {
-    background: rgba(61, 201, 176, 0.15);
-    background: oklch(0.75 0.11 185 / 0.15);
-    border-color: #3dc9b0;
-    border-color: oklch(0.75 0.11 185);
+  .session--ops-muted {
+    background: rgba(255, 255, 255, 0.03);
+    color: #6d7688;
+  }
+  .session--ops-muted .session-title {
+    color: #6d7688;
+    font-style: italic;
   }
 
-  .session--aws {
-    background: rgba(232, 163, 61, 0.15);
-    background: oklch(0.78 0.11 65 / 0.15);
-    border-color: #e8a33d;
-    border-color: oklch(0.78 0.11 65);
+  /* Neutral weight — used for Showcase. */
+  .session--neutral {
+    background: rgba(255, 255, 255, 0.05);
   }
-
-  .session--hackathon {
-    background: rgba(200, 106, 219, 0.15);
-    background: oklch(0.76 0.12 310 / 0.15);
-    border-color: #c86adb;
-    border-color: oklch(0.76 0.12 310);
-  }
-
-  .session--workshops {
-    background: rgba(79, 201, 122, 0.15);
-    background: oklch(0.75 0.11 150 / 0.15);
-    border-color: #4fc97a;
-    border-color: oklch(0.75 0.11 150);
-  }
-
-  .session--showcase {
-    background: rgba(255, 255, 255, 0.06);
-    border-color: rgba(255, 255, 255, 0.2);
+  .session--neutral .session-title {
+    color: #c9d0dd;
   }
 
   .full-width-row {
-    margin: 2px;
     padding: 0.6rem 1rem;
     border-radius: 0.5rem;
-    background: rgba(224, 194, 79, 0.12);
-    background: oklch(0.8 0.1 95 / 0.12);
-    border: 1px dashed #e0c24f;
-    border: 1px dashed oklch(0.8 0.1 95);
     color: white;
     font-family: var(--font-display);
-    font-size: 0.9rem;
     text-align: center;
   }
 
+  .full-width-title {
+    margin: 0;
+    font-size: 0.9rem;
+  }
+
+  .full-width-subtext {
+    margin: 0.25rem 0 0 0;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.65);
+  }
+
   .full-width-row--food {
-    background: rgba(224, 194, 79, 0.18);
-    background: oklch(0.8 0.1 95 / 0.18);
+    background: rgba(224, 194, 79, 0.14);
+    background: oklch(0.8 0.1 95 / 0.14);
+    border: 1px solid #e0c24f;
+    border: 1px solid oklch(0.8 0.1 95);
+  }
+
+  .full-width-row--neutral {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .full-width-row--accent {
+    background: rgba(91, 141, 239, 0.14);
+    background: oklch(0.75 0.11 255 / 0.14);
+    border: 1px solid #5b8def;
+    border: 1px solid oklch(0.75 0.11 255);
   }
 
   .timeline {
@@ -459,6 +544,26 @@ const timelineGroups = groupByStartTime(timelineEntries);
     width: 100%;
     max-width: 720px;
     margin: 0 auto;
+  }
+
+  .timeline-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .timeline-heading {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: white;
+  }
+
+  .timeline-date {
+    margin: 0;
+    font-size: 0.6875rem;
+    color: #8b93a5;
   }
 
   .filter-chips {
@@ -472,92 +577,107 @@ const timelineGroups = groupByStartTime(timelineEntries);
 
   .filter-chip {
     flex: 0 0 auto;
-    padding: 0.4rem 0.9rem;
+    padding: 6px 10px;
     border-radius: 999px;
-    border: 1px solid #1e2534;
-    background: #10141d;
-    color: rgba(255, 255, 255, 0.75);
+    border: 1px solid #29303f;
+    background: transparent;
+    color: #9aa3b5;
     font-family: var(--font-body);
-    font-size: 0.8125rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
     cursor: pointer;
   }
 
   .filter-chip[aria-pressed="true"] {
-    background: rgba(255, 193, 77, 0.15);
-    border-color: rgb(255, 193, 77);
-    color: white;
+    background: #e8ebf1;
+    border-color: #e8ebf1;
+    color: #10141d;
   }
 
   .timeline-group.is-hidden {
     display: none;
   }
 
+  .timeline-group {
+    display: flex;
+    gap: 0.75rem;
+  }
+
   .timeline-time {
-    margin: 0 0 0.5rem 0;
-    color: rgba(255, 255, 255, 0.6);
+    flex: 0 0 44px;
+    margin: 0;
+    padding-top: 0.15rem;
+    text-align: right;
+    color: #8b93a5;
     font-family: var(--font-body);
-    font-size: 0.8125rem;
+    font-size: 0.6875rem;
   }
 
   .timeline-entries {
+    flex: 1 1 auto;
+    min-width: 0;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    border-left: 1px solid #1e2534;
+    padding-left: 0.75rem;
   }
 
   .timeline-entry {
     display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    padding: 0.75rem 0.9rem;
-    border-radius: 0.6rem;
-    border: 1px solid #1e2534;
-    background: #10141d;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 9px 11px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
   }
 
   .timeline-entry.is-hidden {
     display: none;
   }
 
-  .timeline-entry-main {
-    flex: 1 1 auto;
-    min-width: 0;
+  .timeline-entry-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .timeline-entry-tag {
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #c9d0dd;
+  }
+
+  .timeline-duration {
+    flex: 0 0 auto;
+    font-size: 0.625rem;
+    color: #7d8698;
   }
 
   .timeline-entry-title {
     margin: 0;
     color: white;
     font-family: var(--font-body);
-    font-size: 0.9375rem;
-  }
-
-  .timeline-entry-venue {
-    margin: 0.15rem 0 0 0;
-    color: rgba(255, 255, 255, 0.6);
-    font-family: var(--font-body);
-    font-size: 0.75rem;
-  }
-
-  .timeline-duration {
-    flex: 0 0 auto;
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.7);
-    background: rgba(255, 255, 255, 0.08);
-    padding: 0.15rem 0.5rem;
-    border-radius: 999px;
-  }
-
-  .timeline-badge {
-    flex: 0 0 auto;
-    font-size: 0.6875rem;
+    font-size: 0.8125rem;
     font-weight: 600;
-    letter-spacing: 0.03em;
-    padding: 0.1rem 0.4rem;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.15);
-    color: white;
   }
+
+  .timeline-entry--main { background: rgba(91, 141, 239, 0.12); background: oklch(0.75 0.11 255 / 0.12); }
+  .timeline-entry--main .timeline-entry-tag { color: #5b8def; color: oklch(0.75 0.11 255); }
+  .timeline-entry--community { background: rgba(61, 201, 176, 0.12); background: oklch(0.75 0.11 185 / 0.12); }
+  .timeline-entry--community .timeline-entry-tag { color: #3dc9b0; color: oklch(0.75 0.11 185); }
+  .timeline-entry--aws { background: rgba(232, 163, 61, 0.12); background: oklch(0.78 0.11 65 / 0.12); }
+  .timeline-entry--aws .timeline-entry-tag { color: #e8a33d; color: oklch(0.78 0.11 65); }
+  .timeline-entry--hackathon { background: rgba(200, 106, 219, 0.12); background: oklch(0.76 0.12 310 / 0.12); }
+  .timeline-entry--hackathon .timeline-entry-tag { color: #c86adb; color: oklch(0.76 0.12 310); }
+  .timeline-entry--workshops { background: rgba(79, 201, 122, 0.12); background: oklch(0.75 0.11 150 / 0.12); }
+  .timeline-entry--workshops .timeline-entry-tag { color: #4fc97a; color: oklch(0.75 0.11 150); }
+  .timeline-entry--food { background: rgba(224, 194, 79, 0.12); background: oklch(0.8 0.1 95 / 0.12); }
+  .timeline-entry--food .timeline-entry-tag { color: #e0c24f; color: oklch(0.8 0.1 95); }
+  .timeline-entry--neutral { background: rgba(255, 255, 255, 0.05); }
 
   @media (min-width: 769px) {
     .schedule {
