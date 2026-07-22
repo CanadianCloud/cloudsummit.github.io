@@ -5,7 +5,6 @@ import {
   filterByTrack,
   formatDuration,
 } from "./scheduleFilter";
-import { sessions, fullWidthRows } from "./torontoSchedule";
 
 describe("scheduleFilter - groupByStartTime", () => {
   const groups = groupByStartTime(timelineEntries);
@@ -25,6 +24,40 @@ describe("scheduleFilter - groupByStartTime", () => {
   });
 });
 
+describe("scheduleFilter - curation", () => {
+  it("drops overflow streams, drink/snack breaks, and the hackathon-to-mainstage transition", () => {
+    timelineEntries.forEach((entry) => {
+      expect(entry.title).not.toMatch(/Overflow/i);
+      expect(entry.title).not.toMatch(/Drinks/i);
+      expect(entry.title).not.toMatch(/moves to Main Stage/i);
+    });
+  });
+
+  it("synthesizes exactly one Doors open entry", () => {
+    const doorsEntries = timelineEntries.filter((e) => e.title === "Doors open");
+    expect(doorsEntries).toHaveLength(1);
+    expect(doorsEntries[0].alwaysVisible).toBe(true);
+    expect(doorsEntries[0].tag).toBe("Levels 3–5");
+  });
+
+  it("keeps only the first Showcase entry", () => {
+    const showcaseEntries = timelineEntries.filter((e) => e.track === "showcase");
+    expect(showcaseEntries).toHaveLength(1);
+    expect(showcaseEntries[0].title).toBe("Showcase Space opens");
+  });
+
+  it("drops the Event Conclusion row but keeps food break and after party as always-visible", () => {
+    expect(
+      timelineEntries.find((e) => e.id === "event-conclusion"),
+    ).toBeUndefined();
+
+    const foodBreak = timelineEntries.find((e) => e.id === "food-break");
+    const afterParty = timelineEntries.find((e) => e.id === "after-party");
+    expect(foodBreak?.alwaysVisible).toBe(true);
+    expect(afterParty?.alwaysVisible).toBe(true);
+  });
+});
+
 describe("scheduleFilter - filterByTrack", () => {
   it("'all' returns everything", () => {
     expect(filterByTrack("all", timelineEntries)).toHaveLength(
@@ -32,42 +65,34 @@ describe("scheduleFilter - filterByTrack", () => {
     );
   });
 
-  it("'aws' returns only AWS sessions plus the always-visible full-width rows", () => {
-    const result = filterByTrack("aws", timelineEntries);
-    const resultIds = new Set(result.map((e) => e.id));
-
-    const awsSessionIds = sessions
-      .filter((s) => s.venue === "aws")
-      .map((s) => s.id);
-    const fullWidthIds = fullWidthRows.map((r) => r.id);
-
-    expect(resultIds.size).toBe(awsSessionIds.length + fullWidthIds.length);
-    awsSessionIds.forEach((id) => expect(resultIds.has(id)).toBe(true));
-    fullWidthIds.forEach((id) => expect(resultIds.has(id)).toBe(true));
-
-    const otherVenueSession = sessions.find((s) => s.venue === "community");
-    expect(resultIds.has(otherVenueSession!.id)).toBe(false);
+  it("'workshops' matches sessions from both workshop lanes (3 total)", () => {
+    const result = filterByTrack("workshops", timelineEntries);
+    const workshopSessions = result.filter((e) => e.track === "workshops");
+    expect(workshopSessions).toHaveLength(3);
   });
 
-  (["main", "community", "hackathon", "workshops"] as const).forEach(
-    (track) => {
-      it(`'${track}' returns only that track's sessions plus the always-visible rows`, () => {
-        const result = filterByTrack(track, timelineEntries);
-        const resultIds = new Set(result.map((e) => e.id));
+  it("'hackathon' includes the Hackathon Final (track flipped from Main)", () => {
+    const result = filterByTrack("hackathon", timelineEntries);
+    expect(result.some((e) => e.id === "main-9")).toBe(true);
+  });
 
-        const trackSessionIds = sessions
-          .filter((s) => s.venue === track)
-          .map((s) => s.id);
-        const fullWidthIds = fullWidthRows.map((r) => r.id);
+  it("non-'all' filters always include the always-visible rows", () => {
+    const result = filterByTrack("aws", timelineEntries);
+    const alwaysVisibleIds = timelineEntries
+      .filter((e) => e.alwaysVisible)
+      .map((e) => e.id);
+    alwaysVisibleIds.forEach((id) =>
+      expect(result.some((e) => e.id === id)).toBe(true),
+    );
+  });
 
-        expect(resultIds.size).toBe(
-          trackSessionIds.length + fullWidthIds.length,
-        );
-        trackSessionIds.forEach((id) => expect(resultIds.has(id)).toBe(true));
-        fullWidthIds.forEach((id) => expect(resultIds.has(id)).toBe(true));
-      });
-    },
-  );
+  it("excludes entries from other tracks", () => {
+    const result = filterByTrack("aws", timelineEntries);
+    const otherTrackEntry = timelineEntries.find(
+      (e) => e.track === "community",
+    );
+    expect(result.some((e) => e.id === otherTrackEntry!.id)).toBe(false);
+  });
 });
 
 describe("scheduleFilter - duration labels", () => {
@@ -78,10 +103,12 @@ describe("scheduleFilter - duration labels", () => {
     expect(formatDuration(150)).toBe("2.5h");
   });
 
-  it("computes the panel's duration label as 60m and the 90-minute workshop as 90m", () => {
-    const panel = timelineEntries.find((e) => e.id === "main-5");
-    const longWorkshop = timelineEntries.find((e) => e.id === "workshops-3");
-    expect(panel?.durationLabel).toBe("60m");
-    expect(longWorkshop?.durationLabel).toBe("90m");
+  it("pins the two 90-minute room workshops and the 2.5h AWS workshop", () => {
+    const room1 = timelineEntries.find((e) => e.id === "workshop-room-1");
+    const room2 = timelineEntries.find((e) => e.id === "workshop-room-2");
+    const awsWorkshop = timelineEntries.find((e) => e.id === "workshop-aws");
+    expect(room1?.durationLabel).toBe("90m");
+    expect(room2?.durationLabel).toBe("90m");
+    expect(awsWorkshop?.durationLabel).toBe("2.5h");
   });
 });
