@@ -1,10 +1,7 @@
 // Cloud Summit Toronto — Aug 29, 2026 — Full Event Schedule (Issue #176)
-// Transcribed from the official event-schedule table provided by Matt.
-// Two cells were fragmentary in the source table ("AWS Jam on Level 5 Starts"
-// at 2:00pm followed by "Cloud" at 2:30pm and "Workshop Level 2" at 3:00pm);
-// they're reconstructed here as "Cloud Workshop Level 2" spanning 2:30-3:30pm,
-// matching the same "<title>" + "(cont.)" pattern used for Cloud Workshop
-// Level 3. Flag to Matt if that reconstruction is wrong.
+// Restyled per design/design_handoff_cloud_summit_schedule; workshop timing
+// corrected against schedule-extracted.txt (supersedes the earlier
+// reconstructed "Cloud Workshop Level 2/3" guess).
 
 export type VenueId =
   | "hackathon"
@@ -12,9 +9,17 @@ export type VenueId =
   | "community"
   | "main"
   | "aws"
-  | "workshops";
+  | "workshops-1"
+  | "workshops-2";
 
-export type Track = VenueId | "food";
+export type Track =
+  | "hackathon"
+  | "showcase"
+  | "community"
+  | "main"
+  | "aws"
+  | "workshops"
+  | "food";
 
 export type SessionKind =
   | "doors-open"
@@ -29,13 +34,21 @@ export type SessionKind =
   | "hackathon-transition"
   | "hackathon-final"
   | "wrap-up"
-  | "after-party"
-  | "workshop"
-  | "workshop-note";
+  | "workshop";
 
 export interface Venue {
   id: VenueId;
   label: string;
+  /** Short location tag shown on the mobile timeline card. */
+  timelineTag: string;
+}
+
+export interface GridHeader {
+  label: string;
+  /** Number of venue columns this header spans. */
+  span: number;
+  color: string;
+  fallback: string;
 }
 
 export interface Session {
@@ -44,17 +57,22 @@ export interface Session {
   track: Track;
   kind: SessionKind;
   title: string;
+  eyebrow?: string;
+  subtext?: string;
+  /** Overrides the venue's default timelineTag on the mobile card. */
+  timelineTag?: string;
   start: string;
   end: string;
   startMinutes: number;
   endMinutes: number;
   slots: number;
-  badges: string[];
 }
 
 export interface FullWidthRow {
   id: string;
   title: string;
+  subtext?: string;
+  variant: "food" | "neutral" | "accent";
   start: string;
   end: string;
   startMinutes: number;
@@ -76,14 +94,13 @@ const EVENT_END_MINUTES = 18 * 60 + 30; // 6:30 PM
 
 export { EVENT_START_MINUTES, EVENT_END_MINUTES, SLOT_MINUTES };
 
-/** Formats minutes-since-midnight as "12:00 PM" / "6:30 PM" etc. */
+/** Formats minutes-since-midnight as the handoff's short "12:00" / "6:30" labels. */
 function formatMinutes(totalMinutes: number): string {
   const hour24 = Math.floor(totalMinutes / 60) % 24;
   const minute = totalMinutes % 60;
-  const period = hour24 >= 12 ? "PM" : "AM";
   const hour12 = hour24 % 12 === 0 ? 12 : hour24 % 12;
   const minuteStr = minute === 0 ? "00" : String(minute).padStart(2, "0");
-  return `${hour12}:${minuteStr} ${period}`;
+  return `${hour12}:${minuteStr}`;
 }
 
 export const slots: string[] = (() => {
@@ -99,12 +116,22 @@ export const slots: string[] = (() => {
 })();
 
 export const venues: Venue[] = [
-  { id: "hackathon", label: "Basement · Hackathon" },
-  { id: "showcase", label: "L2 · Showcase" },
-  { id: "community", label: "L3 · Community Stage" },
-  { id: "main", label: "L4 · Main Stage" },
-  { id: "aws", label: "L5 · AWS Stage" },
-  { id: "workshops", label: "Workshops" },
+  { id: "hackathon", label: "Basement · Hackathon", timelineTag: "Basement" },
+  { id: "showcase", label: "L2 · Showcase", timelineTag: "Showcase · L2" },
+  { id: "community", label: "L3 · Community Stage", timelineTag: "Community · L3" },
+  { id: "main", label: "L4 · Main Stage", timelineTag: "Main Stage · L4" },
+  { id: "aws", label: "L5 · AWS Stage", timelineTag: "AWS Stage · L5" },
+  { id: "workshops-1", label: "Workshops · Room 1", timelineTag: "Workshops" },
+  { id: "workshops-2", label: "Workshops · Room 2", timelineTag: "Workshops" },
+];
+
+export const gridHeaders: GridHeader[] = [
+  { label: "Basement · Hackathon", span: 1, color: "oklch(0.76 0.12 310)", fallback: "#C86ADB" },
+  { label: "L2 · Showcase", span: 1, color: "#98a2b5", fallback: "#98a2b5" },
+  { label: "L3 · Community Stage", span: 1, color: "oklch(0.75 0.11 185)", fallback: "#3DC9B0" },
+  { label: "L4 · Main Stage", span: 1, color: "oklch(0.75 0.11 255)", fallback: "#5B8DEF" },
+  { label: "L5 · AWS Stage", span: 1, color: "oklch(0.78 0.11 65)", fallback: "#E8A33D" },
+  { label: "Workshops", span: 2, color: "oklch(0.75 0.11 150)", fallback: "#4FC97A" },
 ];
 
 interface SessionInput {
@@ -113,9 +140,11 @@ interface SessionInput {
   track: Track;
   kind: SessionKind;
   title: string;
+  eyebrow?: string;
+  subtext?: string;
+  timelineTag?: string;
   startMinutes: number;
   durationMinutes: number;
-  badges?: string[];
 }
 
 function buildSession(input: SessionInput): Session {
@@ -126,12 +155,14 @@ function buildSession(input: SessionInput): Session {
     track: input.track,
     kind: input.kind,
     title: input.title,
+    eyebrow: input.eyebrow,
+    subtext: input.subtext,
+    timelineTag: input.timelineTag,
     start: formatMinutes(input.startMinutes),
     end: formatMinutes(endMinutes),
     startMinutes: input.startMinutes,
     endMinutes,
     slots: input.durationMinutes / SLOT_MINUTES,
-    badges: input.badges ?? [],
   };
 }
 
@@ -142,7 +173,7 @@ const rawSessions: SessionInput[] = [
     venue: "hackathon",
     track: "hackathon",
     kind: "break",
-    title: "Drinks & Snacks",
+    title: "Drinks & snacks",
     startMinutes: 12 * 60,
     durationMinutes: 30,
   },
@@ -154,14 +185,13 @@ const rawSessions: SessionInput[] = [
     title: "Overflow live stream of Main Stage",
     startMinutes: 12 * 60 + 30,
     durationMinutes: 60,
-    badges: ["LIVE"],
   },
   {
     id: "hackathon-3",
     venue: "hackathon",
     track: "hackathon",
     kind: "break",
-    title: "Drinks & Snacks",
+    title: "Drinks & snacks",
     startMinutes: 13 * 60 + 30,
     durationMinutes: 30,
   },
@@ -170,17 +200,17 @@ const rawSessions: SessionInput[] = [
     venue: "hackathon",
     track: "hackathon",
     kind: "hackathon-round",
-    title: "Hackathon Round 1 Live on Stage",
+    title: "Hackathon Round 1",
+    eyebrow: "ROUND 1",
     startMinutes: 14 * 60,
     durationMinutes: 30,
-    badges: ["LIVE"],
   },
   {
     id: "hackathon-5",
     venue: "hackathon",
     track: "hackathon",
     kind: "break",
-    title: "Drinks & Snacks",
+    title: "Drinks & snacks",
     startMinutes: 14 * 60 + 30,
     durationMinutes: 30,
   },
@@ -189,17 +219,17 @@ const rawSessions: SessionInput[] = [
     venue: "hackathon",
     track: "hackathon",
     kind: "hackathon-round",
-    title: "Hackathon Round 2 Elimination Live on Stage",
+    title: "Hackathon Elimination Round",
+    eyebrow: "ELIMINATION",
     startMinutes: 15 * 60 + 30,
     durationMinutes: 30,
-    badges: ["LIVE"],
   },
   {
     id: "hackathon-7",
     venue: "hackathon",
     track: "hackathon",
     kind: "break",
-    title: "Drinks & Snacks",
+    title: "Drinks & snacks · hot food from 3pm",
     startMinutes: 16 * 60,
     durationMinutes: 60,
   },
@@ -208,7 +238,7 @@ const rawSessions: SessionInput[] = [
     venue: "hackathon",
     track: "hackathon",
     kind: "hackathon-transition",
-    title: "Hackathon moves to Level 4 Main Stage",
+    title: "Hackathon moves to Main Stage ↑",
     startMinutes: 17 * 60,
     durationMinutes: 30,
   },
@@ -219,7 +249,7 @@ const rawSessions: SessionInput[] = [
     venue: "showcase",
     track: "showcase",
     kind: "showcase",
-    title: "Showcase Space Opens",
+    title: "Showcase Space opens",
     startMinutes: 13 * 60 + 30,
     durationMinutes: 30,
   },
@@ -248,7 +278,7 @@ const rawSessions: SessionInput[] = [
     venue: "community",
     track: "community",
     kind: "doors-open",
-    title: "Doors Open",
+    title: "Doors open",
     startMinutes: 12 * 60,
     durationMinutes: 30,
   },
@@ -260,7 +290,6 @@ const rawSessions: SessionInput[] = [
     title: "Overflow live stream of Main Stage",
     startMinutes: 12 * 60 + 30,
     durationMinutes: 60,
-    badges: ["LIVE"],
   },
   {
     id: "community-3",
@@ -324,7 +353,6 @@ const rawSessions: SessionInput[] = [
     title: "Overflow live stream of Main Stage",
     startMinutes: 17 * 60,
     durationMinutes: 60,
-    badges: ["LIVE"],
   },
 
   // L4 · Main Stage
@@ -333,7 +361,7 @@ const rawSessions: SessionInput[] = [
     venue: "main",
     track: "main",
     kind: "doors-open",
-    title: "Doors Open",
+    title: "Doors open",
     startMinutes: 12 * 60,
     durationMinutes: 30,
   },
@@ -342,7 +370,7 @@ const rawSessions: SessionInput[] = [
     venue: "main",
     track: "main",
     kind: "welcome",
-    title: "Main Stage: Welcome Remarks",
+    title: "Welcome Remarks",
     startMinutes: 12 * 60 + 30,
     durationMinutes: 30,
   },
@@ -351,10 +379,10 @@ const rawSessions: SessionInput[] = [
     venue: "main",
     track: "main",
     kind: "keynote",
-    title: "Keynote",
+    title: "Opening Keynote",
+    eyebrow: "KEYNOTE",
     startMinutes: 13 * 60,
     durationMinutes: 30,
-    badges: ["KEYNOTE"],
   },
   {
     id: "main-4",
@@ -370,10 +398,10 @@ const rawSessions: SessionInput[] = [
     venue: "main",
     track: "main",
     kind: "panel",
-    title: "Panel: AI Agents, can we trust them?",
+    title: "AI Agents — can we trust them?",
+    eyebrow: "PANEL · 60 MIN",
     startMinutes: 14 * 60,
     durationMinutes: 60,
-    badges: ["PANEL · 60 MIN"],
   },
   {
     id: "main-6",
@@ -405,29 +433,22 @@ const rawSessions: SessionInput[] = [
   {
     id: "main-9",
     venue: "main",
-    track: "main",
+    // Design flips the Final's track color to Hackathon — it stays a
+    // Main Stage session but joins the Hackathon chip, not Main Stage's.
+    track: "hackathon",
     kind: "hackathon-final",
-    title: "Hackathon Final Live on Main Stage",
+    title: "Hackathon Final",
+    eyebrow: "FINAL",
     startMinutes: 17 * 60,
     durationMinutes: 30,
-    badges: ["LIVE FINAL"],
   },
   {
     id: "main-10",
     venue: "main",
     track: "main",
     kind: "wrap-up",
-    title: "Event Wrap-Up on Main Stage",
+    title: "Event Wrap-Up",
     startMinutes: 17 * 60 + 30,
-    durationMinutes: 30,
-  },
-  {
-    id: "main-11",
-    venue: "main",
-    track: "main",
-    kind: "after-party",
-    title: "After-party starts at a nearby location (5min walk from event)",
-    startMinutes: 18 * 60 + 30,
     durationMinutes: 30,
   },
 
@@ -437,7 +458,7 @@ const rawSessions: SessionInput[] = [
     venue: "aws",
     track: "aws",
     kind: "doors-open",
-    title: "Doors Open",
+    title: "Doors open",
     startMinutes: 12 * 60,
     durationMinutes: 30,
   },
@@ -449,7 +470,6 @@ const rawSessions: SessionInput[] = [
     title: "Overflow live stream of Main Stage",
     startMinutes: 12 * 60 + 30,
     durationMinutes: 60,
-    badges: ["LIVE"],
   },
   {
     id: "aws-3",
@@ -457,9 +477,9 @@ const rawSessions: SessionInput[] = [
     track: "aws",
     kind: "keynote",
     title: "AWS Keynote",
+    eyebrow: "KEYNOTE",
     startMinutes: 13 * 60 + 30,
     durationMinutes: 30,
-    badges: ["KEYNOTE"],
   },
   {
     id: "aws-4",
@@ -514,36 +534,44 @@ const rawSessions: SessionInput[] = [
     title: "Overflow live stream of Main Stage",
     startMinutes: 17 * 60,
     durationMinutes: 60,
-    badges: ["LIVE"],
   },
 
-  // Workshops lane
+  // Workshops — lane 1 (Room 1 then Room 2, sequential)
   {
-    id: "workshops-1",
-    venue: "workshops",
+    id: "workshop-room-1",
+    venue: "workshops-1",
     track: "workshops",
-    kind: "workshop-note",
-    title: "AWS Jam on Level 5 Starts",
+    kind: "workshop",
+    title: "Cloud Workshop — Room 1",
+    eyebrow: "2:00–3:30 · L2",
+    timelineTag: "Workshops · L2",
     startMinutes: 14 * 60,
-    durationMinutes: 30,
+    durationMinutes: 90,
   },
   {
-    id: "workshops-2",
-    venue: "workshops",
+    id: "workshop-room-2",
+    venue: "workshops-1",
     track: "workshops",
     kind: "workshop",
-    title: "Cloud Workshop Level 2",
-    startMinutes: 14 * 60 + 30,
-    durationMinutes: 60,
-  },
-  {
-    id: "workshops-3",
-    venue: "workshops",
-    track: "workshops",
-    kind: "workshop",
-    title: "Cloud Workshop Level 3",
+    title: "Cloud Workshop — Room 2",
+    eyebrow: "3:30–5:00 · L3",
+    timelineTag: "Workshops · L3",
     startMinutes: 15 * 60 + 30,
     durationMinutes: 90,
+  },
+
+  // Workshops — lane 2 (AWS Workshop + AWS Jam)
+  {
+    id: "workshop-aws",
+    venue: "workshops-2",
+    track: "workshops",
+    kind: "workshop",
+    title: "AWS Workshop + AWS Jam",
+    eyebrow: "2:00–4:30 · L5",
+    subtext: "Runs through food break",
+    timelineTag: "Workshops · L5",
+    startMinutes: 14 * 60,
+    durationMinutes: 150,
   },
 ];
 
@@ -552,6 +580,8 @@ export const sessions: Session[] = rawSessions.map(buildSession);
 interface FullWidthRowInput {
   id: string;
   title: string;
+  subtext?: string;
+  variant: "food" | "neutral" | "accent";
   startMinutes: number;
   durationMinutes: number;
   venues: VenueId[];
@@ -561,18 +591,45 @@ const rawFullWidthRows: FullWidthRowInput[] = [
   {
     id: "food-break",
     title: "Hot Food Break",
+    subtext: "all stages pause · hot food in the Basement · workshops continue",
+    variant: "food",
     startMinutes: 15 * 60,
     durationMinutes: 30,
-    // Workshops doesn't pause for the food break — Cloud Workshop Level 2
-    // runs straight through this slot.
     venues: ["hackathon", "showcase", "community", "main", "aws"],
   },
   {
     id: "event-conclusion",
     title: "Event Conclusion",
+    subtext: "Event conclusion — all levels",
+    variant: "neutral",
     startMinutes: 18 * 60,
     durationMinutes: 30,
-    venues: ["hackathon", "showcase", "community", "main", "aws", "workshops"],
+    venues: [
+      "hackathon",
+      "showcase",
+      "community",
+      "main",
+      "aws",
+      "workshops-1",
+      "workshops-2",
+    ],
+  },
+  {
+    id: "after-party",
+    title: "After Party",
+    subtext: "After Party from 6:30pm · 5-minute walk from venue",
+    variant: "accent",
+    startMinutes: 18 * 60 + 30,
+    durationMinutes: 30,
+    venues: [
+      "hackathon",
+      "showcase",
+      "community",
+      "main",
+      "aws",
+      "workshops-1",
+      "workshops-2",
+    ],
   },
 ];
 
@@ -581,6 +638,8 @@ export const fullWidthRows: FullWidthRow[] = rawFullWidthRows.map((row) => {
   return {
     id: row.id,
     title: row.title,
+    subtext: row.subtext,
+    variant: row.variant,
     start: formatMinutes(row.startMinutes),
     end: formatMinutes(endMinutes),
     startMinutes: row.startMinutes,
@@ -598,7 +657,7 @@ export const legend: LegendEntry[] = [
   { track: "food", label: "Food", color: "oklch(0.8 0.1 95)", fallback: "#E0C24F" },
 ];
 
-export const filterTracks: { id: VenueId | "all"; label: string }[] = [
+export const filterTracks: { id: Track | "all"; label: string }[] = [
   { id: "all", label: "All" },
   { id: "main", label: "Main Stage" },
   { id: "community", label: "Community" },
@@ -611,4 +670,7 @@ export const filterTracks: { id: VenueId | "all"; label: string }[] = [
 export const venueKeyText =
   "3 stages + workshops across 5 levels + basement hackathon";
 
-export const dateLine = "Saturday, August 29th, 2026 · 12:00 PM – 6:30 PM";
+export const dateLine =
+  "Saturday, August 29 2026 · 12:00pm – 6:00pm · After party 6:30pm";
+
+export const shortDateLine = "Sat Aug 29 · 12–6pm";

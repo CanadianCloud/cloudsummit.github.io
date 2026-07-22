@@ -34,10 +34,11 @@ describe("Schedule.astro - venue key", () => {
 });
 
 describe("Schedule.astro - grid data-driven rendering", () => {
-  it("iterates the data module's venues and sessions collections to build the grid", () => {
+  it("iterates the data module's venues, sessions, and gridHeaders collections to build the grid", () => {
     expect(source).toMatch(/venues\.map\(/);
     expect(source).toMatch(/sessions\.map\(/);
     expect(source).toMatch(/fullWidthRows\.map\(/);
+    expect(source).toMatch(/gridHeaders\.map\(/);
   });
 });
 
@@ -89,7 +90,7 @@ describe("Schedule.astro - mobile timeline and filter chips", () => {
   });
 
   it("the inline script's filter predicate mirrors scheduleFilter's alwaysVisible-or-track-match rule via DOM data attributes only", () => {
-    expect(source).toMatch(/dataset\.venue/);
+    expect(source).toMatch(/dataset\.track/);
     expect(source).toMatch(/alwaysVisible/i);
   });
 
@@ -97,7 +98,12 @@ describe("Schedule.astro - mobile timeline and filter chips", () => {
     expect(source).toMatch(/filterTracks\.map\(/);
   });
 
-  it("marks always-visible (food break / conclusion / after party) entries in the DOM", () => {
+  it("marks always-visible (food break / after party) entries in the DOM", () => {
     expect(source).toMatch(/data-always-visible/);
+  });
+
+  it("tags each timeline entry with its track via a data attribute instead of venue", () => {
+    expect(source).toMatch(/data-track=/);
+    expect(source).not.toMatch(/data-venue=/);
   });
 });
