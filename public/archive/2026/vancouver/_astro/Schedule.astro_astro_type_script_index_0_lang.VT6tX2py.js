@@ -1,0 +1,1 @@
+import{g as c}from"./cityStore.C6I93cAT.js";function n(e){const t=document.querySelector(".schedule");if(!t)return;const i=e==="vancouver";t.classList.toggle("schedule--hidden",!i),t.setAttribute("aria-hidden",i?"false":"true")}function o(){const e=c();e.init(),n(e.getCity()),e.subscribe(n)}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",o):o();

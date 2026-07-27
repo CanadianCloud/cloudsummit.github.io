@@ -1,0 +1,1 @@
+import{g as o}from"./cityStore.C6I93cAT.js";function n(s){const t=document.getElementById("event-map");if(!t)return;const i=s==="vancouver";t.classList.toggle("event-map-section--hidden",!i),t.setAttribute("aria-hidden",i?"false":"true")}const e=o();e.init();n(e.getCity());e.subscribe(n);
