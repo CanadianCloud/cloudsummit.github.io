@@ -1,7 +1,7 @@
 ---
 import Navigation from "../components/Navigation.astro";
 import Hero from "../components/Hero.astro";
-import CityModal from "../components/CityModal.astro";
+// CityModal import removed to align with the requirements of Issue #130
 import AboutCPCA from "../components/AboutCPCA.astro";
 import WhatIsCloudSummit from "../components/WhatIsCloudSummit.astro";
 import EventLocations from "../components/EventLocations.astro";
@@ -13,7 +13,6 @@ import Ticker from "../components/Ticker.astro";
 import PastSponsors from "../components/PastSponsors.astro";
 import Newsletter from "../components/Newsletter.astro";
 import Footer from "../components/Footer.astro";
-import SeeYouThere from "../components/SeeYouThere.astro";
 import ScrollAnimations from "../components/ScrollAnimations.astro";
 import CommunityPartners from "../components/CommunityPartners.astro";
 import LocalCharitySection from "../components/LocalCharitySection.astro";
@@ -42,9 +41,10 @@ import Speaker from "../components/Speaker.astro";
 import GoogleAnalytics from "../components/GoogleAnalytics.astro";
 import SeoSocial from "../components/SeoSocial.astro";
 import { absoluteUrl, DEFAULT_OG_IMAGE_PATH, getCanonical } from "../lib/seo";
+import CallToActions from "../components/CallToActions.astro";
 
 // Use default city for venueLogisticsContentNewVersionSSR, will be updated client-side
-const content = heroContent[defaultCity];
+const content = heroContent['toronto'];
 
 const homepageSpeakers = speakerContent.filter((speaker) => !speaker.hidden).slice(0, 3);
 
@@ -154,21 +154,22 @@ const ogImageUrl = absoluteUrl(DEFAULT_OG_IMAGE_PATH, Astro);
     <GoogleAnalytics />
   </head>
   <body>
-    <CityModal />
     <Navigation content={navigationContent} />
     <Hero content={content} />
+    <CallToActions />
+    <Schedule />
+
     <WhatIsCloudSummit content={whatIsCloudSummitContent} />
     <CloudSummitActivities content={cloudSummitActivitiesContent} />
     <AboutCPCA content={aboutCPCAContent} />
     <EventLocations />
-    <Schedule />
     <Speaker content={homepageSpeakers} />
      <EventMap content={eventMapContent} />
     <SummitSummary content={eventHighlightsContent} />
     <HighlightReel content={eventHighlightsContent} />
     <Ticker content={tickerContent} />
-    <OurPartners />
-    <CommunityPartners />
+    <!-- <OurPartners /> -->
+    <!-- <CommunityPartners />  -->
     <PastSponsors content={pastSponsorsContent} />
     <LocalCharitySection />
 
@@ -176,13 +177,11 @@ const ogImageUrl = absoluteUrl(DEFAULT_OG_IMAGE_PATH, Astro);
       content={venueLogisticsContentNewVersion}
     />
 
-   
+    
     <FAQ content={faqContent} />
     <Newsletter content={newsletterContent} />
-    <SeeYouThere />
     <Footer content={footerContent} />
     <ScrollAnimations />
-    <!-- <Hero content={content} splineUrl="https://prod.spline.design/WKCpgqTWJIavlH1L/scene.splinecode" /> -->
     <script>
       import { getCityStore } from "../lib/cityStore";
       import type { City } from "../lib/content";

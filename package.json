@@ -6,7 +6,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "test": "vitest"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.2",
@@ -14,5 +15,8 @@
     "gsap": "^3.14.2",
     "lucide-astro": "^0.556.0",
     "lucide-react": "^0.561.0"
+  },
+  "devDependencies": {
+    "vitest": "^4.1.9"
   }
 }

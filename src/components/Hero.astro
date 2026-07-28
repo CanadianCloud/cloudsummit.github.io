@@ -31,7 +31,7 @@ const { content, splineUrl = '' } = Astro.props;
 			<p class="hero-time">{content.time}</p>
 		</div>
 		<div class="hero-actions">
-			<a href={content.primaryCta.href} class="btn btn-primary" data-hero-primary-Cta>{content.primaryCta.text}</a>
+			<a target="_blank" rel="noopener noreferrer" href={content.primaryCta.href} class="btn btn-primary" data-hero-primary-Cta>{content.primaryCta.text}</a>
 			<!-- <a href={content.secondaryCta.href} class="btn btn-secondary">{content.secondaryCta.text}</a> -->
 	
 
@@ -85,7 +85,7 @@ const { content, splineUrl = '' } = Astro.props;
 	const subtitleEl = document.querySelector('[data-city-subtitle]');
 	const descriptionEl = document.querySelector('[data-city-description]');
 	const metaEl = document.querySelector('[data-city-meta]');
-	const ctaButton = document.querySelector('[data-hero-primary-Cta]');
+	const ctaButton = document.querySelector('[data-hero-primary-Cta]') as HTMLAnchorElement;;
 
 	
 	function updateContent(city: 'vancouver' | 'toronto') {
@@ -330,4 +330,3 @@ if (ctaButton) {
 		}
 	}
 </style>
-

@@ -414,7 +414,10 @@ export interface VenueLogisticsSectionNewVersion {
 }
 
 /** Footer line: Website by … — optional LinkedIn per name (same pattern as aws-community-day). */
-export const websiteCredits: Array<{ name: string; link: string | null }> = [
+export const websiteCredits2026_Vancouver: Array<{
+  name: string;
+  link: string | null;
+}> = [
   {
     name: "Nichanun (Luck)",
     link: "https://www.linkedin.com/in/nichanun-pong/",
@@ -430,6 +433,17 @@ export const websiteCredits: Array<{ name: string; link: string | null }> = [
   {
     name: "Laurie",
     link: "https://www.linkedin.com/in/laurieyeh1/",
+  },
+];
+
+export const websiteCredits: Array<{ name: string; link: string | null }> = [
+  {
+    name: "Ahmad",
+    link: "https://www.linkedin.com/in/ahmad-salempoor/",
+  },
+  {
+    name: "Vincent",
+    link: "https://www.linkedin.com/in/vincent-vincent-360b71104/",
   },
 ];
 
@@ -482,7 +496,7 @@ export function getFooterContent(city: City) {
       },
       {
         name: "LinkedIn",
-        url: "https://www.linkedin.com/showcase/vancouvercloudsummit",
+        url: "https://www.linkedin.com/company/canadiancloud/",
       },
     ],
     // pressReleases: [
@@ -871,73 +885,52 @@ export const speakerContent: Speaker[] = [
 export const committeeContent: Committee[] = [
   {
     name: "Matt Carolan",
-    title: "Event Director",
+    title: "",
     link: "https://www.linkedin.com/in/matthewcarolan/",
-    bio: "Matt Carolan is the founder of Cloud Summit and a cloud and security leader with deep experience in platform engineering, enterprise architecture, and cloud transformation. He helps organizations make clear, practical decisions across security, cost, resilience, and operational complexity, combining hands-on technical depth with a global perspective shaped by living and working across Australia, Dubai, Seattle, and Vancouver.",
-    image: "/images/committee/matt-trans.png",
+    bio: "",
+    image: "/images/committee/matt-trans-toronto-2026.jpg",
   },
   {
     name: "Bibi Souza",
-    title: "Mentor",
+    title: "",
     link: "https://www.linkedin.com/in/bibschan/",
-    bio: "Bibi is a community builder and strategic leader with experience across software engineering, project management, and advocacy. She is passionate about bringing people together and helping them grow, with a strong track record of turning fragmented audiences into thriving communities. As an exited founder, she brings an experimental mindset, a bias toward action, and thoughtful risk-taking to everything she builds. At Cloud Summit, she helps shape community with intention, energy, and purpose.",
-    image: "/images/committee/bibi-trans.png",
+    bio: "",
+    image: "/images/committee/Bibi_Souza.jpg",
   },
   {
-    name: "Andrey Barkov",
-    title: "Emcee",
-    link: "https://www.linkedin.com/in/andreybarkov/",
-    bio: "Andrey is one of the emcees for Cloud Summit Vancouver. He is an experienced software engineer with a background in web applications, cloud infrastructure, and microservices, with expertise across Angular, React, C#, Node.js, Azure, and AWS. He brings strong technical knowledge and an agile mindset to the Cloud Summit community.",
-    image: "/images/committee/andrey-trans.png",
+    name: "Ben Udashkin",
+    title: "",
+    link: "https://www.linkedin.com/in/benudashkin/",
+    bio: "",
+    image: "/images/committee/Ben_U.jpg",
   },
   {
-    name: "Warren Lyne",
-    title: "Emcee",
-    link: "https://www.linkedin.com/in/warrenlyne/",
-    bio: "Warren is one of the emcees for Cloud Summit Vancouver. He brings over 20 years of experience across cloud, technical sales, and business development, helping enterprise customers use technology to drive innovation and growth. With deep knowledge of cloud strategy, enterprise solutions, and digital transformation, he combines technical credibility with strong leadership and communication skills.",
-    image: "/images/committee/warren-trans.png",
+    name: "Bansi Delwadia",
+    title: "",
+    link: "https://www.linkedin.com/in/bansidelwadia",
+    bio: "",
+    image: "/images/committee/bensi_delwad.jpg",
   },
   {
-    name: "Fabio Simka Coutinho",
-    title: "Venue and Logistics Co-Lead",
-    link: "https://www.linkedin.com/in/fabio-simka/",
-    bio: "Fabio is the Venue and Logistics Co-Lead for Cloud Summit Vancouver. After 10 years working in healthcare leadership, he transitioned into tech and is now focused on data engineering across AWS, Azure, and Databricks. With experience in high-pressure environments where communication, accountability, and clarity were essential, he brings a thoughtful, dependable approach to building systems and solving problems. His background gives him a strong focus on reliability, real-world impact, and the people behind the data.",
-    image: "/images/committee/fabio-trans.png",
+    name: "Jhan Silva",
+    title: "",
+    link: "https://www.linkedin.com/in/shankyjs",
+    bio: "",
+    image: "/images/committee/jhan_silva.jpg",
   },
   {
-    name: "Jhan (Shanky) Silva",
-    title: "Sponsorship Lead",
-    link: "https://www.linkedin.com/in/shankyjs/",
-    bio: "Shanky is the Sponsorship Lead for Cloud Summit Vancouver. With a strong background in DevOps, automation, and modern development and deployment practices, he brings a practical, goal-oriented approach to building and improving technical processes. A self-driven learner who enjoys creating agile products, Shanky is passionate about continuous improvement, innovation, and helping great ideas gain momentum.",
-    image: "/images/committee/shanky-trans.png",
+    name: "Manush Parikh",
+    title: "",
+    link: "https://www.linkedin.com/in/manush-parikh/",
+    bio: "",
+    image: "/images/committee/Manush_Parikh.jpg",
   },
   {
-    name: "Michael Carlos",
-    title: "Speaker and Community Lead",
-    link: "https://www.linkedin.com/in/mcarlos/",
-    bio: "Michael Carlos is the Speaker and Community Lead for Cloud Summit Vancouver. He brings over 30 years of software engineering experience, including two decades leading development teams, along with a deep interest in AI, robotics, game technology, physics, and evolutionary algorithms. His mix of technical depth and visionary thinking helps shape the ideas, conversations, and community that make Cloud Summit stand out.",
-    image: "/images/committee/michael-trans.png",
-  },
-  {
-    name: "Nichanun Pong (Luck)",
-    title: "Developer Lead",
-    link: "https://www.linkedin.com/in/nichanun-pong/",
-    bio: "Luck is the Developer Lead for Cloud Summit Vancouver. A full-stack developer and product owner, she brings experience across e-commerce, gaming, insurance, and IT, with a focus on building user-centric, data-driven products that connect business goals with strong technical execution. Her background includes JavaScript, React, Node.js, PHP, Laravel, SQL, Python, AWS, and Docker.",
-    image: "/images/committee/luck-trans.png",
-  },
-  {
-    name: "Fernando Stoelting",
-    title: "Venue and Logistics Co-Lead",
-    link: "https://www.linkedin.com/in/fstoelting/",
-    bio: "Fernando is the Venue and Logistics Co-Lead for Cloud Summit Vancouver. He brings 8 years of tech leadership experience across Canada, the US, and Latin America, with a focus on delivering meaningful projects, aligning technology with business goals, and building collaborative, high-performing teams.",
-    image: "/images/committee/fernando-trans.png",
-  },
-  {
-    name: "Philip Mak",
-    title: "Volunteer Lead",
-    link: "https://www.linkedin.com/in/philip-mak-b2b92823a/",
-    bio: "Philip is the Volunteer Lead for Cloud Summit Vancouver. He is a project management professional with experience leading data-driven technical projects across AI, education technology, and community-focused platforms. With a strong background in collaboration, analytics, and user-centered problem solving, he brings an organized and thoughtful approach to supporting volunteers and helping teams succeed.",
-    image: "/images/committee/philip-trans.png",
+    name: "Chris David",
+    title: "",
+    link: "https://www.linkedin.com/in/christophermdavid/",
+    bio: "",
+    image: "/images/committee/Chris_David.jpg",
   },
 ];
 
@@ -1046,13 +1039,12 @@ export const faqContent: FAQ[] = [
   },
   {
     question: "When is Cloud Summit?",
-    answer:
-      "For Cloud Summit Vancouver it takes place on May 1, 2026.\nFor Cloud Summit Toronto it takes place on August 29, 2026.",
+    answer: "The Cloud Summit Toronto takes place on August 29, 2026.",
   },
   {
     question: "Where is the event being held?",
     answer:
-      "For Vancouver the event is being held at Science World in Vancouver, BC.\nFor Toronto the event is being held at Northeastern University in Toronto, ON.",
+      "The event is being held at Northeastern University in Toronto, ON.",
   },
   {
     question: "Who should attend?",
@@ -1129,18 +1121,17 @@ Whether you're deeply technical or just looking to better understand where cloud
   {
     question: "Is the venue accessible?",
     answer:
-      "Both venues in Vancouver and Toronto were selected due to their accessibility. If you have a particular accessibility need, please contact the team in advance.",
+      " The venue was selected due to their accessibility. If you have a particular accessibility need, please contact the team in advance.",
   },
   {
     question: "Is there parking at the venue?",
     answer:
-      "There are parking options near very close to both venues, but availability and pricing may vary. Public transit is also a convenient option for many attendees.",
+      "There are parking options near very close to the venue, but availability and pricing may vary. Public transit is also a convenient option for many attendees.",
   },
   {
     question: "What is the best way to get there?",
-    answer: `For Vancouver, Cloud Summit is held at Science World, 1455 Quebec Street. The venue is easy to reach by car, rideshare, public transit, or on foot. The scenic False Creek seawall runs right by Science World, the Main Street–Science World SkyTrain station is directly across the road, and there are two paid parking lots immediately outside the building off Quebec Street.
-
-For Toronto, Cloud Summit is held at Northeastern University, 375 Queen Street West in downtown Toronto. The venue is easy to reach by public transit or on foot, with Osgoode Station about a five-minute walk away and the 501 Queen streetcar stopping nearby in both directions.`,
+    answer: `The Toronto Cloud Summit is held at Northeastern University, 375 Queen Street West in downtown Toronto. 
+    The venue is easy to reach by public transit or on foot, with Osgoode Station about a five-minute walk away and the 501 Queen streetcar stopping nearby in both directions.`,
   },
   {
     question: "Will food and drinks be available?",
@@ -1169,5 +1160,33 @@ For Toronto, Cloud Summit is held at Northeastern University, 375 Queen Street W
     question: "How do I stay updated?",
     answer:
       "The best way is to check CloudSummit.ca regularly and follow the event’s social channels for speaker announcements, schedule updates, and new event details.",
+  },
+];
+
+export interface CTAButton {
+  label: string;
+  href: string;
+  testid: string;
+  styleClass: string;
+}
+
+export const topPageCTAs: CTAButton[] = [
+  {
+    label: "Sponsors",
+    href: "https://tally.so/r/wLqXvO",
+    testid: "cta-sponsor",
+    styleClass: "bg-blue-600 hover:bg-blue-700",
+  },
+  {
+    label: "Speakers",
+    href: "https://tally.so/r/rjBeN5",
+    testid: "cta-speakers",
+    styleClass: "bg-green-600 hover:bg-green-700",
+  },
+  {
+    label: "Volunteers",
+    href: "https://tally.so/r/mBVZjA",
+    testid: "cta-volunteers",
+    styleClass: "bg-purple-600 hover:bg-purple-700",
   },
 ];
