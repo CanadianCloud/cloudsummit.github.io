@@ -478,10 +478,14 @@ export function getFooterContent(city: City) {
         col: 2,
         text: "Subscribe to Newsletter",
         href: "https://tally.so/r/mR6RBl",
-        target: "_blank",
       },
       // { col: 2, text: 'Sponsorship Info', href: '/our-sponsors' },
 
+      {
+        col: 3,
+        text: "Vancouver - 2026",
+        href: "/archive/2026/vancouver/index.html",
+      },
       { col: 3, text: "2025", href: "/archive/2025/index.html" },
       { col: 3, text: "2024", href: "/archive/2024.html" },
     ],
