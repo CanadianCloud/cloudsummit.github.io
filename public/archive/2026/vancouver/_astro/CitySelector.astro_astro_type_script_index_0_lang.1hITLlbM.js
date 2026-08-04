@@ -1,0 +1,1 @@
+import{g as c}from"./cityStore.C6I93cAT.js";function i(){const t=c(),e=document.getElementById("city-select");e&&(t.init(),e.value=t.getCity(),e.addEventListener("change",n=>{const o=n.target;t.setCity(o.value)}),t.subscribe(n=>{e.value=n}))}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",i):i();

@@ -1,0 +1,32 @@
+[33mcommit 6f1c56ce9b73e08cf96ec600acee3655c594db0b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mstaging[m[33m, [m[1;31morigin/staging[m[33m)[m
+Author: Vincent <vincentbiasa6767@gmail.com>
+Date:   Mon Jul 20 23:00:16 2026 -0700
+
+    Remove unnecessary comments
+
+[33mcommit 22f449cac7b62b90db82f34e9de75e01505f65dd[m
+Merge: d4bd27e 93db34c
+Author: Vincent <vincentbiasa6767@gmail.com>
+Date:   Mon Jul 20 22:53:31 2026 -0700
+
+    Merge pull request #174 from CanadianCloud/feature/newsletter-new-window-138
+    
+    test: add unit tests for newsletter buttons and verify target blank #138
+
+[33mcommit 93db34cf16cfdee020083f527be67ee84e64e602[m[33m ([m[1;31morigin/feature/newsletter-new-window-138[m[33m)[m
+Author: Vincent <vincentbiasa6767@gmail.com>
+Date:   Mon Jul 20 22:52:37 2026 -0700
+
+    Translate a comment to English
+
+[33mcommit 321f24eb7076bafb8fc7f96633b054630c18e255[m
+Author: Vincent <vincentbiasa6767@gmail.com>
+Date:   Mon Jul 20 22:49:49 2026 -0700
+
+    Translate the comment to English
+
+[33mcommit 5822d4318930b02db20706117e80d67f2bf63be3[m
+Author: ahmad1368 <ahmad.salempoor@gmail.com>
+Date:   Sat Jul 11 22:07:09 2026 -0700
+
+    test: add unit tests for newsletter buttons and verify target blank #138
