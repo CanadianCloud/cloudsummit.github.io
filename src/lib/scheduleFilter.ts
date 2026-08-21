@@ -118,7 +118,7 @@ function buildDoorsOpenEntry(): TimelineEntry {
     end: anyDoors?.end ?? "12:30",
     endMinutes,
     track: null,
-    tag: "Levels 3–5",
+    tag: "Levels 3–4",
     styleClass: "neutral",
     alwaysVisible: true,
     durationLabel: formatDuration(endMinutes - startMinutes),

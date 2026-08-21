@@ -37,6 +37,7 @@ import {
   faqContent,
 } from "../lib/content";
 import Schedule from "../components/Schedule.astro";
+import FeaturedSpeakers from "../components/FeaturedSpeakers.astro";
 import Speaker from "../components/Speaker.astro";
 import GoogleAnalytics from "../components/GoogleAnalytics.astro";
 import SeoSocial from "../components/SeoSocial.astro";
@@ -158,6 +159,7 @@ const ogImageUrl = absoluteUrl(DEFAULT_OG_IMAGE_PATH, Astro);
     <Hero content={content} />
     <CallToActions />
     <Schedule />
+    <FeaturedSpeakers />
 
     <WhatIsCloudSummit content={whatIsCloudSummitContent} />
     <CloudSummitActivities content={cloudSummitActivitiesContent} />

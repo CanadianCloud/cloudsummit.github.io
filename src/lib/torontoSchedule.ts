@@ -6,7 +6,6 @@
 export type VenueId =
   | "hackathon"
   | "showcase"
-  | "community"
   | "main"
   | "aws"
   | "workshops-1"
@@ -15,7 +14,6 @@ export type VenueId =
 export type Track =
   | "hackathon"
   | "showcase"
-  | "community"
   | "main"
   | "aws"
   | "workshops"
@@ -51,6 +49,12 @@ export interface GridHeader {
   fallback: string;
 }
 
+export interface Speaker {
+  name: string;
+  role?: string;
+  linkedIn?: string;
+}
+
 export interface Session {
   id: string;
   venue: VenueId;
@@ -61,6 +65,7 @@ export interface Session {
   subtext?: string;
   /** Overrides the venue's default timelineTag on the mobile card. */
   timelineTag?: string;
+  speakers?: Speaker[];
   start: string;
   end: string;
   startMinutes: number;
@@ -118,9 +123,8 @@ export const slots: string[] = (() => {
 export const venues: Venue[] = [
   { id: "hackathon", label: "Basement · Hackathon", timelineTag: "Basement" },
   { id: "showcase", label: "L2 · Showcase", timelineTag: "Showcase · L2" },
-  { id: "community", label: "L3 · Community Stage", timelineTag: "Community · L3" },
   { id: "main", label: "L4 · Main Stage", timelineTag: "Main Stage · L4" },
-  { id: "aws", label: "L5 · AWS Stage", timelineTag: "AWS Stage · L5" },
+  { id: "aws", label: "L3 · AWS Stage", timelineTag: "AWS Stage · L3" },
   { id: "workshops-1", label: "Workshops · Room 1", timelineTag: "Workshops" },
   { id: "workshops-2", label: "Workshops · Room 2", timelineTag: "Workshops" },
 ];
@@ -128,9 +132,8 @@ export const venues: Venue[] = [
 export const gridHeaders: GridHeader[] = [
   { label: "Basement · Hackathon", span: 1, color: "oklch(0.76 0.12 310)", fallback: "#C86ADB" },
   { label: "L2 · Showcase", span: 1, color: "#98a2b5", fallback: "#98a2b5" },
-  { label: "L3 · Community Stage", span: 1, color: "oklch(0.75 0.11 185)", fallback: "#3DC9B0" },
   { label: "L4 · Main Stage", span: 1, color: "oklch(0.75 0.11 255)", fallback: "#5B8DEF" },
-  { label: "L5 · AWS Stage", span: 1, color: "oklch(0.78 0.11 65)", fallback: "#E8A33D" },
+  { label: "L3 · AWS Stage", span: 1, color: "oklch(0.78 0.11 65)", fallback: "#E8A33D" },
   { label: "Workshops", span: 2, color: "oklch(0.75 0.11 150)", fallback: "#4FC97A" },
 ];
 
@@ -143,6 +146,7 @@ interface SessionInput {
   eyebrow?: string;
   subtext?: string;
   timelineTag?: string;
+  speakers?: Speaker[];
   startMinutes: number;
   durationMinutes: number;
 }
@@ -158,6 +162,7 @@ function buildSession(input: SessionInput): Session {
     eyebrow: input.eyebrow,
     subtext: input.subtext,
     timelineTag: input.timelineTag,
+    speakers: input.speakers,
     start: formatMinutes(input.startMinutes),
     end: formatMinutes(endMinutes),
     startMinutes: input.startMinutes,
@@ -272,89 +277,6 @@ const rawSessions: SessionInput[] = [
     durationMinutes: 120,
   },
 
-  // L3 · Community Stage
-  {
-    id: "community-1",
-    venue: "community",
-    track: "community",
-    kind: "doors-open",
-    title: "Doors open",
-    startMinutes: 12 * 60,
-    durationMinutes: 30,
-  },
-  {
-    id: "community-2",
-    venue: "community",
-    track: "community",
-    kind: "stream",
-    title: "Overflow live stream of Main Stage",
-    startMinutes: 12 * 60 + 30,
-    durationMinutes: 60,
-  },
-  {
-    id: "community-3",
-    venue: "community",
-    track: "community",
-    kind: "talk",
-    title: "Community Stage Talk",
-    startMinutes: 13 * 60 + 30,
-    durationMinutes: 30,
-  },
-  {
-    id: "community-4",
-    venue: "community",
-    track: "community",
-    kind: "talk",
-    title: "Community Stage Talk",
-    startMinutes: 14 * 60,
-    durationMinutes: 30,
-  },
-  {
-    id: "community-5",
-    venue: "community",
-    track: "community",
-    kind: "talk",
-    title: "Community Stage Talk",
-    startMinutes: 14 * 60 + 30,
-    durationMinutes: 30,
-  },
-  {
-    id: "community-6",
-    venue: "community",
-    track: "community",
-    kind: "talk",
-    title: "Community Stage Talk",
-    startMinutes: 15 * 60 + 30,
-    durationMinutes: 30,
-  },
-  {
-    id: "community-7",
-    venue: "community",
-    track: "community",
-    kind: "talk",
-    title: "Community Stage Talk",
-    startMinutes: 16 * 60,
-    durationMinutes: 30,
-  },
-  {
-    id: "community-8",
-    venue: "community",
-    track: "community",
-    kind: "talk",
-    title: "Community Stage Talk",
-    startMinutes: 16 * 60 + 30,
-    durationMinutes: 30,
-  },
-  {
-    id: "community-9",
-    venue: "community",
-    track: "community",
-    kind: "stream",
-    title: "Overflow live stream of Main Stage",
-    startMinutes: 17 * 60,
-    durationMinutes: 60,
-  },
-
   // L4 · Main Stage
   {
     id: "main-1",
@@ -389,7 +311,8 @@ const rawSessions: SessionInput[] = [
     venue: "main",
     track: "main",
     kind: "talk",
-    title: "Main Stage Talk",
+    title: "Gateway API Is The Fastest Path to Secure Cloud Based Applications",
+    speakers: [{ name: "Reza Ramezanpour", linkedIn: "https://www.linkedin.com/in/rramezanpour/" }],
     startMinutes: 13 * 60 + 30,
     durationMinutes: 30,
   },
@@ -398,8 +321,12 @@ const rawSessions: SessionInput[] = [
     venue: "main",
     track: "main",
     kind: "panel",
-    title: "AI Agents — can we trust them?",
+    title: "AWS Frontier Agents",
     eyebrow: "PANEL · 60 MIN",
+    speakers: [
+      { name: "Avani Sharma", linkedIn: "https://www.linkedin.com/in/avanisharma130203/" },
+      { name: "Archana Manohar", linkedIn: "https://www.linkedin.com/in/archanamanohar/" },
+    ],
     startMinutes: 14 * 60,
     durationMinutes: 60,
   },
@@ -408,7 +335,8 @@ const rawSessions: SessionInput[] = [
     venue: "main",
     track: "main",
     kind: "talk",
-    title: "Main Stage Talk",
+    title: "From Prompt to Pipeline: Building a Multi-Agent System in Azure AI Foundry with GitHub Copilot",
+    speakers: [{ name: "Kaan Turgut", linkedIn: "https://www.linkedin.com/in/hkaanturgut/" }],
     startMinutes: 15 * 60 + 30,
     durationMinutes: 30,
   },
@@ -417,7 +345,8 @@ const rawSessions: SessionInput[] = [
     venue: "main",
     track: "main",
     kind: "talk",
-    title: "Main Stage Talk",
+    title: "Beyond Ingress: Mastering the Kubernetes Gateway API",
+    speakers: [{ name: "Wolfgang Ofner", linkedIn: "https://www.linkedin.com/in/wolfgangofner" }],
     startMinutes: 16 * 60,
     durationMinutes: 30,
   },
@@ -426,7 +355,11 @@ const rawSessions: SessionInput[] = [
     venue: "main",
     track: "main",
     kind: "talk",
-    title: "Main Stage Talk",
+    title: "Next-Gen Kubernetes Networking: Bypassing Kube-Proxy and Edge Bottlenecks with Cilium",
+    speakers: [
+      { name: "Marino Wijay", linkedIn: "https://www.linkedin.com/in/mwijay" },
+      { name: "Rachel Leekin", linkedIn: "https://www.linkedin.com/in/rachel-leekin/" },
+    ],
     startMinutes: 16 * 60 + 30,
     durationMinutes: 30,
   },
@@ -452,7 +385,7 @@ const rawSessions: SessionInput[] = [
     durationMinutes: 30,
   },
 
-  // L5 · AWS Stage
+  // L3 · AWS Stage
   {
     id: "aws-1",
     venue: "aws",
@@ -478,6 +411,13 @@ const rawSessions: SessionInput[] = [
     kind: "keynote",
     title: "AWS Keynote",
     eyebrow: "KEYNOTE",
+    speakers: [
+      {
+        name: "Milad Kayali",
+        role: "Head of Canada Enterprise Industry Solutions Architecture, AWS",
+        linkedIn: "https://www.linkedin.com/in/miladkayali/",
+      },
+    ],
     startMinutes: 13 * 60 + 30,
     durationMinutes: 30,
   },
@@ -486,7 +426,8 @@ const rawSessions: SessionInput[] = [
     venue: "aws",
     track: "aws",
     kind: "talk",
-    title: "AWS Stage Talk",
+    title: "Your Pods Can Think Now: AI-Augmented Workloads on EKS with Amazon Bedrock",
+    speakers: [{ name: "Kriti Bhandari", linkedIn: "https://www.linkedin.com/in/kritibhandari/" }],
     startMinutes: 14 * 60,
     durationMinutes: 30,
   },
@@ -495,7 +436,8 @@ const rawSessions: SessionInput[] = [
     venue: "aws",
     track: "aws",
     kind: "talk",
-    title: "AWS Stage Talk",
+    title: "Agents Are the New Microservices Problem",
+    speakers: [{ name: "Rohini Gaonkar", linkedIn: "https://www.linkedin.com/in/rohinigaonkar/" }],
     startMinutes: 14 * 60 + 30,
     durationMinutes: 30,
   },
@@ -504,7 +446,8 @@ const rawSessions: SessionInput[] = [
     venue: "aws",
     track: "aws",
     kind: "talk",
-    title: "AWS Stage Talk",
+    title: "Building a Personal Knowledge Graph: How Amazon Quick Remembers Everything",
+    speakers: [{ name: "Hetvi Parsana", linkedIn: "https://www.linkedin.com/in/hetvi-parsana" }],
     startMinutes: 15 * 60 + 30,
     durationMinutes: 30,
   },
@@ -513,7 +456,8 @@ const rawSessions: SessionInput[] = [
     venue: "aws",
     track: "aws",
     kind: "talk",
-    title: "AWS Stage Talk",
+    title: "A Company AI Brain That Curates Itself",
+    speakers: [{ name: "Brett Gillett", linkedIn: "https://www.linkedin.com/in/brettgillett/" }],
     startMinutes: 16 * 60,
     durationMinutes: 30,
   },
@@ -522,7 +466,8 @@ const rawSessions: SessionInput[] = [
     venue: "aws",
     track: "aws",
     kind: "talk",
-    title: "AWS Stage Talk",
+    title: "Security at Machine Speed: Introducing AWS Continuum",
+    speakers: [{ name: "Ashwin Bhargava", linkedIn: "https://www.linkedin.com/in/ashwinbh/" }],
     startMinutes: 16 * 60 + 30,
     durationMinutes: 30,
   },
@@ -567,9 +512,9 @@ const rawSessions: SessionInput[] = [
     track: "workshops",
     kind: "workshop",
     title: "AWS Workshop + AWS Jam",
-    eyebrow: "2:00–4:30 · L5",
+    eyebrow: "2:00–4:30 · L3",
     subtext: "Runs through food break",
-    timelineTag: "Workshops · L5",
+    timelineTag: "Workshops · L3",
     startMinutes: 14 * 60,
     durationMinutes: 150,
   },
@@ -595,7 +540,7 @@ const rawFullWidthRows: FullWidthRowInput[] = [
     variant: "food",
     startMinutes: 15 * 60,
     durationMinutes: 30,
-    venues: ["hackathon", "showcase", "community", "main", "aws"],
+    venues: ["hackathon", "showcase", "main", "aws"],
   },
   {
     id: "event-conclusion",
@@ -607,7 +552,6 @@ const rawFullWidthRows: FullWidthRowInput[] = [
     venues: [
       "hackathon",
       "showcase",
-      "community",
       "main",
       "aws",
       "workshops-1",
@@ -624,7 +568,6 @@ const rawFullWidthRows: FullWidthRowInput[] = [
     venues: [
       "hackathon",
       "showcase",
-      "community",
       "main",
       "aws",
       "workshops-1",
@@ -650,7 +593,6 @@ export const fullWidthRows: FullWidthRow[] = rawFullWidthRows.map((row) => {
 
 export const legend: LegendEntry[] = [
   { track: "main", label: "Main", color: "oklch(0.75 0.11 255)", fallback: "#5B8DEF" },
-  { track: "community", label: "Community", color: "oklch(0.75 0.11 185)", fallback: "#3DC9B0" },
   { track: "aws", label: "AWS", color: "oklch(0.78 0.11 65)", fallback: "#E8A33D" },
   { track: "hackathon", label: "Hackathon", color: "oklch(0.76 0.12 310)", fallback: "#C86ADB" },
   { track: "workshops", label: "Workshops", color: "oklch(0.75 0.11 150)", fallback: "#4FC97A" },
@@ -660,7 +602,6 @@ export const legend: LegendEntry[] = [
 export const filterTracks: { id: Track | "all"; label: string }[] = [
   { id: "all", label: "All" },
   { id: "main", label: "Main Stage" },
-  { id: "community", label: "Community" },
   { id: "aws", label: "AWS" },
   { id: "hackathon", label: "Hackathon" },
   { id: "workshops", label: "Workshops" },
@@ -668,7 +609,7 @@ export const filterTracks: { id: Track | "all"; label: string }[] = [
 ];
 
 export const venueKeyText =
-  "3 stages + workshops across 5 levels + basement hackathon";
+  "2 stages + workshops across 5 levels + basement hackathon";
 
 export const dateLine =
   "Saturday, August 29 2026 · 12:00pm – 6:00pm · After party 6:30pm";

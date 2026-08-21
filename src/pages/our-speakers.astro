@@ -7,6 +7,28 @@ import GoogleAnalytics from '../components/GoogleAnalytics.astro';
 import SeoSocial from '../components/SeoSocial.astro';
 import { absoluteUrl, DEFAULT_OG_IMAGE_PATH, getCanonical } from '../lib/seo';
 
+const torontoSpeakers = [
+  { name: "Milad Kayali",    linkedIn: "https://www.linkedin.com/in/miladkayali/",       talkTitle: "AWS Keynote",                                                                                                        image: "/images/speakers/Milad.png" },
+  { name: "Reza Ramezanpour", linkedIn: "https://www.linkedin.com/in/rramezanpour/",     talkTitle: "Gateway API Is The Fastest Path to Secure Cloud Based Applications",                                                image: "/images/speakers/Reza.png" },
+  { name: "Avani Sharma",    linkedIn: "https://www.linkedin.com/in/avanisharma130203/", talkTitle: "Panel",                                                                                                              image: "/images/speakers/Avani.png" },
+  { name: "Archana Manohar", linkedIn: "https://www.linkedin.com/in/archanamanohar/",    talkTitle: "Panel",                                                                                                              image: "/images/speakers/Archana.png" },
+  { name: "Kriti Bhandari",  linkedIn: "https://www.linkedin.com/in/kritibhandari/",     talkTitle: "Your Pods Can Think Now: AI-Augmented Workloads on EKS with Amazon Bedrock",                                        image: "/images/speakers/Kriti.png" },
+  { name: "Rohini Gaonkar",  linkedIn: "https://www.linkedin.com/in/rohinigaonkar/",     talkTitle: "Agents Are the New Microservices Problem",                                                                           image: "/images/speakers/Rohini.png" },
+  { name: "Hetvi Parsana",   linkedIn: "https://www.linkedin.com/in/hetvi-parsana",      talkTitle: "Building a Personal Knowledge Graph: How Amazon Quick Remembers Everything",                                         image: "/images/speakers/Hetvi.png" },
+  { name: "Brett Gillett",   linkedIn: "https://www.linkedin.com/in/brettgillett/",      talkTitle: "A Company AI Brain That Curates Itself",                                                                             image: "/images/speakers/Brett.png" },
+  { name: "Ashwin Bhargava", linkedIn: "https://www.linkedin.com/in/ashwinbh/",          talkTitle: "Security at Machine Speed: Introducing AWS Continuum",                                                              image: "/images/speakers/Ashwin.png" },
+  { name: "Kaan Turgut",     linkedIn: "https://www.linkedin.com/in/hkaanturgut/",       talkTitle: "From Prompt to Pipeline: Building a Multi-Agent System in Azure AI Foundry with GitHub Copilot",                    image: "/images/speakers/Kaan.png" },
+  { name: "Wolfgang Ofner",  linkedIn: "https://www.linkedin.com/in/wolfgangofner",      talkTitle: "Beyond Ingress: Mastering the Kubernetes Gateway API",                                                              image: "/images/speakers/Wolfgang.png" },
+  { name: "Marino Wijay",    linkedIn: "https://www.linkedin.com/in/mwijay",             talkTitle: "Next-Gen Kubernetes Networking: Bypassing Kube-Proxy and Edge Bottlenecks with Cilium",                             image: "/images/speakers/Marino.png" },
+];
+
+const emcees = [
+  { name: "Matt Carolan",  role: "Event Director", linkedIn: "https://www.linkedin.com/in/matthewcarolan/", image: "/images/speakers/Matt.png" },
+  { name: "Bibi Souza",    role: "MC · HackerRivals", linkedIn: "https://www.linkedin.com/in/bibschan/",   image: "/images/speakers/Bibi.png" },
+  { name: "Victor",        role: "MC · Main Stage",   linkedIn: "https://www.linkedin.com/in/victorszoltysek/", image: "/images/speakers/Victor.png" },
+  { name: "Bansi",         role: "MC · AWS Stage",    linkedIn: "https://www.linkedin.com/in/bansidelwadia/",   image: "/images/speakers/Bansi.png" },
+];
+
 const pageTitle = 'Our Speakers - Cloud Summit 2026';
 const pageDescription =
 	"Meet Cloud Summit 2026 featured speakers at Canada's premier multi-cloud conference in Vancouver and Toronto.";
@@ -80,7 +102,18 @@ const ogImageUrl = absoluteUrl(DEFAULT_OG_IMAGE_PATH, Astro);
 			<section class="speakers-section">
 				<div class="speakers-container">
 					<div class="speakers-city-content speakers-city-content--toronto" aria-live="polite">
-						<p class="speakers-coming-soon">Coming soon..</p>
+						<div class="toronto-speakers-grid">
+							{torontoSpeakers.map((speaker) => (
+								<div class="toronto-speaker-card">
+									<img src={speaker.image} alt={speaker.name} class="toronto-speaker-photo" loading="lazy" />
+									{speaker.linkedIn
+										? <a class="toronto-speaker-name" href={speaker.linkedIn} target="_blank" rel="noopener noreferrer">{speaker.name}</a>
+										: <span class="toronto-speaker-name toronto-speaker-name--plain">{speaker.name}</span>
+									}
+									{speaker.talkTitle && <p class="toronto-speaker-talk">{speaker.talkTitle}</p>}
+								</div>
+							))}
+						</div>
 					</div>
 					<div class="speakers-city-content speakers-city-content--vancouver">
 					<div class="speakers-grid speakers-grid--detailed">
@@ -173,6 +206,19 @@ const ogImageUrl = absoluteUrl(DEFAULT_OG_IMAGE_PATH, Astro);
 					</div>
 				</div>
 			</section>
+
+		<section class="emcees-section">
+			<h2 class="emcees-heading">Emcees & Event Team</h2>
+			<div class="emcees-grid">
+				{emcees.map((person) => (
+					<div class="emcee-card">
+						<img src={person.image} alt={person.name} class="emcee-photo" loading="lazy" />
+						<a class="emcee-name" href={person.linkedIn} target="_blank" rel="noopener noreferrer">{person.name}</a>
+						<p class="emcee-role">{person.role}</p>
+					</div>
+				))}
+			</div>
+		</section>
 		</main>
 
 		<Footer content={footerContent} />
@@ -676,6 +722,134 @@ const ogImageUrl = absoluteUrl(DEFAULT_OG_IMAGE_PATH, Astro);
 		font-size: 1rem;
 		line-height: 1.65;
 		opacity: 0.92;
+	}
+
+	/* Toronto speakers grid */
+	.toronto-speakers-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 2.5rem 2rem;
+		padding: 1rem 0 2rem;
+	}
+
+	.toronto-speaker-card {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.6rem;
+		text-align: center;
+	}
+
+	.toronto-speaker-photo {
+		width: 100%;
+		max-width: 200px;
+		height: auto;
+		object-fit: contain;
+	}
+
+
+	.toronto-speaker-name {
+		font-family: 'Noto Sans', system-ui, sans-serif;
+		font-size: 1rem;
+		font-weight: 700;
+		color: #93b4f5;
+		text-decoration: underline;
+		text-underline-offset: 2px;
+	}
+
+	.toronto-speaker-name:hover {
+		color: white;
+	}
+
+	.toronto-speaker-name--plain {
+		color: white;
+		text-decoration: none;
+	}
+
+	.toronto-speaker-talk {
+		font-family: 'Noto Sans', system-ui, sans-serif;
+		font-size: 0.8125rem;
+		color: #8b93a5;
+		line-height: 1.4;
+		margin: 0;
+	}
+
+	@media (min-width: 600px) {
+		.toronto-speakers-grid {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+
+	@media (min-width: 900px) {
+		.toronto-speakers-grid {
+			grid-template-columns: repeat(4, 1fr);
+		}
+	}
+
+	/* Emcees section */
+	.emcees-section {
+		padding: 3rem 1.5rem 5rem;
+		background: #000;
+		border-top: 1px solid #1e2534;
+	}
+
+	.emcees-heading {
+		font-family: 'Squada One', system-ui, sans-serif;
+		font-size: 2rem;
+		color: rgb(255, 193, 77);
+		text-align: center;
+		margin: 0 0 2.5rem;
+	}
+
+	.emcees-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 2.5rem 2rem;
+		max-width: 700px;
+		margin: 0 auto;
+	}
+
+	.emcee-card {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.6rem;
+		text-align: center;
+	}
+
+	.emcee-photo {
+		width: 100%;
+		max-width: 180px;
+		height: auto;
+		border-radius: 0.75rem;
+		object-fit: contain;
+	}
+
+	.emcee-name {
+		font-family: 'Noto Sans', system-ui, sans-serif;
+		font-size: 1rem;
+		font-weight: 700;
+		color: #93b4f5;
+		text-decoration: underline;
+		text-underline-offset: 2px;
+	}
+
+	.emcee-name:hover {
+		color: white;
+	}
+
+	.emcee-role {
+		font-family: 'Noto Sans', system-ui, sans-serif;
+		font-size: 0.8125rem;
+		color: #8b93a5;
+		margin: 0;
+	}
+
+	@media (min-width: 600px) {
+		.emcees-grid {
+			grid-template-columns: repeat(4, 1fr);
+			max-width: 900px;
+		}
 	}
 
 	/* Desktop Styles */
