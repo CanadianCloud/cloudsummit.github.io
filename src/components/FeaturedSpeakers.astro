@@ -1,0 +1,158 @@
+---
+const speakers = [
+  {
+    name: "Milad Kayali",
+    linkedIn: "https://www.linkedin.com/in/miladkayali/",
+    talkTitle: "AWS Keynote",
+    image: "/images/speakers/Milad.png",
+  },
+  {
+    name: "Marino Wijay",
+    linkedIn: "https://www.linkedin.com/in/mwijay",
+    talkTitle: "Next-Gen Kubernetes Networking: Bypassing Kube-Proxy and Edge Bottlenecks with Cilium",
+    image: "/images/speakers/Marino.png",
+  },
+  {
+    name: "Brett Gillett",
+    linkedIn: "https://www.linkedin.com/in/brettgillett/",
+    talkTitle: "A Company AI Brain That Curates Itself",
+    image: "/images/speakers/Brett.png",
+  },
+];
+
+function initials(name: string): string {
+  return name.split(' ').map((n) => n[0]).join('');
+}
+---
+
+<section class="featured-speakers">
+  <h2 class="section-heading">Featured Speakers</h2>
+  <div class="speakers-grid">
+    {speakers.map((speaker) => (
+      <div class="speaker-card">
+        <div class="speaker-avatar">
+          {speaker.image
+            ? <img src={speaker.image} alt={speaker.name} class="speaker-photo" />
+            : <span class="speaker-initials">{initials(speaker.name)}</span>
+          }
+        </div>
+        <a
+          class="speaker-name"
+          href={speaker.linkedIn}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {speaker.name}
+        </a>
+        <p class="speaker-talk">{speaker.talkTitle}</p>
+      </div>
+    ))}
+  </div>
+  <a href="/our-speakers" class="see-all-btn">See all speakers</a>
+</section>
+
+<style>
+  .featured-speakers {
+    background: #000;
+    padding: 3rem 1.5rem 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+  }
+
+  .section-heading {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    color: rgb(255, 193, 77);
+    margin: 0;
+    text-align: center;
+  }
+
+  .speakers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    width: 100%;
+    max-width: 900px;
+  }
+
+  .speaker-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    text-align: center;
+  }
+
+  .speaker-avatar {
+    width: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .speaker-photo {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 0.75rem;
+  }
+
+  .speaker-initials {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: #8b93a5;
+    user-select: none;
+  }
+
+  .speaker-name {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #93b4f5;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .speaker-name:hover {
+    color: white;
+  }
+
+  .speaker-talk {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    color: #8b93a5;
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  .see-all-btn {
+    display: inline-block;
+    padding: 0.65rem 1.75rem;
+    border: 1px solid #29303f;
+    border-radius: 999px;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #c9d0dd;
+    text-decoration: none;
+  }
+
+  .see-all-btn:hover {
+    background: #1e2534;
+    color: white;
+  }
+
+  @media (max-width: 640px) {
+    .speakers-grid {
+      grid-template-columns: 1fr;
+      max-width: 320px;
+    }
+
+    .section-heading {
+      font-size: 2rem;
+    }
+  }
+</style>
