@@ -11,27 +11,24 @@ import {
 } from "./torontoSchedule";
 
 describe("torontoSchedule - venues", () => {
-  it("lists exactly the 7 grid lanes in order, workshops split into two rooms", () => {
+  it("lists grid lanes in order, with a single workshops lane", () => {
     expect(venues.map((v) => v.id)).toEqual([
       "hackathon",
       "showcase",
       "community",
       "main",
       "aws",
-      "workshops-1",
       "workshops-2",
     ]);
   });
 });
 
 describe("torontoSchedule - gridHeaders", () => {
-  it("has 6 header groups, with Workshops spanning both workshop lanes", () => {
-    expect(gridHeaders).toHaveLength(6);
+  it("has 5 header groups, with Workshops spanning a single lane", () => {
+    expect(gridHeaders).toHaveLength(5);
     const workshopsHeader = gridHeaders.find((h) => h.label === "Workshops");
-    expect(workshopsHeader?.span).toBe(2);
-    gridHeaders
-      .filter((h) => h.label !== "Workshops")
-      .forEach((h) => expect(h.span).toBe(1));
+    expect(workshopsHeader?.span).toBe(1);
+    gridHeaders.forEach((h) => expect(h.span).toBe(1));
   });
 });
 
@@ -115,21 +112,7 @@ describe("torontoSchedule - hackathon", () => {
 });
 
 describe("torontoSchedule - workshops", () => {
-  it("Room 1 runs 2:00-3:30 in lane workshops-1", () => {
-    const room1 = sessions.find((s) => s.id === "workshop-room-1");
-    expect(room1?.venue).toBe("workshops-1");
-    expect(room1?.start).toBe("2:00");
-    expect(room1?.end).toBe("3:30");
-  });
-
-  it("Room 2 runs 3:30-5:00 in lane workshops-1, right after Room 1", () => {
-    const room2 = sessions.find((s) => s.id === "workshop-room-2");
-    expect(room2?.venue).toBe("workshops-1");
-    expect(room2?.start).toBe("3:30");
-    expect(room2?.end).toBe("5:00");
-  });
-
-  it("AWS Workshop + AWS Jam runs 2:00-4:30 in lane workshops-2 and notes it runs through the food break", () => {
+  it("AWS Workshop + AWS Jam runs 2:00-4:30 in the workshops lane and notes it runs through the food break", () => {
     const awsWorkshop = sessions.find((s) => s.id === "workshop-aws");
     expect(awsWorkshop?.venue).toBe("workshops-2");
     expect(awsWorkshop?.start).toBe("2:00");
@@ -145,13 +128,13 @@ describe("torontoSchedule - workshops", () => {
 });
 
 describe("torontoSchedule - after party", () => {
-  it("is a full-width banner at 6:30 across all 7 lanes, not a session", () => {
+  it("is a full-width banner at 6:30 across all 6 lanes, not a session", () => {
     expect(sessions.find((s) => s.title.startsWith("After"))).toBeUndefined();
     const afterParty = fullWidthRows.find((r) => r.id === "after-party");
     expect(afterParty?.title).toBe("After Party");
     expect(afterParty?.start).toBe("6:30");
     expect(afterParty?.variant).toBe("accent");
-    expect(afterParty?.venues).toHaveLength(7);
+    expect(afterParty?.venues).toHaveLength(6);
   });
 });
 
@@ -179,12 +162,12 @@ describe("torontoSchedule - full-width rows", () => {
     ]);
   });
 
-  it("Event Conclusion at 6:00 spans all 7 lanes", () => {
+  it("Event Conclusion at 6:00 spans all 6 lanes", () => {
     const conclusion = fullWidthRows.find((r) => r.id === "event-conclusion");
     expect(conclusion?.start).toBe("6:00");
     expect(conclusion?.end).toBe("6:30");
     expect(conclusion?.variant).toBe("neutral");
-    expect(conclusion?.venues).toHaveLength(7);
+    expect(conclusion?.venues).toHaveLength(6);
   });
 });
 

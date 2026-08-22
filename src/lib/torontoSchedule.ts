@@ -8,7 +8,6 @@ export type VenueId =
   | "showcase"
   | "main"
   | "aws"
-  | "workshops-1"
   | "workshops-2";
 
 export type Track =
@@ -125,8 +124,7 @@ export const venues: Venue[] = [
   { id: "showcase", label: "L2 · Showcase", timelineTag: "Showcase · L2" },
   { id: "main", label: "L4 · Main Stage", timelineTag: "Main Stage · L4" },
   { id: "aws", label: "L3 · AWS Stage", timelineTag: "AWS Stage · L3" },
-  { id: "workshops-1", label: "Workshops · Room 1", timelineTag: "Workshops" },
-  { id: "workshops-2", label: "Workshops · Room 2", timelineTag: "Workshops" },
+  { id: "workshops-2", label: "Workshops", timelineTag: "Workshops" },
 ];
 
 export const gridHeaders: GridHeader[] = [
@@ -134,7 +132,7 @@ export const gridHeaders: GridHeader[] = [
   { label: "L2 · Showcase", span: 1, color: "#98a2b5", fallback: "#98a2b5" },
   { label: "L4 · Main Stage", span: 1, color: "oklch(0.75 0.11 255)", fallback: "#5B8DEF" },
   { label: "L3 · AWS Stage", span: 1, color: "oklch(0.78 0.11 65)", fallback: "#E8A33D" },
-  { label: "Workshops", span: 2, color: "oklch(0.75 0.11 150)", fallback: "#4FC97A" },
+  { label: "Workshops", span: 1, color: "oklch(0.75 0.11 150)", fallback: "#4FC97A" },
 ];
 
 interface SessionInput {
@@ -481,40 +479,16 @@ const rawSessions: SessionInput[] = [
     durationMinutes: 60,
   },
 
-  // Workshops — lane 1 (Room 1 then Room 2, sequential)
-  {
-    id: "workshop-room-1",
-    venue: "workshops-1",
-    track: "workshops",
-    kind: "workshop",
-    title: "Cloud Workshop — Room 1",
-    eyebrow: "2:00–3:30 · L2",
-    timelineTag: "Workshops · L2",
-    startMinutes: 14 * 60,
-    durationMinutes: 90,
-  },
-  {
-    id: "workshop-room-2",
-    venue: "workshops-1",
-    track: "workshops",
-    kind: "workshop",
-    title: "Cloud Workshop — Room 2",
-    eyebrow: "3:30–5:00 · L3",
-    timelineTag: "Workshops · L3",
-    startMinutes: 15 * 60 + 30,
-    durationMinutes: 90,
-  },
-
-  // Workshops — lane 2 (AWS Workshop + AWS Jam)
+  // Workshops
   {
     id: "workshop-aws",
     venue: "workshops-2",
     track: "workshops",
     kind: "workshop",
     title: "AWS Workshop + AWS Jam",
-    eyebrow: "2:00–4:30 · L3",
+    eyebrow: "2:00–4:30",
     subtext: "Runs through food break",
-    timelineTag: "Workshops · L3",
+    timelineTag: "Workshops",
     startMinutes: 14 * 60,
     durationMinutes: 150,
   },
@@ -554,7 +528,6 @@ const rawFullWidthRows: FullWidthRowInput[] = [
       "showcase",
       "main",
       "aws",
-      "workshops-1",
       "workshops-2",
     ],
   },
@@ -570,7 +543,6 @@ const rawFullWidthRows: FullWidthRowInput[] = [
       "showcase",
       "main",
       "aws",
-      "workshops-1",
       "workshops-2",
     ],
   },

@@ -103,12 +103,8 @@ describe("scheduleFilter - duration labels", () => {
     expect(formatDuration(150)).toBe("2.5h");
   });
 
-  it("pins the two 90-minute room workshops and the 2.5h AWS workshop", () => {
-    const room1 = timelineEntries.find((e) => e.id === "workshop-room-1");
-    const room2 = timelineEntries.find((e) => e.id === "workshop-room-2");
+  it("pins the 2.5h AWS workshop", () => {
     const awsWorkshop = timelineEntries.find((e) => e.id === "workshop-aws");
-    expect(room1?.durationLabel).toBe("90m");
-    expect(room2?.durationLabel).toBe("90m");
     expect(awsWorkshop?.durationLabel).toBe("2.5h");
   });
 });
