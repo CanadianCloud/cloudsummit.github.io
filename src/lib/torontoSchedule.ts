@@ -324,6 +324,7 @@ const rawSessions: SessionInput[] = [
     speakers: [
       { name: "Avani Sharma", linkedIn: "https://www.linkedin.com/in/avanisharma130203/" },
       { name: "Archana Manohar", linkedIn: "https://www.linkedin.com/in/archanamanohar/" },
+      { name: "Mitul Tailor", linkedIn: "https://www.linkedin.com/in/mitultailor15/" },
     ],
     startMinutes: 14 * 60,
     durationMinutes: 60,
