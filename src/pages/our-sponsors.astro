@@ -2,6 +2,7 @@
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import PastSponsors from '../components/PastSponsors.astro';
+import Sponsors from '../components/Sponsors.astro';
 import ScrollAnimations from '../components/ScrollAnimations.astro';
 import { navigationContent, footerContent, sponsorshipSponsorsContent } from '../lib/content';
 import GoogleAnalytics from '../components/GoogleAnalytics.astro';
@@ -198,6 +199,9 @@ const sponsorshipTiers = [
 					</div>
 				</div>
 			</section>
+
+			<!-- Current Sponsors -->
+			<Sponsors />
 
 			<!-- Past Sponsors -->
 			<PastSponsors content={sponsorshipSponsorsContent} />

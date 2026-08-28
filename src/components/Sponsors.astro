@@ -1,0 +1,248 @@
+---
+const sponsorTiers = [
+  {
+    tier: "Diamond",
+    badgeColor: "cyan",
+    sponsors: [
+      { name: "BDO", url: "https://www.bdo.ca/services/bdo-digital", logo: "/images/sponsors/bdo.svg" },
+      { name: "5000 Days", url: "http://www.5000days.net", logo: "/images/sponsors/5000days.png" },
+    ],
+    logoSize: "12rem",
+    cols: 2,
+  },
+  {
+    tier: "Platinum",
+    badgeColor: "slate",
+    sponsors: [
+      { name: "AWS", url: "https://aws.amazon.com", logo: "/images/sponsors/aws.png" },
+      { name: "Sumo Logic", url: "https://www.sumologic.com", logo: "/images/sponsors/sumologic.png" },
+    ],
+    logoSize: "10rem",
+    cols: 2,
+  },
+  {
+    tier: "Gold",
+    badgeColor: "gold",
+    sponsors: [
+      { name: "Spacelift", url: "https://spacelift.io", logo: "/images/sponsors/spacelift.png" },
+      { name: "PulsaOps AI", url: "https://www.mirdigitalsolutions.com/business-solutions/pulsar-ops", logo: "/images/sponsors/pulsarops.png" },
+    ],
+    logoSize: "10rem",
+    cols: 2,
+  },
+  {
+    tier: "Community Partners",
+    badgeColor: "white",
+    sponsors: [
+      { name: "OpsFabric", url: "https://opsfabric.ai/", logo: "/images/sponsors/opsfabric.png" },
+      { name: "Orbitra", url: "https://getorbitra.com/", logo: "/images/sponsors/orbitra.png" },
+    ],
+    logoSize: "6rem",
+    cols: 2,
+  },
+];
+---
+
+<section class="sponsors-section" id="sponsors">
+  <div class="sponsors-container">
+    <div class="sponsors-header">
+      <h2 class="sponsors-title">
+        <span class="title-prefix">Our </span>Sponsors
+      </h2>
+      <p class="sponsors-subtitle">
+        Thank you to the incredible organizations making Cloud Summit 2026 possible
+      </p>
+    </div>
+
+    <div class="tiers-list">
+      {sponsorTiers.map(({ tier, badgeColor, sponsors, logoSize, cols }) => (
+        <div class="tier-section">
+          <div class="tier-divider">
+            <div class="divider-line" />
+            <span class={`tier-badge tier-badge--${badgeColor}`}>{tier}</span>
+            <div class="divider-line" />
+          </div>
+          <div class={`sponsor-cards sponsor-cards--cols-${cols}`}>
+            {sponsors.map(({ name, url, logo }) => (
+              <a
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="sponsor-card"
+              >
+                <img
+                  src={logo}
+                  alt={name}
+                  class="sponsor-logo"
+                  style={`max-height: ${logoSize};`}
+                />
+                <p class="sponsor-name">{name}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .sponsors-section {
+    background: #111827;
+    padding: 4rem 1.5rem;
+  }
+
+  .sponsors-container {
+    max-width: 72rem;
+    margin: 0 auto;
+  }
+
+  .sponsors-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .sponsors-title {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    color: rgb(168, 251, 90);
+    margin: 0 0 0.75rem;
+  }
+
+  .title-prefix {
+    color: white;
+    font-family: var(--font-display);
+  }
+
+  .sponsors-subtitle {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 1rem;
+    max-width: 36rem;
+    margin: 0 auto;
+  }
+
+  .tiers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .tier-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .tier-badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.375rem 1rem;
+    border-radius: 9999px;
+    border: 1px solid;
+    white-space: nowrap;
+  }
+
+  .tier-badge--cyan {
+    background: rgba(34, 211, 238, 0.15);
+    color: rgb(103, 232, 249);
+    border-color: rgba(34, 211, 238, 0.35);
+  }
+
+  .tier-badge--slate {
+    background: rgba(203, 213, 225, 0.15);
+    color: rgb(203, 213, 225);
+    border-color: rgba(203, 213, 225, 0.35);
+  }
+
+  .tier-badge--gold {
+    background: rgba(168, 251, 90, 0.15);
+    color: rgb(168, 251, 90);
+    border-color: rgba(168, 251, 90, 0.35);
+  }
+
+  .tier-badge--white {
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.75);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  .sponsor-cards {
+    display: grid;
+    gap: 1.25rem;
+    justify-content: center;
+    grid-template-columns: 1fr;
+  }
+
+  .sponsor-card {
+    background: white;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 1rem;
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    text-decoration: none;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+
+  .sponsor-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(168, 251, 90, 0.4);
+  }
+
+  .sponsor-logo {
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    transition: transform 0.2s;
+  }
+
+  .sponsor-card:hover .sponsor-logo {
+    transform: scale(1.05);
+  }
+
+  .sponsor-name {
+    color: #111;
+    font-weight: 700;
+    font-size: 1rem;
+    text-align: center;
+    margin: 0;
+  }
+
+  @media (min-width: 640px) {
+    .sponsor-cards--cols-2 {
+      grid-template-columns: repeat(2, minmax(0, 20rem));
+    }
+  }
+
+  @media (min-width: 769px) {
+    .sponsors-section {
+      padding: 6rem 2rem;
+    }
+
+    .sponsors-title {
+      font-size: 4rem;
+    }
+
+    .sponsors-subtitle {
+      font-size: 1.125rem;
+    }
+
+    .sponsor-card {
+      padding: 2rem 3rem;
+    }
+  }
+</style>

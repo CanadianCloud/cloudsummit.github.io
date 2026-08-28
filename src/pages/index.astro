@@ -10,7 +10,7 @@ import CloudSummitActivities from "../components/CloudSummitActivities.astro";
 import SummitSummary from "../components/SummitSummary.astro";
 import HighlightReel from "../components/HighlightReel.astro";
 import Ticker from "../components/Ticker.astro";
-import PastSponsors from "../components/PastSponsors.astro";
+
 import Newsletter from "../components/Newsletter.astro";
 import Footer from "../components/Footer.astro";
 import ScrollAnimations from "../components/ScrollAnimations.astro";
@@ -28,7 +28,6 @@ import {
   eventHighlightsContent,
   tickerContent,
   eventMapContent,
-  pastSponsorsContent,
   newsletterContent,
   footerContent,
   defaultCity,
@@ -43,6 +42,7 @@ import GoogleAnalytics from "../components/GoogleAnalytics.astro";
 import SeoSocial from "../components/SeoSocial.astro";
 import { absoluteUrl, DEFAULT_OG_IMAGE_PATH, getCanonical } from "../lib/seo";
 import CallToActions from "../components/CallToActions.astro";
+import Sponsors from "../components/Sponsors.astro";
 
 // Use default city for venueLogisticsContentNewVersionSSR, will be updated client-side
 const content = heroContent['toronto'];
@@ -161,6 +161,7 @@ const ogImageUrl = absoluteUrl(DEFAULT_OG_IMAGE_PATH, Astro);
     <Schedule />
     <FeaturedSpeakers />
 
+    <Sponsors />
     <WhatIsCloudSummit content={whatIsCloudSummitContent} />
     <CloudSummitActivities content={cloudSummitActivitiesContent} />
     <AboutCPCA content={aboutCPCAContent} />
@@ -172,7 +173,7 @@ const ogImageUrl = absoluteUrl(DEFAULT_OG_IMAGE_PATH, Astro);
     <Ticker content={tickerContent} />
     <!-- <OurPartners /> -->
     <!-- <CommunityPartners />  -->
-    <PastSponsors content={pastSponsorsContent} />
+
     <LocalCharitySection />
 
     <VenueLogisticsSectionSecondVersion
